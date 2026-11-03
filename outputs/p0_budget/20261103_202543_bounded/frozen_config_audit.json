@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "dataset_sha256_verified": true,
+  "evaluation_constants_verified": true,
+  "normal_model_calls": 95,
+  "normal_code_slots": 88,
+  "future_model_cli_limit": 127,
+  "known_prior_model_cli_calls": 20,
+  "combined_cli_limit": 147,
+  "future_eval_start_limit": 108,
+  "future_eval_tree_cpu_seconds": 6600,
+  "model_and_eval_concurrency": 4,
+  "evidence_and_links_verified": true,
+  "python_syntax_verified": true,
+  "full_generation_start_permitted": false,
+  "note": "配置与记录的独立一致性检查；不证明控制器已实现或订阅足够。"
+}

@@ -1,0 +1,23 @@
+{
+  "purpose": "不调用模型，检查单次参数中的重试配置能否通过本机 CLI 严格配置解析。",
+  "cli_version": "codex-cli 0.163.0",
+  "model_requests": 0,
+  "proposed_overrides": {
+    "model_providers.p0_chatgpt_https.request_max_retries": 0,
+    "model_providers.p0_chatgpt_https.stream_max_retries": 0
+  },
+  "attempts": [
+    {
+      "command": "codex --strict-config debug models --bundled，附任务1的 HTTPS 配置与上述重试参数",
+      "exit_code": 1,
+      "error": "`--strict-config` is not supported for `codex debug`",
+      "follow_up": "改为支持严格配置的 app-server，只执行 initialize，不请求模型或额度。"
+    },
+    {
+      "command": "codex app-server --strict-config，附任务1的 HTTPS 配置与上述重试参数",
+      "exit_code": 0,
+      "initialize_response_received": true
+    }
+  ],
+  "conclusion": "本机 app-server 接受参数并完成初始化；尚未验证 codex exec 的真实 HTTP 或流中断行为，不能据此证明禁用或完整计数重试。"
+}

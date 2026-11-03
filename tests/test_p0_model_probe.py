@@ -64,6 +64,12 @@ class ProtocolTests(unittest.TestCase):
         retry = {"type": "error", "message": "Reconnecting... 2/5 (request timed out)"}
         fallback = {"type": "item.completed", "item": {"type": "error", "message": "Falling back from WebSockets to HTTPS transport. request timed out"}}
         self.assertEqual(len(probe.extract_message(result(retry, fallback, message, completed))[3]), 2)
+        network_retry = {"type": "error", "message": "Reconnecting... waiting for network (Connection failed: error sending request)"}
+        self.assertEqual(probe.extract_message(result(network_retry, message, completed))[3], [network_retry["message"]])
+        with self.assertRaises(probe.ProbeError):
+            probe.extract_message(result(network_retry, message))
+        with self.assertRaises(probe.ProbeError):
+            probe.extract_message(result(network_retry, message, {"type": "turn.failed"}))
         with self.assertRaises(probe.ProbeError):
             probe.extract_message(result({"type": "error", "message": "model unavailable"}, message, completed))
 

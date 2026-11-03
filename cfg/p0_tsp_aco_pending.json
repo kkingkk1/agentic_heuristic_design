@@ -1,0 +1,92 @@
+{
+  "status": "superseded_draft_not_executable",
+  "superseded_by": "cfg/p0_tsp_aco.json",
+  "execution_permitted": false,
+  "purpose": "P0 ACO＋TSP 白盒初始化和一代的配置与预算候选；不作为运行默认值。",
+  "task": {
+    "name": "tsp_aco",
+    "prompt_condition": "white_box_eoh_seedless_initialization",
+    "reference_seed_in_prompt_or_population": false,
+    "function": "heuristics_v2(distance_matrix: np.ndarray) -> np.ndarray",
+    "model": "gpt-5.6-luna",
+    "model_access": "Codex CLI, existing ChatGPT login, p0_chatgpt_https",
+    "model_reasoning_effort_override": false,
+    "proposed_cli_retry_overrides": {
+      "request_max_retries": 0,
+      "stream_max_retries": 0
+    },
+    "dataset": "problems/tsp_aco/dataset/train50_dataset.npy",
+    "dataset_source_commit": "4ad8cfc55056f2d2da94689366ac346eaa620505",
+    "dataset_sha256": "49cfd10c6d21efd39736e5baf57510b4ce6945c3a057cdbe8dcad398c728599a",
+    "dataset_generator_seed": 1234,
+    "instance_count": 5,
+    "problem_size": 50,
+    "evaluation_seeds": [20261103, 20261104, 20261105, 20261106, 20261107],
+    "ants": 30,
+    "iterations_per_instance": 200,
+    "whole_training_wall_timeout_seconds": 60,
+    "initial_proposals": 30,
+    "population_size": 10,
+    "collaboration_rounds": 3
+  },
+  "resource_proposal": {
+    "python_executable": "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "pythonpath": [
+      "D:\\Tools\\paddleocr-document-rebuild\\.venv\\Lib\\site-packages",
+      "D:\\Tools\\mineru\\.venv\\Lib\\site-packages"
+    ],
+    "host_cpu": "Intel Core i7-14700KF, 20 physical cores, 28 logical processors",
+    "host_memory_bytes": 68463861760,
+    "process_priority": "Normal",
+    "proposed_max_concurrent_evaluations": 4,
+    "proposed_max_concurrent_model_calls": 4,
+    "proposed_min_available_system_memory_bytes": 8589934592,
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "observed_torch_intraop_threads": 1,
+    "observed_torch_interop_threads": 20,
+    "memory_note": "可用内存阈值是拟议的启动条件，不是进程内存硬限制；候选可能自行创建线程或后代。"
+  },
+  "budget_proposal": {
+    "normal_model_calls": 95,
+    "additional_infrastructure_retry_calls": 20,
+    "proposed_model_attempt_limit": 115,
+    "previously_recorded_cli_invocations": 12,
+    "proposed_total_cli_invocations_including_previous": 127,
+    "model_attempt_note": "拟按真实模型请求尝试计数；CLI 内部 HTTP／流重试尚未证明可禁用或完整计数。",
+    "normal_code_generation_slots": 88,
+    "additional_infrastructure_evaluation_starts": 10,
+    "proposed_evaluation_start_limit": 98,
+    "proposed_evaluation_process_tree_cpu_seconds_limit": 6000,
+    "proposed_future_preflight_and_checks_evaluation_cpu_seconds_reserve": 600,
+    "proposed_future_total_evaluation_cpu_seconds_limit": 6600,
+    "evaluation_cpu_note": "拟议上限覆盖今后评价进程树；当前监督器仅在结束后记录主进程。过去的进程树 CPU 记录不完整，另行报告，不纳入已知总数。",
+    "retry_note": "预留仅用于基础设施故障；候选技术错误不触发修复、重评或补提案。"
+  },
+  "evidence": {
+    "benchmark": "outputs/p0_budget/20261103_200319_four/benchmark.json",
+    "independent_audit": "outputs/p0_budget/20261103_200319_four/independent_audit.json",
+    "quota_snapshot": "outputs/p0_budget/20261103_200319_four/quota.json",
+    "budget_ledger": "outputs/p0_budget/20261103_200319_four/budget_ledger.json",
+    "retry_config_probe": "outputs/p0_budget/20261103_200319_four/retry_config_probe.json",
+    "environment_restore_check": "outputs/p0_budget/20261103_200319_four/environment_restore_check.json",
+    "prior_model_records": [
+      "outputs/p0_model_call/20261103_154718_4198a9aa/calls.jsonl",
+      "outputs/p0_model_call/20261103_172345_07f94464/calls.jsonl",
+      "outputs/p0_transport_latency/20261103_171509_d7e80ce2/calls.jsonl"
+    ]
+  },
+  "blocking_items": [
+    "订阅窗口剩余额度无法换算为可完成 115 次尝试的保障；须重新回读并取得可核实的充足依据。",
+    "四路模型并发尚未实测，长历史上下文行为尚未核验。",
+    "CLI 内部传输重试的可计数性或关闭效果尚未核验。"
+  ],
+  "before_full_run_requirements": [
+    "任务4须实现并验证进程树 CPU 预算、并发预留与停止；现有监督器不满足该控制口径。",
+    "报告历史评价进程树 CPU 记录不完整，不能将可确认的小计当作完整成本。"
+  ]
+}

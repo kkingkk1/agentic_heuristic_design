@@ -1,0 +1,97 @@
+{
+  "status": "frozen",
+  "frozen_at_local": "2026-11-03T20:29:30+08:00",
+  "scope": "P0 TSP-ACO 白盒单次初始化与一代；控制流程实现及完整运行另行验收。",
+  "full_generation_start_permitted": false,
+  "readiness_snapshot_note": "该布尔值和下列阻塞项是冻结时的状态快照，不作为运行时授权；任务4须重新核验并记录结果，不改写冻结参数。",
+  "full_generation_start_blockers": [
+    "任务4的控制流程、并发预算预留和评价进程树 CPU 控制尚未实现并验收。",
+    "订阅窗口可用次数无法由使用百分比确定；完整代开始前须按阶段计划检查预算，并记录无法证明的余量。",
+    "长历史提示的实际上下文和截断尚未核验，使用前须检查。"
+  ],
+  "task": {
+    "name": "tsp_aco",
+    "prompt_condition": "white_box_eoh_seedless_initialization",
+    "reference_seed_in_prompt_or_population": false,
+    "function": "heuristics_v2(distance_matrix: np.ndarray) -> np.ndarray",
+    "dataset": "problems/tsp_aco/dataset/train50_dataset.npy",
+    "dataset_source_commit": "4ad8cfc55056f2d2da94689366ac346eaa620505",
+    "dataset_sha256": "49cfd10c6d21efd39736e5baf57510b4ce6945c3a057cdbe8dcad398c728599a",
+    "dataset_generator_seed": 1234,
+    "instance_count": 5,
+    "problem_size": 50,
+    "evaluation_seeds": [20261103, 20261104, 20261105, 20261106, 20261107],
+    "ants": 30,
+    "iterations_per_instance": 200,
+    "whole_training_wall_timeout_seconds": 60,
+    "initial_proposals": 30,
+    "population_size": 10,
+    "collaboration_rounds": 3
+  },
+  "model": {
+    "name": "gpt-5.6-luna",
+    "access": "Codex CLI, existing ChatGPT login, p0_chatgpt_https",
+    "reasoning_effort_override": false,
+    "disabled_feature": "unbounded_connection_retries",
+    "provider_request_max_retries": 0,
+    "provider_stream_max_retries": 0,
+    "retry_policy": "由控制程序按已记录的基础设施失败执行有界重试；候选技术错误不触发修复、重评或补提案。",
+    "transport_limitations": "本机拒绝连接路径已检查；服务端请求次数与失败请求用量未必可完整观测，缺失时须标明。"
+  },
+  "resources": {
+    "python_executable": "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "pythonpath": [
+      "D:\\Tools\\paddleocr-document-rebuild\\.venv\\Lib\\site-packages",
+      "D:\\Tools\\mineru\\.venv\\Lib\\site-packages"
+    ],
+    "host_cpu": "Intel Core i7-14700KF, 20 physical cores, 28 logical processors",
+    "host_memory_bytes": 68463861760,
+    "process_priority": "Normal",
+    "max_concurrent_evaluations": 4,
+    "max_concurrent_model_calls": 4,
+    "min_available_system_memory_bytes": 8589934592,
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "observed_torch_intraop_threads": 1,
+    "observed_torch_interop_threads": 20,
+    "memory_note": "可用内存阈值是启动条件，不是进程内存硬限制；候选可能自行创建线程或后代。"
+  },
+  "budget": {
+    "normal_model_calls": 95,
+    "additional_infrastructure_retry_calls": 20,
+    "max_initialization_and_generation_model_cli_invocations": 115,
+    "future_probe_and_check_model_calls": 10,
+    "future_probe_and_check_infrastructure_retries": 2,
+    "max_future_model_cli_invocations": 127,
+    "prior_recorded_model_cli_invocations": 20,
+    "max_recorded_model_cli_invocations_including_prior": 147,
+    "normal_code_generation_slots": 88,
+    "additional_infrastructure_evaluation_starts": 10,
+    "max_initialization_and_generation_evaluation_starts": 98,
+    "future_probe_and_check_evaluation_starts": 10,
+    "max_future_total_evaluation_starts": 108,
+    "future_initialization_and_generation_eval_process_tree_cpu_seconds": 6000,
+    "future_probes_and_checks_eval_process_tree_cpu_seconds": 600,
+    "max_future_total_eval_process_tree_cpu_seconds": 6600,
+    "accounting_note": "模型上限按 CLI 调用计；实际底层传输尝试及缺失用量单独记录。评价 CPU 按进程树计；历史不可得的子进程开销不计为零。"
+  },
+  "quota_policy": {
+    "use_current_subscription_first": true,
+    "authorized_reset_credit_count": 1,
+    "reset_condition": "只有实际调用因订阅额度耗尽不可用且经回读确认时，才使用先前列出的最早到期免费重置额度；网络或输出格式错误不触发。",
+    "automatic_reset_implemented": false,
+    "latest_snapshot": "outputs/p0_budget/20261103_202543_bounded/quota_after.json"
+  },
+  "evidence": {
+    "evaluation_benchmark": "outputs/p0_budget/20261103_200319_four/benchmark.json",
+    "evaluation_audit": "outputs/p0_budget/20261103_200319_four/independent_audit.json",
+    "model_benchmark": "outputs/p0_budget/20261103_202543_bounded/parallel_model_summary.json",
+    "model_audit": "outputs/p0_budget/20261103_202543_bounded/independent_model_audit.json",
+    "retry_refusal_test": "outputs/p0_budget/20261103_201851_model/retry_refusal.json",
+    "budget_ledger": "outputs/p0_budget/20261103_202543_bounded/frozen_budget_ledger.json"
+  }
+}

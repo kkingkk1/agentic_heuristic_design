@@ -245,7 +245,9 @@ def extract_message(result: dict[str, Any]) -> tuple[str, Any, list[str], list[s
     for event in events:
         if event.get("type") == "error":
             message = event.get("message", "")
-            if not re.fullmatch(r"Reconnecting\.\.\. \d+/\d+ \(request timed out\)", message):
+            recovered_network = "Reconnecting... waiting for network (Connection failed: error sending request)"
+            if not (re.fullmatch(r"Reconnecting\.\.\. \d+/\d+ \(request timed out\)", message)
+                    or message == recovered_network):
                 raise ProbeError(f"Codex 返回错误事件：{message}")
             warnings.append(message)
     completed = [event for event in events if event.get("type") == "turn.completed"]

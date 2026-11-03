@@ -1,0 +1,8 @@
+{
+  "scope": "测量脚本异常退出后的 PowerShell 进程环境变量恢复",
+  "initial_failure": "将不存在的环境变量通过 .NET SetEnvironmentVariable 传入 PowerShell 的 null 后，变量被恢复为空字符串而非不存在。",
+  "correction": "退出时区分原本不存在与原有空字符串；不存在时只移除当前进程的对应环境变量。",
+  "verification": "模拟运行库输出环节抛错，比较六个变量的原值、空值与缺失状态。",
+  "result": "passed",
+  "created_test_directory": false
+}

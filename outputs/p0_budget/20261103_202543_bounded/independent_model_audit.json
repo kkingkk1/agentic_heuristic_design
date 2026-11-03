@@ -1,0 +1,79 @@
+{
+  "status": "passed",
+  "max_overlapping_cli_calls": 4,
+  "model_response_count": 4,
+  "usage": {
+    "input_tokens": 94004,
+    "cached_input_tokens": 41984,
+    "output_tokens": 1512,
+    "reasoning_output_tokens": 563
+  },
+  "visible_retry_warnings": 0,
+  "cli_internal_request_attempts": "not_reported",
+  "workers": [
+    {
+      "worker": "model_probe_1",
+      "status": "passed",
+      "elapsed_seconds": 10.985,
+      "usage": {
+        "input_tokens": 23501,
+        "cached_input_tokens": 10496,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 396,
+        "reasoning_output_tokens": 160
+      },
+      "warnings": [],
+      "thought_characters": 189,
+      "code_characters": 692,
+      "records": "outputs\\p0_budget\\20261103_202543_bounded\\model_probe_1\\calls.jsonl"
+    },
+    {
+      "worker": "model_probe_2",
+      "status": "passed",
+      "elapsed_seconds": 12.094,
+      "usage": {
+        "input_tokens": 23501,
+        "cached_input_tokens": 10496,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 502,
+        "reasoning_output_tokens": 200
+      },
+      "warnings": [],
+      "thought_characters": 156,
+      "code_characters": 1021,
+      "records": "outputs\\p0_budget\\20261103_202543_bounded\\model_probe_2\\calls.jsonl"
+    },
+    {
+      "worker": "model_probe_3",
+      "status": "passed",
+      "elapsed_seconds": 8.828,
+      "usage": {
+        "input_tokens": 23501,
+        "cached_input_tokens": 10496,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 267,
+        "reasoning_output_tokens": 90
+      },
+      "warnings": [],
+      "thought_characters": 159,
+      "code_characters": 521,
+      "records": "outputs\\p0_budget\\20261103_202543_bounded\\model_probe_3\\calls.jsonl"
+    },
+    {
+      "worker": "model_probe_4",
+      "status": "passed",
+      "elapsed_seconds": 14.453,
+      "usage": {
+        "input_tokens": 23501,
+        "cached_input_tokens": 10496,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 347,
+        "reasoning_output_tokens": 113
+      },
+      "warnings": [],
+      "thought_characters": 143,
+      "code_characters": 760,
+      "records": "outputs\\p0_budget\\20261103_202543_bounded\\model_probe_4\\calls.jsonl"
+    }
+  ]
+}

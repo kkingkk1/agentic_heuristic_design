@@ -1,0 +1,101 @@
+{
+  "status": "draft_blocked_not_executable",
+  "source_config": "cfg/p0_tsp_aco_pending.json",
+  "previous_model_usage": {
+    "cli_invocations": 12,
+    "responses_with_usage": 12,
+    "input_tokens": 275345,
+    "cached_input_tokens": 125952,
+    "output_tokens": 2094,
+    "reasoning_output_tokens": 604,
+    "note": "缓存输入计入输入总数；此前 CLI 内部 HTTP／流重试次数和失败请求用量不完整。"
+  },
+  "prior_tsp_aco_recorded_main_process_cpu_seconds": 43.859375,
+  "prior_tsp_aco_cpu_records": [
+    {
+      "path": "outputs\\p0_tsp_aco\\20261103_174821_76657347\\bad_number\\result.json",
+      "main_process_cpu_seconds": 1.84375
+    },
+    {
+      "path": "outputs\\p0_tsp_aco\\20261103_174821_76657347\\bad_shape\\result.json",
+      "main_process_cpu_seconds": 1.875
+    },
+    {
+      "path": "outputs\\p0_tsp_aco\\20261103_174821_76657347\\bad_signature\\result.json",
+      "main_process_cpu_seconds": 1.921875
+    },
+    {
+      "path": "outputs\\p0_tsp_aco\\20261103_174821_76657347\\model\\result.json",
+      "main_process_cpu_seconds": 0.015625
+    },
+    {
+      "path": "outputs\\p0_tsp_aco\\20261103_174821_76657347\\model_final\\result.json",
+      "main_process_cpu_seconds": 11.578125
+    },
+    {
+      "path": "outputs\\p0_tsp_aco\\20261103_174821_76657347\\reference_a\\result.json",
+      "main_process_cpu_seconds": 0.015625
+    },
+    {
+      "path": "outputs\\p0_tsp_aco\\20261103_174821_76657347\\reference_b\\result.json",
+      "main_process_cpu_seconds": 0.015625
+    },
+    {
+      "path": "outputs\\p0_tsp_aco\\20261103_174821_76657347\\reference_final_a\\result.json",
+      "main_process_cpu_seconds": 11.375
+    },
+    {
+      "path": "outputs\\p0_tsp_aco\\20261103_174821_76657347\\reference_final_b\\result.json",
+      "main_process_cpu_seconds": 11.796875
+    },
+    {
+      "path": "outputs\\p0_tsp_aco\\20261103_174821_76657347\\timeout_final\\result.json",
+      "main_process_cpu_seconds": 1.703125
+    },
+    {
+      "path": "outputs\\p0_tsp_aco\\20261103_174821_76657347\\timeout_latest\\result.json",
+      "main_process_cpu_seconds": 1.703125
+    },
+    {
+      "path": "outputs\\p0_tsp_aco\\20261103_174821_76657347\\whole_run_timeout\\result.json",
+      "main_process_cpu_seconds": 0.015625
+    }
+  ],
+  "prior_cpu_limitations": "旧启动器运行的求解子进程和候选后代未计入主进程 CPU，自动测试及其他命令 CPU 亦不完整。",
+  "benchmark": {
+    "concurrency": 4,
+    "batch_wall_seconds": 14.0513579,
+    "evaluation_process_cpu_seconds": 50.5,
+    "mean_cpu_seconds_per_reference": 12.625,
+    "max_sampled_evaluator_working_set_bytes": 532054016,
+    "max_sampled_aggregate_working_set_bytes": 2126811136,
+    "min_sampled_available_memory_bytes": 29866782720
+  },
+  "illustrative_estimates_not_bounds": {
+    "reference_cpu_seconds_for_88_evaluations": 1111.0,
+    "mean_input_tokens_per_recent_probe": 23422.8,
+    "mean_output_tokens_per_recent_probe": 139.0,
+    "input_tokens_for_95_calls_at_probe_mean": 2225166.0,
+    "input_tokens_for_115_calls_at_probe_mean": 2693622.0,
+    "output_tokens_for_95_calls_at_probe_mean": 13205.0,
+    "output_tokens_for_115_calls_at_probe_mean": 15985.0,
+    "note": "由单个参考函数与五次短提示估算；正式提示、长历史、候选代码和重试均可能不同，不能证明额度足够。"
+  },
+  "quota_observed_at_utc": "2026-11-03T12:05:23.485969+00:00",
+  "quota_buckets": [
+    {
+      "limit_id": "codex",
+      "primary": {
+        "used_percent": 96,
+        "duration_minutes": 10080,
+        "resets_at_unix": 1793775947
+      },
+      "secondary": null,
+      "spend_control_reached": false,
+      "rate_limit_reached_type": null,
+      "has_credits": false
+    }
+  ],
+  "remaining_model_calls": null,
+  "gate": "订阅余量与模型请求量不能直接比较；拟议配置不可执行。"
+}

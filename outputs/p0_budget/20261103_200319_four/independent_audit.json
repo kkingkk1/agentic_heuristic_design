@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "independently_recomputed_tours": 20,
+  "objectives_match_task2_reference": true,
+  "max_parallel_evaluators_observed": 4,
+  "priorities": [
+    "Normal"
+  ],
+  "max_evaluator_working_set_bytes": 532054016,
+  "max_total_evaluator_working_set_bytes": 2126811136,
+  "min_available_memory_bytes": 29866782720,
+  "total_evaluator_cpu_seconds": 50.5,
+  "note": "原始采样还含控制台进程；本次按 result.json 中的评价 PID 过滤。内存为采样工作集，不是硬上限。",
+  "initial_failure": "首次独立核验未设置项目所需 PYTHONPATH，报 ModuleNotFoundError: No module named numpy；补齐与任务2相同包路径后重跑。"
+}

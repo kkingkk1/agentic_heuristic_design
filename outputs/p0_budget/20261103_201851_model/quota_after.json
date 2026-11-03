@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "observed_at_utc": "2026-11-03T12:20:48.239503+00:00",
+  "source": "codex app-server account/rateLimits/read",
+  "requested_model": "gpt-5.6-luna",
+  "model_specific_bucket_confirmed": false,
+  "ordinary_usage_allowed": true,
+  "buckets": [
+    {
+      "limit_id": "codex",
+      "primary": {
+        "used_percent": 97,
+        "duration_minutes": 10080,
+        "resets_at_unix": 1793775947
+      },
+      "secondary": null,
+      "spend_control_reached": false,
+      "rate_limit_reached_type": null,
+      "has_credits": false
+    }
+  ],
+  "available_reset_credit_count": 3,
+  "remaining_model_calls": null,
+  "note": "窗口百分比不能直接换算成剩余模型调用次数；重置额度未使用。"
+}

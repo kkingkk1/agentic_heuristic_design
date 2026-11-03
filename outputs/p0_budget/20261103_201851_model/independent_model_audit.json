@@ -1,0 +1,83 @@
+{
+  "status": "passed_with_recorded_network_retry",
+  "max_overlapping_cli_calls": 4,
+  "model_response_count": 4,
+  "usage": {
+    "input_tokens": 93679,
+    "cached_input_tokens": 41984,
+    "output_tokens": 1639,
+    "reasoning_output_tokens": 486
+  },
+  "network_retry_count_visible": 1,
+  "cli_internal_request_attempts": "unavailable",
+  "original_summary": "outputs\\p0_budget\\20261103_201851_model\\parallel_model_summary.json",
+  "original_summary_note": "原始摘要保留第3路解析失败；修正后由原始事件重放，不重新调用模型。",
+  "workers": [
+    {
+      "worker": "model_probe_1",
+      "status": "passed_after_replay",
+      "elapsed_seconds": 7.906,
+      "usage": {
+        "input_tokens": 23498,
+        "cached_input_tokens": 10496,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 311,
+        "reasoning_output_tokens": 45
+      },
+      "warnings": [],
+      "thought_characters": 216,
+      "code_characters": 847,
+      "records": "outputs\\p0_budget\\20261103_201851_model\\model_probe_1\\calls.jsonl"
+    },
+    {
+      "worker": "model_probe_2",
+      "status": "passed_after_replay",
+      "elapsed_seconds": 9.687,
+      "usage": {
+        "input_tokens": 23498,
+        "cached_input_tokens": 10496,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 576,
+        "reasoning_output_tokens": 202
+      },
+      "warnings": [],
+      "thought_characters": 191,
+      "code_characters": 1116,
+      "records": "outputs\\p0_budget\\20261103_201851_model\\model_probe_2\\calls.jsonl"
+    },
+    {
+      "worker": "model_probe_3",
+      "status": "passed_after_replay",
+      "elapsed_seconds": 16.406,
+      "usage": {
+        "input_tokens": 23498,
+        "cached_input_tokens": 10496,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 382,
+        "reasoning_output_tokens": 83
+      },
+      "warnings": [
+        "Reconnecting... waiting for network (Connection failed: error sending request)"
+      ],
+      "thought_characters": 178,
+      "code_characters": 986,
+      "records": "outputs\\p0_budget\\20261103_201851_model\\model_probe_3\\calls.jsonl"
+    },
+    {
+      "worker": "model_probe_4",
+      "status": "passed_after_replay",
+      "elapsed_seconds": 7.406,
+      "usage": {
+        "input_tokens": 23185,
+        "cached_input_tokens": 10496,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 370,
+        "reasoning_output_tokens": 156
+      },
+      "warnings": [],
+      "thought_characters": 154,
+      "code_characters": 623,
+      "records": "outputs\\p0_budget\\20261103_201851_model\\model_probe_4\\calls.jsonl"
+    }
+  ]
+}

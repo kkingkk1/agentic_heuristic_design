@@ -1,0 +1,42 @@
+{
+  "started_at_utc": "2026-11-03T12:20:06.812690+00:00",
+  "elapsed_seconds": 16.406000000075437,
+  "model": "gpt-5.6-luna",
+  "concurrency": 4,
+  "cli_retry_overrides": [
+    "-c",
+    "model_providers.p0_chatgpt_https.request_max_retries=0",
+    "-c",
+    "model_providers.p0_chatgpt_https.stream_max_retries=0"
+  ],
+  "purpose": "预算与并发探针；生成结果不进入初始化种群。",
+  "results": [
+    {
+      "index": 1,
+      "status": "passed",
+      "thought_characters": 216,
+      "code_characters": 847,
+      "records": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p0_budget\\20261103_201851_model\\model_probe_1\\calls.jsonl"
+    },
+    {
+      "index": 2,
+      "status": "passed",
+      "thought_characters": 191,
+      "code_characters": 1116,
+      "records": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p0_budget\\20261103_201851_model\\model_probe_2\\calls.jsonl"
+    },
+    {
+      "index": 3,
+      "status": "failed",
+      "error": "ProbeError: Codex 返回错误事件：Reconnecting... waiting for network (Connection failed: error sending request)",
+      "records": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p0_budget\\20261103_201851_model\\model_probe_3\\calls.jsonl"
+    },
+    {
+      "index": 4,
+      "status": "passed",
+      "thought_characters": 154,
+      "code_characters": 623,
+      "records": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p0_budget\\20261103_201851_model\\model_probe_4\\calls.jsonl"
+    }
+  ]
+}
