@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py", line 157, in <module>
+    main()
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py", line 129, in main
+    heuristic = load_heuristic(sys.argv[2])
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py", line 54, in load_heuristic
+    raise ValueError("候选签名必须为 heuristics_v2(distance_matrix: np.ndarray) -> np.ndarray。")
+ValueError: 候选签名必须为 heuristics_v2(distance_matrix: np.ndarray) -> np.ndarray。

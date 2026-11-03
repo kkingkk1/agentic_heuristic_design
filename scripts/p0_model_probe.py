@@ -19,6 +19,15 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = "gpt-5.6-luna"
+# 仅本进程参数：沿用 ChatGPT 后端和登录，直接使用此前回退成功的 HTTPS。
+HTTPS_CONFIG = [
+    "-c", 'model_provider="p0_chatgpt_https"',
+    "-c", 'model_providers.p0_chatgpt_https.name="OpenAI"',
+    "-c", 'model_providers.p0_chatgpt_https.base_url="https://chatgpt.com/backend-api/codex"',
+    "-c", "model_providers.p0_chatgpt_https.requires_openai_auth=true",
+    "-c", "model_providers.p0_chatgpt_https.supports_websockets=false",
+    "-c", 'model_providers.p0_chatgpt_https.wire_api="responses"',
+]
 TASK = (
     "Design the edge heuristic module for a fixed ant-colony TSP solver. "
     "The objective is to minimize tour length. The module takes a NumPy "
@@ -266,8 +275,8 @@ def extract_message(result: dict[str, Any]) -> tuple[str, Any, list[str], list[s
 def call(cli: list[str], records: Path, run_dir: Path, stage: str, prompt: str) -> str:
     command = cli + [
         "exec", "--ignore-user-config", "--skip-git-repo-check", "--ephemeral",
-        "--json", "--sandbox", "read-only", "--model", MODEL, "--cd", str(run_dir), "-",
-    ]
+        "--json", "--sandbox", "read-only", "--model", MODEL,
+    ] + HTTPS_CONFIG + ["--cd", str(run_dir), "-"]
     append_record(records, {"event": "prompt", "stage": stage, "prompt": prompt})
     print(f"调用 {stage}，模型 {MODEL}。", flush=True)
     result = run_command(command, prompt)
@@ -277,6 +286,8 @@ def call(cli: list[str], records: Path, run_dir: Path, stage: str, prompt: str) 
         "event": "response", "stage": stage, "message": message,
         "usage": usage, "event_types": event_types, "warnings": warnings,
     })
+    if any("Falling back from WebSockets to HTTPS transport" in warning for warning in warnings):
+        raise ProbeError("HTTPS 配置未生效：本次仍发生 WebSocket 回退。")
     return message
 
 
@@ -328,6 +339,7 @@ def main() -> int:
         records = run_dir / "calls.jsonl"
         append_record(records, {
             "event": "start", "model_requested": MODEL,
+            "transport": "项目调用通过临时 p0_chatgpt_https 配置直接使用 ChatGPT HTTPS 后端。",
             "context": "每次调用均为新的 --ephemeral 会话；只显式传入该次 prompt，不恢复会话。",
             "truncation": "调用脚本不截断提示；CLI/服务端内部上下文与截断未由该接口完整暴露。",
             "fixtures": "Critic 和长期反思中的代码与分数为人工构造的协议测试数据，不是评价结果。",

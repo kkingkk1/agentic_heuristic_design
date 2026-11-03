@@ -1,0 +1,31 @@
+{
+  "command": [
+    "D:\\Tools\\mineru\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-u",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\eval.py",
+    "50",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p0_tsp_aco\\20261103_174821_76657347\\whole_run_timeout",
+    "train"
+  ],
+  "started_at_utc": "2026-11-03T09:48:52.435264+00:00",
+  "timeout_seconds": 60,
+  "pythonpath": "D:\\Tools\\paddleocr-document-rebuild\\.venv\\Lib\\site-packages",
+  "omp_num_threads": null,
+  "mkl_num_threads": null,
+  "cpu_scope": "仅评价主进程，不包含后代进程",
+  "status": "timeout",
+  "pid": 80184,
+  "termination": {
+    "command": "taskkill /PID <pid> /T /F",
+    "exit_code": 0,
+    "stdout": "SUCCESS: The process with PID 80292 (child process of PID 83312) has been terminated.\nSUCCESS: The process with PID 83312 (child process of PID 27776) has been terminated.\nSUCCESS: The process with PID 27776 (child process of PID 80184) has been terminated.\nSUCCESS: The process with PID 80184 (child process of PID 53660) has been terminated.\n",
+    "stderr": ""
+  },
+  "exit_code": 1,
+  "cpu_seconds": {
+    "user": 0.0,
+    "kernel": 0.015625
+  },
+  "elapsed_seconds": 60.31299999996554
+}

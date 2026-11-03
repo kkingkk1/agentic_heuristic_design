@@ -1,0 +1,69 @@
+{
+  "checked_at_utc": "2026-11-03T09:58:34.907464+00:00",
+  "upstream_commit": "4ad8cfc55056f2d2da94689366ac346eaa620505",
+  "dataset_sha256": "49cfd10c6d21efd39736e5baf57510b4ce6945c3a057cdbe8dcad398c728599a",
+  "dataset_generation_seed": 1234,
+  "aco_sha256": "233fdb43f4cba571c92a06134167830cdb2260d9f316650f4775d38e2848cb70",
+  "eval_sha256": "9d2cb03573517724936c39aeb40e78af94421932495ffeaaf8c20c90a00cd0b4",
+  "supervisor_sha256_at_audit": "4cc757d0fe13d6c5b7593a75938932c795a0d7fbc380fa9f8030b39c9b6bec6c",
+  "independent_path_length_check": "math.hypot + math.fsum；5 实例 × 3 次评价",
+  "reference_replay_exact": true,
+  "valid_evaluations": {
+    "reference_final_a": {
+      "objectives": [
+        5.73647143107342,
+        6.1381689024311905,
+        6.741944406114264,
+        6.4275256522103295,
+        6.322496925715304
+      ],
+      "average": 6.273321463508902,
+      "elapsed_seconds": 11.797000000020489,
+      "cpu_seconds": {
+        "user": 10.859375,
+        "kernel": 0.515625
+      }
+    },
+    "reference_final_b": {
+      "objectives": [
+        5.73647143107342,
+        6.1381689024311905,
+        6.741944406114264,
+        6.4275256522103295,
+        6.322496925715304
+      ],
+      "average": 6.273321463508902,
+      "elapsed_seconds": 12.281000000075437,
+      "cpu_seconds": {
+        "user": 11.328125,
+        "kernel": 0.46875
+      }
+    },
+    "model_final": {
+      "objectives": [
+        5.73647143107342,
+        6.1381689024311905,
+        6.741944406114264,
+        6.4275256522103295,
+        6.322496925715304
+      ],
+      "average": 6.273321463508902,
+      "elapsed_seconds": 12.15700000000652,
+      "cpu_seconds": {
+        "user": 11.03125,
+        "kernel": 0.546875
+      }
+    }
+  },
+  "invalid_candidates_rejected": [
+    "bad_signature",
+    "bad_number",
+    "bad_shape"
+  ],
+  "timeout": {
+    "seconds": 60.375,
+    "pid": 7296,
+    "child_pid": 73908,
+    "live_pid_checked": true
+  }
+}

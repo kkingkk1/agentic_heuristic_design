@@ -84,6 +84,34 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(audit["bundled_model_catalog"]["context_window"], 123)
         self.assertNotIn("Private AGENTS.md skills instructions", json.dumps(audit))
 
+    def test_call_uses_chatgpt_https_without_changing_model_or_auth(self):
+        message = {"type": "item.completed", "item": {"type": "agent_message", "text": "answer"}}
+        completed = {"type": "turn.completed", "usage": {"input_tokens": 10}}
+        result = {"exit_code": 0, "stdout": "\n".join(json.dumps(event) for event in (message, completed))}
+        with patch.object(probe, "run_command", return_value=result) as runner, patch.object(probe, "append_record"):
+            self.assertEqual(probe.call(["codex"], Path("record"), Path("run"), "proposal", "prompt"), "answer")
+        command, prompt = runner.call_args.args
+        self.assertEqual(prompt, "prompt")
+        self.assertIn("--ignore-user-config", command)
+        self.assertEqual(command[command.index("--model") + 1], "gpt-5.6-luna")
+        self.assertIn('model_providers.p0_chatgpt_https.base_url="https://chatgpt.com/backend-api/codex"', command)
+        self.assertIn("model_providers.p0_chatgpt_https.requires_openai_auth=true", command)
+        self.assertIn("model_providers.p0_chatgpt_https.supports_websockets=false", command)
+        self.assertFalse(any("reasoning_effort" in part or "env_key" in part for part in command))
+
+    def test_call_records_and_rejects_unexpected_websocket_fallback(self):
+        events = [
+            {"type": "error", "message": "Reconnecting... 2/5 (request timed out)"},
+            {"type": "item.completed", "item": {"type": "error", "message": "Falling back from WebSockets to HTTPS transport. request timed out"}},
+            {"type": "item.completed", "item": {"type": "agent_message", "text": "answer"}},
+            {"type": "turn.completed", "usage": {"input_tokens": 10}},
+        ]
+        result = {"exit_code": 0, "stdout": "\n".join(json.dumps(event) for event in events)}
+        with patch.object(probe, "run_command", return_value=result), patch.object(probe, "append_record") as recorder:
+            with self.assertRaisesRegex(probe.ProbeError, "HTTPS 配置未生效"):
+                probe.call(["codex"], Path("record"), Path("run"), "proposal", "prompt")
+        self.assertEqual([call.args[1]["event"] for call in recorder.call_args_list], ["prompt", "process", "response"])
+
 
 if __name__ == "__main__":
     unittest.main()
