@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "zotero_item_key": "J7FI486W",
+  "title": "RoCo: Role-Based LLMs Collaboration for Automatic Heuristic Design",
+  "generated_at": "2026-10-05T14:14:29.870132Z",
+  "artifacts": [
+    {
+      "name": "2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design.pdf",
+      "path": "2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design.pdf",
+      "sha256": "c6b8ed097fb26c96191bf0894ddb5e4ca873ec335d62faffcf44873376a1aa6b",
+      "bytes": 4843131
+    },
+    {
+      "name": "01-full-paper-summary.md",
+      "path": "01-full-paper-summary.md",
+      "sha256": "d2e9605cb0a626fd2fef719ea3290554c8fd4d16e845ce34fec899b286154a99",
+      "bytes": 23650
+    },
+    {
+      "name": "02-paper2html.html",
+      "path": "02-paper2html.html",
+      "sha256": "eb242aef0f4a0cd83ba2599e50509023db73b36448177fbeae1b01caae739673",
+      "bytes": 652688
+    },
+    {
+      "name": "03-transferable-knowledge.md",
+      "path": "03-transferable-knowledge.md",
+      "sha256": "4e187db48245585143988e44e62dcae1b7ce432e69599b6158b528898eca75b3",
+      "bytes": 14797
+    }
+  ]
+}

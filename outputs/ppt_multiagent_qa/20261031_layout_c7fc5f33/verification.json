@@ -1,0 +1,70 @@
+{
+  "scope": "layout-and-file-integrity-only",
+  "actual_model_calls": true,
+  "model_requested": "gpt-5.6-luna",
+  "reasoning_effort": "medium",
+  "run_id": "2892a3475ded41848536aa3f0f088e85",
+  "roles": {
+    "visual-critic": {
+      "agent_id": "01a19271-db85-7d90-8761-5e9798bd59f4",
+      "verdict": "pass",
+      "slides": [
+        1,
+        2,
+        3
+      ],
+      "raw_report": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\visual-critic\\raw-report.json",
+      "events": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\visual-critic\\codex.stdout.jsonl"
+    },
+    "geometry-inspector": {
+      "agent_id": "01a19271-db61-7990-82e1-60c17cdbe70a",
+      "verdict": "pass",
+      "slides": [
+        1,
+        2,
+        3
+      ],
+      "raw_report": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\geometry-inspector\\raw-report.json",
+      "events": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\geometry-inspector\\codex.stdout.jsonl"
+    },
+    "format-arbiter": {
+      "agent_id": "01a19272-00bb-7252-9b09-e14693b819cd",
+      "verdict": "pass",
+      "slides": [
+        1,
+        2,
+        3
+      ],
+      "raw_report": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\format-arbiter\\raw-report.json",
+      "events": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\format-arbiter\\codex.stdout.jsonl"
+    }
+  },
+  "baseline_status": "baseline-pass",
+  "final_status": "accepted",
+  "publication_status": "published",
+  "source": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\Writing\\方案三_通用启发式自动设计.pptx",
+  "output": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\方案三_通用启发式自动设计_版式完整性审查通过.pptx",
+  "source_unchanged": true,
+  "source_and_output_byte_identical": true,
+  "sha256": "6bf71f98643fb5f536e874d1635c767469fc41d8af61343ab2333b8e0ac565fa",
+  "zip_crc_valid": true,
+  "zip_part_count": 51,
+  "hook_and_user_config_unchanged": true,
+  "config_after": {
+    "C:\\Users\\a_wei\\.codex\\config.toml": {
+      "exists": true,
+      "size": 16613,
+      "mtime_ns": 1793455788279997000
+    },
+    "C:\\Users\\a_wei\\.codex\\hooks.json": {
+      "exists": true,
+      "size": 854,
+      "mtime_ns": 1793455693944630900
+    },
+    "C:\\Users\\a_wei\\.codex\\hooks\\hooks.json": {
+      "exists": false,
+      "size": null,
+      "mtime_ns": null
+    }
+  }
+}

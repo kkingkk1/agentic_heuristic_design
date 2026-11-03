@@ -1,0 +1,7 @@
+{
+  "status": "blocked",
+  "code": "missing-render",
+  "reason": "没有取得本轮 PDF 导出",
+  "run_id": "9e822b1a01da4ed7813ac77cf9cb7ef7",
+  "run_directory": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_e073523c\\runs\\9e822b1a01da4ed7813ac77cf9cb7ef7"
+}

@@ -1,0 +1,15 @@
+{
+  "pid": 27640,
+  "status": "completed",
+  "exit_code": 0,
+  "command": [
+    "C:\\Users\\a_wei\\Tools\\LibreOffice\\SourceDir\\LibreOffice\\program\\soffice.com",
+    "-env:UserInstallation=file:///C:/Users/a_wei/AppData/Local/Temp/ppt-qa-lo-probe-m64gqq99",
+    "--headless",
+    "--convert-to",
+    "pdf",
+    "--outdir",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_e073523c\\runs\\9e822b1a01da4ed7813ac77cf9cb7ef7\\render-short-profile-probe",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_e073523c\\runs\\9e822b1a01da4ed7813ac77cf9cb7ef7\\candidate.pptx"
+  ]
+}

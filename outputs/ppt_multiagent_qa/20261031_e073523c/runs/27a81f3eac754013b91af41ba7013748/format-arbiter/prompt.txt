@@ -1,0 +1,83 @@
+你是 PPT 只读审查者 format-arbiter。不得编辑稿件、页图或其他报告，不得委派其他智能体。不要访问账号材料或凭证。所有附加页图都必须查看。仅返回 schema 规定的 JSON。
+visual-critic 检查可读性、层级、视觉证据和用户要求；geometry-inspector 检查遮挡、裁切、位置、连接线，必要时只读 PPTX XML；format-arbiter 独立检查页图并读取两份报告，整理可执行修改清单。实际缺陷写 findings，存在待修缺陷时用 needs-editor。通过时 findings 和 checklist 均为空。不能完成检查时用 inconclusive。非 Arbiter 的 checklist 留空。未发现缺陷允许通过，不能制造问题。
+{
+  "pptx": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_e073523c\\runs\\27a81f3eac754013b91af41ba7013748\\candidate.pptx",
+  "slides": [
+    {
+      "number": 1,
+      "image": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_e073523c\\runs\\27a81f3eac754013b91af41ba7013748\\render\\slide-1.png"
+    },
+    {
+      "number": 2,
+      "image": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_e073523c\\runs\\27a81f3eac754013b91af41ba7013748\\render\\slide-2.png"
+    },
+    {
+      "number": 3,
+      "image": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_e073523c\\runs\\27a81f3eac754013b91af41ba7013748\\render\\slide-3.png"
+    }
+  ],
+  "requirements": "# 真实三角色审查要求\n\n本轮使用项目中已有的《方案三_通用启发式自动设计.pptx》，完整检查全部三页。目标是验证真实角色调用、证据检查与发布门禁，不要求一定通过，不以验证流程为由降低审查标准。\n\n只读审核，不编辑原稿或工作副本。若有待修问题，给出页码、对象、实际观察或合同依据和可执行修改建议。未发现缺陷允许通过，不制造问题。只有全部通过才允许发布新的副本，不得覆盖原文件。\n\n视觉审查覆盖标题层级、正文可读性、文字裁切、遮挡、表格、对齐、连接线方向、图中逻辑关系与留白。几何审查可只读检查 PPTX XML。检查应依据真实页图和必要的 XML 证据，不把有意的图形叠放、流程线穿入节点等一律判为错误。\n\n未提供额外的视觉参考页，不宣称完成对不存在参考的风格一致性验收。用户未要求另换配色或整体设计。没有外部风格参考不单独构成拒绝本次基本可读性审查的理由。\n\n项目当前有效合同摘录（来自用户本轮提供的项目规则）：\n- 当前阶段为 P0：ACO＋TSP 白盒单任务一代接入与验收，尚无已验收系统或算法性能结论。\n- 个体为 Thought、Code、Fitness。\n- 适应度是固定预算后训练集平均原始目标，耗时单独报告，不用“收敛收益÷收敛耗时”定义适应度。\n- 旧父代和早轮候选不自动加入代末生存池；保持固定候选集 Top N。\n- 保留四算子、双精英比较、共同启动、三轮续写、逐轮和末轮融合、本代反思、六个精英变异。\n- 不引入 Planner、Retriever、独立候选档案或新的筛选机制。\n\n如果 PPT 中出现与以上当前合同直接矛盾的说法，明确指出；不要自动替换或修改。方法事实源为项目 vault/Knowledge/通用启发式自动设计框架.md；唯一主计划为 vault/多智能体协作的通用启发式自动设计.md。资料路径仅供需要时只读核对，本轮不做联网文献调研。\n\n三角色均须实际检查所有页图。Visual Critic 和 Geometry Inspector 独立完成，Format Arbiter 读取两份报告后核对并整理清单。无法完成图像读取、审查或证据核对时用 inconclusive，不能猜测通过。\n",
+  "reviewed_reports": {
+    "visual-critic": {
+      "sha256": "d7f32879668c3d36f04be02407af5f2f768cc712c3079320638c9917249595bc",
+      "content": {
+        "role": "visual-critic",
+        "agent_id": "01a19261-cc6d-78e1-9efd-39cd2c0d573e",
+        "read_only": true,
+        "status": "completed",
+        "phase": "baseline",
+        "pptx_sha256": "6bf71f98643fb5f536e874d1635c767469fc41d8af61343ab2333b8e0ac565fa",
+        "slides": [
+          {
+            "number": 1,
+            "sha256": "60a3e2ace11bffc29408c9c873c4c377af8d417c6d526c3b0b267cd40d168019"
+          },
+          {
+            "number": 2,
+            "sha256": "debf8bad45dcd11e2cbb7798e55b18f89e1635aa60f57de0713fb34dc66e3363"
+          },
+          {
+            "number": 3,
+            "sha256": "782d929d164f439a8f6ebfb387a495eb2d4e9d6eadad8455721613d53311107c"
+          }
+        ],
+        "summary": "已完成三页页图的只读视觉审查。发现与当前项目合同直接冲突的适应度定义，以及第一页角色名称疑似文字错误，需编辑后复审。",
+        "findings": [
+          "第1页“解质冒智能体”角色名称疑似错字或乱码，无法与项目合同中的 Thought、Code、Fitness 三角色对应。请核对并改为合同规定的角色名称。",
+          "第2页“独立评价”中写有“收敛收益 / 耗时”，与当前合同“适应度是固定预算后训练集平均原始目标，耗时单独报告”直接矛盾。应拆分为适应度与耗时两个独立指标。",
+          "第3页明确写有“适应度 = 收敛收益 ÷ 收敛耗时（完整求解过程）”，与当前合同直接矛盾。应删除该比值定义，并改为固定预算后的训练集平均原始目标；耗时单独报告。",
+          "第1页“解质冒智能体”“效率智能体”等角色划分未呈现合同规定的 Thought、Code、Fitness 个体定义，建议核对整套角色术语与当前 P0 合同的一致性。"
+        ],
+        "verdict": "needs-editor"
+      }
+    },
+    "geometry-inspector": {
+      "sha256": "a3656232c24ce0193906cafc3387d34f69cd0b5281092118826d03a4b4d87197",
+      "content": {
+        "role": "geometry-inspector",
+        "agent_id": "01a19261-cc4a-7640-a98c-23461e44b6c7",
+        "read_only": true,
+        "status": "completed",
+        "phase": "baseline",
+        "pptx_sha256": "6bf71f98643fb5f536e874d1635c767469fc41d8af61343ab2333b8e0ac565fa",
+        "slides": [
+          {
+            "number": 1,
+            "sha256": "60a3e2ace11bffc29408c9c873c4c377af8d417c6d526c3b0b267cd40d168019"
+          },
+          {
+            "number": 2,
+            "sha256": "debf8bad45dcd11e2cbb7798e55b18f89e1635aa60f57de0713fb34dc66e3363"
+          },
+          {
+            "number": 3,
+            "sha256": "782d929d164f439a8f6ebfb387a495eb2d4e9d6eadad8455721613d53311107c"
+          }
+        ],
+        "summary": "已完成三页页图的几何检查。未发现遮挡、裁切、越界、连接线异常或明显位置问题。",
+        "findings": [],
+        "verdict": "pass"
+      }
+    }
+  }
+}

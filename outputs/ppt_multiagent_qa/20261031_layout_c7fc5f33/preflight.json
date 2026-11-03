@@ -1,0 +1,32 @@
+{
+  "scope": "layout-and-file-integrity-only",
+  "source": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\Writing\\方案三_通用启发式自动设计.pptx",
+  "source_sha256": "6bf71f98643fb5f536e874d1635c767469fc41d8af61343ab2333b8e0ac565fa",
+  "source_stat": {
+    "exists": true,
+    "size": 61948,
+    "mtime_ns": 1792722968000000000
+  },
+  "output": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\方案三_通用启发式自动设计_版式完整性审查通过.pptx",
+  "brief": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\review-brief.md",
+  "runs_dir": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs",
+  "model": "gpt-5.6-luna",
+  "reasoning_effort": "medium",
+  "config_before": {
+    "C:\\Users\\a_wei\\.codex\\config.toml": {
+      "exists": true,
+      "size": 16613,
+      "mtime_ns": 1793455788279997000
+    },
+    "C:\\Users\\a_wei\\.codex\\hooks.json": {
+      "exists": true,
+      "size": 854,
+      "mtime_ns": 1793455693944630900
+    },
+    "C:\\Users\\a_wei\\.codex\\hooks\\hooks.json": {
+      "exists": false,
+      "size": null,
+      "mtime_ns": null
+    }
+  }
+}

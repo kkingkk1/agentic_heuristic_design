@@ -1,0 +1,13 @@
+{
+  "pid": 56548,
+  "status": "completed",
+  "exit_code": 0,
+  "command": [
+    "C:\\Users\\a_wei\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\poppler\\Library\\bin\\pdftoppm.EXE",
+    "-png",
+    "-r",
+    "120",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\render\\candidate.pdf",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\render\\slide"
+  ]
+}

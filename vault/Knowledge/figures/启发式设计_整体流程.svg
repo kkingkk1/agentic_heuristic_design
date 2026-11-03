@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1004" viewBox="0 0 720 1004" role="img" aria-labelledby="title desc">
+  <title id="title">通用启发式自动设计：整体流程</title>
+  <desc id="desc">冻结输入并初始化种群后，每代依次进行 EoH 扩展与精英抽样、四角色协作、本代长期反思与六个精英变异、Top N 筛选与历史记忆更新。研发结束后冻结训练最优程序并独立测试。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="#8292a6"/></marker>
+    <style>
+      text { font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+      .title { font-size:26px; font-weight:700; fill:#182c46; }
+      .sub { font-size:14px; fill:#66778c; }
+      .head { font-size:20px; font-weight:700; fill:#243b55; }
+      .body { font-size:15px; fill:#52657b; }
+      .step { font-size:15px; font-weight:700; fill:#426b9b; text-anchor:middle; }
+      .line { fill:none; stroke:#8292a6; stroke-width:2; marker-end:url(#arrow); }
+    </style>
+  </defs>
+  <rect width="720" height="1004" fill="#fff"/>
+  <text x="50" y="45" class="title">通用启发式自动设计</text>
+  <text x="50" y="72" class="sub">整体流程 · RoCo 主线 / Q 与 E 分别关注收益与速度</text>
+
+  <rect x="50" y="104" width="620" height="102" rx="14" fill="#eef4fb" stroke="#c7d8ed"/>
+  <rect x="50" y="124" width="4" height="62" rx="2" fill="#527fb4"/>
+  <text x="76" y="138" class="head">准备输入 · 初始化种群</text>
+  <text x="76" y="165" class="body">冻结问题、模块接口、调用框架与评价规则</text>
+  <text x="76" y="188" class="body">EoH 初始化提示从零生成候选，并独立评价</text>
+  <path d="M360 206V242" class="line"/>
+
+  <rect x="30" y="242" width="660" height="566" rx="18" fill="#f6f8fb" stroke="#dce4ee"/>
+  <text x="64" y="274" class="head" style="font-size:17px">单代演化</text>
+  <text x="656" y="274" class="sub" text-anchor="end">重复至研发预算结束</text>
+
+  <rect x="64" y="296" width="592" height="100" rx="12" fill="#fff" stroke="#dce4ee"/>
+  <circle cx="104" cy="332" r="20" fill="#edf3fa"/>
+  <text x="104" y="337" class="step">01</text>
+  <text x="140" y="330" class="head">候选扩展与精英抽样</text>
+  <text x="140" y="357" class="body">E1/E2/M1/M2 生成并评价最多 4N 个提案</text>
+  <text x="140" y="380" class="body">从本代原种群按排名概率抽取两个不同精英</text>
+  <path d="M360 396V424" class="line"/>
+
+  <rect x="64" y="424" width="592" height="100" rx="12" fill="#fff" stroke="#dce4ee"/>
+  <circle cx="104" cy="460" r="20" fill="#edf3fa"/>
+  <text x="104" y="465" class="step">02</text>
+  <text x="140" y="458" class="head">四角色多轮协作</text>
+  <text x="140" y="485" class="body">Critic 反馈 → Q/E 改进 → Integrator 融合</text>
+  <text x="140" y="508" class="body">协作结束，再融合正式各轮的最佳 Q/E 提案</text>
+  <path d="M360 524V552" class="line"/>
+
+  <rect x="64" y="552" width="592" height="100" rx="12" fill="#fff" stroke="#dce4ee"/>
+  <circle cx="104" cy="588" r="20" fill="#edf3fa"/>
+  <text x="104" y="593" class="step">03</text>
+  <text x="140" y="586" class="head">本代反思与精英变异</text>
+  <text x="140" y="613" class="body">Q/E 总结长期反思，Integrator 合并经验</text>
+  <text x="140" y="636" class="body">结合角色历史记忆，两个原始精英各做三类变异</text>
+  <path d="M360 652V680" class="line"/>
+
+  <rect x="64" y="680" width="592" height="100" rx="12" fill="#fff" stroke="#dce4ee"/>
+  <circle cx="104" cy="716" r="20" fill="#edf3fa"/>
+  <text x="104" y="721" class="step">04</text>
+  <text x="140" y="714" class="head">筛选下一代 · 更新记忆</text>
+  <text x="140" y="741" class="body">按规定候选集取 Top N，形成下一代种群</text>
+  <text x="140" y="764" class="body">本代 Q/E/I 长期经验追加到各自历史记忆</text>
+
+  <path d="M360 808V844" class="line"/>
+  <rect x="50" y="844" width="620" height="100" rx="14" fill="#edf6f2" stroke="#c3ded1"/>
+  <rect x="50" y="864" width="4" height="60" rx="2" fill="#4c9076"/>
+  <text x="76" y="880" class="head">研发结束 · 冻结并测试</text>
+  <text x="76" y="909" class="body">按训练适应度选定程序，冻结代码与配置后独立测试</text>
+
+  <circle cx="58" cy="978" r="4" fill="#6e839b"/>
+  <text x="72" y="983" class="sub">所有新代码均独立评价；耗时单独记录，不进入 Fitness。</text>
+</svg>

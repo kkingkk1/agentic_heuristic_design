@@ -1,0 +1,7 @@
+{
+  "status": "blocked",
+  "code": "invalid-evidence",
+  "reason": "存在待修问题，Arbiter 必须给出修改清单",
+  "run_id": "27a81f3eac754013b91af41ba7013748",
+  "run_directory": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_e073523c\\runs\\27a81f3eac754013b91af41ba7013748"
+}

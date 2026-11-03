@@ -1,0 +1,8 @@
+2026-10-31T14:34:05.244107Z ERROR codex_skills_extension::host_service: failed to install system skills: io error while remove existing system skills dir: 拒绝访问。 (os error 5)
+2026-10-31T14:34:06.070220Z  WARN codex_skills::interface: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-10-31T14:34:06.070251Z  WARN codex_skills::interface: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-10-31T14:34:06.079806Z  WARN codex_core::shell_snapshot: Failed to create shell snapshot for powershell: Shell snapshot not supported yet for PowerShell
+2026-10-31T14:34:06.203458Z  WARN codex_skills_extension::loader::metadata: ignoring file:///C:/Users/a_wei/.codex/skills/onedrive-zotero-library/agents/openai.yaml: failed to read openai.yaml: invalid utf-8 sequence of 1 bytes from index 45
+2026-10-31T14:34:06.204913Z  WARN codex_skills::interface: ignoring interface.default_prompt: exceeds maximum length of 1024 characters
+2026-10-31T14:34:06.305918Z  WARN codex_mcp::rmcp_client: MCP server startup failed server_name="mineru" error=handshaking with MCP server failed: connection closed: initialize response: connection closed: initialize response
+2026-10-31T14:34:11.574036Z  WARN codex_mcp::rmcp_client: failed to initialize MCP client during shutdown: MCP startup failed: handshaking with MCP server failed: connection closed: initialize response: connection closed: initialize response

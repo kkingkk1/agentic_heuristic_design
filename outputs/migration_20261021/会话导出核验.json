@@ -1,0 +1,48 @@
+{
+  "thread_id": "01a1574e-adf4-7030-aea3-61bda75d9b62",
+  "title": "查找 ROCO 输入",
+  "source_project": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana",
+  "exported_at": "2026-10-21T16:02:11+08:00",
+  "message_count": 116,
+  "user_messages": 36,
+  "assistant_messages": 80,
+  "sources": [
+    {
+      "path": "C:\\Users\\a_wei\\.codex\\sessions\\2026\\10\\20\\rollout-2026-10-20T11-15-36-01a1574e-adf4-7030-aea3-61bda75d9b62.jsonl",
+      "bytes_at_read": 624672,
+      "first_timestamp": "2026-10-20T03:15:39.481Z",
+      "last_timestamp": "2026-10-20T03:18:01.684Z"
+    },
+    {
+      "path": "C:\\Users\\a_wei\\.codex\\sessions\\2026\\10\\20\\rollout-2026-10-20T11-18-08-01a1574e-adf4-7030-aea3-61bda75d9b62_01a15750-ff2d-7313-9fde-ecd4ecdc2e22.jsonl",
+      "bytes_at_read": 58119,
+      "first_timestamp": "2026-10-20T03:18:08.430Z",
+      "last_timestamp": "2026-10-20T03:22:08.495Z"
+    },
+    {
+      "path": "C:\\Users\\a_wei\\.codex\\sessions\\2026\\10\\20\\rollout-2026-10-20T11-22-14-01a1574e-adf4-7030-aea3-61bda75d9b62_01a15754-bf97-7de1-b7ee-98535ba63b22.jsonl",
+      "bytes_at_read": 7880340,
+      "first_timestamp": "2026-10-20T03:22:14.295Z",
+      "last_timestamp": "2026-10-21T08:02:10.858Z"
+    }
+  ],
+  "assets": [
+    {
+      "source": "C:/Users/a_wei/AppData/Local/Temp/codex-clipboard-29e15441-3f09-47f9-8517-87645617f2db.png",
+      "available": true,
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\History\\attachments\\codex-clipboard-29e15441-3f09-47f9-8517-87645617f2db.png"
+    },
+    {
+      "source": "C:/Users/a_wei/AppData/Local/Temp/codex-clipboard-87b71ce9-4334-4dd1-a2a4-d553d5d70536.png",
+      "available": true,
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\History\\attachments\\codex-clipboard-87b71ce9-4334-4dd1-a2a4-d553d5d70536.png"
+    },
+    {
+      "source": "C:/Users/a_wei/AppData/Local/Temp/codex-clipboard-f867da1f-711b-4676-8de9-93fb1fc00ce3.png",
+      "available": true,
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\History\\attachments\\codex-clipboard-f867da1f-711b-4676-8de9-93fb1fc00ce3.png"
+    }
+  ],
+  "app_thread_moved": false,
+  "app_thread_move": "deferred_by_user"
+}

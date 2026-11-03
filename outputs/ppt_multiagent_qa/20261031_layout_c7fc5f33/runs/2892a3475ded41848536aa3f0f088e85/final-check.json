@@ -1,0 +1,41 @@
+{
+  "run_id": "2892a3475ded41848536aa3f0f088e85",
+  "check": {
+    "phase": "final",
+    "status": "accepted",
+    "pptx": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\candidate.pptx",
+    "pptx_sha256": "6bf71f98643fb5f536e874d1635c767469fc41d8af61343ab2333b8e0ac565fa",
+    "slides": [
+      1,
+      2,
+      3
+    ],
+    "review_agents": {
+      "visual-critic": "01a19271-db85-7d90-8761-5e9798bd59f4",
+      "geometry-inspector": "01a19271-db61-7990-82e1-60c17cdbe70a",
+      "format-arbiter": "01a19272-00bb-7252-9b09-e14693b819cd"
+    }
+  },
+  "fingerprint": {
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\Writing\\方案三_通用启发式自动设计.pptx": "6bf71f98643fb5f536e874d1635c767469fc41d8af61343ab2333b8e0ac565fa",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\candidate.pptx": "6bf71f98643fb5f536e874d1635c767469fc41d8af61343ab2333b8e0ac565fa",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\review-brief.md": "128f4adcf2f93f6e05912d9e6d71d326cce56eb2872329c7c1ef6b3727260727",
+    "C:\\Users\\a_wei\\.codex\\skills\\pptx\\scripts\\verify_review_evidence.py": "516bd01e8635064b7e57d07dd71dc74b1350643bfdcd8f4862ccc035714d935e",
+    "C:\\Users\\a_wei\\.codex\\skills\\ppt-multi-agent-qa\\assets\\review.schema.json": "7eee9b5caa1c45e74233c35a12225bb92e1c4fcc00a517f2c2b143a3b2b1cbb6",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\render\\slide-1.png": "60a3e2ace11bffc29408c9c873c4c377af8d417c6d526c3b0b267cd40d168019",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\render\\slide-2.png": "debf8bad45dcd11e2cbb7798e55b18f89e1635aa60f57de0713fb34dc66e3363",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\render\\slide-3.png": "782d929d164f439a8f6ebfb387a495eb2d4e9d6eadad8455721613d53311107c",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\visual-critic\\review.json": "67044ad02ae1fe80f44a79c213e399616e585d5174bdc510d39e5bb4dd2a7ffd",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\visual-critic\\raw-report.json": "2d451266ab2fe720e136587466e225544881d3a5efb2e91c63d7f8a5075f1977",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\visual-critic\\codex.stdout.jsonl": "75cb9c93563fece88c8f57ab3d3101d781d0306b181203b01b22d790573085d1",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\visual-critic\\execution.json": "3fd5bbf02bca83dc7ef01a0c82dbe5f3dac2778264685529486637bafb05cf9d",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\geometry-inspector\\review.json": "b409ff8598d37599a7b3d0e04672057aee41140724bb5a7677e2f0e36bec4769",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\geometry-inspector\\raw-report.json": "2a52fce39bc5ee318748bc84121fcace355b7af0cc85069b4d60dc54319a10c2",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\geometry-inspector\\codex.stdout.jsonl": "e1923e2b5063d9b5d38d4bcc0e2fd3f403dfd24650989f2aaed00eebe3801b8c",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\geometry-inspector\\execution.json": "1c30902547b6f55e72394eea0b1e98a6bfed723b487397d377bfd68dab1169e2",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\format-arbiter\\review.json": "90ca740eb1ce48aed551d3f34f1eb8ff026c920245e604c14ad5b94c3061522b",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\format-arbiter\\raw-report.json": "c83991f674f743e49d9263df582a7b0211e0e837dfc90f7dc17c2b3217a8773e",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\format-arbiter\\codex.stdout.jsonl": "523c08903bc6f0706ef45aa698f53ba10f891a643d5a6af109f64263718ed363",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\format-arbiter\\execution.json": "5cca47b1a691c0ffa94d3cc3390793953f6d62fa4a9fb1c167fd2ad69e47a768"
+  }
+}

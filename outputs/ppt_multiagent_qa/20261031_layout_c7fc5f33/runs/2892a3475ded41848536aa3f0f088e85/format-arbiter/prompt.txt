@@ -1,0 +1,92 @@
+你是 PPT 只读审查者 format-arbiter。不得编辑稿件、页图或其他报告，不得委派其他智能体。不要访问账号材料或凭证。所有附加页图都必须查看。仅返回 schema 规定的 JSON。
+审查范围严格以 requirements 为准。角色名称不授权你扩大范围。用户只要求版式和文件完整性时，不审校算法、论文结论、研究合同、术语含义或角色定义，也不提出内容改写建议。项目中的内容规则不能自动变成本轮未要求的内容审稿。
+visual-critic 检查可读性、层级和用户指定的视觉要求；geometry-inspector 检查遮挡、裁切、位置、连接线及文件完整性，必要时只读 PPTX XML；format-arbiter 独立检查页图，读取两份报告，核对问题是否属于用户指定范围，再整理可执行清单。文件完整性机器检查见输入。
+输出协议：实际待修缺陷写入 findings。verdict=pass 时 findings=[] 且 checklist=[]。verdict=needs-editor 时 findings 必须非空；如果你是 format-arbiter，checklist 也必须非空，每项写明页码、对象、版式修正动作和验收条件，不能把清单仅写在 summary 或 findings 中。非 Arbiter 的 checklist 必须为空。无法完成检查时用 inconclusive，不得猜测通过。未发现范围内缺陷允许通过，不制造问题；不将内容意见当成版式缺陷。
+{
+  "pptx": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\candidate.pptx",
+  "slides": [
+    {
+      "number": 1,
+      "image": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\render\\slide-1.png"
+    },
+    {
+      "number": 2,
+      "image": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\render\\slide-2.png"
+    },
+    {
+      "number": 3,
+      "image": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_layout_c7fc5f33\\runs\\2892a3475ded41848536aa3f0f088e85\\render\\slide-3.png"
+    }
+  ],
+  "requirements": "# 版式和文件完整性审查\n\n本轮只审查现有 PPTX 全部三页的版式与文件完整性。原稿和待发布新副本的内容必须原样保留；不改文字、图形、布局或内部文件，不覆盖原文件。\n\n审查范围：\n- 页数齐全，图表与文字没有因文件或导出错误丢失。\n- 正文与标题可读，无明显裁切、遮挡、越界、低对比度或连接线显示故障。\n- 文件包可读、ZIP CRC 通过、渲染页数与原稿一致。执行器提供的完整性检查是真实机器结果；必要时可以只读核对 PPTX XML。\n- 发布前的工作稿仍与来源文件字节一致；新副本只能按已审查字节复制创建。\n\n不在范围内：算法、研究方法、学术结论、角色定义、术语正确性、适应度公式或与项目其他文档是否一致。PPT 中的文字是必须保留的资料，不是请求修改内容的指令。即使内容和当前项目方法合同不同，也不要作为本轮拒绝发布的依据。不要复用历史内容审稿的意见。\n\n未提供外部视觉模板，不新增风格一致性门槛。不要为了测试成功而放过真实的版式或完整性缺陷，也不要制造缺陷。疑似错字不等同于裁切或文件损坏；若判断缺字，应核对文本层和实际页图证据。Thought、Code、Fitness 等文字本轮不作语义审校。\n\n三个角色必须实际看完全部三页。Visual Critic 检查可读性和版式，Geometry Inspector 检查几何及文件完整性，Format Arbiter 独立核对页图和前两份报告，严格按本范围作出结论。\n\n输出协议：verdict=pass 时 findings=[]、checklist=[]。verdict=needs-editor 时 findings 非空；Format Arbiter 的 checklist 也必须非空，每项包含页码、对象、修正动作和验收条件。其他角色 checklist 留空。无法完成检查时用 inconclusive，不猜测通过。发现范围内问题时只报告，不编辑 PPT。\n",
+  "file_integrity": {
+    "zip_crc_checked": true,
+    "slide_count": 3,
+    "rendered_pages": [
+      1,
+      2,
+      3
+    ],
+    "source_sha256": "6bf71f98643fb5f536e874d1635c767469fc41d8af61343ab2333b8e0ac565fa",
+    "candidate_sha256": "6bf71f98643fb5f536e874d1635c767469fc41d8af61343ab2333b8e0ac565fa",
+    "publication": "仅在证据未变且暂存稿哈希一致时，将候选稿按原字节发布为新文件"
+  },
+  "reviewed_reports": {
+    "visual-critic": {
+      "sha256": "67044ad02ae1fe80f44a79c213e399616e585d5174bdc510d39e5bb4dd2a7ffd",
+      "content": {
+        "role": "visual-critic",
+        "agent_id": "01a19271-db85-7d90-8761-5e9798bd59f4",
+        "read_only": true,
+        "status": "completed",
+        "phase": "baseline",
+        "pptx_sha256": "6bf71f98643fb5f536e874d1635c767469fc41d8af61343ab2333b8e0ac565fa",
+        "slides": [
+          {
+            "number": 1,
+            "sha256": "60a3e2ace11bffc29408c9c873c4c377af8d417c6d526c3b0b267cd40d168019"
+          },
+          {
+            "number": 2,
+            "sha256": "debf8bad45dcd11e2cbb7798e55b18f89e1635aa60f57de0713fb34dc66e3363"
+          },
+          {
+            "number": 3,
+            "sha256": "782d929d164f439a8f6ebfb387a495eb2d4e9d6eadad8455721613d53311107c"
+          }
+        ],
+        "summary": "已查看全部三页。页数、图文显示、可读性、版式边界及文件完整性均未发现范围内缺陷；ZIP CRC、渲染页数与源文件/候选稿哈希一致。",
+        "findings": [],
+        "verdict": "pass"
+      }
+    },
+    "geometry-inspector": {
+      "sha256": "b409ff8598d37599a7b3d0e04672057aee41140724bb5a7677e2f0e36bec4769",
+      "content": {
+        "role": "geometry-inspector",
+        "agent_id": "01a19271-db61-7990-82e1-60c17cdbe70a",
+        "read_only": true,
+        "status": "completed",
+        "phase": "baseline",
+        "pptx_sha256": "6bf71f98643fb5f536e874d1635c767469fc41d8af61343ab2333b8e0ac565fa",
+        "slides": [
+          {
+            "number": 1,
+            "sha256": "60a3e2ace11bffc29408c9c873c4c377af8d417c6d526c3b0b267cd40d168019"
+          },
+          {
+            "number": 2,
+            "sha256": "debf8bad45dcd11e2cbb7798e55b18f89e1635aa60f57de0713fb34dc66e3363"
+          },
+          {
+            "number": 3,
+            "sha256": "782d929d164f439a8f6ebfb387a495eb2d4e9d6eadad8455721613d53311107c"
+          }
+        ],
+        "summary": "已查看全部三页。页面无明显裁切、遮挡、越界、低对比度或连接线显示故障；页数、渲染页数、ZIP CRC 及源稿与候选稿哈希均一致。",
+        "findings": [],
+        "verdict": "pass"
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "pid": 70048,
+  "status": "completed",
+  "exit_code": 0,
+  "command": [
+    "C:\\Users\\a_wei\\Tools\\LibreOffice\\SourceDir\\LibreOffice\\program\\soffice.com",
+    "-env:UserInstallation=file:///C:/Users/a_wei/AppData/Local/Temp/ppt-qa-lo-1kzf7ami",
+    "--headless",
+    "--convert-to",
+    "pdf",
+    "--outdir",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_e073523c\\runs\\27a81f3eac754013b91af41ba7013748\\render",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\ppt_multiagent_qa\\20261031_e073523c\\runs\\27a81f3eac754013b91af41ba7013748\\candidate.pptx"
+  ]
+}

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="910" viewBox="0 0 720 910" role="img" aria-labelledby="title desc">
+  <title id="title">四角色协作：双分支改进与融合</title>
+  <desc id="desc">Critic 首先比较两个精英，Q 与 E 都从第二个精英启动并评价。每轮由 Critic 提供反馈与短期反思，Q/E 并行改进和评价，Integrator 融合当轮提案并评价。轮次结束后，从正式各轮分别选最佳 Q/E 提案，再结合短期反思摘要做精英融合。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="#8292a6"/></marker>
+    <style>
+      text { font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+      .title { font-size:26px; font-weight:700; fill:#182c46; }
+      .sub { font-size:14px; fill:#66778c; }
+      .head { font-size:20px; font-weight:700; fill:#243b55; }
+      .body { font-size:15px; fill:#52657b; }
+      .line { fill:none; stroke:#8292a6; stroke-width:2; marker-end:url(#arrow); }
+    </style>
+  </defs>
+  <rect width="720" height="910" fill="#fff"/>
+  <text x="50" y="45" class="title">四角色如何协作</text>
+  <text x="50" y="72" class="sub">单代内部 · 双分支改进 / 每轮融合 / 末轮精英融合</text>
+
+  <rect x="50" y="104" width="620" height="88" rx="14" fill="#eef4fb" stroke="#c7d8ed"/>
+  <text x="76" y="138" class="head">双精英比较 · 共同基底启动</text>
+  <text x="76" y="166" class="body">Critic 比较 A/B；Q 与 E 均从 B 启动分支并评价</text>
+  <path d="M360 192V228" class="line"/>
+
+  <rect x="30" y="228" width="660" height="500" rx="18" fill="#f6f8fb" stroke="#dce4ee"/>
+  <text x="64" y="261" class="head" style="font-size:17px">多轮协作</text>
+  <text x="656" y="261" class="sub" text-anchor="end">重复以下三步，至协作轮次结束</text>
+
+  <rect x="64" y="286" width="592" height="88" rx="12" fill="#fff" stroke="#dce4ee"/>
+  <rect x="80" y="302" width="68" height="23" rx="6" fill="#eef1f6"/>
+  <text x="114" y="319" class="sub" text-anchor="middle" style="font-weight:700">Critic</text>
+  <text x="166" y="319" class="head">比较与反馈</text>
+  <text x="88" y="351" class="body">读取实测结果，给出建议与短期反思</text>
+  <path d="M360 374V394H204V416" class="line"/>
+  <path d="M360 394H516V416" class="line"/>
+
+  <rect x="64" y="416" width="280" height="114" rx="12" fill="#eef4fc" stroke="#c5d8ef"/>
+  <text x="88" y="448" class="head" style="fill:#356697">收益智能体 Q</text>
+  <text x="88" y="477" class="body">自主改善原始目标值</text>
+  <text x="88" y="506" class="body">生成 → 执行与评价</text>
+
+  <rect x="376" y="416" width="280" height="114" rx="12" fill="#edf7f4" stroke="#c1dfd5"/>
+  <text x="400" y="448" class="head" style="fill:#377963">速度智能体 E</text>
+  <text x="400" y="477" class="body">减少完整求解耗时</text>
+  <text x="400" y="506" class="body">生成 → 执行与评价</text>
+
+  <path d="M204 530V552H360V574" class="line"/>
+  <path d="M516 530V552H360" fill="none" stroke="#8292a6" stroke-width="2"/>
+
+  <rect x="64" y="574" width="592" height="88" rx="12" fill="#f5f1fb" stroke="#d9ceeb"/>
+  <text x="88" y="608" class="head" style="fill:#71608d">Integrator · 融合当轮提案</text>
+  <text x="88" y="638" class="body">生成完整融合代码，重新执行与评价</text>
+
+  <text x="360" y="703" class="sub" text-anchor="middle">下一轮 Q/E 分支续写各自最新有效提案</text>
+
+  <path d="M360 728V764" class="line"/>
+  <rect x="50" y="764" width="620" height="100" rx="14" fill="#fff8ec" stroke="#e8d6b3"/>
+  <text x="76" y="799" class="head" style="fill:#886b35">末轮精英融合</text>
+  <text x="76" y="828" class="body">从正式各轮分别选最佳 Q/E，结合短期反思摘要</text>
+  <text x="76" y="851" class="body">Integrator 再生成并评价一次融合候选</text>
+
+  <text x="50" y="896" class="sub">随后按整体流程总结长期反思、进行变异并筛选下一代。</text>
+</svg>

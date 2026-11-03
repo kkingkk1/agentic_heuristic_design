@@ -1,0 +1,25 @@
+{
+  "role": "geometry-inspector",
+  "agent_id": "01a19261-cc4a-7640-a98c-23461e44b6c7",
+  "read_only": true,
+  "status": "completed",
+  "phase": "baseline",
+  "pptx_sha256": "6bf71f98643fb5f536e874d1635c767469fc41d8af61343ab2333b8e0ac565fa",
+  "slides": [
+    {
+      "number": 1,
+      "sha256": "60a3e2ace11bffc29408c9c873c4c377af8d417c6d526c3b0b267cd40d168019"
+    },
+    {
+      "number": 2,
+      "sha256": "debf8bad45dcd11e2cbb7798e55b18f89e1635aa60f57de0713fb34dc66e3363"
+    },
+    {
+      "number": 3,
+      "sha256": "782d929d164f439a8f6ebfb387a495eb2d4e9d6eadad8455721613d53311107c"
+    }
+  ],
+  "summary": "已完成三页页图的几何检查。未发现遮挡、裁切、越界、连接线异常或明显位置问题。",
+  "findings": [],
+  "verdict": "pass"
+}

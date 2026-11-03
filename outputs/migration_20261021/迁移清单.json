@@ -1,0 +1,594 @@
+{
+  "source_root": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana",
+  "destination_root": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design",
+  "groups": [
+    {
+      "path": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021",
+      "type": "directory",
+      "file_count": 16,
+      "bytes": 27006449,
+      "reparse_points": false
+    },
+    {
+      "path": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_slim_20261021",
+      "type": "directory",
+      "file_count": 6,
+      "bytes": 13130167,
+      "reparse_points": false
+    }
+  ],
+  "files": [
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\add_scheme_three.py",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\add_scheme_three.py",
+      "bytes": 26100,
+      "sha256": "5ba402991090e4fedc3d069a754b18c89d38fd0496e07ba95068cc0d9a02329b"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\修改前备份.pptx",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\修改前备份.pptx",
+      "bytes": 6514180,
+      "sha256": "07e6bc95b22f622f2f8701ba34a0e1070d97b70b21831954dcdcfeeda5f48bc3"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\参考第10页.png",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\参考第10页.png",
+      "bytes": 91018,
+      "sha256": "d56f97213b75b2d0a528d5c5641637199d1174f830465fb5293e1b27a686ee53"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\参考第11页.png",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\参考第11页.png",
+      "bytes": 143676,
+      "sha256": "a5bb452d0a51a673e197f3bc57223b439200f5e132380ff79efe0e6bd560b6a7"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\参考第12页.png",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\参考第12页.png",
+      "bytes": 92492,
+      "sha256": "4ada5835589e80d559a1ae5bfa446a4350f3051bca57abe5e631baa84653b477"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\参考第13页.png",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\参考第13页.png",
+      "bytes": 135393,
+      "sha256": "29e39c44be6f3695f0c5b51d0fa1956417f032bf71a75eecc434a1369a702082"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\参考第14页.png",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\参考第14页.png",
+      "bytes": 56780,
+      "sha256": "9a42083d792d65bd2d08caa6f19b8f3e58b2c227789565c0e60b0ab5bbbb2266"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\参考第15页.png",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\参考第15页.png",
+      "bytes": 60705,
+      "sha256": "71d3c082919aced4bc01f5f302724904b3688511e33cc57d35e1358e2ca07dfa"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\应用前备份.pptx",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\应用前备份.pptx",
+      "bytes": 6514677,
+      "sha256": "013a7008179c8fb7a339e851d9d6850a4e056029fd3808ddb7a8e5427167cfd6"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\方案三最终核验稿.pptx",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\方案三最终核验稿.pptx",
+      "bytes": 6532060,
+      "sha256": "cd06a18419b0d13eebecc5574af1d6e179ebd9e40ebd05c4d2644f56dc29d7bb"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\方案三核验稿.pptx",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\方案三核验稿.pptx",
+      "bytes": 6531186,
+      "sha256": "956585d0d54f37f0ed5691d459af346ef5dd6bd830170220479eb700305fa310"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\检查记录.md",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\检查记录.md",
+      "bytes": 4329,
+      "sha256": "68d0d3adaf176b62381449a803ec97db7b23fb6d708955b031cee6517ddbb302"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\第14页.png",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\第14页.png",
+      "bytes": 93639,
+      "sha256": "d4a48393f9918925a0eb3d7b1a1f58414af98b07f07cbf5f2df967b8d99bb6b6"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\第15页.png",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\第15页.png",
+      "bytes": 81681,
+      "sha256": "d3b049005dd9a39a8462f9c9be5848e71657caa30beb248856ad18c6d1fbc459"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\第16页.png",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\第16页.png",
+      "bytes": 56814,
+      "sha256": "939885a955233a7ce83d983d995f45785403eb7951ec977b4182ca6f94120827"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\第17页.png",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021\\第17页.png",
+      "bytes": 71719,
+      "sha256": "1b3774e36211d1558a35a20c0441321a5165c308046da6f08e898315151401e8"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_slim_20261021\\__pycache__\\slim_slide15.cpython-313.pyc",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_slim_20261021\\__pycache__\\slim_slide15.cpython-313.pyc",
+      "bytes": 17099,
+      "sha256": "8d1e84590cd2c967543f5ac5130bfee64b838974967daa954b1d39d5518c3358"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_slim_20261021\\slim_slide15.py",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_slim_20261021\\slim_slide15.py",
+      "bytes": 8452,
+      "sha256": "e53efe4a64b61255d6d5a7afae2337c0671bb73c08f66a841c5c3089c75a5cb6"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_slim_20261021\\修改前备份.pptx",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_slim_20261021\\修改前备份.pptx",
+      "bytes": 6532044,
+      "sha256": "012a99cf76396a389d8f028b25ab5c3c9ea5af3b8abdb3e4155c96ac6ac87b1f"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_slim_20261021\\检查记录.md",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_slim_20261021\\检查记录.md",
+      "bytes": 2831,
+      "sha256": "cc33b87679ba7702cfc33994d5723b51b5bce82d964a3ab3ce4279492d03b376"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_slim_20261021\\第15页.png",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_slim_20261021\\第15页.png",
+      "bytes": 39720,
+      "sha256": "6b1fc8fb713a90a41a433438703642090f0d6d0ba9cd1e08916c535ac7b3eef2"
+    },
+    {
+      "source": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_slim_20261021\\第15页精简核验稿.pptx",
+      "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\satellite_multiagent_briefing\\scheme_three_slim_20261021\\第15页精简核验稿.pptx",
+      "bytes": 6530021,
+      "sha256": "340a9c4bb7f63f1090a6506b460ca99808fd11af094b87f5d7e854b4185ac8c3"
+    }
+  ],
+  "file_count": 22,
+  "total_bytes": 40136616,
+  "source_removal": "complete",
+  "onedrive_process": "running_at_preflight",
+  "cloud_sync_completion": "not_verified",
+  "reference_materials": {
+    "source_root": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design",
+    "destination_root": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo",
+    "file_count": 51,
+    "total_bytes": 8716119,
+    "files": [
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\01-full-paper-summary.md",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\01-full-paper-summary.md",
+        "relative_path": "01-full-paper-summary.md",
+        "bytes": 23650,
+        "sha256": "d2e9605cb0a626fd2fef719ea3290554c8fd4d16e845ce34fec899b286154a99"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\02-paper2html.html",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\02-paper2html.html",
+        "relative_path": "02-paper2html.html",
+        "bytes": 652688,
+        "sha256": "eb242aef0f4a0cd83ba2599e50509023db73b36448177fbeae1b01caae739673"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\03-transferable-knowledge.md",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\03-transferable-knowledge.md",
+        "relative_path": "03-transferable-knowledge.md",
+        "bytes": 14797,
+        "sha256": "4e187db48245585143988e44e62dcae1b7ce432e69599b6158b528898eca75b3"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\04-RoCo-多智能体框架与原理-验收.md",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\04-RoCo-多智能体框架与原理-验收.md",
+        "relative_path": "04-RoCo-多智能体框架与原理-验收.md",
+        "bytes": 7689,
+        "sha256": "52af92ade6b9e1e197b0689f5f35f3ee1bb3bcfac3f6f6ed0421a6adcf361071"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\04-RoCo-多智能体框架与原理.pptx",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\04-RoCo-多智能体框架与原理.pptx",
+        "relative_path": "04-RoCo-多智能体框架与原理.pptx",
+        "bytes": 76822,
+        "sha256": "3b679180ce50f5a7552d6bd88ffc0d8d1ea1b83b43572757cb8e447e45d826fa"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\05-RoCo-多智能体框架与原理-参考范例修正版.pptx",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\05-RoCo-多智能体框架与原理-参考范例修正版.pptx",
+        "relative_path": "05-RoCo-多智能体框架与原理-参考范例修正版.pptx",
+        "bytes": 93683,
+        "sha256": "0c40a2d5cf833409b122669d7039537e4ea2173b01ae8ba5a5465cea9a604ccd"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design.pdf",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design.pdf",
+        "relative_path": "2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design.pdf",
+        "bytes": 4849727,
+        "sha256": "ac4b4f0e1dd2ff2619ea8a3660b77a3dd5e7b95b0a479346f90c45b025408c47"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\checksums.sha256",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\checksums.sha256",
+        "relative_path": "checksums.sha256",
+        "bytes": 421,
+        "sha256": "fcefbf56f3fdbcd949c2f17f73d3f0a061c5e9b93dc7fbda1e86f7eb62bbf2f6"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\metadata.json",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\metadata.json",
+        "relative_path": "metadata.json",
+        "bytes": 1159,
+        "sha256": "dd48f889ea068a9a331933df2d0093a65635dbc2e911647e2a0eb59978e912d8"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\0180ed22-0f89-4c9d-bd62-2205cbbf94ec_content_list.json",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\0180ed22-0f89-4c9d-bd62-2205cbbf94ec_content_list.json",
+        "relative_path": "mineru/0180ed22-0f89-4c9d-bd62-2205cbbf94ec_content_list.json",
+        "bytes": 138396,
+        "sha256": "a46335d04b972d236cbb96211b31d9680dbd8cd8ff038d7239c167b860b847cf"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\0180ed22-0f89-4c9d-bd62-2205cbbf94ec_content_list_v2.json",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\0180ed22-0f89-4c9d-bd62-2205cbbf94ec_content_list_v2.json",
+        "relative_path": "mineru/0180ed22-0f89-4c9d-bd62-2205cbbf94ec_content_list_v2.json",
+        "bytes": 235023,
+        "sha256": "1272ce4dd4f16e1d4e24c7795baa5fad7ceb127fccd6f060ab19a84ae21778f9"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\0180ed22-0f89-4c9d-bd62-2205cbbf94ec_model.json",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\0180ed22-0f89-4c9d-bd62-2205cbbf94ec_model.json",
+        "relative_path": "mineru/0180ed22-0f89-4c9d-bd62-2205cbbf94ec_model.json",
+        "bytes": 336034,
+        "sha256": "05c81c311c5000190c443a79cccb34ead555bb1a02db4685b91f4bde5e8dbd23"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\cache-metadata.json",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\cache-metadata.json",
+        "relative_path": "mineru/cache-metadata.json",
+        "bytes": 710,
+        "sha256": "d0db1960e640fe35e07cd21061a5d7e7f5d4b4a4d7a8e7ae8b5420ba02372618"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\content_list.json",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\content_list.json",
+        "relative_path": "mineru/content_list.json",
+        "bytes": 138396,
+        "sha256": "a46335d04b972d236cbb96211b31d9680dbd8cd8ff038d7239c167b860b847cf"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\content_list_v2.json",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\content_list_v2.json",
+        "relative_path": "mineru/content_list_v2.json",
+        "bytes": 235023,
+        "sha256": "1272ce4dd4f16e1d4e24c7795baa5fad7ceb127fccd6f060ab19a84ae21778f9"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\full.md",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\full.md",
+        "relative_path": "mineru/full.md",
+        "bytes": 84404,
+        "sha256": "fa7da3f309c157d9b49f02c47b3092008da6105bf1c7c9b42f43b5b242ead18e"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\003c380a16ab20035ae389208f7c5004047662459d3e46cefc9f94aeb7937633.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\003c380a16ab20035ae389208f7c5004047662459d3e46cefc9f94aeb7937633.jpg",
+        "relative_path": "mineru/images/003c380a16ab20035ae389208f7c5004047662459d3e46cefc9f94aeb7937633.jpg",
+        "bytes": 9338,
+        "sha256": "f7dfc089edb324ee6bbe66bcd0b217a750c49e311ce2ef9dab921ab64948f10e"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\038012d4b49d51453f5810ea0d751c6300d0d92573fdb604a8e1b81fb89809f3.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\038012d4b49d51453f5810ea0d751c6300d0d92573fdb604a8e1b81fb89809f3.jpg",
+        "relative_path": "mineru/images/038012d4b49d51453f5810ea0d751c6300d0d92573fdb604a8e1b81fb89809f3.jpg",
+        "bytes": 2684,
+        "sha256": "787d0d4b79f4a3481f27859cdc378035698fc7654713930cdf50e0b0befaa93d"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\1eff14d2610ba6c855ece8908f42dc607b1c1b84bd2014f8609252d5c4813b41.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\1eff14d2610ba6c855ece8908f42dc607b1c1b84bd2014f8609252d5c4813b41.jpg",
+        "relative_path": "mineru/images/1eff14d2610ba6c855ece8908f42dc607b1c1b84bd2014f8609252d5c4813b41.jpg",
+        "bytes": 4452,
+        "sha256": "37c9e48472b00888bba982d1c2c3a22361adb72a6f927b4175e405c084d376a4"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\203a9e9860db72a9bdee2cd66131f67f1cda20c68be87ffa0f248b1e54110876.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\203a9e9860db72a9bdee2cd66131f67f1cda20c68be87ffa0f248b1e54110876.jpg",
+        "relative_path": "mineru/images/203a9e9860db72a9bdee2cd66131f67f1cda20c68be87ffa0f248b1e54110876.jpg",
+        "bytes": 4037,
+        "sha256": "7d90327a236540336319e808655edd5288898aa2f24c0430f84315cc89d98184"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\235560e1902e82ed6a337a0fd6650dcdd56e367439fb857b008c09ed4f8afd8b.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\235560e1902e82ed6a337a0fd6650dcdd56e367439fb857b008c09ed4f8afd8b.jpg",
+        "relative_path": "mineru/images/235560e1902e82ed6a337a0fd6650dcdd56e367439fb857b008c09ed4f8afd8b.jpg",
+        "bytes": 9246,
+        "sha256": "29c00a97761c2d699a8051774722d5bc14c2847a12ee85dc499149b2493e282b"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\2c8a92269438783cdea9c12bd474e8effbb35c2a04f522020829d2e48e3822b9.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\2c8a92269438783cdea9c12bd474e8effbb35c2a04f522020829d2e48e3822b9.jpg",
+        "relative_path": "mineru/images/2c8a92269438783cdea9c12bd474e8effbb35c2a04f522020829d2e48e3822b9.jpg",
+        "bytes": 57144,
+        "sha256": "f773c18c1d22938254115ba7f38ffb9ec7e9df97b6a1d8432f554f90f833d53c"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\2dc6a02e8e2ad74da9d7109a79c3785f6d1e87d4e27a923b10ad642fb2396615.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\2dc6a02e8e2ad74da9d7109a79c3785f6d1e87d4e27a923b10ad642fb2396615.jpg",
+        "relative_path": "mineru/images/2dc6a02e8e2ad74da9d7109a79c3785f6d1e87d4e27a923b10ad642fb2396615.jpg",
+        "bytes": 2431,
+        "sha256": "f7dd042a0fe2a1ad0f8e78a731c4aa4b0427e6472feff9ae1dcb58af127c6a24"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\366ba8be944f4880a6bcdbbd487119e5e4a64df8827f843f48fc9469c8860283.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\366ba8be944f4880a6bcdbbd487119e5e4a64df8827f843f48fc9469c8860283.jpg",
+        "relative_path": "mineru/images/366ba8be944f4880a6bcdbbd487119e5e4a64df8827f843f48fc9469c8860283.jpg",
+        "bytes": 4092,
+        "sha256": "9de91d3fa877997567dc7b9d0e1d3493e708c657ca767f427036ca203153829a"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\3a158f5529d74d2cdceac66cd4222eee369163362fd17d173bfbf86281d915d7.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\3a158f5529d74d2cdceac66cd4222eee369163362fd17d173bfbf86281d915d7.jpg",
+        "relative_path": "mineru/images/3a158f5529d74d2cdceac66cd4222eee369163362fd17d173bfbf86281d915d7.jpg",
+        "bytes": 5320,
+        "sha256": "2f718b76ff8c7d72d44f096be638d9c30fc0e79e0c4468fa47f3ac05ca7a82eb"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\41e60c2f964ba2298a98cdf8d835294510c1376971f86adbcde28699de246daa.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\41e60c2f964ba2298a98cdf8d835294510c1376971f86adbcde28699de246daa.jpg",
+        "relative_path": "mineru/images/41e60c2f964ba2298a98cdf8d835294510c1376971f86adbcde28699de246daa.jpg",
+        "bytes": 4019,
+        "sha256": "98afbd506f4ff8e5661dd74d4b5c0cebb8d093e5240dc5c707f812d0e1c7353e"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\4bd530efad5ee2077aa7dbf0666cbab93c07915cdd7958257b9589ca46085367.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\4bd530efad5ee2077aa7dbf0666cbab93c07915cdd7958257b9589ca46085367.jpg",
+        "relative_path": "mineru/images/4bd530efad5ee2077aa7dbf0666cbab93c07915cdd7958257b9589ca46085367.jpg",
+        "bytes": 36278,
+        "sha256": "5599e3279bf4e3bc51724d2f5c70fabbf71e7979c77475198502b4362e076be9"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\546ccfb45cd3adea9e115f737cdcc7eb12049f0d54c362dbe10383028e74b613.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\546ccfb45cd3adea9e115f737cdcc7eb12049f0d54c362dbe10383028e74b613.jpg",
+        "relative_path": "mineru/images/546ccfb45cd3adea9e115f737cdcc7eb12049f0d54c362dbe10383028e74b613.jpg",
+        "bytes": 6688,
+        "sha256": "43a72d9e4eb990bd14be6e225004c22059075b2c8e1c393bbe84f1ef0edf727d"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\567aa3e46cedc1b6d0376b1bf0a7fe0642a4280041db4927ce19f07417116953.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\567aa3e46cedc1b6d0376b1bf0a7fe0642a4280041db4927ce19f07417116953.jpg",
+        "relative_path": "mineru/images/567aa3e46cedc1b6d0376b1bf0a7fe0642a4280041db4927ce19f07417116953.jpg",
+        "bytes": 16830,
+        "sha256": "5899001c7f4b222214b0edf86d950b65bd6e3785a9a5b48b1c5818a24c77fe34"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\61c607d86e7cdda955d1cb168e88a84ecb46134af5d6245b5a1c7efdb455a7c0.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\61c607d86e7cdda955d1cb168e88a84ecb46134af5d6245b5a1c7efdb455a7c0.jpg",
+        "relative_path": "mineru/images/61c607d86e7cdda955d1cb168e88a84ecb46134af5d6245b5a1c7efdb455a7c0.jpg",
+        "bytes": 77800,
+        "sha256": "32db72c782fafce5add50236b6b68f021ce8a4dbd626a539bfe1af7b9f3e9778"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\6b9fba350c1840c6f27c5185cb9e63d07748eafd82001559ca6806b41425a6ef.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\6b9fba350c1840c6f27c5185cb9e63d07748eafd82001559ca6806b41425a6ef.jpg",
+        "relative_path": "mineru/images/6b9fba350c1840c6f27c5185cb9e63d07748eafd82001559ca6806b41425a6ef.jpg",
+        "bytes": 3186,
+        "sha256": "942d5bf163e92620e6c183414a2c0882626a3c37daa313396fed0da5ebe708c9"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\794b4b6dd6fd33b73d533c552f652b364dbe83fb844c1cf6e1e155d3f64739a2.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\794b4b6dd6fd33b73d533c552f652b364dbe83fb844c1cf6e1e155d3f64739a2.jpg",
+        "relative_path": "mineru/images/794b4b6dd6fd33b73d533c552f652b364dbe83fb844c1cf6e1e155d3f64739a2.jpg",
+        "bytes": 5075,
+        "sha256": "dd124bd6919d91a2fa005fba59ed094741c729bf1cfe8891987959c8193dc985"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\795cc6bc3bf463aa0a598d44609ab23ee05a35cfbf9816bdba6fad85df467615.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\795cc6bc3bf463aa0a598d44609ab23ee05a35cfbf9816bdba6fad85df467615.jpg",
+        "relative_path": "mineru/images/795cc6bc3bf463aa0a598d44609ab23ee05a35cfbf9816bdba6fad85df467615.jpg",
+        "bytes": 4249,
+        "sha256": "e3a6292ca3515e09f284dcad1bcd91565f4611bb9fc9ad86d7b2b4f7e1eebaa1"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\826e0eecf98011054819d163c8e6238ec7af50248d51b28b291e13cb209106d9.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\826e0eecf98011054819d163c8e6238ec7af50248d51b28b291e13cb209106d9.jpg",
+        "relative_path": "mineru/images/826e0eecf98011054819d163c8e6238ec7af50248d51b28b291e13cb209106d9.jpg",
+        "bytes": 98594,
+        "sha256": "740e3d4c965310b1f6253b4003a81262bac2223cfb6ef3466767cf3cf816837f"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\849d91bddce743c7e604e1f8564e003325767343a09cec57fb4fdc98d618aa0c.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\849d91bddce743c7e604e1f8564e003325767343a09cec57fb4fdc98d618aa0c.jpg",
+        "relative_path": "mineru/images/849d91bddce743c7e604e1f8564e003325767343a09cec57fb4fdc98d618aa0c.jpg",
+        "bytes": 109251,
+        "sha256": "f4d401c59d1a82c583a0dd5fa8e86e3c5e1f0ce08ca8be148e3eafc043bea860"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\8b19fde018e999ce4bfa22e87b38bbd141f04fa34ae1c88b9fbb7125dd0f20af.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\8b19fde018e999ce4bfa22e87b38bbd141f04fa34ae1c88b9fbb7125dd0f20af.jpg",
+        "relative_path": "mineru/images/8b19fde018e999ce4bfa22e87b38bbd141f04fa34ae1c88b9fbb7125dd0f20af.jpg",
+        "bytes": 64158,
+        "sha256": "6de49b3a0f0c02c3234a1caa1b9492da11e951fba0998f87d722ecec88f36287"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\a49fe2e39dfb058555008f84806822cb9d0b56528c850f0b67bb7bbf66b987eb.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\a49fe2e39dfb058555008f84806822cb9d0b56528c850f0b67bb7bbf66b987eb.jpg",
+        "relative_path": "mineru/images/a49fe2e39dfb058555008f84806822cb9d0b56528c850f0b67bb7bbf66b987eb.jpg",
+        "bytes": 8220,
+        "sha256": "d2657a0ebd4c28bc792f41213f8eec8d94ab52b433040c350b04b836e444efd3"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\aeec47e8bd09215132cc10f61bf7c0f7b858d1fb344f3e16a280b53cf6ba101b.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\aeec47e8bd09215132cc10f61bf7c0f7b858d1fb344f3e16a280b53cf6ba101b.jpg",
+        "relative_path": "mineru/images/aeec47e8bd09215132cc10f61bf7c0f7b858d1fb344f3e16a280b53cf6ba101b.jpg",
+        "bytes": 32774,
+        "sha256": "24301220b0836d626d4c6862da3d0e44dfd65089da42b6aaf3957f7c9d92b637"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\af206827245fd48f6970e40283f1fb205870afeeb6171d75c384aa97478601f8.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\af206827245fd48f6970e40283f1fb205870afeeb6171d75c384aa97478601f8.jpg",
+        "relative_path": "mineru/images/af206827245fd48f6970e40283f1fb205870afeeb6171d75c384aa97478601f8.jpg",
+        "bytes": 3664,
+        "sha256": "edd8034130b7e86ff3de65859996208b83291292e9137b374bc63e5ea50d8498"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\b2062edd4ce70599a6100cbbd2d5b92a9544612b250ebd237cf196c87cab9e8c.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\b2062edd4ce70599a6100cbbd2d5b92a9544612b250ebd237cf196c87cab9e8c.jpg",
+        "relative_path": "mineru/images/b2062edd4ce70599a6100cbbd2d5b92a9544612b250ebd237cf196c87cab9e8c.jpg",
+        "bytes": 3626,
+        "sha256": "6617d70fb659f6f748c145b3b8176a59356b41c207d0cbf2ae7b2bf56885ebc1"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\c0e390657ecb8dfa3f28004fa556d4ba2d80fda2275e329874795262e1d9f848.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\c0e390657ecb8dfa3f28004fa556d4ba2d80fda2275e329874795262e1d9f848.jpg",
+        "relative_path": "mineru/images/c0e390657ecb8dfa3f28004fa556d4ba2d80fda2275e329874795262e1d9f848.jpg",
+        "bytes": 9208,
+        "sha256": "5852f0a9736a881e5b64591f9e51de4fcd3e59f7d8b5b4691ea63e15dae0c7c2"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\c812436567277a61bfe6d006560bb5fbea29c054e883ee3148dd279b7f1996f4.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\c812436567277a61bfe6d006560bb5fbea29c054e883ee3148dd279b7f1996f4.jpg",
+        "relative_path": "mineru/images/c812436567277a61bfe6d006560bb5fbea29c054e883ee3148dd279b7f1996f4.jpg",
+        "bytes": 74979,
+        "sha256": "eb47007e543e16d367aaadbf428eb75dcdbc51ab22d6beca3b9066d1631e84dc"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\ccf70289ca64cdfad1c6daf0adaa4b0d89ccdc0bb6132ce72671042434f128cb.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\ccf70289ca64cdfad1c6daf0adaa4b0d89ccdc0bb6132ce72671042434f128cb.jpg",
+        "relative_path": "mineru/images/ccf70289ca64cdfad1c6daf0adaa4b0d89ccdc0bb6132ce72671042434f128cb.jpg",
+        "bytes": 3752,
+        "sha256": "86027fc79d406a6feb5d509553edb07df1566123d73d606e1e4fc8cbea82d1b8"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\e02fcd89c008eae48c3398bb5d839fbe561e93f8b2fddc9c952cba545a6a6e66.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\e02fcd89c008eae48c3398bb5d839fbe561e93f8b2fddc9c952cba545a6a6e66.jpg",
+        "relative_path": "mineru/images/e02fcd89c008eae48c3398bb5d839fbe561e93f8b2fddc9c952cba545a6a6e66.jpg",
+        "bytes": 5202,
+        "sha256": "c2a65de868b6faab837b362f06981b8815a791bfc7376a5eb22ee68e6ace7907"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\e1402677c92b0a6011d4dcceb0f97ca12ecae4e2d05d72cc64a40961c6d8f0ce.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\e1402677c92b0a6011d4dcceb0f97ca12ecae4e2d05d72cc64a40961c6d8f0ce.jpg",
+        "relative_path": "mineru/images/e1402677c92b0a6011d4dcceb0f97ca12ecae4e2d05d72cc64a40961c6d8f0ce.jpg",
+        "bytes": 23754,
+        "sha256": "03b9fd327beaa52124094e21719862230d6207a0bca4af9b396a6fa8b9960c41"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\e7fb235641c9b638723bac383ddb0b724126fc726be29d520052750a2a99f577.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\e7fb235641c9b638723bac383ddb0b724126fc726be29d520052750a2a99f577.jpg",
+        "relative_path": "mineru/images/e7fb235641c9b638723bac383ddb0b724126fc726be29d520052750a2a99f577.jpg",
+        "bytes": 5947,
+        "sha256": "a95de0747d6df3088b16b46b3b19750b559d24f0fd69c5b28dcae3e276b322c8"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\e81d18bfdf43e3a4304595e0e2bd67c1f4248dcfca7cd4d947190903b90bfd21.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\e81d18bfdf43e3a4304595e0e2bd67c1f4248dcfca7cd4d947190903b90bfd21.jpg",
+        "relative_path": "mineru/images/e81d18bfdf43e3a4304595e0e2bd67c1f4248dcfca7cd4d947190903b90bfd21.jpg",
+        "bytes": 5276,
+        "sha256": "6d6467dd01236208a12d217ad48fced2693b8c95b3c87201c37c413ab268cd74"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\f2c400632a4f93ae39efb5da0fc93f7d25dd3cf38cf5664bee7af2171b18c59b.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\f2c400632a4f93ae39efb5da0fc93f7d25dd3cf38cf5664bee7af2171b18c59b.jpg",
+        "relative_path": "mineru/images/f2c400632a4f93ae39efb5da0fc93f7d25dd3cf38cf5664bee7af2171b18c59b.jpg",
+        "bytes": 10003,
+        "sha256": "32e4bbe90e7d85b0c22f8b99e70b03f4a7302c08afaf58eac5af0c421091ea1c"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\f3bee31c3af0c6d6444197daa74219b9aae7bcb497daad868732432df6771bdc.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\f3bee31c3af0c6d6444197daa74219b9aae7bcb497daad868732432df6771bdc.jpg",
+        "relative_path": "mineru/images/f3bee31c3af0c6d6444197daa74219b9aae7bcb497daad868732432df6771bdc.jpg",
+        "bytes": 3796,
+        "sha256": "fc0a6af54f49f08d1138b1a32361099c0df98e2984912b9f8a103c8118e93cb5"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\images\\feca315298a39fe3cc859f99122473c894c35bd52dd6138c2607e5191f0cfe15.jpg",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\images\\feca315298a39fe3cc859f99122473c894c35bd52dd6138c2607e5191f0cfe15.jpg",
+        "relative_path": "mineru/images/feca315298a39fe3cc859f99122473c894c35bd52dd6138c2607e5191f0cfe15.jpg",
+        "bytes": 5111,
+        "sha256": "96fd1cfae157014460ee0b1bffeb772c036c6d6f0bd709d4bbc7276f879860f6"
+      },
+      {
+        "source": "E:\\OneDrive\\my_library\\10_Academic_Literature\\Preprints\\2025__Xu__RoCo_Role-Based_LLMs_Collaboration_for_Automatic_Heuristic_Design\\mineru\\layout.json",
+        "destination": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\References\\RoCo\\mineru\\layout.json",
+        "relative_path": "mineru/layout.json",
+        "bytes": 1107313,
+        "sha256": "9cb163b0de6c1df8f66fdd7d0f1d2b83b2dd606aed8edadb3fce573b9707442c"
+      }
+    ],
+    "source_removal": "not_requested_source_preserved",
+    "verification": "all_source_and_destination_sizes_and_sha256_match",
+    "source_metadata_pdf_consistency": {
+      "actual_pdf_bytes": 4849727,
+      "actual_pdf_sha256": "ac4b4f0e1dd2ff2619ea8a3660b77a3dd5e7b95b0a479346f90c45b025408c47",
+      "metadata_pdf_bytes": 4843131,
+      "metadata_pdf_sha256": "c6b8ed097fb26c96191bf0894ddb5e4ca873ec335d62faffcf44873376a1aa6b",
+      "mineru_pdf_bytes": 4843131,
+      "mineru_pdf_sha256": "c6b8ed097fb26c96191bf0894ddb5e4ca873ec335d62faffcf44873376a1aa6b",
+      "matches": false,
+      "handling": "source_metadata_preserved_as_historical_record_no_reparse_or_version_claim"
+    },
+    "project_link_verification": {
+      "checked_documents": [
+        "AGENTS.md",
+        "README.md",
+        "vault/00-Knowledge-Base-Status.md",
+        "vault/01-Research-Plan-and-Progress.md",
+        "vault/02-Index.md",
+        "vault/Knowledge/通用启发式自动设计框架.md",
+        "vault/Knowledge/Source-Provenance.md"
+      ],
+      "local_links_checked": 34,
+      "missing_targets": 0,
+      "outside_project_targets": 0,
+      "mineru_image_links_checked": 7
+    },
+    "modified_project_documents": [
+      "AGENTS.md",
+      "README.md",
+      "vault/00-Knowledge-Base-Status.md",
+      "vault/01-Research-Plan-and-Progress.md",
+      "vault/02-Index.md",
+      "vault/Knowledge/通用启发式自动设计框架.md",
+      "vault/Knowledge/Source-Provenance.md"
+    ]
+  },
+  "removed_source_files": 22,
+  "removed_empty_directories": [
+    "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021",
+    "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_slim_20261021\\__pycache__",
+    "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_slim_20261021"
+  ],
+  "source_presentation": {
+    "removed_original_pages": [
+      14,
+      15
+    ],
+    "current_page_count": 15,
+    "latest_backup": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\migration_20261021\\源端清理前最新合集.pptx",
+    "other_pages_1_to_13_preserved": true
+  },
+  "acl_changes": [],
+  "attribute_changes": [
+    {
+      "path": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_20261021",
+      "original_attributes": 524337,
+      "change": "clear_readonly_before_removing_empty_directory"
+    },
+    {
+      "path": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_slim_20261021\\__pycache__",
+      "original_attributes": 524337,
+      "change": "clear_readonly_before_removing_empty_directory"
+    },
+    {
+      "path": "E:\\OneDrive\\project\\static_determine\\roco_paperbanana\\outputs\\satellite_multiagent_briefing\\scheme_three_slim_20261021",
+      "original_attributes": 524337,
+      "change": "clear_readonly_before_removing_empty_directory"
+    }
+  ],
+  "acl_review": "只读核查存在Everyone Deny DeleteSubdirectoriesAndFiles；未修改ACL"
+}
