@@ -2,7 +2,7 @@
 
 在给定求解框架中自动设计启发式模块，沿用 RoCo 主流程，只将 Explorer／Exploiter 的任务目标改为收益 Q／速度 E。
 
-当前按 ACO＋TSP 白盒完成单任务一代接入与验收。项目尚无已验收系统或性能结论。运行采用 Windows 本机 Python 与已有 Codex CLI，模型为当前订阅的 GPT-5.6 Luna。
+P0 已完成 ACO＋TSP 白盒单任务一代工程验收。P1 正在接入正式任务和对照，运行矩阵与预算尚未冻结。项目尚无已验收的通用系统或性能结论。运行采用 Windows 本机 Python 与已有 Codex CLI，模型为当前订阅的 GPT-5.6 Luna。
 
 ## 当前入口
 

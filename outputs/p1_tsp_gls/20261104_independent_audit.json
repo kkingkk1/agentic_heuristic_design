@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "instances": 10,
+  "gls_iterations": 1200,
+  "perturbation_moves": 30,
+  "reference_cpu_seconds": 10.515625,
+  "backend_cpu_seconds": 10.6875,
+  "lkh_cpu_seconds": 16.140625,
+  "lkh_optimality_proven": false,
+  "invalid_status": "failed",
+  "timeout_status": "timeout",
+  "timeout_after_start": true,
+  "source_git_blob_before_alias_change": "01b0dfc34b64754dbc56d37cb742730f724eddd3"
+}

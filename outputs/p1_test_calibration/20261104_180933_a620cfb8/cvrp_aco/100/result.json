@@ -1,0 +1,37 @@
+{
+  "task": "cvrp_aco",
+  "size": 100,
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+    "--worker",
+    "cvrp_aco",
+    "100"
+  ],
+  "timeout_seconds": 120,
+  "formal_test_data_used": false,
+  "started_at_utc": "2026-11-04T10:09:56.831078+00:00",
+  "pid": 74764,
+  "process_tree": {
+    "user_seconds": 22.984375,
+    "kernel_seconds": 0.671875,
+    "cpu_seconds": 23.65625,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "exit_code": 0,
+  "elapsed_seconds": 23.843999999924563,
+  "measurement": {
+    "event": "calibration_complete",
+    "task": "cvrp_aco",
+    "size": 100,
+    "seed": 20790100,
+    "iterations": 500,
+    "objective": 17.51829880320426,
+    "solve_elapsed_seconds": 22.01500000001397
+  }
+}

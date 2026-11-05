@@ -1,0 +1,47 @@
+{
+  "status": "passed",
+  "seed": 7451,
+  "formal_test_data_used": false,
+  "cases": {
+    "tsp": {
+      "project_objective": 3.778975488841889,
+      "source_objective": 3.778975486755371,
+      "valid_permutation": true
+    },
+    "op": {
+      "project_objective": 7.545454545454546,
+      "source_objective": 7.480000019073486,
+      "closed_route_length": 2.9617252535862395,
+      "max_length": 3.0,
+      "difference_due_to_source_precision_not_resolved": true
+    },
+    "cvrp": {
+      "project_objective": 4.446560780580514,
+      "source_objective": 4.446560859680176,
+      "capacity": 50
+    },
+    "mkp": {
+      "project_objective": 9.255025276509489,
+      "source_objective": 9.255026817321777,
+      "normalized_capacity": 1
+    },
+    "bpp": {
+      "project_bin_count": 11,
+      "source_load_fitness": 0.562589898989899,
+      "capacity": 150,
+      "bin_loads": [
+        150,
+        141,
+        150,
+        150,
+        75,
+        85,
+        80,
+        79,
+        97,
+        88,
+        96
+      ]
+    }
+  }
+}

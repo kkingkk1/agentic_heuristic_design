@@ -1,0 +1,87 @@
+{
+  "plan": {
+    "model": "gpt-5.6-luna",
+    "access": "Codex CLI / current ChatGPT login",
+    "conditions": [
+      {
+        "task": "tsp_aco",
+        "prompt_condition": "white_box"
+      },
+      {
+        "task": "tsp_aco",
+        "prompt_condition": "black_box"
+      },
+      {
+        "task": "op_aco",
+        "prompt_condition": "white_box"
+      },
+      {
+        "task": "op_aco",
+        "prompt_condition": "black_box"
+      },
+      {
+        "task": "cvrp_aco",
+        "prompt_condition": "white_box"
+      },
+      {
+        "task": "cvrp_aco",
+        "prompt_condition": "black_box"
+      },
+      {
+        "task": "mkp_aco",
+        "prompt_condition": "white_box"
+      },
+      {
+        "task": "mkp_aco",
+        "prompt_condition": "black_box"
+      },
+      {
+        "task": "bpp_offline_aco",
+        "prompt_condition": "white_box"
+      },
+      {
+        "task": "bpp_offline_aco",
+        "prompt_condition": "black_box"
+      },
+      {
+        "task": "tsp_gls",
+        "prompt_condition": "white_box"
+      }
+    ],
+    "max_model_cli_calls": 11,
+    "max_training_evaluations": 11,
+    "max_concurrent_conditions": 4,
+    "infrastructure_retries": 0,
+    "uses_formal_test_data": false,
+    "note": "每个条件只检查一次无种子提案及其完整训练评价；不构成正式研发或性能比较。"
+  },
+  "resources": {
+    "available_memory_bytes": 36640804864,
+    "priority": "Normal"
+  },
+  "quota": {
+    "observed_at_utc": "2026-11-05T05:36:02.765505+00:00",
+    "source": "codex app-server account/rateLimits/read",
+    "requested_model": "gpt-5.6-luna",
+    "model_specific_bucket_confirmed": false,
+    "ordinary_usage_allowed": true,
+    "buckets": [
+      {
+        "limit_id": "codex",
+        "primary": {
+          "used_percent": 39,
+          "duration_minutes": 10080,
+          "resets_at_unix": 1794315699
+        },
+        "secondary": null,
+        "spend_control_reached": false,
+        "rate_limit_reached_type": null,
+        "has_credits": false
+      }
+    ],
+    "available_reset_credit_count": 2,
+    "remaining_model_calls": null,
+    "note": "窗口百分比不能直接换算成剩余模型调用次数；本次只读回读不使用重置额度。"
+  },
+  "quota_gate": "unquantified_explicitly_accepted"
+}

@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "checked_instances": 5,
+  "checked_iterations_per_instance": 200,
+  "training_only": true,
+  "average": 20.371737728590546,
+  "candidate": "全 1 工程夹具，未进入初始种群"
+}

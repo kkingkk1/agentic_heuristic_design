@@ -1,0 +1,16 @@
+[*] Running ...
+[*] Dataset loaded: E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\dataset\train50_dataset.npy with 5 instances.
+P0_JSON {"event": "start", "dataset": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy", "seed_base": 20261103, "n_ants": 30, "n_iterations": 200, "numpy": "2.3.5", "torch": "2.13.0+cu126", "torch_threads": 1}
+[*] Instance 0: 8.851688975389076
+P0_JSON {"event": "instance", "index": 0, "seed": 20261103, "objective": 8.851688975389076, "iterations": 200, "tour": [5, 24, 10, 40, 37, 3, 18, 46, 27, 28, 9, 43, 29, 12, 15, 6, 17, 41, 4, 35, 22, 47, 44, 16, 2, 42, 26, 8, 31, 36, 32, 30, 21, 11, 39, 34, 20, 45, 25, 49, 0, 23, 14, 7, 38, 48, 19, 33, 1, 13]}
+[*] Instance 1: 9.453353457346957
+P0_JSON {"event": "instance", "index": 1, "seed": 20261104, "objective": 9.453353457346957, "iterations": 200, "tour": [6, 4, 20, 36, 38, 43, 13, 40, 11, 21, 41, 9, 25, 32, 49, 28, 10, 34, 31, 0, 39, 1, 29, 27, 19, 15, 37, 30, 46, 33, 35, 42, 23, 45, 48, 18, 2, 7, 16, 44, 24, 22, 47, 5, 26, 17, 14, 8, 12, 3]}
+[*] Instance 2: 9.67712802022363
+P0_JSON {"event": "instance", "index": 2, "seed": 20261105, "objective": 9.67712802022363, "iterations": 200, "tour": [28, 25, 31, 45, 9, 12, 18, 30, 29, 7, 41, 49, 26, 10, 36, 44, 19, 8, 17, 35, 14, 4, 22, 3, 39, 23, 15, 5, 24, 48, 1, 16, 46, 11, 43, 32, 0, 38, 34, 2, 37, 42, 27, 6, 33, 47, 13, 40, 20, 21]}
+[*] Instance 3: 9.992926486744619
+P0_JSON {"event": "instance", "index": 3, "seed": 20261106, "objective": 9.992926486744619, "iterations": 200, "tour": [41, 8, 1, 17, 15, 27, 33, 43, 42, 26, 39, 11, 30, 35, 10, 19, 38, 9, 20, 28, 47, 32, 25, 48, 16, 0, 23, 12, 21, 13, 29, 45, 18, 4, 22, 34, 5, 40, 31, 24, 14, 6, 46, 36, 7, 49, 3, 37, 2, 44]}
+[*] Instance 4: 9.266670957359914
+P0_JSON {"event": "instance", "index": 4, "seed": 20261107, "objective": 9.266670957359914, "iterations": 200, "tour": [30, 37, 39, 46, 4, 24, 27, 11, 12, 0, 8, 48, 6, 19, 14, 40, 28, 44, 42, 10, 2, 25, 5, 31, 7, 36, 35, 13, 32, 41, 45, 49, 18, 15, 23, 33, 22, 16, 9, 26, 20, 29, 34, 17, 3, 47, 21, 38, 1, 43]}
+[*] Average:
+9.448353579412839
+P0_JSON {"event": "complete", "instance_count": 5, "average": 9.448353579412839}

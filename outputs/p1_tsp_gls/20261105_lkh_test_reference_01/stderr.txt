@@ -1,0 +1,6 @@
+E:\OneDrive\project\static_determine\agentic_heuristic_design\scripts\p1_tsp_gls_lkh_test.py:69: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(points, points) + np.eye(size) * 1e-5
+E:\OneDrive\project\static_determine\agentic_heuristic_design\scripts\p1_tsp_gls_lkh_test.py:69: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(points, points) + np.eye(size) * 1e-5
+E:\OneDrive\project\static_determine\agentic_heuristic_design\scripts\p1_tsp_gls_lkh_test.py:69: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(points, points) + np.eye(size) * 1e-5

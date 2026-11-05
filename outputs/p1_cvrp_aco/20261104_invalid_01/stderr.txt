@@ -1,0 +1,18 @@
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py:125: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coordinates, coordinates)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py:125: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coordinates, coordinates)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py:125: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coordinates, coordinates)
+Traceback (most recent call last):
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py", line 182, in <module>
+    main()
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py", line 171, in main
+    objective, path, iterations = solve(instance[:, 1:], instance[:, 0], heuristic, black_box=black_box)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py", line 131, in solve
+    scores = checked_heuristic(heuristic, distances, coordinates, demands, black_box=black_box)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py", line 66, in checked_heuristic
+    raise ValueError("启发式必须返回有限实数。")
+ValueError: 启发式必须返回有限实数。

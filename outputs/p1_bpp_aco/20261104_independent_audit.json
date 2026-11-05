@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "runs": {
+    "white": {
+      "instances": 5,
+      "iterations": 100,
+      "objectives": [
+        207,
+        209,
+        208,
+        213,
+        210
+      ],
+      "maximum_bin_load": 150,
+      "cpu_seconds": 44.078125
+    },
+    "black": {
+      "instances": 5,
+      "iterations": 100,
+      "objectives": [
+        212,
+        211,
+        213,
+        217,
+        216
+      ],
+      "maximum_bin_load": 150,
+      "cpu_seconds": 43.53125
+    }
+  },
+  "source_git_blobs": {
+    "cfg/problem/bpp_offline_aco.yaml": "ea06d2a0fca42f0b4a90dc5063110f0fe016224c",
+    "cfg/problem/bpp_offline_aco_black_box.yaml": "8eef9385ac2f34fc78172e21dac8c2fb942a8e04",
+    "prompts/bpp_offline_aco/func_desc.txt": "a6e1757aec211411d9b8c5c447aaeddd3a508616",
+    "prompts/bpp_offline_aco/func_signature.txt": "cf77d092f99b678d3a44771dac2ca089024b1892",
+    "prompts/bpp_offline_aco_black_box/func_desc.txt": "d80e6f51544604b6e4c7dc10807f1dc4a159233c",
+    "prompts/bpp_offline_aco_black_box/func_signature.txt": "6723a7be2a2c85930d9a762aadb955cf4bf051dd",
+    "problems/bpp_offline_aco/dataset/train500_dataset.npz": "6184f952df4cf3a5e8c8da1f9d9052c8b2043735"
+  },
+  "unmodified_upstream_aco_blob": "ab5d1475c844dd85fae36e3463b57604562eb6a9",
+  "compatibility_change": "np.float_ -> np.float64",
+  "invalid_status": "failed",
+  "timeout_status": "timeout",
+  "timeout_active_processes": 0,
+  "earlier_attempt": "20261104_*_01 保留；主进程退出后的活动进程计数被过早解释为错误"
+}

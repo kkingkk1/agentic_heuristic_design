@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "runs": {
+    "white": {
+      "instances": 5,
+      "iterations": 100,
+      "average": 13.824000000000002,
+      "max_route_length": 2.997033620984693,
+      "cpu_seconds": 16.703125
+    },
+    "black": {
+      "instances": 5,
+      "iterations": 100,
+      "average": 7.640000000000001,
+      "max_route_length": 2.995376322449831,
+      "cpu_seconds": 11.703125
+    }
+  },
+  "source_git_blobs": {
+    "problems/op_aco/aco.py": "315589944dfd4e12450e38a08a6348fc9daf1b09",
+    "cfg/problem/op_aco.yaml": "1c37a40cfa8b1bae6ffbe9da958b6c546ce09c3e",
+    "cfg/problem/op_aco_black_box.yaml": "0eae5f3ad5a914fc3d199a7afe767d432061407a",
+    "prompts/op_aco/func_desc.txt": "636688523499b82547525701afe20b8d1f94390a",
+    "prompts/op_aco/func_signature.txt": "2fe8bd0b4f1118f74ecffc1b8fda741a1d2589dc",
+    "prompts/op_aco_black_box/func_desc.txt": "b15cbc6fcd2a2f64537fc49983a80ab8f3d3be0f",
+    "prompts/op_aco_black_box/func_signature.txt": "ffcb197d54f2d1df3cf695e5f103e897d783636c",
+    "problems/op_aco/dataset/train50_dataset.npz": "437462740e19bc27fffa20b56739d1730adf1d2b"
+  },
+  "invalid_status": "failed",
+  "timeout_status": "timeout",
+  "timeout_active_processes": 0
+}

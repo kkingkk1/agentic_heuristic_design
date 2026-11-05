@@ -1,0 +1,35 @@
+{
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\mkp_aco\\eval.py",
+    "100",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_mkp_aco\\20261104_invalid_01",
+    "train"
+  ],
+  "started_at_utc": "2026-11-04T05:58:37.551147+00:00",
+  "timeout_seconds": 60,
+  "protected_sha256": {
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_mkp_aco\\20261104_invalid_01\\problems\\mkp_aco\\gpt.py": "d0fdbb8735183a49425e212ae3c13cd1bef706ceacaecce176e72e2533f5c8e0",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\mkp_aco\\aco.py": "665dc6dd727ab7c52b883b915fc2220dfca0404f9aa1c9355119cae3ea660f3e",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\mkp_aco\\eval.py": "7fa75b37bf8f96ca2643ccb50400b7a5615e5153140d08d4c41401a3324dce43",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\mkp_aco\\eval_black_box.py": "ee86bfeef5da4eb373b6331a13c6e3d010f4ac67597052668ff6654f9e9d9a50",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\mkp_aco\\dataset\\train100_dataset.npz": "6dc1ffc07b50b8ee7bba919443a6840ed82a04a817e039e05da809877bf21073",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_mkp_aco_evaluate.py": "41745ffd10c23f41341a282a8ab1dabf9f2a2933491f0138feb4b09043024284"
+  },
+  "status": "failed",
+  "cpu_scope": "Windows 作业中的完整进程树",
+  "prompt_condition": "white_box",
+  "pid": 71652,
+  "exit_code": 1,
+  "process_tree": {
+    "user_seconds": 0.875,
+    "kernel_seconds": 0.703125,
+    "cpu_seconds": 1.578125,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 1.672000000020489
+}

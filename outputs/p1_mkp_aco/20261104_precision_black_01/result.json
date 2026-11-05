@@ -1,0 +1,57 @@
+{
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\mkp_aco\\eval_black_box.py",
+    "100",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_mkp_aco\\20261104_precision_black_01",
+    "train"
+  ],
+  "started_at_utc": "2026-11-04T10:15:15.349855+00:00",
+  "timeout_seconds": 60,
+  "protected_sha256": {
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_mkp_aco\\20261104_precision_black_01\\problems\\mkp_aco\\gpt.py": "a0e0f61acedcf254fa75094edf922d7509426ac41b5887bbf87261f3fdc736c4",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\mkp_aco\\aco.py": "ebf5752f688328e686c0dd8963422704a001644166c99ffe79064edfe0306e09",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\mkp_aco\\eval.py": "6b52e04fb387a6b28828ead292258baf1f4d30f4d8a1f23b956a4a519304b601",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\mkp_aco\\eval_black_box.py": "ee86bfeef5da4eb373b6331a13c6e3d010f4ac67597052668ff6654f9e9d9a50",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\mkp_aco\\dataset\\train100_dataset.npz": "6dc1ffc07b50b8ee7bba919443a6840ed82a04a817e039e05da809877bf21073",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_job_supervision.py": "7de34fd313bda57e2a1836eef27bbb0c1193e3db3619bc968e380c0f75a849dd",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_mkp_aco_evaluate.py": "5a5951a1f66801ecf9bd6389d77a73d2b05066f51f93dd5fe365fc983fb4fee2"
+  },
+  "status": "passed",
+  "cpu_scope": "Windows 作业中的完整进程树",
+  "prompt_condition": "black_box",
+  "pid": 31468,
+  "exit_code": 0,
+  "process_tree": {
+    "user_seconds": 6.8125,
+    "kernel_seconds": 0.953125,
+    "cpu_seconds": 7.765625,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 7.952999999979511,
+  "objectives": [
+    10.52921090964573,
+    18.161219908600575,
+    16.60454011718523,
+    10.952115292526459,
+    35.04816034842937
+  ],
+  "average": 18.259049315277473,
+  "fitness": 18.259049315277473,
+  "start": {
+    "event": "start",
+    "dataset": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\mkp_aco\\dataset\\train100_dataset.npz",
+    "seed_base": 20261103,
+    "n_ants": 10,
+    "n_iterations": 50,
+    "n_items": 100,
+    "n_dims": 5,
+    "numpy": "2.3.5",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1
+  }
+}

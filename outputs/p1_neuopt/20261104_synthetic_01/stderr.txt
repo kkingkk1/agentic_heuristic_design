@@ -1,0 +1,32 @@
+Traceback (most recent call last):
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\baselines\neuopt\synthetic_check.py", line 128, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\baselines\neuopt\synthetic_check.py", line 122, in main
+    print("P1_NEUOPT_JSON " + json.dumps(check(args.size, args.steps, args.seed, args.device),
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\baselines\neuopt\synthetic_check.py", line 100, in check
+    result = agent.rollout(problem, T=steps, val_m=1, stall_limit=10, batch=batch, record=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\baselines\neuopt\verified\agent\ppo.py", line 160, in rollout
+    action = self.actor(problem,
+             ^^^^^^^^^^^^^^^^^^^
+  File "D:\Tools\mineru\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Tools\mineru\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\baselines\neuopt\verified\nets\actor_network.py", line 116, in forward
+    action, log_ll, entropy = self.decoder(problem,
+                              ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Tools\mineru\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Tools\mineru\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\baselines\neuopt\verified\nets\graph_layers.py", line 441, in forward
+    k_action_left[stopped,i] = action[stopped].squeeze().clone()
+    ~~~~~~~~~~~~~^^^^^^^^^^^
+IndexError: index 1 is out of bounds for dimension 1 with size 1

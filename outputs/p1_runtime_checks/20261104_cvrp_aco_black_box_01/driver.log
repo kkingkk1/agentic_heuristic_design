@@ -1,0 +1,1 @@
+{"task": "cvrp_aco", "condition": "black_box", "status": "passed", "cpu": 27.703125, "model_calls": 0}

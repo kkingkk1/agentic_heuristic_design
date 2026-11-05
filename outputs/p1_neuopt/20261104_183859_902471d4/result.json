@@ -1,0 +1,105 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\baselines\\neuopt\\synthetic_check.py",
+    "--size",
+    "20",
+    "--steps",
+    "5",
+    "--seed",
+    "20790020",
+    "--device",
+    "cuda"
+  ],
+  "started_at_utc": "2026-11-04T10:38:59.417554+00:00",
+  "timeout_seconds": 120,
+  "resources": {
+    "available_memory_bytes": 37608452096,
+    "priority": "Normal"
+  },
+  "gpu_before": "NVIDIA GeForce RTX 3060, 12288, 3847, 2",
+  "protected_sha256": {
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\baselines\\neuopt\\synthetic_check.py": "13dbc401d7b6b9e2829db8bc1395ab9245a969a6f87e7661e7031119ce447734",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_neuopt_check.py": "4c321ff60a36c1b1afb128682c04ee88d47e3f4eb9013f4496dc2802c42cecc0"
+  },
+  "formal_test_data_used": false,
+  "pid": 68268,
+  "process_tree": {
+    "user_seconds": 1.15625,
+    "kernel_seconds": 0.8125,
+    "cpu_seconds": 1.96875,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "exit_code": 0,
+  "elapsed_seconds": 2.030999999959022,
+  "measurement": {
+    "status": "passed",
+    "size": 20,
+    "steps": 5,
+    "seed": 20790020,
+    "device": "cuda",
+    "checkpoint": "tsp20.pt",
+    "batch_size": 2,
+    "instances": [
+      {
+        "route": [
+          0,
+          1,
+          6,
+          3,
+          16,
+          7,
+          15,
+          9,
+          11,
+          10,
+          5,
+          8,
+          14,
+          19,
+          2,
+          17,
+          4,
+          13,
+          18,
+          12
+        ],
+        "float64_recomputed_length": 5.06684831835566,
+        "source_float32_length": 5.066848278045654
+      },
+      {
+        "route": [
+          0,
+          12,
+          5,
+          19,
+          11,
+          3,
+          17,
+          13,
+          15,
+          9,
+          10,
+          18,
+          7,
+          16,
+          8,
+          2,
+          1,
+          14,
+          4,
+          6
+        ],
+        "float64_recomputed_length": 6.275956040485712,
+        "source_float32_length": 6.275956153869629
+      }
+    ],
+    "formal_test_data_used": false,
+    "adaptation": "不启用 TensorBoard；安全读取权重；使用两个合成实例；在 record=False 下记录来源最优路线。"
+  }
+}

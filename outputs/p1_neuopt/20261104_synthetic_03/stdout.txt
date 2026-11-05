@@ -1,0 +1,5 @@
+TSP with 20 nodes. MAX 4-opt. Do assert: False
+simpleMDP:  True
+# params in Actor {'Total': 682628, 'Trainable': 682628}
+Distributed: False
+P1_NEUOPT_JSON {"status": "passed", "size": 20, "steps": 5, "seed": 20790020, "device": "cuda", "checkpoint": "tsp20.pt", "batch_size": 2, "instances": [{"route": [0, 1, 6, 3, 16, 7, 15, 9, 11, 10, 5, 8, 14, 19, 2, 17, 4, 13, 18, 12], "float64_recomputed_length": 5.06684831835566, "source_float32_length": 5.066848278045654}, {"route": [0, 12, 5, 19, 11, 3, 17, 13, 15, 9, 10, 18, 7, 16, 8, 2, 1, 14, 4, 6], "float64_recomputed_length": 6.275956040485712, "source_float32_length": 6.275956153869629}], "formal_test_data_used": false, "adaptation": "不启用 TensorBoard；安全读取权重；使用两个合成实例；在 record=False 下记录来源最优路线。"}

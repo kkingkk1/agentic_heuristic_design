@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\op_aco\eval.py", line 182, in <module>
+    main()
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\op_aco\eval.py", line 171, in main
+    objective, solution, distance, iterations = solve(points, heuristic)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\op_aco\eval.py", line 134, in solve
+    scores = checked_heuristic(heuristic, prizes.numpy(), distances.numpy())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\op_aco\eval.py", line 74, in checked_heuristic
+    raise ValueError("启发式必须返回有限实数。")
+ValueError: 启发式必须返回有限实数。

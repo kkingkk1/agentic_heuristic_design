@@ -1,0 +1,79 @@
+{
+  "status": "engineering",
+  "method": {
+    "id": "eoh_paper_adapted"
+  },
+  "model": {
+    "name": "gpt-5.6-luna",
+    "access": "Codex CLI, existing ChatGPT login, p0_chatgpt_https",
+    "reasoning_effort_override": false,
+    "disabled_feature": "unbounded_connection_retries",
+    "provider_request_max_retries": 0,
+    "provider_stream_max_retries": 0,
+    "retry_policy": "由控制程序按已记录的基础设施失败执行有界重试；候选技术错误不触发修复、重评或补提案。",
+    "transport_limitations": "本机拒绝连接路径已检查；服务端请求次数与失败请求用量未必可完整观测，缺失时须标明。"
+  },
+  "resources": {
+    "python_executable": "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "pythonpath": [
+      "D:\\Tools\\paddleocr-document-rebuild\\.venv\\Lib\\site-packages",
+      "D:\\Tools\\mineru\\.venv\\Lib\\site-packages"
+    ],
+    "host_cpu": "Intel Core i7-14700KF, 20 physical cores, 28 logical processors",
+    "host_memory_bytes": 68463861760,
+    "process_priority": "Normal",
+    "max_concurrent_evaluations": 4,
+    "max_concurrent_model_calls": 4,
+    "min_available_system_memory_bytes": 8589934592,
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "observed_torch_intraop_threads": 1,
+    "observed_torch_interop_threads": 20,
+    "memory_note": "可用内存阈值是启动条件，不是进程内存硬限制；候选可能自行创建线程或后代。"
+  },
+  "budget": {
+    "normal_model_calls": 95,
+    "additional_infrastructure_retry_calls": 20,
+    "max_initialization_and_generation_model_cli_invocations": 115,
+    "future_probe_and_check_model_calls": 10,
+    "future_probe_and_check_infrastructure_retries": 2,
+    "max_future_model_cli_invocations": 127,
+    "prior_recorded_model_cli_invocations": 20,
+    "max_recorded_model_cli_invocations_including_prior": 147,
+    "normal_code_generation_slots": 88,
+    "additional_infrastructure_evaluation_starts": 10,
+    "max_initialization_and_generation_evaluation_starts": 98,
+    "future_probe_and_check_evaluation_starts": 10,
+    "max_future_total_evaluation_starts": 108,
+    "future_initialization_and_generation_eval_process_tree_cpu_seconds": 6000,
+    "future_probes_and_checks_eval_process_tree_cpu_seconds": 600,
+    "max_future_total_eval_process_tree_cpu_seconds": 6600,
+    "accounting_note": "模型上限按 CLI 调用计；实际底层传输尝试及缺失用量单独记录。评价 CPU 按进程树计；历史不可得的子进程开销不计为零。"
+  },
+  "task": {
+    "name": "mkp_aco",
+    "prompt_condition": "white_box",
+    "problem_size": 100,
+    "objective_direction": "max",
+    "function": "heuristics_v2(prize: np.ndarray, weight: np.ndarray) -> np.ndarray",
+    "instance_count": 5,
+    "ants": 10,
+    "iterations_per_instance": 50,
+    "dataset_generator_seed": 1234,
+    "evaluation_seeds": [
+      20261103,
+      20261104,
+      20261105,
+      20261106,
+      20261107
+    ],
+    "dataset": "problems/mkp_aco/dataset/train100_dataset.npz",
+    "dataset_sha256": "6dc1ffc07b50b8ee7bba919443a6840ed82a04a817e039e05da809877bf21073",
+    "whole_training_wall_timeout_seconds": 60,
+    "population_size": 10
+  }
+}

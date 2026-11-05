@@ -1,0 +1,71 @@
+{
+  "plan": {
+    "task": "tsp_aco",
+    "prompt_condition": "white_box",
+    "model": "gpt-5.6-luna",
+    "access": "Codex CLI / current ChatGPT login",
+    "max_model_cli_calls": 7,
+    "max_evaluation_starts": 6,
+    "evaluation_wall_timeout_seconds_each": 60,
+    "max_evaluation_process_tree_cpu_seconds": 10416,
+    "max_concurrent_methods": 4,
+    "infrastructure_retries": 0,
+    "reset_credits": 0,
+    "operations": [
+      {
+        "method": "eoh",
+        "max_model_calls": 1,
+        "max_evaluations": 1
+      },
+      {
+        "method": "reevo",
+        "max_model_calls": 1,
+        "max_evaluations": 1
+      },
+      {
+        "method": "hsevo",
+        "max_model_calls": 2,
+        "max_evaluations": 2
+      },
+      {
+        "method": "mcts",
+        "max_model_calls": 2,
+        "max_evaluations": 1
+      },
+      {
+        "method": "roco",
+        "max_model_calls": 1,
+        "max_evaluations": 1
+      }
+    ],
+    "note": "只检查单候选及一组和声参数；不构成完整代验收，也不使用测试集。"
+  },
+  "resources": {
+    "available_memory_bytes": 35032047616,
+    "priority": "Normal"
+  },
+  "quota": {
+    "observed_at_utc": "2026-11-05T03:49:26.140243+00:00",
+    "source": "codex app-server account/rateLimits/read",
+    "requested_model": "gpt-5.6-luna",
+    "model_specific_bucket_confirmed": false,
+    "ordinary_usage_allowed": true,
+    "buckets": [
+      {
+        "limit_id": "codex",
+        "primary": {
+          "used_percent": 36,
+          "duration_minutes": 10080,
+          "resets_at_unix": 1794315699
+        },
+        "secondary": null,
+        "spend_control_reached": false,
+        "rate_limit_reached_type": null,
+        "has_credits": false
+      }
+    ],
+    "available_reset_credit_count": 2,
+    "remaining_model_calls": null,
+    "note": "窗口百分比不能直接换算成剩余模型调用次数；本次只读回读不使用重置额度。"
+  }
+}

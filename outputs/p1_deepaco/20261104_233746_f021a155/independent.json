@@ -1,0 +1,54 @@
+{
+  "status": "passed",
+  "mandatory_requirements": [
+    {
+      "for": "torch-geometric",
+      "dependency": "aiohttp",
+      "version": "3.14.1"
+    },
+    {
+      "for": "torch-geometric",
+      "dependency": "fsspec",
+      "version": "2026.6.0"
+    },
+    {
+      "for": "torch-geometric",
+      "dependency": "jinja2",
+      "version": "3.1.6"
+    },
+    {
+      "for": "torch-geometric",
+      "dependency": "numpy",
+      "version": "2.3.5"
+    },
+    {
+      "for": "torch-geometric",
+      "dependency": "psutil",
+      "version": "7.2.2"
+    },
+    {
+      "for": "torch-geometric",
+      "dependency": "pyparsing",
+      "version": "3.3.2"
+    },
+    {
+      "for": "torch-geometric",
+      "dependency": "requests",
+      "version": "2.34.2"
+    },
+    {
+      "for": "torch-geometric",
+      "dependency": "tqdm",
+      "version": "4.68.4"
+    },
+    {
+      "for": "torch-geometric",
+      "dependency": "xxhash",
+      "version": "3.6.0"
+    }
+  ],
+  "global_mean_pool_vs_numpy": "passed",
+  "batch_norm_vs_numpy": "passed",
+  "torch_scatter_available": false,
+  "torch_sparse_available": false
+}

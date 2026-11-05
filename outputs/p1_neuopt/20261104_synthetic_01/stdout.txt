@@ -1,0 +1,4 @@
+TSP with 20 nodes. MAX 4-opt. Do assert: False
+simpleMDP:  True
+# params in Actor {'Total': 682628, 'Trainable': 682628}
+Distributed: False

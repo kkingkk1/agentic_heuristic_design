@@ -1,0 +1,18 @@
+{"event": "precision_reproduction", "seed": 20800700, "size": 700, "max_used": 1.0000001104383813, "excess": 1.1043838132884787e-07, "knapsack_dtype": "torch.float32", "weight_dtype": "torch.float64", "items": 374}
+Traceback (most recent call last):
+  File "<stdin>", line 22, in <module>
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\mkp_aco\eval.py", line 128, in solve
+    objective, best = aco.run(n_iterations)
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Tools\mineru\.venv\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\mkp_aco\aco.py", line 50, in run
+    sols = self.gen_sol() # (n_ants, max_horizon)
+           ^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\mkp_aco\eval.py", line 110, in gen_sol
+    check_solution(solution, self.source_prize, self.source_weight)
+  File "<stdin>", line 15, in check
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\mkp_aco\eval.py", line 91, in check_solution
+    raise ValueError("��Υ������Լ����")
+ValueError: ��Υ������Լ����

@@ -1,0 +1,37 @@
+{
+  "task": "bpp_offline_aco",
+  "size": 1000,
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+    "--worker",
+    "bpp_offline_aco",
+    "1000"
+  ],
+  "timeout_seconds": 120,
+  "formal_test_data_used": false,
+  "started_at_utc": "2026-11-04T10:10:49.099202+00:00",
+  "pid": 100992,
+  "process_tree": {
+    "user_seconds": 25.296875,
+    "kernel_seconds": 1.015625,
+    "cpu_seconds": 26.3125,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "exit_code": 0,
+  "elapsed_seconds": 26.406000000075437,
+  "measurement": {
+    "event": "calibration_complete",
+    "task": "bpp_offline_aco",
+    "size": 1000,
+    "seed": 20811000,
+    "iterations": 100,
+    "objective": 420.0,
+    "solve_elapsed_seconds": 26.15700000000652
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "training_instances": 10,
+  "routes_identical": true,
+  "objectives_identical": true,
+  "iterations_per_instance": 1200,
+  "pre_change_solver_sha256": "bce35a2cc2186906df2752824aec9de810b610e561312e4c1cfd9f14fa71da7d",
+  "dataset_sha256": "f8da974c2a9e935b86c05991f0ed722d01bd1e3a4a18ddde65c381b224086235",
+  "fixture_sha256": "dff978f28f787af1d30f90b0e7dd70f11e74b620385064de683434ac56cb5c6e",
+  "replay_result_sha256": "c5011a78488b49202af1eed052eef7f49a47076fe0901f676714fa9fc7a83801",
+  "note": "从当前文件的未修改部分还原修改前求解器；仅关闭 Numba 缓存以便内存重放。"
+}

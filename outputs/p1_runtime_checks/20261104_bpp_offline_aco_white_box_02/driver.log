@@ -1,0 +1,1 @@
+{"task": "bpp_offline_aco", "condition": "white_box", "status": "passed", "cpu": 45.0625, "model_calls": 0}

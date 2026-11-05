@@ -1,0 +1,7 @@
+P1_JSON {"event": "start", "dataset": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\op_aco\\dataset\\train50_dataset.npz", "seed_base": 20261103, "n_ants": 30, "n_iterations": 100, "n_nodes": 50, "max_len": 3.0, "numpy": "2.3.5", "torch": "2.13.0+cu126", "torch_threads": 1}
+P1_JSON {"event": "instance", "index": 0, "seed": 20261103, "objective": 10.060000000000002, "iterations": 100, "solution": [0, 35, 41, 29, 4, 9, 43, 48, 27, 6, 17, 44, 47, 38, 5, 24, 10, 40, 30, 14], "distance": 2.9491811609525103}
+P1_JSON {"event": "instance", "index": 1, "seed": 20261104, "objective": 10.27, "iterations": 100, "solution": [0, 8, 5, 26, 14, 12, 17, 47, 22, 3, 30, 37, 13, 19, 15, 43, 39, 50], "distance": 2.9977140672469313}
+P1_JSON {"event": "instance", "index": 2, "seed": 20261105, "objective": 7.56, "iterations": 100, "solution": [0, 13, 17, 14, 35, 4, 39, 3, 23, 15, 25, 37, 48, 11, 50], "distance": 2.9739899820853664}
+P1_JSON {"event": "instance", "index": 3, "seed": 20261106, "objective": 8.9, "iterations": 100, "solution": [0, 3, 42, 43, 27, 15, 46, 36, 17, 7, 49, 24, 31, 2, 30, 26, 1], "distance": 2.961675702125425}
+P1_JSON {"event": "instance", "index": 4, "seed": 20261107, "objective": 9.5, "iterations": 100, "solution": [0, 37, 30, 38, 3, 15, 34, 23, 47, 21, 43, 33, 17, 27, 50, 50, 50], "distance": 2.994483548322128}
+P1_JSON {"event": "complete", "instance_count": 5, "average": 9.258, "fitness": 9.258}

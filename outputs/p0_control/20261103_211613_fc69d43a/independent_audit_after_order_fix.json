@@ -1,0 +1,94 @@
+{
+  "status": "passed",
+  "events": 1023,
+  "event_counts": {
+    "preflight": 1,
+    "initial_quota_gate": 1,
+    "candidate_registered": 88,
+    "proposal_budget_reserved": 88,
+    "model_budget_reserved": 95,
+    "model_attempt": 95,
+    "model_process": 95,
+    "model_usage": 95,
+    "proposal_response": 88,
+    "evaluation_budget_reserved": 88,
+    "evaluation_cpu_final": 88,
+    "evaluation": 88,
+    "proposal_budget_released": 88,
+    "initial_population": 1,
+    "generation_cpu_budget_check": 1,
+    "generation_quota": 1,
+    "generation_quota_gate": 1,
+    "elite_pair": 1,
+    "model_response": 7,
+    "branch_transition": 8,
+    "selection": 1,
+    "history_appended": 3,
+    "finish": 1
+  },
+  "model_attempts": 95,
+  "normal_model_calls": 95,
+  "model_retries": 0,
+  "candidate_slots": 88,
+  "evaluations": 88,
+  "valid_evaluations": 83,
+  "recomputed_tours": 415,
+  "evaluation_process_tree_cpu_seconds": 1042.46875,
+  "observed_model_usage": {
+    "input_tokens": 2335456,
+    "cached_input_tokens": 1333760,
+    "output_tokens": 111795,
+    "reasoning_output_tokens": 41388
+  },
+  "missing_model_usage_fields": {
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0
+  },
+  "failed_attempt_usage": "不可完整取得，不按零估算。",
+  "source_verification": "source_snapshot",
+  "generation_order_recorded": false,
+  "finish": {
+    "event_index": 1023,
+    "event": "finish",
+    "at_utc": "2026-11-03T13:35:28.367424+00:00",
+    "status": "completed"
+  },
+  "quota_acceptance": true,
+  "initial_population": [
+    "c0024",
+    "c0006",
+    "c0014",
+    "c0020",
+    "c0010",
+    "c0013",
+    "c0025",
+    "c0005",
+    "c0004",
+    "c0008"
+  ],
+  "elites": [
+    "c0024",
+    "c0006"
+  ],
+  "final_pool_size": 50,
+  "final_population": [
+    "c0052",
+    "c0044",
+    "c0048",
+    "c0049",
+    "c0062",
+    "c0063",
+    "c0053",
+    "c0059",
+    "c0088",
+    "c0067"
+  ],
+  "skipped_slots": [],
+  "history_roles": [
+    "Q",
+    "E",
+    "I"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "formal_test_data_used": false,
+  "cases": {
+    "tsp": {
+      "distance_recomputed": 5.363626130836275,
+      "valid": true
+    },
+    "op": {
+      "score_recomputed": 15.99,
+      "distance_recomputed": 2.9916643470716644,
+      "valid": true
+    },
+    "bpp": {
+      "bins_recomputed": 205,
+      "max_bin_load": 150,
+      "source_fitness_recomputed": 0.9807685636856368,
+      "valid": true
+    },
+    "cvrp": {
+      "distance_recomputed": 8.871418033579022,
+      "max_vehicle_load": 50.0,
+      "valid": true
+    },
+    "mkp": {
+      "score_recomputed": 50.06910812644795,
+      "max_capacity_used": 0.9993206306606865,
+      "valid": true
+    }
+  }
+}

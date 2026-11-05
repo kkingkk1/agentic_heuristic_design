@@ -1,0 +1,35 @@
+{
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_gls\\eval.py",
+    "200",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_tsp_gls\\20261104_timeout_03",
+    "train"
+  ],
+  "started_at_utc": "2026-11-04T08:33:15.116417+00:00",
+  "timeout_seconds": 3,
+  "protected_sha256": {
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_tsp_gls\\20261104_timeout_03\\problems\\tsp_gls\\gpt.py": "2166603d167f0a82463f7e6fb6e13bdfeda55704c28835a45f7dde99bac8bbf6",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_gls\\gls.py": "64b4ab71a127903164fbeee57c5c2c5cf6435bfa2bb88cb7297fcc08c0f82b20",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_gls\\eval.py": "97a1f89f3c8a3e3f3a9c2161685e224a92525801b44db2f7f9732bb73528d75a",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_gls\\dataset\\train200_dataset.npy": "f8da974c2a9e935b86c05991f0ed722d01bd1e3a4a18ddde65c381b224086235",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_job_supervision.py": "7de34fd313bda57e2a1836eef27bbb0c1193e3db3619bc968e380c0f75a849dd",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_tsp_gls_evaluate.py": "1d75cd65b7e0e40fe4a8574b1db92a1b54944dd191e4917a406fa1b7bb0b5073"
+  },
+  "status": "timeout",
+  "cpu_scope": "Windows 作业中的完整进程树",
+  "prompt_condition": "white_box",
+  "pid": 44204,
+  "exit_code": 1,
+  "process_tree": {
+    "user_seconds": 0.765625,
+    "kernel_seconds": 0.296875,
+    "cpu_seconds": 1.0625,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 3.0160000000614673
+}

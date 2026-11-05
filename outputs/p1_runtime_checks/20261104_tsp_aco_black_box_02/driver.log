@@ -1,0 +1,1 @@
+{"task": "tsp_aco", "condition": "black_box", "status": "passed", "cpu": 10.359375, "model_calls": 0}

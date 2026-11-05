@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\cvrp_aco\\eval.py",
+    "50",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_task_smoke\\20261105_133602_b6f6a25c\\cvrp_aco_white_fixture\\candidates\\c0001",
+    "train"
+  ],
+  "resources": {
+    "available_memory_bytes": 36682346496,
+    "priority": "Normal"
+  },
+  "started_at_utc": "2026-11-05T05:39:32.646019+00:00",
+  "candidate_id": "c0001",
+  "pid": 21748,
+  "exit_code": 0,
+  "objectives": [
+    12.434548237627098,
+    14.801951169500107,
+    14.887460140538817,
+    13.308198005152093,
+    13.529514232531255,
+    12.406654162085218,
+    13.92191893098258,
+    14.415723435736183,
+    12.103858004582312,
+    13.28448658619154
+  ],
+  "average": 13.509431290492719,
+  "fitness": -13.509431290492719,
+  "start": {
+    "event": "start",
+    "dataset": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\cvrp_aco\\dataset\\train50_dataset.npy",
+    "seed_base": 20261103,
+    "n_ants": 20,
+    "n_iterations": 100,
+    "n_customers": 50,
+    "capacity": 50,
+    "numpy": "2.3.5",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1
+  },
+  "completed_monotonic_ns": 699367203000000,
+  "process_tree_cpu": {
+    "user_seconds": 22.984375,
+    "kernel_seconds": 0.515625,
+    "cpu_seconds": 23.5,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 23.60999999998603
+}

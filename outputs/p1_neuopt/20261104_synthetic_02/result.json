@@ -1,0 +1,28 @@
+{
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\baselines\\neuopt\\synthetic_check.py",
+    "--size",
+    "20",
+    "--steps",
+    "5",
+    "--device",
+    "cuda"
+  ],
+  "timeout_seconds": 120,
+  "formal_test_data_used": false,
+  "status": "failed",
+  "pid": 25576,
+  "process_tree": {
+    "user_seconds": 1.125,
+    "kernel_seconds": 0.796875,
+    "cpu_seconds": 1.921875,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "exit_code": 1,
+  "elapsed_seconds": 2.01500000001397
+}

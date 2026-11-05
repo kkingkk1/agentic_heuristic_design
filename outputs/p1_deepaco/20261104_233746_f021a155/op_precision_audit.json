@@ -1,0 +1,34 @@
+{
+  "status": "measured",
+  "source_data": "P1 OP training data only",
+  "source_input_dtype": "float64",
+  "comparison": "project float64 versus DeepACO graph float32",
+  "formal_test_data_used": false,
+  "instances": [
+    {
+      "index": 0,
+      "nodes_with_difference_over_1e-6": 0,
+      "max_absolute_prize_difference": 2.8610229518832853e-08
+    },
+    {
+      "index": 1,
+      "nodes_with_difference_over_1e-6": 0,
+      "max_absolute_prize_difference": 2.8610229518832853e-08
+    },
+    {
+      "index": 2,
+      "nodes_with_difference_over_1e-6": 0,
+      "max_absolute_prize_difference": 2.8610229518832853e-08
+    },
+    {
+      "index": 3,
+      "nodes_with_difference_over_1e-6": 0,
+      "max_absolute_prize_difference": 2.622604367008563e-08
+    },
+    {
+      "index": 4,
+      "nodes_with_difference_over_1e-6": 0,
+      "max_absolute_prize_difference": 2.8610229518832853e-08
+    }
+  ]
+}

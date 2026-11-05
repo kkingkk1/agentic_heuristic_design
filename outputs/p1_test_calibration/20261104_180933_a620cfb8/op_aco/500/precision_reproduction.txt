@@ -1,0 +1,18 @@
+{"event": "precision_reproduction", "seed": 20780500, "size": 500, "limit": 8.0, "actual_distance": 8.000000099955301, "excess": 9.995530092510307e-08, "travel_dtype": "torch.float32", "distance_dtype": "torch.float64", "nodes": 127}
+Traceback (most recent call last):
+  File "<stdin>", line 24, in <module>
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\op_aco\eval.py", line 146, in solve
+    objective, best = aco.run(n_iterations)
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Tools\mineru\.venv\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\op_aco\aco.py", line 66, in run
+    sols = self.gen_sol()
+           ^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\op_aco\eval.py", line 127, in gen_sol
+    check_solution(solution, self.source_positions, self.source_prizes, self.source_max_len)
+  File "<stdin>", line 16, in check
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\op_aco\eval.py", line 106, in check_solution
+    raise ValueError("·�߳����������ơ�")
+ValueError: ·�߳����������ơ�

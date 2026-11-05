@@ -1,0 +1,2 @@
+{"event": "calibration_start", "task": "bpp_offline_aco", "size": 700, "seed": 20810700, "iterations": 100, "formal_test_data_used": false}
+{"event": "calibration_complete", "task": "bpp_offline_aco", "size": 700, "seed": 20810700, "iterations": 100, "objective": 297.0, "solve_elapsed_seconds": 15.09299999999348}

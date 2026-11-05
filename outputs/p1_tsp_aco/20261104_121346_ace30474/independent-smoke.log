@@ -1,0 +1,4 @@
+<stdin>:13: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+<stdin>:13: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+<stdin>:13: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+{"status": "passed", "dataset": "独立合成实例，不属于正式训练或测试集", "nodes": 50, "ants": 30, "iterations": 500, "objective": 6.406559547890696, "independent_length": 6.406559547890695, "original_solver": 6.406559547890696, "seed": 76199}

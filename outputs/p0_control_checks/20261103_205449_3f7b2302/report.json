@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "model_calls": 0,
+  "source": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p0_tsp_aco\\20261103_174821_76657347\\reference_final_a",
+  "cpu_budget_seconds": 600,
+  "check_job_cpu_rate": 2857,
+  "check_job_max_logical_cores": 8,
+  "whole_training_wall_timeout_seconds": 60,
+  "previous_check_cpu_seconds": 37.015625,
+  "objectives": [
+    5.73647143107342,
+    6.1381689024311905,
+    6.741944406114264,
+    6.4275256522103295,
+    6.322496925715304
+  ],
+  "average": 6.273321463508902,
+  "process_tree_cpu": {
+    "user_seconds": 11.890625,
+    "kernel_seconds": 0.9375,
+    "cpu_seconds": 12.828125,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 13.25,
+  "baseline_objectives_match": true
+}

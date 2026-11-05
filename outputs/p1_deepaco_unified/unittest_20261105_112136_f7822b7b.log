@@ -1,0 +1,82 @@
+调用 proposal，模型 gpt-5.6-luna。
+调用 proposal，模型 gpt-5.6-luna。
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p0_tsp_aco.py:68: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(node_pos, node_pos)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p0_tsp_aco.py:68: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(node_pos, node_pos)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p0_tsp_aco.py:68: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(node_pos, node_pos)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py:123: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  dist_mat = distance_matrix(node_pos, node_pos)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py:123: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  dist_mat = distance_matrix(node_pos, node_pos)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py:123: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  dist_mat = distance_matrix(node_pos, node_pos)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py:133: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coordinates, coordinates)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py:133: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coordinates, coordinates)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py:133: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coordinates, coordinates)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p1_cvrp_aco.py:87: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coords, coords)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p1_cvrp_aco.py:87: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coords, coords)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p1_cvrp_aco.py:87: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coords, coords)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p1_cvrp_aco.py:44: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coordinates, coordinates)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p1_cvrp_aco.py:44: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coordinates, coordinates)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p1_cvrp_aco.py:44: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coordinates, coordinates)
+D:\Tools\agentic-heuristic-p1-pyg\torch_geometric\llm\utils\backend_utils.py:26: DeprecationWarning: `torch_geometric.distributed` has been deprecated since 2.7.0 and will no longer be maintained. For distributed training, refer to our tutorials on distributed training at https://pytorch-geometric.readthedocs.io/en/latest/tutorial/distributed.html or cuGraph examples at https://github.com/rapidsai/cugraph-gnn/tree/main/python/cugraph-pyg/cugraph_pyg/examples
+  from torch_geometric.distributed import (
+D:\Tools\mineru\.venv\Lib\site-packages\torch\jit\_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py:167: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coordinates, coordinates)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py:167: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coordinates, coordinates)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py:167: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coordinates, coordinates)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p1_deepaco_cvrp_mkp.py:61: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(self.coordinates, self.coordinates)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p1_deepaco_cvrp_mkp.py:61: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(self.coordinates, self.coordinates)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p1_deepaco_cvrp_mkp.py:61: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(self.coordinates, self.coordinates)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p1_tsp_aco.py:118: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coords, coords)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p1_tsp_aco.py:118: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coords, coords)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p1_tsp_aco.py:118: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coords, coords)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py:123: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  dist_mat = distance_matrix(node_pos, node_pos)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py:123: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  dist_mat = distance_matrix(node_pos, node_pos)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py:123: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  dist_mat = distance_matrix(node_pos, node_pos)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p1_tsp_aco.py:103: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coords, coords)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p1_tsp_aco.py:103: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coords, coords)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p1_tsp_aco.py:103: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coords, coords)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_gls\eval.py:76: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(positions, positions) + np.eye(len(positions)) * 1e-5
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_gls\eval.py:76: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(positions, positions) + np.eye(len(positions)) * 1e-5
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_gls\eval.py:76: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(positions, positions) + np.eye(len(positions)) * 1e-5
+E:\OneDrive\project\static_determine\agentic_heuristic_design\scripts\p1_tsp_gls_lkh_train.py:38: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(points, points) + np.eye(len(points)) * 1e-5
+E:\OneDrive\project\static_determine\agentic_heuristic_design\scripts\p1_tsp_gls_lkh_train.py:38: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(points, points) + np.eye(len(points)) * 1e-5
+E:\OneDrive\project\static_determine\agentic_heuristic_design\scripts\p1_tsp_gls_lkh_train.py:38: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(points, points) + np.eye(len(points)) * 1e-5
+----------------------------------------------------------------------
+Ran 200 tests in 17.857s
+
+OK

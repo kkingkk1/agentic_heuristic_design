@@ -1,0 +1,58 @@
+test_legacy_single_bucket_is_supported (test_p0_budget_quota.QuotaSnapshotTests.test_legacy_single_bucket_is_supported) ... ok
+test_missing_or_invalid_windows_fail_closed (test_p0_budget_quota.QuotaSnapshotTests.test_missing_or_invalid_windows_fail_closed) ... ok
+test_snapshot_keeps_percent_and_removes_account_identifiers (test_p0_budget_quota.QuotaSnapshotTests.test_snapshot_keeps_percent_and_removes_account_identifiers) ... ok
+test_concurrent_proposals_wait_until_full_evaluation_reservation_is_free (test_p0_controller.BudgetTests.test_concurrent_proposals_wait_until_full_evaluation_reservation_is_free) ... ok
+test_generation_keeps_all_evaluation_retry_reservations (test_p0_controller.BudgetTests.test_generation_keeps_all_evaluation_retry_reservations) ... ok
+test_generation_rejects_insufficient_empirical_cpu_budget (test_p0_controller.BudgetTests.test_generation_rejects_insufficient_empirical_cpu_budget) ... ok
+test_live_cpu_guard_terminates_all_active_jobs (test_p0_controller.BudgetTests.test_live_cpu_guard_terminates_all_active_jobs) ... ok
+test_model_reservation_has_atomic_retry_limit (test_p0_controller.BudgetTests.test_model_reservation_has_atomic_retry_limit) ... ok
+test_quota_cannot_be_inferred_from_window_percentages (test_p0_controller.BudgetTests.test_quota_cannot_be_inferred_from_window_percentages) ... ok
+test_reserves_across_concurrent_starts_and_counts_completed_children (test_p0_controller.BudgetTests.test_reserves_across_concurrent_starts_and_counts_completed_children) ... ok
+test_unquantified_quota_exception_is_explicit_and_never_overrides_known_shortfall (test_p0_controller.BudgetTests.test_unquantified_quota_exception_is_explicit_and_never_overrides_known_shortfall) ... ok
+test_critic_instructions_follow_objective_order_and_ties (test_p0_controller.ControllerTests.test_critic_instructions_follow_objective_order_and_ties) ... ok
+test_dedup_uses_earliest_complete_evaluation_without_admitting_old_parent (test_p0_controller.ControllerTests.test_dedup_uses_earliest_complete_evaluation_without_admitting_old_parent) ... ok
+test_invalid_proposals_fall_back_skip_fusions_and_do_not_retry (test_p0_controller.ControllerTests.test_invalid_proposals_fall_back_skip_fusions_and_do_not_retry) ... ok
+test_normal_generation_counts_slots_fixed_pool_and_prompt_boundaries (test_p0_controller.ControllerTests.test_normal_generation_counts_slots_fixed_pool_and_prompt_boundaries) ... ok
+test_scope_check_rejects_obvious_writes (test_p0_controller.ControllerTests.test_scope_check_rejects_obvious_writes) ... ok
+test_too_few_initial_or_final_candidates_stops_without_history (test_p0_controller.ControllerTests.test_too_few_initial_or_final_candidates_stops_without_history) ... ok
+test_generation_quota_gate_rechecks_and_respects_only_explicit_exception (test_p0_controller.ModelRuntimeTests.test_generation_quota_gate_rechecks_and_respects_only_explicit_exception) ... ok
+test_insufficient_evaluation_budget_stops_before_model_call (test_p0_controller.ModelRuntimeTests.test_insufficient_evaluation_budget_stops_before_model_call) ... ok
+test_known_network_failure_uses_only_infrastructure_retry_budget (test_p0_controller.ModelRuntimeTests.test_known_network_failure_uses_only_infrastructure_retry_budget) ... ok
+test_rate_limit_stops_without_retry_or_reset (test_p0_controller.ModelRuntimeTests.test_rate_limit_stops_without_retry_or_reset) ... ok
+test_descendant_cpu_is_counted_after_all_processes_exit (test_p0_controller.WindowsJobTests.test_descendant_cpu_is_counted_after_all_processes_exit) ... ok
+test_terminate_removes_live_descendants (test_p0_controller.WindowsJobTests.test_terminate_removes_live_descendants) ... ok
+调用 proposal，模型 gpt-5.6-luna。
+test_call_records_and_rejects_unexpected_websocket_fallback (test_p0_model_probe.ProtocolTests.test_call_records_and_rejects_unexpected_websocket_fallback) ... ok
+调用 proposal，模型 gpt-5.6-luna。
+test_call_uses_chatgpt_https_without_changing_model_or_auth (test_p0_model_probe.ProtocolTests.test_call_uses_chatgpt_https_without_changing_model_or_auth) ... ok
+test_context_comparison_preserves_structure_without_instruction_text (test_p0_model_probe.ProtocolTests.test_context_comparison_preserves_structure_without_instruction_text) ... ok
+test_critic_requires_paper_tags_and_word_limits (test_p0_model_probe.ProtocolTests.test_critic_requires_paper_tags_and_word_limits) ... ok
+test_events_require_completion_and_reject_tool_actions (test_p0_model_probe.ProtocolTests.test_events_require_completion_and_reject_tool_actions) ... ok
+test_long_term_and_merge_protocols (test_p0_model_probe.ProtocolTests.test_long_term_and_merge_protocols) ... ok
+test_proposal_accepts_complete_module_and_keeps_content (test_p0_model_probe.ProtocolTests.test_proposal_accepts_complete_module_and_keeps_content) ... ok
+test_proposal_rejects_wrong_interface_and_incomplete_response (test_p0_model_probe.ProtocolTests.test_proposal_rejects_wrong_interface_and_incomplete_response) ... ok
+test_complete_minimization_has_negative_fitness (test_p0_tsp_aco.CompletionValidationTests.test_complete_minimization_has_negative_fitness) ... ok
+test_incomplete_or_inconsistent_results_never_receive_fitness (test_p0_tsp_aco.CompletionValidationTests.test_incomplete_or_inconsistent_results_never_receive_fitness) ... ok
+test_missing_taskkill_stops_main_process_and_reports_tree_failure (test_p0_tsp_aco.CompletionValidationTests.test_missing_taskkill_stops_main_process_and_reports_tree_failure) ... ok
+test_finite_negative_scores_follow_upstream_clipping_and_input_is_copied (test_p0_tsp_aco.HeuristicValidationTests.test_finite_negative_scores_follow_upstream_clipping_and_input_is_copied) ... ok
+test_path_check_rejects_duplicate_city_for_any_ant (test_p0_tsp_aco.HeuristicValidationTests.test_path_check_rejects_duplicate_city_for_any_ant) ... ok
+test_reference_preserves_original_aco_result_for_full_budget (test_p0_tsp_aco.HeuristicValidationTests.test_reference_preserves_original_aco_result_for_full_budget) ... E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p0_tsp_aco.py:68: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(node_pos, node_pos)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p0_tsp_aco.py:68: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(node_pos, node_pos)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\tests\test_p0_tsp_aco.py:68: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(node_pos, node_pos)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py:102: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  dist_mat = distance_matrix(node_pos, node_pos)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py:102: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  dist_mat = distance_matrix(node_pos, node_pos)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py:102: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  dist_mat = distance_matrix(node_pos, node_pos)
+ok
+test_rejects_nonfinite_path_cost (test_p0_tsp_aco.HeuristicValidationTests.test_rejects_nonfinite_path_cost) ... ok
+test_rejects_wrong_shape_type_and_nonfinite_values (test_p0_tsp_aco.HeuristicValidationTests.test_rejects_wrong_shape_type_and_nonfinite_values) ... ok
+
+----------------------------------------------------------------------
+Ran 39 tests in 4.844s
+
+OK

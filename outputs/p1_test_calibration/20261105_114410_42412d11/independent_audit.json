@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "formal_test_data_used": false,
+  "cases": {
+    "op_aco50": {
+      "score_recomputed": 15.62,
+      "distance_recomputed": 2.998055900319878,
+      "valid": true
+    },
+    "mkp_aco100": {
+      "score_recomputed": 11.60399822760938,
+      "max_capacity_used": 0.9942866127274337,
+      "valid": true
+    },
+    "tsp_gls50": {
+      "distance_recomputed": 6.2829343404083575,
+      "valid": true
+    },
+    "tsp_gls200": {
+      "distance_recomputed": 10.748527182864887,
+      "valid": true
+    }
+  }
+}

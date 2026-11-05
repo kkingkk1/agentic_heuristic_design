@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\bpp_offline_aco\\eval.py",
+    "500",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_runtime_checks\\20261104_bpp_offline_aco_white_box_02\\candidates\\c0001",
+    "train"
+  ],
+  "resources": {
+    "available_memory_bytes": 38386176000,
+    "priority": "Normal"
+  },
+  "started_at_utc": "2026-11-04T07:32:03.150123+00:00",
+  "candidate_id": "c0001",
+  "pid": 101592,
+  "exit_code": 0,
+  "objectives": [
+    207,
+    209,
+    208,
+    213,
+    210
+  ],
+  "average": 209.4,
+  "fitness": -209.4,
+  "start": {
+    "event": "start",
+    "dataset": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\bpp_offline_aco\\dataset\\train500_dataset.npz",
+    "seed_base": 20261103,
+    "n_ants": 20,
+    "n_iterations": 100,
+    "n_items": 500,
+    "capacity": 150,
+    "numpy": "2.3.5"
+  },
+  "completed_monotonic_ns": 619737718000000,
+  "process_tree_cpu": {
+    "user_seconds": 44.4375,
+    "kernel_seconds": 0.625,
+    "cpu_seconds": 45.0625,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 45.10900000005495
+}

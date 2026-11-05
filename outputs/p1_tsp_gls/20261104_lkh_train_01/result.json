@@ -1,0 +1,55 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_tsp_gls_lkh_train.py",
+    "--child"
+  ],
+  "timeout_seconds": 120,
+  "protected_sha256": {
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_tsp_gls_lkh_train.py": "ed731d4e348bf587f1fc2f77defde148f97c757b1e97a8972f3867cfba207677",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_gls\\dataset\\train200_dataset.npy": "f8da974c2a9e935b86c05991f0ed722d01bd1e3a4a18ddde65c381b224086235",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_job_supervision.py": "7de34fd313bda57e2a1836eef27bbb0c1193e3db3619bc968e380c0f75a849dd"
+  },
+  "resources": {
+    "available_memory_bytes": 35696721920,
+    "priority": "Normal"
+  },
+  "optimality_proven": false,
+  "pid": 25564,
+  "exit_code": 0,
+  "process_tree": {
+    "user_seconds": 13.6875,
+    "kernel_seconds": 2.453125,
+    "cpu_seconds": 16.140625,
+    "total_processes": 12,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 4.25,
+  "objectives": [
+    10.525864590537651,
+    10.68465072449332,
+    10.81259200118892,
+    10.38442973939829,
+    10.536548369821022,
+    10.306668249504575,
+    11.105239282462154,
+    10.691543950027732,
+    10.522109073672024,
+    10.269406168775552
+  ],
+  "average": 10.583905214988125,
+  "start": {
+    "event": "start",
+    "instances": 10,
+    "nodes": 200,
+    "scale": 1000000,
+    "runs": 10,
+    "workers": 10,
+    "elkai_version": "2.0.1",
+    "optimality_proven": false
+  }
+}

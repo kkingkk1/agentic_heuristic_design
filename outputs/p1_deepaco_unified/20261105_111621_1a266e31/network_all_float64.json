@@ -1,0 +1,105 @@
+{
+  "status": "passed",
+  "at_utc": "2026-11-05T03:18:09.474632+00:00",
+  "seed": 7451,
+  "device": "cpu",
+  "formal_test_data_used": false,
+  "torch": "2.13.0+cu126",
+  "numpy": "2.3.5",
+  "torch_geometric": "2.7.0",
+  "pyparsing": "3.3.2",
+  "xxhash": "3.6.0",
+  "torch_num_threads": 1,
+  "weights_strictly_loaded": [
+    "pretrained/bpp/bpp120.pt",
+    "pretrained/cvrp/cvrp100.pt",
+    "pretrained/cvrp/cvrp20.pt",
+    "pretrained/cvrp/cvrp500.pt",
+    "pretrained/mkp/mkp300.pt",
+    "pretrained/mkp/mkp500.pt",
+    "pretrained/op/op100.pt",
+    "pretrained/op/op200.pt",
+    "pretrained/op/op300.pt",
+    "pretrained/tsp/tsp100.pt",
+    "pretrained/tsp/tsp20.pt",
+    "pretrained/tsp/tsp500.pt"
+  ],
+  "cases": [
+    {
+      "task": "tsp",
+      "checkpoint": "tsp20",
+      "matrix_shape": [
+        20,
+        20
+      ],
+      "compute_dtype": "torch.float64",
+      "output_dtype": "float64",
+      "minimum": 1e-10,
+      "maximum": 0.8988496527048981,
+      "sha256": "158edd94cbfa4c6b38fadf1d5691b6a1091004a032d6a64aae9fc9c8e3367d4a",
+      "repeated_output_equal": true,
+      "elapsed_seconds": 0.01600000006146729
+    },
+    {
+      "task": "op",
+      "checkpoint": "op100",
+      "matrix_shape": [
+        100,
+        100
+      ],
+      "compute_dtype": "torch.float64",
+      "output_dtype": "float64",
+      "minimum": 1e-10,
+      "maximum": 0.9833066329616326,
+      "sha256": "295b612a74d0b8bdfc0c9cc6a478a3dc0960102833953ba0abd99489e5b63a64",
+      "repeated_output_equal": true,
+      "elapsed_seconds": 0.015999999945051968
+    },
+    {
+      "task": "cvrp",
+      "checkpoint": "cvrp20",
+      "matrix_shape": [
+        21,
+        21
+      ],
+      "compute_dtype": "torch.float64",
+      "output_dtype": "float64",
+      "minimum": 1.0000000000818436e-10,
+      "maximum": 0.9390712178273063,
+      "sha256": "24ffe3c4a531e3868c0b825c2fd0f7a392e0fd0573cace3688d1d75cf08c0ab5",
+      "repeated_output_equal": true,
+      "elapsed_seconds": 0.015000000013969839
+    },
+    {
+      "task": "mkp",
+      "checkpoint": "mkp300",
+      "matrix_shape": [
+        300,
+        300
+      ],
+      "compute_dtype": "torch.float64",
+      "output_dtype": "float64",
+      "minimum": 0.9999954341250487,
+      "maximum": 42908.97031147602,
+      "sha256": "cc99ea1078d5a6046730b48ba321ba22627580c2fae448563a0c0ff050148775",
+      "repeated_output_equal": true,
+      "elapsed_seconds": 0.9220000000204891
+    },
+    {
+      "task": "bpp",
+      "checkpoint": "bpp120",
+      "matrix_shape": [
+        121,
+        121
+      ],
+      "compute_dtype": "torch.float64",
+      "output_dtype": "float64",
+      "minimum": 1.1686282691732612e-10,
+      "maximum": 0.9893029048303458,
+      "sha256": "ba64b420f52d63ac6e8754ce913cbeb5bfea302f5f862a672b00f50d7488fe57",
+      "repeated_output_equal": true,
+      "elapsed_seconds": 0.10899999993853271
+    }
+  ],
+  "elapsed_seconds": 1.2959999999729916
+}

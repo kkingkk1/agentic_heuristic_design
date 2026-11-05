@@ -1,0 +1,68 @@
+{
+  "status": "passed",
+  "model_candidates_passed": 10,
+  "model_candidates_failed": 1,
+  "independent_fixture_passed": true,
+  "instances_recomputed": 70,
+  "formal_test_data_used": false,
+  "model_attempts": 11,
+  "model_retries": 0,
+  "failure": "CVRP 白盒候选数组形状不匹配，原候选和错误保留；未修复或补提案。",
+  "checks": {
+    "tsp_aco_white_box": {
+      "instances_recomputed": 5,
+      "protected_files": 21,
+      "status": "passed"
+    },
+    "tsp_aco_black_box": {
+      "instances_recomputed": 5,
+      "protected_files": 21,
+      "status": "passed"
+    },
+    "op_aco_white_box": {
+      "instances_recomputed": 5,
+      "protected_files": 21,
+      "status": "passed"
+    },
+    "op_aco_black_box": {
+      "instances_recomputed": 5,
+      "protected_files": 21,
+      "status": "passed"
+    },
+    "cvrp_aco_black_box": {
+      "instances_recomputed": 10,
+      "protected_files": 21,
+      "status": "passed"
+    },
+    "mkp_aco_white_box": {
+      "instances_recomputed": 5,
+      "protected_files": 21,
+      "status": "passed"
+    },
+    "mkp_aco_black_box": {
+      "instances_recomputed": 5,
+      "protected_files": 21,
+      "status": "passed"
+    },
+    "bpp_offline_aco_white_box": {
+      "instances_recomputed": 5,
+      "protected_files": 21,
+      "status": "passed"
+    },
+    "bpp_offline_aco_black_box": {
+      "instances_recomputed": 5,
+      "protected_files": 21,
+      "status": "passed"
+    },
+    "tsp_gls_white_box": {
+      "instances_recomputed": 10,
+      "protected_files": 20,
+      "status": "passed"
+    },
+    "cvrp_aco_white_fixture": {
+      "instances_recomputed": 10,
+      "protected_files": 19,
+      "status": "passed"
+    }
+  }
+}

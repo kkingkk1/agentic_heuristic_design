@@ -1,0 +1,104 @@
+{
+  "model_calls": 11,
+  "results": [
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 7.3483175793494295,
+      "condition": "tsp_aco_white_box",
+      "model_calls": 1,
+      "evaluation_starts": 1
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 9.615390298236752,
+      "condition": "tsp_aco_black_box",
+      "model_calls": 1,
+      "evaluation_starts": 1
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 9.258,
+      "condition": "op_aco_white_box",
+      "model_calls": 1,
+      "evaluation_starts": 1
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 13.136000000000001,
+      "condition": "op_aco_black_box",
+      "model_calls": 1,
+      "evaluation_starts": 1
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": false,
+      "error": "候选运行或输出非法；详见 stderr.txt。",
+      "objective": null,
+      "condition": "cvrp_aco_white_box",
+      "model_calls": 1,
+      "evaluation_starts": 1
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 21.744303232921432,
+      "condition": "cvrp_aco_black_box",
+      "model_calls": 1,
+      "evaluation_starts": 1
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 21.933609239796244,
+      "condition": "mkp_aco_white_box",
+      "model_calls": 1,
+      "evaluation_starts": 1
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 17.59595430441575,
+      "condition": "mkp_aco_black_box",
+      "model_calls": 1,
+      "evaluation_starts": 1
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 208.2,
+      "condition": "bpp_offline_aco_white_box",
+      "model_calls": 1,
+      "evaluation_starts": 1
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 209.2,
+      "condition": "bpp_offline_aco_black_box",
+      "model_calls": 1,
+      "evaluation_starts": 1
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 10.619425652869012,
+      "condition": "tsp_gls_white_box",
+      "model_calls": 1,
+      "evaluation_starts": 1
+    }
+  ]
+}

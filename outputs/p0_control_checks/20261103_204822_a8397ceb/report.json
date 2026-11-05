@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "model_calls": 0,
+  "source": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p0_tsp_aco\\20261103_174821_76657347\\reference_final_a",
+  "cpu_budget_seconds": 600,
+  "check_job_cpu_rate": 2857,
+  "check_job_max_logical_cores": 8,
+  "whole_training_wall_timeout_seconds": 60,
+  "case": "failures_only",
+  "invalid_number_status": "candidate_error",
+  "timeout_status": "timeout",
+  "fixture_wall_timeout_seconds": 3,
+  "total_process_tree_cpu_seconds": 4.484375
+}

@@ -1,0 +1,4 @@
+{"event_index": 1, "event": "proposal_budget_reserved", "at_utc": "2026-11-04T07:28:51.256577+00:00", "candidate_id": "c0001", "outstanding": 1, "per_proposal_cpu_seconds": 1736, "used_cpu_seconds": 0.0}
+{"event_index": 2, "event": "evaluation_budget_reserved", "at_utc": "2026-11-04T07:28:51.261574+00:00", "candidate_id": "c0001", "starts": 1, "normal": 1, "retries": 0, "used_cpu_seconds": 0.0, "shared_future_cpu_reservation_seconds": 1736}
+{"event_index": 3, "event": "evaluation_cpu_final", "at_utc": "2026-11-04T07:28:52.786855+00:00", "candidate_id": "c0001", "accounting": {"user_seconds": 0.921875, "kernel_seconds": 0.453125, "cpu_seconds": 1.375, "total_processes": 2, "active_processes": 0, "terminated_processes": 0}, "total_cpu_seconds": 1.375}
+{"event_index": 4, "event": "proposal_budget_released", "at_utc": "2026-11-04T07:28:52.787851+00:00", "candidate_id": "c0001", "outstanding": 0}

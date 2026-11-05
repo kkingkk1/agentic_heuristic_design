@@ -1,0 +1,832 @@
+{
+  "resources": {
+    "available_memory_bytes": 37731368960,
+    "priority": "Normal"
+  },
+  "results": [
+    {
+      "task": "tsp_aco",
+      "size": 50,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "tsp_aco",
+        "50"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:09:33.140040+00:00",
+      "pid": 103060,
+      "process_tree": {
+        "user_seconds": 5.328125,
+        "kernel_seconds": 0.640625,
+        "cpu_seconds": 5.96875,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 6.093999999924563,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "tsp_aco",
+        "size": 50,
+        "seed": 20770050,
+        "iterations": 500,
+        "objective": 5.943839953356553,
+        "solve_elapsed_seconds": 4.204000000027008
+      }
+    },
+    {
+      "task": "tsp_aco",
+      "size": 100,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "tsp_aco",
+        "100"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:09:33.140040+00:00",
+      "pid": 19308,
+      "process_tree": {
+        "user_seconds": 10.171875,
+        "kernel_seconds": 0.578125,
+        "cpu_seconds": 10.75,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 10.905999999959022,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "tsp_aco",
+        "size": 100,
+        "seed": 20770100,
+        "iterations": 500,
+        "objective": 8.760257994584986,
+        "solve_elapsed_seconds": 8.969000000040978
+      }
+    },
+    {
+      "task": "tsp_aco",
+      "size": 200,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "tsp_aco",
+        "200"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:09:33.140040+00:00",
+      "pid": 40592,
+      "process_tree": {
+        "user_seconds": 23.609375,
+        "kernel_seconds": 0.59375,
+        "cpu_seconds": 24.203125,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 24.405999999959022,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "tsp_aco",
+        "size": 200,
+        "seed": 20770200,
+        "iterations": 500,
+        "objective": 13.46283918363414,
+        "solve_elapsed_seconds": 22.5
+      }
+    },
+    {
+      "task": "op_aco",
+      "size": 50,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "op_aco",
+        "50"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:09:33.141040+00:00",
+      "pid": 54856,
+      "process_tree": {
+        "user_seconds": 7.46875,
+        "kernel_seconds": 0.5625,
+        "cpu_seconds": 8.03125,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 8.171999999904074,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "op_aco",
+        "size": 50,
+        "seed": 20780050,
+        "iterations": 200,
+        "objective": 15.62,
+        "solve_elapsed_seconds": 6.420999999972992
+      }
+    },
+    {
+      "task": "op_aco",
+      "size": 100,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "op_aco",
+        "100"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:09:39.235819+00:00",
+      "pid": 55784,
+      "process_tree": {
+        "user_seconds": 13.78125,
+        "kernel_seconds": 0.53125,
+        "cpu_seconds": 14.3125,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 14.452999999979511,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "op_aco",
+        "size": 100,
+        "seed": 20780100,
+        "iterations": 200,
+        "objective": 30.03,
+        "solve_elapsed_seconds": 12.891000000061467
+      }
+    },
+    {
+      "task": "op_aco",
+      "size": 200,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "op_aco",
+        "200"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:09:41.307185+00:00",
+      "pid": 97832,
+      "process_tree": {
+        "user_seconds": 21.9375,
+        "kernel_seconds": 0.5625,
+        "cpu_seconds": 22.5,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 22.75,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "op_aco",
+        "size": 200,
+        "seed": 20780200,
+        "iterations": 200,
+        "objective": 44.95,
+        "solve_elapsed_seconds": 21.125
+      }
+    },
+    {
+      "task": "op_aco",
+      "size": 500,
+      "status": "failed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "op_aco",
+        "500"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:09:44.076844+00:00",
+      "pid": 101552,
+      "process_tree": {
+        "user_seconds": 12.140625,
+        "kernel_seconds": 0.484375,
+        "cpu_seconds": 12.625,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 1,
+      "elapsed_seconds": 12.766000000061467
+    },
+    {
+      "task": "cvrp_aco",
+      "size": 50,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "cvrp_aco",
+        "50"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:09:53.746038+00:00",
+      "pid": 74104,
+      "process_tree": {
+        "user_seconds": 12.46875,
+        "kernel_seconds": 0.53125,
+        "cpu_seconds": 13.0,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 13.094000000040978,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "cvrp_aco",
+        "size": 50,
+        "seed": 20790050,
+        "iterations": 500,
+        "objective": 11.412601639767157,
+        "solve_elapsed_seconds": 11.39000000001397
+      }
+    },
+    {
+      "task": "cvrp_aco",
+      "size": 100,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "cvrp_aco",
+        "100"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:09:56.831078+00:00",
+      "pid": 74764,
+      "process_tree": {
+        "user_seconds": 22.984375,
+        "kernel_seconds": 0.671875,
+        "cpu_seconds": 23.65625,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 23.843999999924563,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "cvrp_aco",
+        "size": 100,
+        "seed": 20790100,
+        "iterations": 500,
+        "objective": 17.51829880320426,
+        "solve_elapsed_seconds": 22.01500000001397
+      }
+    },
+    {
+      "task": "cvrp_aco",
+      "size": 200,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "cvrp_aco",
+        "200"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:09:57.542615+00:00",
+      "pid": 30432,
+      "process_tree": {
+        "user_seconds": 50.890625,
+        "kernel_seconds": 0.5,
+        "cpu_seconds": 51.390625,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 51.56299999996554,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "cvrp_aco",
+        "size": 200,
+        "seed": 20790200,
+        "iterations": 500,
+        "objective": 36.34413538241554,
+        "solve_elapsed_seconds": 49.81299999996554
+      }
+    },
+    {
+      "task": "cvrp_aco",
+      "size": 500,
+      "status": "timeout",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "cvrp_aco",
+        "500"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:10:04.063275+00:00",
+      "pid": 89736,
+      "process_tree": {
+        "user_seconds": 118.84375,
+        "kernel_seconds": 0.875,
+        "cpu_seconds": 119.71875,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 1,
+      "elapsed_seconds": 120.03100000007544
+    },
+    {
+      "task": "mkp_aco",
+      "size": 100,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "mkp_aco",
+        "100"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:10:06.868058+00:00",
+      "pid": 55580,
+      "process_tree": {
+        "user_seconds": 2.375,
+        "kernel_seconds": 0.5,
+        "cpu_seconds": 2.875,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 2.98499999998603,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "mkp_aco",
+        "size": 100,
+        "seed": 20800100,
+        "iterations": 100,
+        "objective": 11.603998227609377,
+        "solve_elapsed_seconds": 1.3900000000139698
+      }
+    },
+    {
+      "task": "mkp_aco",
+      "size": 200,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "mkp_aco",
+        "200"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:10:09.859256+00:00",
+      "pid": 103904,
+      "process_tree": {
+        "user_seconds": 5.796875,
+        "kernel_seconds": 0.59375,
+        "cpu_seconds": 6.390625,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 6.531000000075437,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "mkp_aco",
+        "size": 200,
+        "seed": 20800200,
+        "iterations": 100,
+        "objective": 43.479135394976254,
+        "solve_elapsed_seconds": 4.89000000001397
+      }
+    },
+    {
+      "task": "mkp_aco",
+      "size": 300,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "mkp_aco",
+        "300"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:10:16.389070+00:00",
+      "pid": 99308,
+      "process_tree": {
+        "user_seconds": 8.484375,
+        "kernel_seconds": 0.46875,
+        "cpu_seconds": 8.953125,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 9.061999999918044,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "mkp_aco",
+        "size": 300,
+        "seed": 20800300,
+        "iterations": 100,
+        "objective": 64.47010753459122,
+        "solve_elapsed_seconds": 7.467999999993481
+      }
+    },
+    {
+      "task": "mkp_aco",
+      "size": 500,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "mkp_aco",
+        "500"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:10:20.679031+00:00",
+      "pid": 32132,
+      "process_tree": {
+        "user_seconds": 29.1875,
+        "kernel_seconds": 0.6875,
+        "cpu_seconds": 29.875,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 30.031000000075437,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "mkp_aco",
+        "size": 500,
+        "seed": 20800500,
+        "iterations": 100,
+        "objective": 188.4015722623468,
+        "solve_elapsed_seconds": 28.406000000075437
+      }
+    },
+    {
+      "task": "mkp_aco",
+      "size": 700,
+      "status": "failed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "mkp_aco",
+        "700"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:10:25.454019+00:00",
+      "pid": 37908,
+      "process_tree": {
+        "user_seconds": 2.703125,
+        "kernel_seconds": 0.453125,
+        "cpu_seconds": 3.15625,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 1,
+      "elapsed_seconds": 3.25
+    },
+    {
+      "task": "bpp_offline_aco",
+      "size": 500,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "bpp_offline_aco",
+        "500"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:10:28.701283+00:00",
+      "pid": 66064,
+      "process_tree": {
+        "user_seconds": 9.09375,
+        "kernel_seconds": 0.15625,
+        "cpu_seconds": 9.25,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 9.329000000027008,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "bpp_offline_aco",
+        "size": 500,
+        "seed": 20810500,
+        "iterations": 100,
+        "objective": 209.0,
+        "solve_elapsed_seconds": 9.077999999979511
+      }
+    },
+    {
+      "task": "bpp_offline_aco",
+      "size": 700,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "bpp_offline_aco",
+        "700"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:10:38.026971+00:00",
+      "pid": 70940,
+      "process_tree": {
+        "user_seconds": 14.8125,
+        "kernel_seconds": 0.46875,
+        "cpu_seconds": 15.28125,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 15.312000000034459,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "bpp_offline_aco",
+        "size": 700,
+        "seed": 20810700,
+        "iterations": 100,
+        "objective": 297.0,
+        "solve_elapsed_seconds": 15.09299999999348
+      }
+    },
+    {
+      "task": "bpp_offline_aco",
+      "size": 1000,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "bpp_offline_aco",
+        "1000"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:10:49.099202+00:00",
+      "pid": 100992,
+      "process_tree": {
+        "user_seconds": 25.296875,
+        "kernel_seconds": 1.015625,
+        "cpu_seconds": 26.3125,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 26.406000000075437,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "bpp_offline_aco",
+        "size": 1000,
+        "seed": 20811000,
+        "iterations": 100,
+        "objective": 420.0,
+        "solve_elapsed_seconds": 26.15700000000652
+      }
+    },
+    {
+      "task": "tsp_gls",
+      "size": 20,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "tsp_gls",
+        "20"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:10:50.718238+00:00",
+      "pid": 93556,
+      "process_tree": {
+        "user_seconds": 0.9375,
+        "kernel_seconds": 0.328125,
+        "cpu_seconds": 1.265625,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 1.3439999999245629,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "tsp_gls",
+        "size": 20,
+        "seed": 20820020,
+        "iterations": 73,
+        "objective": 4.039985582774688,
+        "solve_elapsed_seconds": 0.0
+      }
+    },
+    {
+      "task": "tsp_gls",
+      "size": 50,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "tsp_gls",
+        "50"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:10:52.054241+00:00",
+      "pid": 29456,
+      "process_tree": {
+        "user_seconds": 0.921875,
+        "kernel_seconds": 0.328125,
+        "cpu_seconds": 1.25,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 1.3900000000139698,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "tsp_gls",
+        "size": 50,
+        "seed": 20820050,
+        "iterations": 175,
+        "objective": 6.2829343404083575,
+        "solve_elapsed_seconds": 0.0
+      }
+    },
+    {
+      "task": "tsp_gls",
+      "size": 100,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "tsp_gls",
+        "100"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:10:53.340813+00:00",
+      "pid": 92644,
+      "process_tree": {
+        "user_seconds": 1.453125,
+        "kernel_seconds": 0.234375,
+        "cpu_seconds": 1.6875,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 1.8439999999245629,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "tsp_gls",
+        "size": 100,
+        "seed": 20820100,
+        "iterations": 1800,
+        "objective": 7.936139657357698,
+        "solve_elapsed_seconds": 0.5150000000139698
+      }
+    },
+    {
+      "task": "tsp_gls",
+      "size": 200,
+      "status": "passed",
+      "command": [
+        "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "-B",
+        "-u",
+        "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+        "--worker",
+        "tsp_gls",
+        "200"
+      ],
+      "timeout_seconds": 120,
+      "formal_test_data_used": false,
+      "started_at_utc": "2026-11-04T10:10:53.441938+00:00",
+      "pid": 66632,
+      "process_tree": {
+        "user_seconds": 1.640625,
+        "kernel_seconds": 0.375,
+        "cpu_seconds": 2.015625,
+        "total_processes": 2,
+        "active_processes": 0,
+        "terminated_processes": 0
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 2.047000000020489,
+      "measurement": {
+        "event": "calibration_complete",
+        "task": "tsp_gls",
+        "size": 200,
+        "seed": 20820200,
+        "iterations": 800,
+        "objective": 10.740846439010555,
+        "solve_elapsed_seconds": 0.765999999945052
+      }
+    }
+  ]
+}

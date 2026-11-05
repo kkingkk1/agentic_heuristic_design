@@ -1,0 +1,2 @@
+{"event_index": 1, "event": "evaluation_budget_reserved", "at_utc": "2026-11-03T12:53:18.283190+00:00", "candidate_id": "reference", "starts": 1, "normal": 1, "retries": 0, "used_cpu_seconds": 0.0, "shared_future_cpu_reservation_seconds": 496}
+{"event_index": 2, "event": "evaluation_cpu_final", "at_utc": "2026-11-03T12:53:31.068622+00:00", "candidate_id": "reference", "accounting": {"user_seconds": 11.71875, "kernel_seconds": 0.59375, "cpu_seconds": 12.3125, "total_processes": 2, "active_processes": 0, "terminated_processes": 0}, "total_cpu_seconds": 12.3125}

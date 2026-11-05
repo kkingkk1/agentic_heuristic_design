@@ -1,0 +1,28 @@
+{
+  "task": "mkp_aco",
+  "size": 700,
+  "status": "failed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+    "--worker",
+    "mkp_aco",
+    "700"
+  ],
+  "timeout_seconds": 120,
+  "formal_test_data_used": false,
+  "started_at_utc": "2026-11-04T10:10:25.454019+00:00",
+  "pid": 37908,
+  "process_tree": {
+    "user_seconds": 2.703125,
+    "kernel_seconds": 0.453125,
+    "cpu_seconds": 3.15625,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "exit_code": 1,
+  "elapsed_seconds": 3.25
+}

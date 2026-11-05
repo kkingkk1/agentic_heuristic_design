@@ -1,0 +1,2 @@
+{"event": "calibration_start", "task": "tsp_gls", "size": 100, "seed": 20820100, "iterations": 1800, "formal_test_data_used": false}
+{"event": "calibration_complete", "task": "tsp_gls", "size": 100, "seed": 20820100, "iterations": 1800, "objective": 7.936139657357698, "solve_elapsed_seconds": 0.5150000000139698}

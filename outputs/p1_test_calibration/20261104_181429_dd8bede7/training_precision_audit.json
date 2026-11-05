@@ -1,0 +1,65 @@
+{
+  "status": "passed",
+  "results": [
+    {
+      "task": "op_aco",
+      "condition": "white",
+      "run": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_op_aco\\20261104_precision_white_01",
+      "status": "passed",
+      "objectives": [
+        14.980000000000002,
+        13.510000000000002,
+        11.66,
+        14.68,
+        14.29
+      ],
+      "average": 13.824000000000002,
+      "solver_sha256": "853b43ac25b7366bbc6531b0f43a9eb5acc00ac5c4a03f2191bd816392e97a25"
+    },
+    {
+      "task": "op_aco",
+      "condition": "black",
+      "run": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_op_aco\\20261104_precision_black_01",
+      "status": "passed",
+      "objectives": [
+        7.27,
+        7.22,
+        5.920000000000001,
+        9.3,
+        8.49
+      ],
+      "average": 7.640000000000001,
+      "solver_sha256": "853b43ac25b7366bbc6531b0f43a9eb5acc00ac5c4a03f2191bd816392e97a25"
+    },
+    {
+      "task": "mkp_aco",
+      "condition": "white",
+      "run": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_mkp_aco\\20261104_precision_white_01",
+      "status": "passed",
+      "objectives": [
+        12.261581245329982,
+        23.598621139049555,
+        20.13933880712441,
+        13.239955493505965,
+        41.368521588211394
+      ],
+      "average": 22.12160365464426,
+      "solver_sha256": "ebf5752f688328e686c0dd8963422704a001644166c99ffe79064edfe0306e09"
+    },
+    {
+      "task": "mkp_aco",
+      "condition": "black",
+      "run": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_mkp_aco\\20261104_precision_black_01",
+      "status": "passed",
+      "objectives": [
+        10.52921090964573,
+        18.161219908600575,
+        16.60454011718523,
+        10.952115292526459,
+        35.04816034842937
+      ],
+      "average": 18.259049315277473,
+      "solver_sha256": "ebf5752f688328e686c0dd8963422704a001644166c99ffe79064edfe0306e09"
+    }
+  ]
+}

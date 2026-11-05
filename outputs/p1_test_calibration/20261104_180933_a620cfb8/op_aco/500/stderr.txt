@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\scripts\p1_calibrate_test_cost.py", line 151, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\scripts\p1_calibrate_test_cost.py", line 127, in main
+    worker(name, size)
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\scripts\p1_calibrate_test_cost.py", line 59, in worker
+    result = module.solve(rng.rand(size, 2), heuristic, iterations, settings["TEST_MAX_LEN"][size])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\op_aco\eval.py", line 146, in solve
+    objective, best = aco.run(n_iterations)
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Tools\mineru\.venv\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\op_aco\aco.py", line 66, in run
+    sols = self.gen_sol()
+           ^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\op_aco\eval.py", line 127, in gen_sol
+    check_solution(solution, self.source_positions, self.source_prizes, self.source_max_len)
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\op_aco\eval.py", line 106, in check_solution
+    raise ValueError("路线超过长度限制。")
+ValueError: 路线超过长度限制。

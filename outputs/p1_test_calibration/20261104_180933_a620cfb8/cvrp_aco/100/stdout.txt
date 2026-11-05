@@ -1,0 +1,2 @@
+{"event": "calibration_start", "task": "cvrp_aco", "size": 100, "seed": 20790100, "iterations": 500, "formal_test_data_used": false}
+{"event": "calibration_complete", "task": "cvrp_aco", "size": 100, "seed": 20790100, "iterations": 500, "objective": 17.51829880320426, "solve_elapsed_seconds": 22.01500000001397}

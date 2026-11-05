@@ -1,0 +1,50 @@
+{
+  "calls": 7,
+  "results": [
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 5.9500875514996565,
+      "normal_model_calls": 1,
+      "evaluation_starts": 1,
+      "method": "eoh"
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 5.966831121551532,
+      "normal_model_calls": 1,
+      "evaluation_starts": 1,
+      "method": "reevo"
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 6.580224376959843,
+      "normal_model_calls": 2,
+      "evaluation_starts": 2,
+      "method": "hsevo"
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 7.736599254313217,
+      "normal_model_calls": 2,
+      "evaluation_starts": 1,
+      "method": "mcts"
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 9.48302059300282,
+      "normal_model_calls": 1,
+      "evaluation_starts": 1,
+      "method": "roco"
+    }
+  ]
+}

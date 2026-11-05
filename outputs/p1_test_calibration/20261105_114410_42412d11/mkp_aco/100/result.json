@@ -1,0 +1,60 @@
+{
+  "task": "mkp_aco",
+  "size": 100,
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_calibrate_test_cost.py",
+    "--worker",
+    "mkp_aco",
+    "100"
+  ],
+  "timeout_seconds": 120,
+  "formal_test_data_used": false,
+  "calibration_sha256": "e39bed9b1bbc2fcd666e16b2893875e773a04814313ed243f943900b25ddd57a",
+  "reference_sha256": "606eb31f2c91524397f69840e99c17922305c63cae0a4fbffae4322379925b74",
+  "solver_sha256": "4b9220e39b07950bf824c838c4e9f4c796d97b783c5a4f4378d269e359e2ed7d",
+  "evaluator_sha256": "cfc46a943ab3a39c2be4ecf9be8c08f3a307627c7d8cdbf714bac45d41f966dc",
+  "started_at_utc": "2026-11-05T03:44:10.564007+00:00",
+  "pid": 90532,
+  "process_tree": {
+    "user_seconds": 2.46875,
+    "kernel_seconds": 0.546875,
+    "cpu_seconds": 3.015625,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "exit_code": 0,
+  "elapsed_seconds": 3.094000000040978,
+  "measurement": {
+    "event": "calibration_complete",
+    "task": "mkp_aco",
+    "size": 100,
+    "seed": 20800100,
+    "iterations": 100,
+    "objective": 11.603998227609377,
+    "solution": [
+      33,
+      40,
+      50,
+      70,
+      31,
+      28,
+      84,
+      69,
+      48,
+      19,
+      77,
+      73,
+      59,
+      71,
+      92,
+      22,
+      44
+    ],
+    "solve_elapsed_seconds": 1.3599999999860302
+  }
+}

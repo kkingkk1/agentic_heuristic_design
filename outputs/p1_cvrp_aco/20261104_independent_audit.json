@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "runs": {
+    "white": {
+      "instances": 10,
+      "iterations": 100,
+      "average": 13.509431290492723,
+      "max_route_load": 50.0,
+      "cpu_seconds": 23.9375
+    },
+    "black": {
+      "instances": 10,
+      "iterations": 100,
+      "average": 24.59578975201212,
+      "max_route_load": 50.0,
+      "cpu_seconds": 27.28125
+    }
+  },
+  "source_git_blobs": {
+    "problems/cvrp_aco/aco.py": "ff135ca1f30374b6769777470f1150434fd70ac3",
+    "cfg/problem/cvrp_aco.yaml": "b3f13bbf656db3edaf472fb84a088b0370c8021f",
+    "cfg/problem/cvrp_aco_black_box.yaml": "027658064ced7410e00317d820cd40128b195a08",
+    "prompts/cvrp_aco/func_desc.txt": "9193c786c3c4493a634aa117f81d419109698256",
+    "prompts/cvrp_aco/func_signature.txt": "bf2da3346b73cec993e99afda5ff0db65771f4a3",
+    "prompts/cvrp_aco_black_box/func_desc.txt": "9902c040068626aa4ba8e65c37f1811a17d00105",
+    "prompts/cvrp_aco_black_box/func_signature.txt": "8cecc350c83e68c3455adb47826cb9476db77b26",
+    "problems/cvrp_aco/dataset/train50_dataset.npy": "1b9f2252f5509a2748dc3ff2c7ee5e6a83a0f221"
+  },
+  "invalid_status": "failed",
+  "timeout_status": "timeout",
+  "timeout_active_processes": 0
+}

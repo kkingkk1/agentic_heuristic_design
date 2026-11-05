@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\bpp_offline_aco\eval.py", line 147, in <module>
+    main()
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\bpp_offline_aco\eval.py", line 134, in main
+    objective, solution, iterations = solve(demand, heuristic)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\bpp_offline_aco\eval.py", line 101, in solve
+    scores = checked_heuristic(heuristic, demand)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\bpp_offline_aco\eval.py", line 63, in checked_heuristic
+    raise ValueError("启发式必须返回有限实数，且至少有一个正值。")
+ValueError: 启发式必须返回有限实数，且至少有一个正值。

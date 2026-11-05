@@ -1,0 +1,1 @@
+P1_JSON {"event": "start", "dataset": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_gls\\dataset\\train200_dataset.npy", "seed_base": 20261103, "n_nodes": 200, "n_iterations": 1200, "perturbation_moves": 30, "numpy": "2.3.5"}

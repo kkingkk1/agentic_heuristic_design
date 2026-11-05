@@ -1,0 +1,82 @@
+{
+  "status": "passed",
+  "formal_test_data_used": false,
+  "dataset_sha256": "49cfd10c6d21efd39736e5baf57510b4ce6945c3a057cdbe8dcad398c728599a",
+  "model_calls": 7,
+  "training_evaluations": 6,
+  "methods": {
+    "eoh": {
+      "model_calls": 1,
+      "candidates": [
+        {
+          "candidate_id": "c0001",
+          "candidate_sha256": "15f02ce0187bc06ef1215dff86c548f82c740c6cc6b364a505a0167ac0a2002d",
+          "route_count": 5,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    "reevo": {
+      "model_calls": 1,
+      "candidates": [
+        {
+          "candidate_id": "c0001",
+          "candidate_sha256": "e1026782cc88c9d58ad10dc43d24ebcb04b89ccf2a539900ee8eda73986fc0dc",
+          "route_count": 5,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    "hsevo": {
+      "model_calls": 2,
+      "candidates": [
+        {
+          "candidate_id": "c0001",
+          "candidate_sha256": "b8762c5155b1352b8f56ce0c67e98d348607c4c9db502e501024fcf04b90d4fb",
+          "route_count": 5,
+          "valid": true
+        },
+        {
+          "candidate_id": "c0002",
+          "candidate_sha256": "98a912ca4c5dd1987883fba6888746117fccefe6e2793f8724f34a0959e993bd",
+          "route_count": 5,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    "mcts": {
+      "model_calls": 2,
+      "candidates": [
+        {
+          "candidate_id": "c0001",
+          "candidate_sha256": "8691264ea2a6501d002a09385986aeb9a9ed01774080ef08474308bb804d66e3",
+          "route_count": 5,
+          "valid": true
+        }
+      ],
+      "valid": true
+    },
+    "roco": {
+      "model_calls": 1,
+      "candidates": [
+        {
+          "candidate_id": "c0001",
+          "candidate_sha256": "e4c9c4ad04684f38fcf3a4e3d99a0bcc6f8c9eed73ae9e9f9362e84ea5b7433c",
+          "route_count": 5,
+          "valid": true
+        }
+      ],
+      "valid": true
+    }
+  },
+  "observed_tokens": {
+    "input_tokens": 168061,
+    "cached_input_tokens": 73472,
+    "output_tokens": 4941,
+    "reasoning_output_tokens": 1090
+  },
+  "note": "已回读的本地 token 用量；缓存输入和推理输出分别包含在输入和输出中。"
+}

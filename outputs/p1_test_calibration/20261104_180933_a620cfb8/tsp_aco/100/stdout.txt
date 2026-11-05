@@ -1,0 +1,2 @@
+{"event": "calibration_start", "task": "tsp_aco", "size": 100, "seed": 20770100, "iterations": 500, "formal_test_data_used": false}
+{"event": "calibration_complete", "task": "tsp_aco", "size": 100, "seed": 20770100, "iterations": 500, "objective": 8.760257994584986, "solve_elapsed_seconds": 8.969000000040978}

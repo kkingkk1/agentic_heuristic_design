@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "reference_sha256": "e9d89b4d49cee3f7bacf88d185f3e4ee8152f24defc1bf7aa072ac4be352bcc4",
+  "data_contract_sha256": "fbf84d0bf7ee51071089a01863354abbdb13bfd24d5b7802ba115fcfd2edd0a1",
+  "auditor_sha256": "578be3fd65a79b4eefdc5a541eee7ecca2b5324de68c679da17a0d4ae00ed363",
+  "route_count": 256,
+  "max_absolute_route_error": 1.7763568394002505e-15,
+  "sizes": {
+    "20": {
+      "instances": 64,
+      "mean_objective": 3.8362853943492015,
+      "published_reevo_mean": 3.8362853943492015,
+      "difference_from_published": 0.0
+    },
+    "50": {
+      "instances": 64,
+      "mean_objective": 5.68457994395107,
+      "published_reevo_mean": 5.68457994395107,
+      "difference_from_published": 0.0
+    },
+    "100": {
+      "instances": 64,
+      "mean_objective": 7.778580370400294,
+      "published_reevo_mean": 7.778580370400294,
+      "difference_from_published": 0.0
+    },
+    "200": {
+      "instances": 64,
+      "mean_objective": 10.71194600194464,
+      "published_reevo_mean": 10.71194600194464,
+      "difference_from_published": 0.0
+    }
+  },
+  "optimality_proven": false,
+  "note": "逐边以 math.hypot 和 math.fsum 重算；均值一致不证明历史笔记使用了相同文件。"
+}

@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "formal_test_data_used": false,
+  "cases": {
+    "op": {
+      "score_recomputed": 15.99,
+      "distance_recomputed": 2.9916643470716644,
+      "valid": true
+    },
+    "bpp": {
+      "bins_recomputed": 258,
+      "max_bin_load": 150,
+      "source_fitness_recomputed": 0.6499381567614126,
+      "valid": true
+    }
+  }
+}

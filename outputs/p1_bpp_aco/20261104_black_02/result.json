@@ -1,0 +1,55 @@
+{
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\bpp_offline_aco\\eval_black_box.py",
+    "500",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_bpp_aco\\20261104_black_02",
+    "train"
+  ],
+  "started_at_utc": "2026-11-04T06:39:56.471751+00:00",
+  "timeout_seconds": 60,
+  "protected_sha256": {
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_bpp_aco\\20261104_black_02\\problems\\bpp_offline_aco\\gpt.py": "22acab51435a5abfa0efa31086c28e9e3c26c1631d94a26d9cb281e067721366",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\bpp_offline_aco\\aco.py": "ce695d44007b3dfdac86bd940f2ae4f7a0e2a72db15de8a816e10a0b73a63fba",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\bpp_offline_aco\\eval.py": "26a0b77124613849733d7fc7e260596926ebef83bc57d7d60ac721224a22892e",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\bpp_offline_aco\\eval_black_box.py": "4d6157eba0834b9db7ebddba4f506d47f407198fb92261416be4cf9aee87f9ee",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\bpp_offline_aco\\dataset\\train500_dataset.npz": "1119ff4455d01d61559c6cbb967fa9919c266712f67cf008d6438847ed73d433",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_job_supervision.py": "7de34fd313bda57e2a1836eef27bbb0c1193e3db3619bc968e380c0f75a849dd",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_bpp_aco_evaluate.py": "017d2a133052c33866c91526a892e248b7ad46182e63f4db03b1ccf98db18d56"
+  },
+  "status": "passed",
+  "cpu_scope": "Windows 作业中的完整进程树",
+  "prompt_condition": "black_box",
+  "pid": 51136,
+  "exit_code": 0,
+  "process_tree": {
+    "user_seconds": 42.953125,
+    "kernel_seconds": 0.578125,
+    "cpu_seconds": 43.53125,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 43.57799999997951,
+  "objectives": [
+    212,
+    211,
+    213,
+    217,
+    216
+  ],
+  "average": 213.8,
+  "fitness": -213.8,
+  "start": {
+    "event": "start",
+    "dataset": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\bpp_offline_aco\\dataset\\train500_dataset.npz",
+    "seed_base": 20261103,
+    "n_ants": 20,
+    "n_iterations": 100,
+    "n_items": 500,
+    "capacity": 150,
+    "numpy": "2.3.5"
+  }
+}

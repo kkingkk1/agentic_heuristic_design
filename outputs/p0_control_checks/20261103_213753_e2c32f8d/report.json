@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "fixture": "全部模型响应与评价分数均为人工构造，不代表真实运行。",
+  "model_calls": 95,
+  "evaluation_slots": 88,
+  "candidate_slots": 88,
+  "operator_counts": {
+    "initialization": 30,
+    "E1": 10,
+    "E2": 10,
+    "M1": 10,
+    "M2": 10,
+    "startup": 2,
+    "continuation": 6,
+    "round_fusion": 3,
+    "elite_fusion": 1,
+    "elite_mutation": 6
+  },
+  "pool_size": 50,
+  "selected": [
+    "c0088",
+    "c0087",
+    "c0086",
+    "c0085",
+    "c0084",
+    "c0083",
+    "c0082",
+    "c0081",
+    "c0080",
+    "c0079"
+  ],
+  "event_count": 286
+}

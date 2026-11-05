@@ -1,0 +1,22 @@
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py:133: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coordinates, coordinates)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py:133: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coordinates, coordinates)
+E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py:133: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  distances = distance_matrix(coordinates, coordinates)
+Traceback (most recent call last):
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py", line 297, in <module>
+    main()
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py", line 278, in main
+    objective, path, completed_iterations = solve(instance[:, 1:], instance[:, 0], heuristic,
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py", line 139, in solve
+    scores = checked_heuristic(heuristic, distances, coordinates, demands, black_box=black_box)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\problems\cvrp_aco\eval.py", line 70, in checked_heuristic
+    scores = heuristic(distances.copy(), coordinates.copy(), demands.copy(), CAPACITY)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\outputs\p1_task_smoke\20261105_133602_b6f6a25c\cvrp_aco_white_box\candidates\c0001\problems\cvrp_aco\gpt.py", line 72, in heuristics_v2
+    score[0, :] = depot_priority
+    ~~~~~^^^^^^
+ValueError: could not broadcast input array from shape (51,51) into shape (51,)

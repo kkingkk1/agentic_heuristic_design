@@ -1,0 +1,2 @@
+{"event": "calibration_start", "task": "op_aco", "size": 200, "seed": 20780200, "iterations": 200, "formal_test_data_used": false}
+{"event": "calibration_complete", "task": "op_aco", "size": 200, "seed": 20780200, "iterations": 200, "objective": 44.95, "solve_elapsed_seconds": 21.125}

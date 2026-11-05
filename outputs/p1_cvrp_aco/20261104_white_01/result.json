@@ -1,0 +1,61 @@
+{
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\cvrp_aco\\eval.py",
+    "50",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_cvrp_aco\\20261104_white_01",
+    "train"
+  ],
+  "started_at_utc": "2026-11-04T06:09:10.303624+00:00",
+  "timeout_seconds": 120,
+  "protected_sha256": {
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_cvrp_aco\\20261104_white_01\\problems\\cvrp_aco\\gpt.py": "7add34471e5f3f2f59e26894c6997e5a0db72afc3af2cd803a966aa160c48b8a",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\cvrp_aco\\aco.py": "511674415d57b0da25cef3fd1a3feb90a40254ea8a037b875cb9c101d11eba76",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\cvrp_aco\\eval.py": "31a7d652307afb74ef17158e17c8c079110890bd33ea2a7570c82d55ba931ec8",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\cvrp_aco\\eval_black_box.py": "cda07f2f453b168dd334b1ec83e085ce1a295efc56218c70f28ff868b2751b48",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\cvrp_aco\\dataset\\train50_dataset.npy": "caf38e123b53da4fefda9a988da5f029267d78daf0995d2b68721f6ca8b46452",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_cvrp_aco_evaluate.py": "62655aa37274d4f1ecfc5ff8c3d2fd0df5558c40b465a650964f54f68238fd89"
+  },
+  "status": "passed",
+  "cpu_scope": "Windows 作业中的完整进程树",
+  "prompt_condition": "white_box",
+  "pid": 9976,
+  "exit_code": 0,
+  "process_tree": {
+    "user_seconds": 23.359375,
+    "kernel_seconds": 0.578125,
+    "cpu_seconds": 23.9375,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 24.04700000002049,
+  "objectives": [
+    12.434548237627098,
+    14.801951169500107,
+    14.887460140538817,
+    13.308198005152093,
+    13.529514232531255,
+    12.406654162085218,
+    13.92191893098258,
+    14.415723435736183,
+    12.103858004582312,
+    13.28448658619154
+  ],
+  "average": 13.509431290492719,
+  "fitness": -13.509431290492719,
+  "start": {
+    "event": "start",
+    "dataset": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\cvrp_aco\\dataset\\train50_dataset.npy",
+    "seed_base": 20261103,
+    "n_ants": 20,
+    "n_iterations": 100,
+    "n_customers": 50,
+    "capacity": 50,
+    "numpy": "2.3.5",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1
+  }
+}

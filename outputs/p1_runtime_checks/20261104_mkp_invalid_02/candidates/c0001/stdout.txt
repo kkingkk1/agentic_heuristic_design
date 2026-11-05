@@ -1,0 +1,1 @@
+P1_JSON {"event": "start", "dataset": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\mkp_aco\\dataset\\train100_dataset.npz", "seed_base": 20261103, "n_ants": 10, "n_iterations": 50, "n_items": 100, "n_dims": 5, "numpy": "2.3.5", "torch": "2.13.0+cu126", "torch_threads": 1}

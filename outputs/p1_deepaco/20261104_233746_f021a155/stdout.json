@@ -1,0 +1,95 @@
+{
+  "status": "passed",
+  "at_utc": "2026-11-04T15:37:50.486593+00:00",
+  "seed": 7451,
+  "device": "cpu",
+  "formal_test_data_used": false,
+  "torch": "2.13.0+cu126",
+  "numpy": "2.3.5",
+  "torch_geometric": "2.7.0",
+  "pyparsing": "3.3.2",
+  "xxhash": "3.6.0",
+  "torch_num_threads": 1,
+  "weights_strictly_loaded": [
+    "pretrained/bpp/bpp120.pt",
+    "pretrained/cvrp/cvrp100.pt",
+    "pretrained/cvrp/cvrp20.pt",
+    "pretrained/cvrp/cvrp500.pt",
+    "pretrained/mkp/mkp300.pt",
+    "pretrained/mkp/mkp500.pt",
+    "pretrained/op/op100.pt",
+    "pretrained/op/op200.pt",
+    "pretrained/op/op300.pt",
+    "pretrained/tsp/tsp100.pt",
+    "pretrained/tsp/tsp20.pt",
+    "pretrained/tsp/tsp500.pt"
+  ],
+  "cases": [
+    {
+      "task": "tsp",
+      "checkpoint": "tsp20",
+      "matrix_shape": [
+        20,
+        20
+      ],
+      "minimum": 1.000000013351432e-10,
+      "maximum": 0.8988495469093323,
+      "sha256": "fa9b4c2a392f3183a1dedd2c61d4e5f300525495c8d745a351a4858edb902a8b",
+      "repeated_output_equal": true,
+      "elapsed_seconds": 0.0
+    },
+    {
+      "task": "op",
+      "checkpoint": "op100",
+      "matrix_shape": [
+        100,
+        100
+      ],
+      "minimum": 1.000000013351432e-10,
+      "maximum": 0.9833065867424011,
+      "sha256": "1e003ed74c410d1ba828013816e33119489fe2d72eb02508afa13f345ab5a37d",
+      "repeated_output_equal": true,
+      "elapsed_seconds": 0.015999999945051968
+    },
+    {
+      "task": "cvrp",
+      "checkpoint": "cvrp20",
+      "matrix_shape": [
+        21,
+        21
+      ],
+      "minimum": 1.000000013351432e-10,
+      "maximum": 0.9390711188316345,
+      "sha256": "c7fbf67f1cbf6d4fbc1fcfa3535f8c9276c0f3c9b0596b2e10de36b901157191",
+      "repeated_output_equal": true,
+      "elapsed_seconds": 0.015000000013969839
+    },
+    {
+      "task": "mkp",
+      "checkpoint": "mkp300",
+      "matrix_shape": [
+        300,
+        300
+      ],
+      "minimum": 2.1901081709074788e-05,
+      "maximum": 0.939754843711853,
+      "sha256": "e179791191230812d8ef5df72e5ad60404f6bfbd82ed4a7d99f07a2b9d60f461",
+      "repeated_output_equal": true,
+      "elapsed_seconds": 0.5320000000065193
+    },
+    {
+      "task": "bpp",
+      "checkpoint": "bpp120",
+      "matrix_shape": [
+        121,
+        121
+      ],
+      "minimum": 1.168628249725856e-10,
+      "maximum": 0.989302933216095,
+      "sha256": "135f39790aba78d6a0bf5d3091f35e307af2093da66555a5f00fae4828acd896",
+      "repeated_output_equal": true,
+      "elapsed_seconds": 0.062000000034458935
+    }
+  ],
+  "elapsed_seconds": 0.9220000000204891
+}

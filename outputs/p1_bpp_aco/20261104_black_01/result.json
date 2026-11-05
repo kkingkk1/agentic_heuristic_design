@@ -1,0 +1,36 @@
+{
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\bpp_offline_aco\\eval_black_box.py",
+    "500",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_bpp_aco\\20261104_black_01",
+    "train"
+  ],
+  "started_at_utc": "2026-11-04T06:32:48.337676+00:00",
+  "timeout_seconds": 60,
+  "protected_sha256": {
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_bpp_aco\\20261104_black_01\\problems\\bpp_offline_aco\\gpt.py": "22acab51435a5abfa0efa31086c28e9e3c26c1631d94a26d9cb281e067721366",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\bpp_offline_aco\\aco.py": "ce695d44007b3dfdac86bd940f2ae4f7a0e2a72db15de8a816e10a0b73a63fba",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\bpp_offline_aco\\eval.py": "26a0b77124613849733d7fc7e260596926ebef83bc57d7d60ac721224a22892e",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\bpp_offline_aco\\eval_black_box.py": "4d6157eba0834b9db7ebddba4f506d47f407198fb92261416be4cf9aee87f9ee",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\bpp_offline_aco\\dataset\\train500_dataset.npz": "1119ff4455d01d61559c6cbb967fa9919c266712f67cf008d6438847ed73d433",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_bpp_aco_evaluate.py": "b822b4e126344f20c9767983d0e0a0979a902aa9f875090f5bb5d7d28dd78e13"
+  },
+  "status": "infrastructure_error",
+  "cpu_scope": "Windows 作业中的完整进程树",
+  "prompt_condition": "black_box",
+  "pid": 102780,
+  "exit_code": 0,
+  "error": "评价主进程退出后仍有作业子进程。",
+  "process_tree": {
+    "user_seconds": 44.203125,
+    "kernel_seconds": 0.84375,
+    "cpu_seconds": 45.046875,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 45.07799999997951
+}

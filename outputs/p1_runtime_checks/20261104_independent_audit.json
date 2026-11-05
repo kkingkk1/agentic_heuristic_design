@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "runs": {
+    "tsp_aco": {
+      "condition": "black_box",
+      "instances": 5,
+      "ants": 30,
+      "iterations": 200,
+      "cpu_seconds": 10.359375
+    },
+    "mkp_aco": {
+      "condition": "white_box",
+      "instances": 5,
+      "ants": 10,
+      "iterations": 50,
+      "cpu_seconds": 8.578125
+    },
+    "cvrp_aco": {
+      "condition": "black_box",
+      "instances": 10,
+      "ants": 20,
+      "iterations": 100,
+      "cpu_seconds": 28.203125
+    },
+    "op_aco": {
+      "condition": "black_box",
+      "instances": 5,
+      "ants": 30,
+      "iterations": 100,
+      "cpu_seconds": 12.09375
+    },
+    "bpp_offline_aco": {
+      "condition": "white_box",
+      "instances": 5,
+      "ants": 20,
+      "iterations": 100,
+      "cpu_seconds": 45.0625
+    }
+  },
+  "checks": [
+    "逐实例独立重算",
+    "配置与实际参数一致",
+    "完整进程树退出",
+    "未发起模型调用"
+  ],
+  "invalid": {
+    "status": "candidate_error",
+    "fitness_present": false
+  },
+  "earlier_config_issue": "保留 _01：部分工程配置继承 P0 任务字段；不作为配置验收。"
+}

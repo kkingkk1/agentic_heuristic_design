@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\op_aco\\eval_black_box.py",
+    "50",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_runtime_checks\\20261104_op_aco_black_box_01\\candidates\\c0001",
+    "train"
+  ],
+  "resources": {
+    "available_memory_bytes": 39045488640,
+    "priority": "Normal"
+  },
+  "started_at_utc": "2026-11-04T07:26:40.419590+00:00",
+  "candidate_id": "c0001",
+  "pid": 88616,
+  "exit_code": 0,
+  "objectives": [
+    7.27,
+    7.22,
+    5.920000000000001,
+    9.3,
+    8.49
+  ],
+  "average": 7.640000000000001,
+  "fitness": 7.640000000000001,
+  "start": {
+    "event": "start",
+    "dataset": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\op_aco\\dataset\\train50_dataset.npz",
+    "seed_base": 20261103,
+    "n_ants": 30,
+    "n_iterations": 100,
+    "n_nodes": 50,
+    "max_len": 3.0,
+    "numpy": "2.3.5",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1
+  },
+  "completed_monotonic_ns": 619381921000000,
+  "process_tree_cpu": {
+    "user_seconds": 11.328125,
+    "kernel_seconds": 0.53125,
+    "cpu_seconds": 11.859375,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 12.030999999959022
+}

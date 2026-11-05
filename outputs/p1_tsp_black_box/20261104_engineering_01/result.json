@@ -1,0 +1,44 @@
+{
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\eval_black_box.py",
+    "50",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_tsp_black_box\\20261104_engineering_01",
+    "train"
+  ],
+  "started_at_utc": "2026-11-04T05:47:47.863091+00:00",
+  "timeout_seconds": 60,
+  "pythonpath": "D:\\Tools\\paddleocr-document-rebuild\\.venv\\Lib\\site-packages;D:\\Tools\\mineru\\.venv\\Lib\\site-packages",
+  "omp_num_threads": "1",
+  "mkl_num_threads": "1",
+  "cpu_scope": "仅启动的主进程，不包含后代；若 Python 是启动器，实际求解可能在后代进程",
+  "status": "passed",
+  "pid": 88116,
+  "exit_code": 0,
+  "cpu_seconds": {
+    "user": 8.765625,
+    "kernel": 0.578125
+  },
+  "elapsed_seconds": 9.422000000020489,
+  "objectives": [
+    19.517653172620285,
+    19.878834202880114,
+    19.955891704648227,
+    21.82551466237108,
+    20.68079490043303
+  ],
+  "average": 20.371737728590546,
+  "fitness": -20.371737728590546,
+  "start": {
+    "event": "start",
+    "dataset": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy",
+    "seed_base": 20261103,
+    "n_ants": 30,
+    "n_iterations": 200,
+    "numpy": "2.3.5",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1
+  }
+}
