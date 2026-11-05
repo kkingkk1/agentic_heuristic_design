@@ -59,14 +59,26 @@ def route_from_successor(successor):
     return route
 
 
-def solve_batch(points, steps, seed, device):
+def solve_batch(points, steps, seed, device, compute_dtype="float32"):
     """在独立进程中运行来源模型；每批至少两个实例。"""
+    if compute_dtype not in ("float32", "float64"):
+        raise ValueError("计算精度无效。")
+    previous_dtype = torch.get_default_dtype()
+    try:
+        # 来源增强函数创建的旋转矩阵依赖默认精度；仅在本次调用期间设置。
+        torch.set_default_dtype(torch.float64 if compute_dtype == "float64" else torch.float32)
+        return _solve_batch(points, steps, seed, device, compute_dtype)
+    finally:
+        torch.set_default_dtype(previous_dtype)
+
+
+def _solve_batch(points, steps, seed, device, compute_dtype):
     points = np.asarray(points)
     if (points.ndim != 3 or points.shape[0] < 2 or points.shape[2] != 2
             or points.shape[1] not in (20, 50, 100, 200) or points.dtype.kind != "f"
             or not np.isfinite(points).all() or (points < 0).any() or (points >= 1).any()
             or type(steps) is not int or steps < 1 or type(seed) is not int or seed < 0
-            or device not in ("cpu", "cuda")):
+            or device not in ("cpu", "cuda") or compute_dtype not in ("float32", "float64")):
         raise ValueError("实例、规模、步数、种子或设备无效。")
     batch_size, size = points.shape[:2]
     verify_sources()
@@ -100,9 +112,12 @@ def solve_batch(points, steps, seed, device):
     agent = PPO(problem, options)
     state = torch.load(ROOT / "pre-trained" / f"tsp{size}.pt", map_location="cpu", weights_only=True)
     agent.actor.load_state_dict(state["actor"], strict=True)
-    agent.actor.to(options.device)
+    tensor_dtype = torch.float64 if compute_dtype == "float64" else torch.float32
+    agent.actor.to(device=options.device, dtype=tensor_dtype)
+    # 来源的位置编码不是 buffer，不会跟随 actor.to 转换精度。
+    agent.actor.embedder.pattern = agent.actor.embedder.pattern.to(dtype=tensor_dtype)
     agent.actor.eval()
-    batch = {"coordinates": torch.as_tensor(points, dtype=torch.float32).to(options.device)}
+    batch = {"coordinates": torch.as_tensor(points, dtype=tensor_dtype).to(options.device)}
     captured = {}
     get_initial = problem.get_initial_solutions
     step = problem.step
@@ -137,22 +152,39 @@ def solve_batch(points, steps, seed, device):
         length = math.fsum(math.hypot(*(points[index, a] - points[index, b]))
                            for a, b in zip(route, route[1:] + route[:1]))
         reported = float(result[0][index].detach().cpu())
-        if not math.isfinite(length) or not math.isclose(length, reported, rel_tol=1e-5, abs_tol=1e-5):
+        tolerance = 1e-12 if compute_dtype == "float64" else 1e-5
+        if not math.isfinite(length) or not math.isclose(length, reported, rel_tol=tolerance, abs_tol=tolerance):
             raise ValueError("NeuOpt 的路线与报告长度不一致。")
         observations.append({"route": route, "float64_recomputed_length": length,
-                             "source_float32_length": reported})
+                             "solver_reported_length": reported,
+                             "source_float32_length": reported if compute_dtype == "float32" else None})
     return {"status": "passed", "size": size, "steps": steps, "seed": seed, "device": device,
-            "checkpoint": f"tsp{size}.pt", "batch_size": batch_size, "instances": observations,
+            "compute_dtype": compute_dtype, "checkpoint": f"tsp{size}.pt", "batch_size": batch_size,
+            "instances": observations,
             "search_elapsed_seconds": search_elapsed, "peak_gpu_allocated_bytes": peak_gpu,
             "adaptation": "不启用 TensorBoard；安全读取权重；使用至少两个实例；在 record=False 下记录来源最优路线。"}
 
 
-def check(size, steps, seed, device):
+def solve_one(points, steps, seed, device):
+    """以逐实例种子求解；第二份副本仅满足来源的最小批量限制。"""
+    points = np.asarray(points)
+    if points.ndim != 2 or points.shape[1] != 2 or points.dtype != np.float64:
+        raise ValueError("NeuOpt 单实例输入必须为 float64 坐标矩阵。")
+    batch = np.stack((points, points))
+    result = solve_batch(batch, steps, seed, device, compute_dtype="float64")
+    return {"route": result["instances"][0]["route"],
+            "objective": result["instances"][0]["float64_recomputed_length"],
+            "solver_reported_length": result["instances"][0]["solver_reported_length"],
+            "search_elapsed_seconds": result["search_elapsed_seconds"],
+            "peak_gpu_allocated_bytes": result["peak_gpu_allocated_bytes"]}
+
+
+def check(size, steps, seed, device, compute_dtype="float32"):
     if size not in (20, 50, 100, 200) or type(seed) is not int or seed < 0:
         raise ValueError("合成规模或种子无效。")
     # 来源解码器对 batch_size=1 会将布尔张量压成标量；使用两个独立合成实例。
     points = np.random.RandomState(seed).random_sample((2, size, 2))
-    result = solve_batch(points, steps, seed, device)
+    result = solve_batch(points, steps, seed, device, compute_dtype)
     result["formal_test_data_used"] = False
     return result
 
@@ -163,8 +195,9 @@ def main():
     parser.add_argument("--steps", type=int, default=5)
     parser.add_argument("--seed", type=int, default=20790020)
     parser.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
+    parser.add_argument("--compute-dtype", choices=("float32", "float64"), default="float32")
     args = parser.parse_args()
-    print("P1_NEUOPT_JSON " + json.dumps(check(args.size, args.steps, args.seed, args.device),
+    print("P1_NEUOPT_JSON " + json.dumps(check(args.size, args.steps, args.seed, args.device, args.compute_dtype),
                                        ensure_ascii=False, allow_nan=False), flush=True)
     return 0
 

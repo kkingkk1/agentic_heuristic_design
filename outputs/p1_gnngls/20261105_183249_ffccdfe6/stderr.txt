@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\scripts\p1_gnngls_check.py", line 145, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\scripts\p1_gnngls_check.py", line 92, in main
+    worker(args.size, args.seed, args.mode, args.time_limit, args.perturbations)
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\scripts\p1_gnngls_check.py", line 70, in worker
+    result = solve(points, checkpoint_size=20, scaler_size=20, time_limit=time_limit,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\baselines\gnngls\reference.py", line 135, in solve
+    verify_sources()
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\baselines\gnngls\reference.py", line 52, in verify_sources
+    raise ValueError(f"GNNGLS 权重或缩放器哈希不符：{name}")
+ValueError: GNNGLS 权重或缩放器哈希不符：models/tsp50/checkpoint_best_val.pt

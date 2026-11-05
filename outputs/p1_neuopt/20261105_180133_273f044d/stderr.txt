@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\baselines\neuopt\synthetic_check.py", line 180, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\baselines\neuopt\synthetic_check.py", line 174, in main
+    print("P1_NEUOPT_JSON " + json.dumps(check(args.size, args.steps, args.seed, args.device, args.compute_dtype),
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\baselines\neuopt\synthetic_check.py", line 161, in check
+    result = solve_batch(points, steps, seed, device, compute_dtype)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\baselines\neuopt\synthetic_check.py", line 131, in solve_batch
+    result = agent.rollout(problem, T=steps, val_m=1, stall_limit=10, batch=batch, record=False)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\baselines\neuopt\verified\agent\ppo.py", line 139, in rollout
+    batch_aug = problem.augment(batch, val_m)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\baselines\neuopt\verified\problems\problem_tsp.py", line 33, in augment
+    coordinates = augmentation(coordinates, val_m).reshape(-1,gs,dim)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\baselines\neuopt\verified\utils\utils.py", line 25, in augmentation
+    coordinates[:,i] = rotate_tensor(coordinates[:,i], int(id_[0] * 4 + 1) * 90)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\OneDrive\project\static_determine\agentic_heuristic_design\baselines\neuopt\verified\utils\utils.py", line 15, in rotate_tensor
+    return torch.matmul(x - 0.5, rot_mat) + 0.5
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: expected mat1 and mat2 to have the same dtype, but got: double != float

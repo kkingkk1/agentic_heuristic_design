@@ -22,9 +22,10 @@ from scripts.p0_runtime import digest, memory_and_priority  # noqa: E402
 from scripts.p0_windows_job import WindowsJob  # noqa: E402
 from scripts.p1_job_supervision import wait_for_job  # noqa: E402
 from baselines.neuopt.synthetic_check import ROOT as NEUOPT_ROOT, SOURCE_BLOBS  # noqa: E402
+from scripts.p1_neuopt_test_evaluate import read_complete, synthetic_inputs  # noqa: E402
 
 
-def audit(stdout_path, size, steps, seed, device):
+def audit(stdout_path, size, steps, seed, device, compute_dtype="float32"):
     prefix = "P1_NEUOPT_JSON "
     events = [json.loads(line[len(prefix):]) for line in stdout_path.read_text(encoding="utf-8").splitlines()
               if line.startswith(prefix)]
@@ -33,6 +34,7 @@ def audit(stdout_path, size, steps, seed, device):
     event = events[0]
     if (event.get("status") != "passed" or event.get("size") != size or event.get("steps") != steps
             or event.get("seed") != seed or event.get("device") != device or event.get("batch_size") != 2
+            or event.get("compute_dtype", "float32") != compute_dtype
             or event.get("formal_test_data_used") is not False or len(event.get("instances", [])) != 2):
         raise ValueError("NeuOpt 工程检查参数不符。")
     elapsed, peak = event.get("search_elapsed_seconds"), event.get("peak_gpu_allocated_bytes")
@@ -48,8 +50,10 @@ def audit(stdout_path, size, steps, seed, device):
             raise ValueError("NeuOpt 路线不是城市排列。")
         length = math.fsum(math.hypot(*(points[index, a] - points[index, b]))
                            for a, b in zip(route, route[1:] + route[:1]))
+        reported = result.get("solver_reported_length", result.get("source_float32_length"))
+        tolerance = 1e-12 if compute_dtype == "float64" else 1e-5
         if (not math.isclose(length, result.get("float64_recomputed_length"), rel_tol=1e-12, abs_tol=1e-12)
-                or not math.isclose(length, result.get("source_float32_length"), rel_tol=1e-5, abs_tol=1e-5)):
+                or not math.isclose(length, reported, rel_tol=tolerance, abs_tol=tolerance)):
             raise ValueError("NeuOpt 路线长度与独立重算不一致。")
     return event
 
@@ -60,10 +64,14 @@ def main():
     parser.add_argument("--steps", type=int, default=5)
     parser.add_argument("--seed", type=int, default=20790020)
     parser.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
+    parser.add_argument("--compute-dtype", choices=("float32", "float64"), default="float32")
+    parser.add_argument("--sequence", action="store_true", help="检查逐实例种子与测试事件")
     parser.add_argument("--timeout-seconds", type=int, default=120)
     args = parser.parse_args()
-    if args.steps <= 0 or args.seed < 0 or args.timeout_seconds <= 0:
+    if args.steps <= 0 or not 0 <= args.seed < 2**32 - 1 or args.timeout_seconds <= 0:
         parser.error("步数和保护时限必须为正，种子不能为负。")
+    if args.sequence and args.compute_dtype != "float64":
+        parser.error("逐实例测试接口要求 float64。")
     resources = memory_and_priority()
     if resources["available_memory_bytes"] < 8589934592 or resources["priority"] != "Normal":
         raise RuntimeError("可用内存或进程优先级不满足工程检查条件。")
@@ -77,10 +85,12 @@ def main():
     root = ROOT / "outputs/p1_neuopt" / (datetime.now().strftime("%Y%m%d_%H%M%S") + "_" + uuid.uuid4().hex[:8])
     root.mkdir(parents=True, exist_ok=False)
     script = ROOT / "baselines/neuopt/synthetic_check.py"
-    protected_paths = [script, Path(__file__).resolve(), *(NEUOPT_ROOT / name for name in SOURCE_BLOBS)]
+    test_script = ROOT / "scripts/p1_neuopt_test_evaluate.py"
+    protected_paths = [script, test_script, Path(__file__).resolve(), *(NEUOPT_ROOT / name for name in SOURCE_BLOBS)]
     protected = {str(path): digest(path) for path in protected_paths}
-    command = [sys.executable, "-B", "-u", str(script), "--size", str(args.size), "--steps", str(args.steps),
-               "--seed", str(args.seed), "--device", args.device]
+    command = [sys.executable, "-B", "-u", str(test_script if args.sequence else script),
+               "--size", str(args.size), "--steps", str(args.steps), "--seed", str(args.seed), "--device", args.device]
+    command += ["--synthetic"] if args.sequence else ["--compute-dtype", args.compute_dtype]
     env = os.environ.copy()
     env.update({"PYTHONUTF8": "1", "PYTHONDONTWRITEBYTECODE": "1", "OMP_NUM_THREADS": "1",
                 "MKL_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "NUMEXPR_NUM_THREADS": "1"})
@@ -105,7 +115,10 @@ def main():
         if any(digest(Path(path)) != expected for path, expected in protected.items()):
             raise ValueError("工程检查脚本在运行期间发生变化。")
         if record["status"] == "failed" and record.get("exit_code") == 0:
-            record["measurement"] = audit(stdout_path, args.size, args.steps, args.seed, args.device)
+            if args.sequence:
+                record["measurement"] = read_complete(stdout_path, *synthetic_inputs(args.size, args.steps, args.seed, args.device))
+            else:
+                record["measurement"] = audit(stdout_path, args.size, args.steps, args.seed, args.device, args.compute_dtype)
             record["status"] = "passed"
     except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError) as exc:
         record["status"], record["error"] = "infrastructure_error", f"{type(exc).__name__}: {exc}"

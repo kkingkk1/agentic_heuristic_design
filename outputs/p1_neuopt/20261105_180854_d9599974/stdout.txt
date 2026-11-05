@@ -1,0 +1,12 @@
+P1_JSON {"event": "start", "method": "neuopt_float64_project_eval", "source_commit": "ccf6b5f0f6a8fda2792b4be11d4ec35390a8139b", "dataset_sha256": "synthetic:20:20790020", "size": 20, "instance_count": 2, "seed_base": 20790020, "search_steps": 5, "device": "cuda", "compute_dtype": "float64", "batch_size": 2, "reference_sha256": "synthetic", "reference_mean": 1.0}
+TSP with 20 nodes. MAX 4-opt. Do assert: False
+simpleMDP:  True
+# params in Actor {'Total': 682628, 'Trainable': 682628}
+Distributed: False
+P1_JSON {"event": "instance", "index": 0, "seed": 20790020, "steps": 5, "reference": 1.0, "elapsed_seconds": 0.5, "route": [0, 13, 1, 7, 18, 4, 6, 14, 2, 17, 10, 11, 5, 8, 19, 12, 15, 9, 16, 3], "objective": 5.91247825319754, "solver_reported_length": 5.91247825319754, "search_elapsed_seconds": 0.26500000001396984, "peak_gpu_allocated_bytes": 14471680}
+TSP with 20 nodes. MAX 4-opt. Do assert: False
+simpleMDP:  True
+# params in Actor {'Total': 682628, 'Trainable': 682628}
+Distributed: False
+P1_JSON {"event": "instance", "index": 1, "seed": 20790021, "steps": 5, "reference": 1.0, "elapsed_seconds": 0.1410000000614673, "route": [0, 4, 10, 16, 18, 13, 3, 17, 11, 19, 5, 12, 15, 14, 6, 8, 7, 2, 9, 1], "objective": 5.953071781083468, "solver_reported_length": 5.953071781083468, "search_elapsed_seconds": 0.0779999999795109, "peak_gpu_allocated_bytes": 14472192}
+P1_JSON {"event": "complete", "instance_count": 2, "average": 5.932775017140504, "reference_mean": 1.0, "lkh_gap_percent": 493.27750171405035}
