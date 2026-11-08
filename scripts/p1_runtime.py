@@ -107,6 +107,13 @@ class TaskRuntime(Runtime):
             self.protected.append(task_dir / "lkh_reference.py")
         else:
             self.protected.append(task_dir / "eval_black_box.py")
+        if config.get("matrix_contract_sha256"):
+            from scripts.p1_formal_matrix import MATRIX_PATH, implementation_paths, test_cells
+            self.protected.extend((MATRIX_PATH, *implementation_paths()))
+            for frozen_task, _, size in test_cells(data_contract):
+                entry = next(row for row in data_contract["tasks"][frozen_task]["test"] if row["size"] == size)
+                self.protected.append(ROOT / entry["path"])
+            self.protected = list(dict.fromkeys(self.protected))
         self.protected_hashes = {str(path): digest(path) for path in self.protected}
 
     def model(self, stage, prompt):

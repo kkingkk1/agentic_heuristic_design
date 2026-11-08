@@ -5,6 +5,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 import importlib.util
 import json
+import math
 import os
 from pathlib import Path
 import random
@@ -30,17 +31,22 @@ TIMEOUT_SECONDS = 120
 WORKERS = 4
 
 
-def worker(name, size):
+def worker(name, size, candidate_root=None):
     task_dir = ROOT / "problems" / name
     sys.path.insert(0, str(task_dir))
     spec = importlib.util.spec_from_file_location("p1_calibration_evaluator", task_dir / "eval.py")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
-    reference_dir = "gls_reference" if name == "tsp_gls" else "aco_reference"
-    reference = importlib.util.spec_from_file_location("p1_calibration_reference", ROOT / "baselines" / reference_dir / f"{name}.py")
-    reference_module = importlib.util.module_from_spec(reference)
-    reference.loader.exec_module(reference_module)
-    heuristic = reference_module.heuristics_v2
+    if candidate_root is not None:
+        if name != "tsp_aco":
+            raise ValueError("候选合成检查目前只支持 TSP-ACO。")
+        heuristic = module.load_heuristic(candidate_root)
+    else:
+        reference_dir = "gls_reference" if name == "tsp_gls" else "aco_reference"
+        reference = importlib.util.spec_from_file_location("p1_calibration_reference", ROOT / "baselines" / reference_dir / f"{name}.py")
+        reference_module = importlib.util.module_from_spec(reference)
+        reference.loader.exec_module(reference_module)
+        heuristic = reference_module.heuristics_v2
     seed = 20770000 + list(TEST_SIZES).index(name) * 10000 + size
     rng = np.random.RandomState(seed)
     random.seed(seed)
@@ -78,7 +84,7 @@ def worker(name, size):
                       "solve_elapsed_seconds": time.monotonic() - started}, allow_nan=False), flush=True)
 
 
-def calibrate(name, size, root, timeout):
+def calibrate(name, size, root, timeout, *, candidate_root=None):
     directory = root / name / str(size)
     directory.mkdir(parents=True, exist_ok=False)
     stdout_path, stderr_path = directory / "stdout.txt", directory / "stderr.txt"
@@ -86,15 +92,23 @@ def calibrate(name, size, root, timeout):
     env.update({"PYTHONUTF8": "1", "PYTHONDONTWRITEBYTECODE": "1", "OMP_NUM_THREADS": "1",
                 "MKL_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "NUMEXPR_NUM_THREADS": "1"})
     command = [sys.executable, "-B", "-u", str(Path(__file__).resolve()), "--worker", name, str(size)]
+    if candidate_root is not None:
+        if name != "tsp_aco":
+            raise ValueError("候选合成检查目前只支持 TSP-ACO。")
+        command.extend(("--candidate-root", str(Path(candidate_root).resolve())))
+    source = (ROOT / "baselines" / ("gls_reference" if name == "tsp_gls" else "aco_reference") / f"{name}.py"
+              if candidate_root is None else Path(candidate_root).resolve() / "problems/tsp_aco/gpt.py")
     begin = time.monotonic()
     record = {"task": name, "size": size, "status": "failed", "command": command,
               "timeout_seconds": timeout, "formal_test_data_used": False,
               "calibration_sha256": digest(Path(__file__).resolve()),
-              "reference_sha256": digest(ROOT / "baselines" /
-                  ("gls_reference" if name == "tsp_gls" else "aco_reference") / f"{name}.py"),
+              "heuristic_source": "reference" if candidate_root is None else "candidate",
+              "heuristic_sha256": digest(source),
               "solver_sha256": digest(ROOT / "problems" / name / ("gls.py" if name == "tsp_gls" else "aco.py")),
               "evaluator_sha256": digest(ROOT / "problems" / name / "eval.py"),
               "started_at_utc": datetime.now(timezone.utc).isoformat()}
+    if candidate_root is None:
+        record["reference_sha256"] = record["heuristic_sha256"]
     with stdout_path.open("x", encoding="utf-8") as stdout, stderr_path.open("x", encoding="utf-8") as stderr:
         try:
             with WindowsJob() as job:
@@ -108,7 +122,7 @@ def calibrate(name, size, root, timeout):
             record["status"], record["error"] = "infrastructure_error", f"{type(exc).__name__}: {exc}"
     record["elapsed_seconds"] = time.monotonic() - begin
     protected = {Path(__file__).resolve(): record["calibration_sha256"],
-                 ROOT / "baselines" / ("gls_reference" if name == "tsp_gls" else "aco_reference") / f"{name}.py": record["reference_sha256"],
+                 source: record["heuristic_sha256"],
                  ROOT / "problems" / name / ("gls.py" if name == "tsp_gls" else "aco.py"): record["solver_sha256"],
                  ROOT / "problems" / name / "eval.py": record["evaluator_sha256"]}
     if any(digest(path) != expected for path, expected in protected.items()):
@@ -118,8 +132,22 @@ def calibrate(name, size, root, timeout):
             events = [json.loads(line) for line in stdout_path.read_text(encoding="utf-8").splitlines() if line.startswith("{")]
             if len(events) != 2 or [event.get("event") for event in events] != ["calibration_start", "calibration_complete"]:
                 raise ValueError("校准事件不完整。")
-            record["measurement"], record["status"] = events[-1], "passed"
-        except (ValueError, json.JSONDecodeError) as exc:
+            measurement = events[-1]
+            if candidate_root is not None:
+                expected_seed = 20770000 + size
+                tour = measurement.get("solution")
+                if (measurement.get("task") != name or measurement.get("size") != size
+                        or measurement.get("seed") != expected_seed or measurement.get("iterations") != 500
+                        or not isinstance(tour, list) or sorted(tour) != list(range(size))):
+                    raise ValueError("候选合成检查的任务、参数或路线无效。")
+                points = np.random.RandomState(expected_seed).rand(size, 2)
+                ordered = points[np.asarray(tour, dtype=np.int64)]
+                length = float(np.linalg.norm(ordered - np.roll(ordered, 1, axis=0), axis=1).sum(dtype=np.float64))
+                if not math.isclose(measurement.get("objective"), length, rel_tol=1e-12, abs_tol=1e-12):
+                    raise ValueError("候选合成路线的 float64 长度重算不一致。")
+                record["independent_route_length_float64"] = length
+            record["measurement"], record["status"] = measurement, "passed"
+        except (TypeError, ValueError, json.JSONDecodeError) as exc:
             record["error"] = f"输出无效：{exc}"
     with (directory / "result.json").open("x", encoding="utf-8", newline="\n") as stream:
         json.dump(record, stream, ensure_ascii=False, indent=2, allow_nan=False)
@@ -133,12 +161,13 @@ def main():
     parser.add_argument("--case", action="append", help="只校准 TASK:SIZE；可重复")
     parser.add_argument("--timeout-seconds", type=int, default=TIMEOUT_SECONDS, help="每个完整实例的保护时限")
     parser.add_argument("--worker", nargs=2, metavar=("TASK", "SIZE"), help=argparse.SUPPRESS)
+    parser.add_argument("--candidate-root", type=Path, help=argparse.SUPPRESS)
     args = parser.parse_args()
     if args.worker:
         name, size = args.worker[0], int(args.worker[1])
         if name not in TEST_SIZES or size not in TEST_SIZES[name]:
             parser.error("未知任务或规模。")
-        worker(name, size)
+        worker(name, size, args.candidate_root)
         return 0
     if args.timeout_seconds <= 0:
         parser.error("时限必须为正整数。")

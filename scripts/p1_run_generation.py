@@ -15,11 +15,12 @@ if str(ROOT) not in sys.path:
 
 from scripts import p0_budget_quota, p0_model_probe as probe  # noqa: E402
 from scripts.p0_controller import Controller, StopRun  # noqa: E402
-from scripts.p0_runtime import JsonLog, memory_and_priority, quota_gate  # noqa: E402
+from scripts.p0_runtime import JsonLog, generation_requirements, memory_and_priority, quota_gate  # noqa: E402
+from scripts.p1_formal_matrix import formal_run_guard, verify_training_config  # noqa: E402
 from scripts.p1_runtime import TaskRuntime  # noqa: E402
 
 
-def validate_config(config, *, method_id="proposed_qe"):
+def validate_config(config, *, method_id="proposed_solution_quality_and_speed_agents"):
     if (not isinstance(config, dict) or config.get("status") != "frozen"
             or not isinstance(config.get("method"), dict) or config["method"].get("id") != method_id):
         raise ValueError(f"正式入口只接受 status=frozen 且方法标识为 {method_id} 的完整配置。")
@@ -27,12 +28,16 @@ def validate_config(config, *, method_id="proposed_qe"):
     if not isinstance(task, dict) or not isinstance(budget, dict):
         raise ValueError("缺少任务或预算配置。")
     generations, seed = task.get("generations"), task.get("selection_seed")
+    initial, population = task.get("initial_proposals"), task.get("population_size")
     if (type(generations) is not int or generations < 1 or type(seed) is not int or seed < 0
-            or task.get("initial_proposals") != 30 or task.get("population_size") != 10
+            or type(initial) is not int or type(population) is not int
+            or (initial, population) not in ((30, 10), (6, 2))
             or task.get("collaboration_rounds") != 3
             or task.get("reference_seed_in_prompt_or_population") is not False):
         raise ValueError("初始化、代数、选择种子或无种子合同无效。")
-    model_calls, code_slots = 30 + 65 * generations, 30 + 58 * generations
+    generation_calls, generation_evaluations = generation_requirements(population)
+    model_calls = initial + generation_calls * generations
+    code_slots = initial + generation_evaluations * generations
     model_retries, eval_retries = (budget.get("additional_infrastructure_retry_calls"),
                                    budget.get("additional_infrastructure_evaluation_starts"))
     cpu = budget.get("future_initialization_and_generation_eval_process_tree_cpu_seconds")
@@ -67,6 +72,7 @@ def main():
     try:
         config = json.loads(Path(args.config).read_text(encoding="utf-8"))
         generations, seed = validate_config(config)
+        verify_training_config(config)
     except (OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
         print(f"配置无效：{exc}", file=sys.stderr)
         return 1
@@ -103,9 +109,11 @@ def main():
             print(f"启动前检查通过；记录：{run_dir}")
             return 0
         runtime.cli = cli
-        controller = Controller(runtime, log, population_size=10, initial_count=30, rounds=3,
+        controller = Controller(runtime, log, population_size=config["task"]["population_size"],
+                                initial_count=config["task"]["initial_proposals"], rounds=3,
                                 seed=seed, generations=generations, task_contract=runtime.contract)
-        controller.run()
+        with formal_run_guard(config, run_dir, log):
+            controller.run()
         print(f"训练完成；记录：{run_dir}")
         return 0
     except (StopRun, probe.ProbeError, p0_budget_quota.QuotaProbeError, OSError, ValueError, KeyError) as exc:

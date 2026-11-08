@@ -1,0 +1,71 @@
+{
+  "calls": 7,
+  "results": [
+    {
+      "candidate_id": "c0001",
+      "valid": false,
+      "error": "invalid_proposal: 输出必须依次且仅包含非空标签：thought, code。",
+      "objective": null,
+      "normal_model_calls": 1,
+      "evaluation_starts": 0,
+      "synthetic_status": "not_run",
+      "method": "proposed"
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 6.125463125954457,
+      "normal_model_calls": 1,
+      "evaluation_starts": 1,
+      "synthetic_status": "passed",
+      "synthetic_record": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_model_smoke\\20261106_101132_14b70dfe\\eoh\\synthetic\\tsp_aco\\50\\result.json",
+      "method": "eoh"
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 6.015723230957538,
+      "normal_model_calls": 1,
+      "evaluation_starts": 1,
+      "synthetic_status": "passed",
+      "synthetic_record": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_model_smoke\\20261106_101132_14b70dfe\\reevo\\synthetic\\tsp_aco\\50\\result.json",
+      "method": "reevo"
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 6.0588397975010135,
+      "normal_model_calls": 1,
+      "evaluation_starts": 1,
+      "synthetic_status": "passed",
+      "synthetic_record": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_model_smoke\\20261106_101132_14b70dfe\\hsevo\\synthetic\\tsp_aco\\50\\result.json",
+      "method": "hsevo"
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 6.424553491162816,
+      "normal_model_calls": 2,
+      "evaluation_starts": 1,
+      "synthetic_status": "passed",
+      "synthetic_record": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_model_smoke\\20261106_101132_14b70dfe\\mcts\\synthetic\\tsp_aco\\50\\result.json",
+      "method": "mcts"
+    },
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 11.990678090173429,
+      "normal_model_calls": 1,
+      "evaluation_starts": 1,
+      "synthetic_status": "passed",
+      "synthetic_record": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_model_smoke\\20261106_101132_14b70dfe\\roco\\synthetic\\tsp_aco\\50\\result.json",
+      "method": "roco"
+    }
+  ],
+  "formal_test_data_used": false
+}

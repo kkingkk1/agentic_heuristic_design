@@ -99,6 +99,8 @@ class ProtocolTests(unittest.TestCase):
         command, prompt = runner.call_args.args
         self.assertEqual(prompt, "prompt")
         self.assertIn("--ignore-user-config", command)
+        self.assertNotIn("--ephemeral", command)
+        self.assertNotIn("resume", command)
         self.assertEqual(command[command.index("--model") + 1], "gpt-5.6-luna")
         self.assertIn('model_providers.p0_chatgpt_https.base_url="https://chatgpt.com/backend-api/codex"', command)
         self.assertIn("model_providers.p0_chatgpt_https.requires_openai_auth=true", command)

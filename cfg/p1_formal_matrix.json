@@ -1,0 +1,57 @@
+{
+  "status": "frozen",
+  "contract_id": "p1_tsp50_small_20261107",
+  "scope": "只冻结 TSP-ACO 白盒 TSP50 的本方法与 RoCo 小规模对照；不授权启动正式实验。其他任务、规模与对照不在本批矩阵中。",
+  "conditions": [{"task": "tsp_aco", "prompt_condition": "white_box", "test_sizes": [50]}],
+  "method_ids": ["proposed_solution_quality_and_speed_agents", "roco_paper_adapted"],
+  "initial_proposals": 6,
+  "population_size": 2,
+  "collaboration_rounds": 3,
+  "data_contract_sha256": "fbf84d0bf7ee51071089a01863354abbdb13bfd24d5b7802ba115fcfd2edd0a1",
+  "resource_config_sha256": "9b6062a4f7a2fd43a845007700c887f1db7442bf7339d49b32a7a566aa965555",
+  "implementation_sha256": "e8065094d29b7494117359156a697649d0fc2b07049de40c001fd3695ec98316",
+  "training_software_versions": {
+    "python": "3.12.12",
+    "numpy": "2.3.5",
+    "scipy": "1.18.0",
+    "torch": "2.13.0+cu126",
+    "torch_cuda": "12.6",
+    "pyyaml": "6.0.2"
+  },
+  "deepaco_extra_versions": {"torch-geometric": "2.7.0", "pyparsing": "3.3.2", "xxhash": "3.6.0"},
+  "selection_seeds": [2026110601, 2026110602],
+  "research_repeats": 2,
+  "solver_repeats_per_instance": 1,
+  "normal_and_retry_evaluation_limit": 32,
+  "model_retry_limit": 0,
+  "evaluation_retry_reservation": 0,
+  "model_cli_limit_per_research": 39,
+  "training_process_tree_cpu_seconds": 18000,
+  "max_concurrent_research_runs": 1,
+  "token_limits": {
+    "input_including_cached": null,
+    "output": null,
+    "policy": "不设 token 总上限；按已回读输入、缓存输入和输出分别累计。失败或缺失用量标记未知，不按零计算。"
+  },
+  "selection_randomness": "同一重复索引在各任务和方法使用同一个选择种子；模型未提供可固定种子，保存实际提示、响应和顺序。",
+  "test_randomness": "使用数据合同的逐规模 evaluation_seed_base 加实例索引；训练使用数据合同已冻结的评价种子。",
+  "reference_randomness": "传统 ACO 与 DeepACO 对每个测试实例求解一次，沿用测试数据合同的种子。",
+  "comparison": {
+    "primary": "TSP-ACO 白盒 TSP50 中，本方法与 RoCo 小规模适配进行比较。",
+    "primary_family_size": 1,
+    "statistical_unit": "完整独立研发运行；64 个测试实例不是独立研发重复。",
+    "analysis": "报告两次研发逐次结果、均值和范围；不以两次重复宣称显著性。任一重复失败时标为不完整，不以成功子集冒充完整比较。",
+    "references": "传统 ACO 和 DeepACO 分别报告求解参考及其成本，不混入 AHD 研发重复。DeepACO 的 TSP50 使用 TSP100 权重，标记为跨规模。"
+  },
+  "test_wall_seconds": {"tsp_aco": {"50": 900}},
+  "test_process_tree_cpu_multiplier": 28,
+  "deepaco_checkpoint": {"tsp_aco": {"50": "tsp100"}},
+  "deepaco_k_sparse": 20,
+  "budget_evidence": [
+    "outputs/p1_test_calibration/20261106_002738_4f709871/summary.json",
+    "outputs/p1_deepaco_unified/20261105_114241_d96c0105/tsp/result.json",
+    "outputs/p0_control/20261103_211613_fc69d43a/independent_audit_after_order_fix.json"
+  ],
+  "budget_note": "每项候选或参考测试墙钟上限 900 秒。TSP50 合成单例校准仅供数量级参考，不能保证 64 例按时结束；超时记失败，不删去。研发时间另计，未冻结总墙钟上限。",
+  "concurrency_note": "每个研发运行沿用冻结资源中的四个并发模型调用及四个并发评价；独立研发运行按顺序启动，避免把每运行上限误当作全局上限。"
+}

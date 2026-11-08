@@ -1,0 +1,19 @@
+{
+  "audit_status": "passed",
+  "model_calls": 1,
+  "response_format": "thought_then_raw_python",
+  "model_code_unchanged": true,
+  "candidate_sha256": "462a60a0e3538b3177aed3d1123dd170807257db7d8f26607982b7737ccff843",
+  "training_evaluations": 1,
+  "synthetic_tests": 1,
+  "route_recomputed_float64": true,
+  "protected_files_unchanged": 20,
+  "formal_test_data_used": false,
+  "historical_failure_preserved": true,
+  "observed_tokens": {
+    "input_tokens": 23966,
+    "cached_input_tokens": 17280,
+    "output_tokens": 1058,
+    "reasoning_output_tokens": 129
+  }
+}

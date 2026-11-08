@@ -1,0 +1,40 @@
+{
+  "model_attempt_events": 7,
+  "model_process_events": 7,
+  "model_usage_events": 7,
+  "attempts_without_usage": 0,
+  "usage_events_without_process": 0,
+  "attempt_process_count_mismatches": 0,
+  "stages_with_repeated_attempts": 0,
+  "observed_tokens": {
+    "input_tokens": 167513,
+    "cached_input_tokens": 73472,
+    "output_tokens": 5298,
+    "reasoning_output_tokens": 1232
+  },
+  "usage_events_missing_field": {
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0
+  },
+  "usage_events_invalid_field": {
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_output_tokens": 0
+  },
+  "usage_events_with_inconsistent_subsets": 0,
+  "usage_events_with_warnings": 0,
+  "usage_events_missing_warning_metadata": 0,
+  "local_records_complete": true,
+  "note": "仅统计本地已回读用量；缓存输入属于输入，reasoning 输出属于输出。缺失或失败请求不按零计算；服务端不可见开销不包含在内。按日志和阶段核对事件数，重复阶段不能逐次证明对应关系。",
+  "source_logs": [
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_model_smoke\\20261106_101132_14b70dfe\\proposed\\events.jsonl",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_model_smoke\\20261106_101132_14b70dfe\\eoh\\events.jsonl",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_model_smoke\\20261106_101132_14b70dfe\\reevo\\events.jsonl",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_model_smoke\\20261106_101132_14b70dfe\\hsevo\\events.jsonl",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_model_smoke\\20261106_101132_14b70dfe\\mcts\\events.jsonl",
+    "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_model_smoke\\20261106_101132_14b70dfe\\roco\\events.jsonl"
+  ]
+}

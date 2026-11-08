@@ -276,7 +276,7 @@ def extract_message(result: dict[str, Any]) -> tuple[str, Any, list[str], list[s
 
 def call(cli: list[str], records: Path, run_dir: Path, stage: str, prompt: str) -> str:
     command = cli + [
-        "exec", "--ignore-user-config", "--skip-git-repo-check", "--ephemeral",
+        "exec", "--ignore-user-config", "--skip-git-repo-check",
         "--json", "--sandbox", "read-only", "--model", MODEL,
     ] + HTTPS_CONFIG + ["--cd", str(run_dir), "-"]
     append_record(records, {"event": "prompt", "stage": stage, "prompt": prompt})
@@ -342,7 +342,7 @@ def main() -> int:
         append_record(records, {
             "event": "start", "model_requested": MODEL,
             "transport": "项目调用通过临时 p0_chatgpt_https 配置直接使用 ChatGPT HTTPS 后端。",
-            "context": "每次调用均为新的 --ephemeral 会话；只显式传入该次 prompt，不恢复会话。",
+            "context": "每次调用均为新的持久化会话；只显式传入该次 prompt，不恢复其他会话。",
             "truncation": "调用脚本不截断提示；CLI/服务端内部上下文与截断未由该接口完整暴露。",
             "fixtures": "Critic 和长期反思中的代码与分数为人工构造的协议测试数据，不是评价结果。",
         })
@@ -389,8 +389,8 @@ def main() -> int:
 
         reflections = {}
         for role, description in (
-            ("Q", "focus on improving the objective value"),
-            ("E", "focus on reducing computational cost"),
+            ("Solution Quality Agent", "focus on improving the objective value"),
+            ("Speed Agent", "focus on reducing computational cost"),
         ):
             prompt = f"""Below is your prior short-term reflection on designing heuristics for {TASK}
 {critic['reflection']}
@@ -402,8 +402,8 @@ Do not use tools or read files; respond only with the requested output.
             append_record(records, {"event": "parsed", "stage": stage, "reflection": reflections[role]})
 
         merge_prompt = f"""Merge these two long-term reflections into one concise experience text. Preserve the useful insights; return plain text only.
-Q: {reflections['Q']}
-E: {reflections['E']}
+Solution Quality Agent: {reflections['Solution Quality Agent']}
+Speed Agent: {reflections['Speed Agent']}
 Do not use tools or read files; respond only with the requested output.
 """
         merged = parse_merge(call(cli, records, run_dir, "long_term_merge", merge_prompt))

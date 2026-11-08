@@ -74,37 +74,73 @@ def check_modification_scope(code: str) -> None:
             raise ValueError("候选引用不允许的文件、进程或动态执行入口。")
 
 
-def candidate_text(candidate: Candidate, *, thought: bool = True) -> str:
-    desc = f"Algorithm description: {candidate.thought}\n" if thought else ""
-    return f"{desc}Code:\n{candidate.code}\nObjective score: {candidate.objective}\n"
+DESIGN_ROLES = ("solution_quality_agent", "speed_agent")
+INTEGRATOR_ROLE = "integrator"
+ROLE_DETAILS = {
+    "solution_quality_agent": {
+        "label": "Solution Quality Agent", "focus": "improving the objective value",
+        "identity": "Act as the Solution Quality Agent.\n",
+        "opening": "Here is an algorithm proposed by previous agents:",
+        "direction": "focusing on {focus}. Use the critic's feedback to improve solution quality while preserving feasibility.",
+    },
+    "speed_agent": {
+        "label": "Speed Agent", "focus": "reducing computational cost",
+        "identity": "Act as the Speed Agent.\n",
+        "opening": "Here are some algorithms proposed by previous agents:",
+        "direction": "to refine and improve it through {focus}. Use the critic's feedback to reduce computational work while preserving feasibility and the task objective.",
+    },
+}
 
 
-def role_prompt(role: str, candidate: Candidate, critic: dict[str, str], *, task: str = TASK, output: str = OUTPUT) -> str:
-    focus = "improving the objective value" if role == "Q" else "reducing computational cost"
-    style = ("Use creative, future-oriented thinking to introduce novel directions combined with the feedback."
-             if role == "Q" else
-             "Use conservative, efficiency-driven thinking to enhance performance incrementally.")
-    return (f"{task}\n{candidate_text(candidate)}Critic's feedback: {critic['advice']}\n"
-            f"Reflection: {critic['reflection']}\nBased on the feedback and reflection, propose a new "
-            f"algorithm that improves the previous one, focusing on {focus}. {style}\n{output}")
+def role_prompt(role: str, candidate: Candidate, critic: dict[str, str], *, task: str = TASK,
+                output: str = OUTPUT, details: dict[str, dict[str, str]] = ROLE_DETAILS) -> str:
+    if role not in details:
+        raise ValueError("未知设计角色。")
+    spec = details[role]
+    direction = spec["direction"].format(focus=spec["focus"])
+    return (f"{task}\n{spec['identity']}{spec['opening']}\nAlgorithm description: {candidate.thought}\n"
+            f"Code: {candidate.code}\nObjective score: {candidate.objective}\n"
+            f"Critic's feedback: {critic['advice']}\nReflection: {critic['reflection']}\n"
+            "Based on the critic's feedback and the reflection, please propose a new algorithm "
+            f"that improves the previous ones {direction}\n{output}")
 
 
-def round_critic_prompt(q: Candidate, e: Candidate, *, task: str = TASK, direction: str = "min") -> str:
-    if e.fitness > q.fitness:
-        instruction = ("The current E candidate has a better objective than Q. Identify successful changes "
-                       "and recommend how to build on them.")
-        compared = f"Better algorithm (E):\n{candidate_text(e)}Worse algorithm (Q):\n{candidate_text(q)}"
-    elif e.fitness < q.fitness:
-        instruction = ("The current E candidate has a worse objective than Q. Identify counterproductive "
-                       "choices and suggest how to correct the direction.")
-        compared = f"Better algorithm (Q):\n{candidate_text(q)}Worse algorithm (E):\n{candidate_text(e)}"
+def round_critic_prompt(first: Candidate, second: Candidate, *, task: str = TASK, direction: str = "min") -> str:
+    better_direction = "lower" if direction == "min" else "higher"
+    if second.fitness == first.fitness:
+        return (f"{task}\nAs an optimization expert in the domain of heuristic optimization, compare:\n"
+                f"First algorithm description: {first.thought}\nFirst code: {first.code}\n"
+                f"First objective value: {first.objective}\nSecond algorithm description: {second.thought}\n"
+                f"Second code: {second.code}\nSecond objective value: {second.objective}\n"
+                "The objectives are tied. Compare the designs without claiming either score is better. "
+                "Reflect on the evolution direction and provide targeted feedback.\n"
+                "Format your response as:\n<ref>Your reflection about current code</ref> "
+                "<ans>Specific critique and actionable suggestions (max 40 words)</ans>\n"
+                "Let's think step by step and be constructive in your analysis.")
+    current_better = second.fitness > first.fitness
+    worse, better = (first, second) if current_better else (second, first)
+    worse_position, better_position = (("prior", "current") if current_better else ("current", "prior"))
+    if current_better:
+        instruction = ("First reflect on the evolution direction of the current code: (Note: Current code is better)\n"
+                       "What successful evolutionary patterns can we identify? Which design improvements were "
+                       'most effective? Such as "..benefits", "..gains" and so on.\n\n'
+                       "Then provide targeted feedback for the current code: Recommend how to further leverage "
+                       "successful strategies.\n")
     else:
-        instruction = "The objectives are tied. Compare the designs without claiming either score is better."
-        compared = f"Q algorithm:\n{candidate_text(q)}E algorithm:\n{candidate_text(e)}"
-    better = "lower" if direction == "min" else "higher"
-    return (f"{task}\nCompare these evaluated algorithms; a {better} objective is better.\n"
-            f"{compared}{instruction} Reflect on the differences and give actionable improvements. "
-            "Return exactly <ref>reflection</ref><ans>advice, at most 40 words</ans>.")
+        instruction = ("First, consider and reflect on the evolution direction of the current code:\n"
+                       '**Note: current code is worse**: Why did this evolution direction fail? What design choices '
+                       'or implementation changes were counterproductive? Such as "avoid..." and so on.\n\n'
+                       "Then provide targeted feedback for the current code: For the current worse code: "
+                       "Suggest how to correct the evolution path\n")
+    # 论文未展开 invalid_ind_prompt；已确认合同只记录技术错误，不向角色追加错误报告。
+    return (f"{task}\nAs an optimization expert in the domain of heuristic optimization, compare:\n"
+            f"Worse algorithm description: {worse.thought}\nWorse and {worse_position} code: {worse.code}\n"
+            f"Worse objective value: {worse.objective}\nBetter algorithm description: {better.thought}\n"
+            f"Better and {better_position} code: {better.code}\nBetter objective value: {better.objective}\n\n"
+            f"A {better_direction} objective is better.\n{instruction}"
+            "Format your response as:\n<ref>Your reflection about current code</ref> "
+            "<ans>Specific critique and actionable suggestions (max 40 words)</ans>\n"
+            "Let's think step by step and be constructive in your analysis.")
 
 
 def parse_round_critic(message: str) -> dict[str, str]:
@@ -116,6 +152,17 @@ def parse_round_critic(message: str) -> dict[str, str]:
 
 class Controller:
     """backend 提供 model、evaluate、before_generation；log 提供 event。"""
+
+    design_roles = DESIGN_ROLES
+    role_details = ROLE_DETAILS
+    integrator_role = INTEGRATOR_ROLE
+    fusion_wording = {
+        "first_final_label": "Solution Quality Agent", "second_final_label": "Speed Agent",
+        "round_priorities": "the solution quality contribution of the Solution Quality Agent, the computational efficiency contribution of the Speed Agent",
+        "balance": "solution quality and computational efficiency",
+        "first_final_priority": "solution quality improvement potential from the best Solution Quality Agent",
+        "second_final_priority": "computational efficiency improvement capabilities from the best Speed Agent",
+    }
 
     def __init__(self, backend, log, *, population_size=10, initial_count=30, rounds=3, seed=20261103,
                  task_contract=None, generations=1):
@@ -135,7 +182,7 @@ class Controller:
         self._lock = threading.Lock()
         self._generated = 0
         self.stop = threading.Event()
-        self.history: dict[str, list[str]] = {role: [] for role in ("Q", "E", "I")}
+        self.history: dict[str, list[str]] = {role: [] for role in (*self.design_roles, self.integrator_role)}
 
     def event(self, kind: str, **fields: Any) -> None:
         self.log.event(kind, **fields)
@@ -160,17 +207,17 @@ class Controller:
             sequence = len(self.candidates) + 1
             candidate = Candidate(f"c{sequence:04d}", sequence, stage, parents)
             self.candidates.append(candidate)
-        parts = stage.split("_")
+        parts = stage.split("_", 2)
         if parts[0] == "init":
             role, operator, generation, round_number = "initializer", "initialization", 0, None
         elif parts[0] == "eoh":
             role, operator, generation, round_number = "EoH", parts[1], self.generation, None
         elif parts[0] == "start":
-            role, operator, generation, round_number = parts[1], "startup", self.generation, 0
+            role, operator, generation, round_number = stage.removeprefix("start_"), "startup", self.generation, 0
         elif parts[0] == "round":
             role, operator, generation, round_number = parts[2], "continuation", self.generation, int(parts[1])
         elif parts[0] == "fusion":
-            role, operator, generation = "I", "elite_fusion" if parts[1] == "final" else "round_fusion", self.generation
+            role, operator, generation = self.integrator_role, "elite_fusion" if parts[1] == "final" else "round_fusion", self.generation
             round_number = None if parts[1] == "final" else int(parts[1])
         else:
             role, operator, generation, round_number = parts[2], "elite_mutation", self.generation, None
@@ -294,39 +341,58 @@ class Controller:
         second = self.random.choice([i for i in (first + 1, first + 2) if i < len(population)])
         return population[first], population[second]
 
+    def role_focus(self, role):
+        return self.role_details[role]["focus"]
+
     def branch_prompt(self, role, candidate, critic):
-        return role_prompt(role, candidate, critic, task=self.task, output=self.output)
+        return role_prompt(role, candidate, critic, task=self.task, output=self.output, details=self.role_details)
 
     def branch_critic_prompt(self, first, second):
         return round_critic_prompt(first, second, task=self.task, direction=self.direction)
 
     def round_fusion_prompt(self, proposals, better):
-        return (f"{self.task}\nQ candidate:\n{candidate_text(proposals[0])}"
-                f"E candidate:\n{candidate_text(proposals[1])}"
-                "Act as a strategic integrator. Weigh the long-term innovation of Q and the "
-                f"short-term refinement of E. A {better.lower()} objective is better. Propose the next "
-                "step that balances exploration and exploitation by reasoning through "
-                f"their complementary strengths.\n{self.output}")
+        first, second = proposals
+        first_label, second_label = (self.role_details[role]["label"] for role in self.design_roles)
+        wording = self.fusion_wording
+        return (f"{self.task}\nHere are the current candidates for integration:\n"
+                f"{first_label}'s algorithm description: {first.thought}\n{first_label}'s code: {first.code}\n"
+                f"{first_label}'s objective Score: {first.objective}\n\n"
+                f"{second_label}'s algorithm description: {second.thought}\n{second_label}'s code: {second.code}\n"
+                f"{second_label}'s objective Score: {second.objective}\n\n"
+                f"Act as a strategic integrator. Weigh {wording['round_priorities']}. "
+                f"Remember A {better.lower()} objective score is better.\n"
+                f"Propose the next step that balances {wording['balance']}, maximizing overall progress "
+                f"by reasoning through their complementary strengths.\n{self.output}")
 
     def final_fusion_prompt(self, best, reflections):
-        return (f"{self.task}\nBest Q:\n{candidate_text(best[0], thought=False)}"
-                f"Best E:\n{candidate_text(best[1], thought=False)}"
-                f"Reflection summary: {' | '.join(reflections)}\nAct as a strategic integrator. "
-                "Consider the long-term innovation potential of the best Q, the short-term "
-                "refinement capabilities of the best E, and the reflection insights. Combine "
-                "their strongest elements and address those insights, balancing exploration "
-                f"and exploitation.\n{self.output}")
+        first, second = best
+        wording = self.fusion_wording
+        return (f"{self.task}\nHere are the BEST candidates for integration:\n"
+                f"Best {wording['first_final_label']}'s code:{first.code}\nobjective Score: {first.objective}\n\n"
+                f"Best {wording['second_final_label']}'s code:{second.code}\nobjective Score: {second.objective}\n\n"
+                f"Reflection summary: {' | '.join(reflections)}\nAct as a strategic integrator. You must consider:\n"
+                f"1. The {wording['first_final_priority']}\n"
+                f"2. The {wording['second_final_priority']}\n"
+                "3. Insights from the reflection summary\n"
+                "Your task is to create a solution that combines the strongest elements from both algorithms "
+                "while addressing insights from the reflection. Create an algorithm that balances "
+                f"{wording['balance']} to maximize progress.\n{self.output}")
 
     def long_reflection_prompt(self, role, reflections, changes):
-        focus = "improving the objective value" if role == "Q" else "reducing computational cost"
-        return (f"{self.task}\nRole: {role}, focus on {focus}.\n"
-                f"Short-term reflections: {' | '.join(reflections)}\n"
+        label = self.role_details[role]["label"]
+        return (f"Below is your prior short-term reflection on designing heuristics for {self.task}\n"
+                f"{' | '.join(reflections)}\n"
                 f"Objective changes: {changes[role]}\n"
-                "Give constructive hints in fewer than 50 words. Return exactly <ans>...</ans>.")
+                f"Based on the relection with changing of the objective scores for {label} {self.role_focus(role)},\n"
+                "write constructive and detailed hints for designing better heuristics, based on prior reflections "
+                f"and focus on {label} and using less than 50 words. Please provide your answer in the following "
+                "format: <ans>...</ans>. Let's think step by step.")
 
     def merge_reflections_prompt(self, lessons):
+        first, second = self.design_roles
         return ("Merge these two reflections into one concise experience. Return plain text only.\n"
-                f"Q: {lessons['Q']}\nE: {lessons['E']}")
+                f"{self.role_details[first]['label']}: {lessons[first]}\n"
+                f"{self.role_details[second]['label']}: {lessons[second]}")
 
     def run(self):
         try:
@@ -353,32 +419,52 @@ class Controller:
                 a, b = self.elite_pair(population)
                 self.event("elite_pair", generation=self.generation, a=a.candidate_id, b=b.candidate_id)
                 better = "Lower" if self.direction == "min" else "Higher"
-                initial_critic = (f"{self.task}\nBetter code:\n{a.code}\nBetter objective score: {a.objective}\n"
-                                  f"Worse code:\n{b.code}\nWorse objective score: {b.objective}\n"
-                                  f"{better} objective is better. Reflect on why the better code performs better; "
-                                  "give design hints in fewer than 20 words and actionable critique. "
-                                  "Return exactly <ref>reflection</ref><ans>advice, at most 40 words</ans>.")
+                if a.fitness == b.fitness:
+                    initial_critic = (f"{self.task}\nHere are the algorithms proposed by initial population.\n"
+                                      f"First code:\n{a.code}\nFirst objective score: {a.objective}\n"
+                                      f"Second code:\n{b.code}\nSecond objective score: {b.objective}\n"
+                                      "The objectives are tied. Compare the designs without claiming either score "
+                                      "is better; give design hints in fewer than 20 words and actionable critique.\n"
+                                      "<ref>Reflection on current code's evolution direction (max 30 words)</ref>\n"
+                                      "<ans>Specific critique and actionable suggestions (max 40 words)</ans>\n"
+                                      "Let's think step by step and be constructive in your analysis.")
+                else:
+                    initial_critic = (f"{self.task}\nHere are the algorithms proposed by initial population.\n"
+                                      f"Better code:\n{a.code}\nBetter objective score: {a.objective}\n"
+                                      f"Worse code:\n{b.code}\nWorse objective score: {b.objective}\n"
+                                      f"Note: **A {better.lower()} objective score is better**.\n\n"
+                                      "Act as a reflector and critical evaluator in the domain of optimization "
+                                      "heuristics. First, reflect on why the better algorithm outperforms the other: "
+                                      "You respond with some hints for designing better heuristics, based on the two "
+                                      "code and using less than 20 words. Then analyze the worse algorithm's "
+                                      "limitations and provide specific, actionable improvements.\n\n"
+                                      "Please provide your answer in the following format:\n"
+                                      "<ref>Reflection on current code's evolution direction (max 30 words)</ref>\n"
+                                      "<ans>Specific critique and actionable suggestions (max 40 words)</ans>\n"
+                                      "Let's think step by step and be constructive in your analysis.")
                 critic = self.request("critic_initial", initial_critic, probe.parse_critic)
                 reflections = [critic["reflection"]]
+                first_role, second_role = self.design_roles
+                all_roles = (*self.design_roles, self.integrator_role)
                 starts = self.batch([(f"start_{role}", (b,), self.branch_prompt(role, b, critic))
-                                     for role in ("Q", "E")])
-                current = {role: result if result.valid else b for role, result in zip(("Q", "E"), starts)}
+                                     for role in self.design_roles])
+                current = {role: result if result.valid else b for role, result in zip(self.design_roles, starts)}
                 changes = {role: [{"from_objective": b.objective, "proposal_objective": result.objective,
-                                   "to_objective": current[role].objective}] for role, result in zip(("Q", "E"), starts)}
-                for role, result in zip(("Q", "E"), starts):
+                                   "to_objective": current[role].objective}] for role, result in zip(self.design_roles, starts)}
+                for role, result in zip(self.design_roles, starts):
                     self.event("branch_transition", generation=self.generation, role=role, round=0, previous=b.candidate_id,
                                proposal=result.candidate_id, current=current[role].candidate_id, **changes[role][-1])
-                formal = {"Q": [], "E": []}
+                formal = {role: [] for role in self.design_roles}
                 last = []
                 for turn in range(1, self.rounds + 1):
-                    critic = self.request(f"critic_{turn}", self.branch_critic_prompt(current["Q"], current["E"]),
+                    critic = self.request(f"critic_{turn}", self.branch_critic_prompt(current[first_role], current[second_role]),
                                           parse_round_critic)
                     reflections.append(critic["reflection"])
                     previous = current.copy()
                     proposals = self.batch([(f"round_{turn}_{role}", (previous[role],),
                                              self.branch_prompt(role, previous[role], critic))
-                                            for role in ("Q", "E")])
-                    for role, result in zip(("Q", "E"), proposals):
+                                            for role in self.design_roles])
+                    for role, result in zip(self.design_roles, proposals):
                         if result.valid:
                             formal[role].append(result)
                             current[role] = result
@@ -395,24 +481,26 @@ class Controller:
                         self.event("slot_skipped", generation=self.generation, stage=f"fusion_{turn}", reason="invalid_new_input")
                     last = [*proposals, fusion]
                 elite_fusion = None
-                if formal["Q"] and formal["E"]:
-                    best = [self.select(formal[role], 1)[0] for role in ("Q", "E")]
+                if all(formal[role] for role in self.design_roles):
+                    best = [self.select(formal[role], 1)[0] for role in self.design_roles]
                     prompt = self.final_fusion_prompt(best, reflections)
                     elite_fusion = self.batch([("fusion_final", best, prompt)])[0]
                 else:
                     self.event("slot_skipped", generation=self.generation, stage="fusion_final", reason="missing_formal_branch")
                 lessons = {}
-                for role in ("Q", "E"):
+                for role in self.design_roles:
                     prompt = self.long_reflection_prompt(role, reflections, changes)
                     lessons[role] = self.request(f"reflection_{role}", prompt, probe.parse_long_term)
-                lessons["I"] = self.request("reflection_I", self.merge_reflections_prompt(lessons),
-                                            probe.parse_merge)
+                lessons[self.integrator_role] = self.request(f"reflection_{self.integrator_role}",
+                                                             self.merge_reflections_prompt(lessons), probe.parse_merge)
                 specs = []
                 for elite_name, elite in (("A", a), ("B", b)):
-                    for role in ("Q", "E", "I"):
-                        prompt = (f"{self.task}\nHistory reflection: {' | '.join(self.history[role])}\n"
-                                  f"Reflection insights: {lessons[role]}\nCurrent elite code:\n{elite.code}\n"
-                                  f"Propose a mutation based on these insights.\n{self.output}")
+                    for role in all_roles:
+                        prompt = (f"{self.task}\n[History reflection as reference]:\n{' | '.join(self.history[role])}\n"
+                                  f"[Reflection insights]:\n{lessons[role]}\n[Current best code]:\n{elite.code}\n"
+                                  "Based on the history reflections and mainly based on reflection insights and "
+                                  "the current best code, propose a mutation that addresses the key insights "
+                                  f"and improves upon the previous solutions.\n{self.output}")
                         specs.append((f"mutation_{elite_name}_{role}", (elite,), prompt))
                 mutations = self.batch(specs)
                 pool = [*eoh, *last, elite_fusion, *mutations]
@@ -420,7 +508,7 @@ class Controller:
                 self.event("selection", generation=self.generation, pool=[c.candidate_id for c in pool if c is not None],
                            selected=[{"candidate_id": c.candidate_id, "evaluation_origin": c.evaluation_origin}
                                      for c in selected])
-                for role in ("Q", "E", "I"):
+                for role in all_roles:
                     self.history[role].append(lessons[role])
                     self.event("history_appended", role=role, generation=self.generation, reflection=lessons[role])
                 population = selected

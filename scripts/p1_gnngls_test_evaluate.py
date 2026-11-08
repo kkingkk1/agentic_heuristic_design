@@ -25,6 +25,7 @@ from baselines.gnngls.reference import ASSET_SHA256, ISOLATED, ROOT as SOURCE_RO
 from problems.tsp_gls.lkh_reference import REFERENCE_PATH, load_reference, reached_reference  # noqa: E402
 from scripts.p0_runtime import digest, memory_and_priority  # noqa: E402
 from scripts.p0_windows_job import WindowsJob  # noqa: E402
+from scripts.p1_formal_matrix import MATRIX_PATH, verify_reference_config  # noqa: E402
 from scripts.p1_runtime import DATA_CONTRACT  # noqa: E402
 from scripts.p1_test_evaluate import wait_bounded  # noqa: E402
 
@@ -213,6 +214,7 @@ def resolve_input(config_path):
 
 def evaluate_reference(config_path):
     config_path, config, entry, dataset, reference = resolve_input(config_path)
+    verify_reference_config(config, "gnngls")
     resource_config = json.loads(RESOURCE_CONFIG.read_text(encoding="utf-8"))["resources"]
     if Path(sys.executable).resolve() != Path(resource_config["python_executable"]).resolve():
         raise ValueError("参考测试必须使用项目冻结的 Python。")
@@ -221,7 +223,7 @@ def evaluate_reference(config_path):
     resources = memory_and_priority()
     if resources["available_memory_bytes"] < resource_config["min_available_system_memory_bytes"]:
         raise ValueError("可用内存低于项目运行阈值。")
-    protected = [config_path, DATA_CONTRACT, RESOURCE_CONFIG, dataset, REFERENCE_PATH,
+    protected = [config_path, DATA_CONTRACT, RESOURCE_CONFIG, MATRIX_PATH, dataset, REFERENCE_PATH,
                  *(Path(path) for path in config["implementation_sha256"])]
     before = {str(path): digest(path) for path in protected}
     command = [resource_config["python_executable"], "-B", "-u", str(Path(__file__).resolve()),
@@ -233,6 +235,7 @@ def evaluate_reference(config_path):
     root = ROOT / "outputs/p1_gnngls_test" / (datetime.now().strftime("%Y%m%d_%H%M%S") + "_" + uuid.uuid4().hex[:8])
     root.mkdir(parents=True, exist_ok=False)
     record = {"status": "failed", "method": METHOD, "task": "tsp_gls", "size": config["size"],
+              "matrix_contract_sha256": config["matrix_contract_sha256"],
               "command": command, "resources": resources, "protected_sha256": before,
               "checkpoint_size": config["checkpoint_size"], "scaler_size": config["scaler_size"],
               "checkpoint_scale_mode": config["checkpoint_scale_mode"], "scaler_scale_mode": config["scaler_scale_mode"],

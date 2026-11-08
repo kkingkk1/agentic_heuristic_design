@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "formal_experiment_started": false,
+  "model_calls": 0,
+  "conditions": 1,
+  "methods": 2,
+  "research_runs": 4,
+  "test_condition_scales": 1,
+  "candidate_test_runs": 4,
+  "candidate_test_instances": 256,
+  "normal_model_calls": 156,
+  "max_model_calls_including_retries": 156,
+  "normal_evaluation_slots": 128,
+  "max_evaluation_starts_including_retries": 128,
+  "max_training_process_tree_cpu_seconds": 72000,
+  "candidate_test_max_wall_seconds_sum": 3600,
+  "candidate_test_max_cpu_seconds_sum": 100800,
+  "reference_test_runs": 2,
+  "reference_test_instances": 128,
+  "reference_test_max_wall_seconds_sum": 1800,
+  "reference_test_max_cpu_seconds_sum": 50400,
+  "primary_comparisons": 1,
+  "model_token_total_limit": null,
+  "recorded_at_utc": "2026-11-07T14:01:53.531727+00:00",
+  "matrix_sha256": "9da3461ddef28dc562b37d6bb97353e56d1a0030a457d02f3dfaef5df980cd6a",
+  "implementation_sha256": "79bc33830054bee7539bee540cbe777e26b25d1e96da69ba6c23f675199e896a",
+  "implementation_files": 33,
+  "role_comparison": "相同输入和模拟响应下，39 个阶段的提示除两个角色的目标短语外一致。",
+  "paper_prompt_check": "对照项目内 RoCo v2 的 Prompt 1–5、7–10；逐轮 Critic 按实际优劣修正论文中矛盾的位置标签，补充目标方向；长期反思补充公式要求的目标值变化。",
+  "paper_undefined_cases": "平分、无效程序占位符、输出包裹和 Merge 按既有项目合同处理；无效程序提示留空。",
+  "related_unittests": {
+    "run": 115,
+    "skipped": 1,
+    "status": "passed"
+  },
+  "historical_p0_replay": "passed",
+  "earlier_check_failures": [
+    {
+      "command": "python -B -m unittest tests.test_p0_controller tests.test_p1_roco",
+      "reason": "论文提示恢复后，旧测试仍断言旧版提示与角色名称。",
+      "prevention": "按论文提示及实际目标方向更新断言，并增加论文原文与两方法同输入对照。"
+    },
+    {
+      "command": "python -B -m unittest tests.test_p0_controller tests.test_p1_roco tests.test_p1_task_contract",
+      "reason": "任务方向测试仍匹配旧版初始 Critic 的提示文句。",
+      "prevention": "改为核对论文提示中的目标方向，并复验全部受影响条件。"
+    }
+  ]
+}

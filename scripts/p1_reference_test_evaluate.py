@@ -26,6 +26,7 @@ from problems.tsp_gls.lkh_reference import REFERENCE_PATH, load_reference  # noq
 from scripts.p0_controller import check_modification_scope  # noqa: E402
 from scripts.p0_runtime import digest, memory_and_priority  # noqa: E402
 from scripts.p0_windows_job import WindowsJob  # noqa: E402
+from scripts.p1_formal_matrix import MATRIX_PATH, verify_reference_config  # noqa: E402
 from scripts.p1_runtime import DATA_CONTRACT  # noqa: E402
 from scripts.p1_task_contract import load_task_contract  # noqa: E402
 from scripts.p1_test_evaluate import PREFIX, read_complete, wait_bounded  # noqa: E402
@@ -154,6 +155,7 @@ def verify_tsp_routes(stdout_path, dataset, size):
 def evaluate_reference(config_path):
     config_path = Path(config_path).resolve()
     config = json.loads(config_path.read_text(encoding="utf-8"))
+    verify_reference_config(config, "expert")
     data = json.loads(DATA_CONTRACT.read_text(encoding="utf-8"))
     entry = load_reference_contract(config, data, digest(DATA_CONTRACT), digest(RESOURCE_CONFIG))
     task = config["task"]
@@ -173,7 +175,7 @@ def evaluate_reference(config_path):
     resources = memory_and_priority()
     if resources["available_memory_bytes"] < resource_config["min_available_system_memory_bytes"]:
         raise ValueError("可用内存低于项目运行阈值。")
-    protected = [config_path, DATA_CONTRACT, RESOURCE_CONFIG, dataset, *(Path(path) for path in snapshot)]
+    protected = [config_path, DATA_CONTRACT, RESOURCE_CONFIG, MATRIX_PATH, dataset, *(Path(path) for path in snapshot)]
     if lkh is not None:
         protected.append(REFERENCE_PATH)
     before = {str(path): digest(path) for path in protected}
@@ -192,6 +194,7 @@ def evaluate_reference(config_path):
     env.update({"PYTHONUTF8": "1", "PYTHONDONTWRITEBYTECODE": "1",
                 "PYTHONPATH": os.pathsep.join([str(ROOT), r"D:\Tools\agentic-heuristic-p1-numba", *resource_config["pythonpath"]])})
     record = {"status": "failed", "method": config["method"], "task": task, "size": config["size"],
+              "matrix_contract_sha256": config["matrix_contract_sha256"],
               "source_commit": SOURCE_COMMIT, "reference_sha256": digest(reference), "command": command,
               "resources": resources, "protected_sha256": before, "started_at_utc": datetime.now(timezone.utc).isoformat(),
               "timeout_seconds": config["whole_dataset_wall_timeout_seconds"],

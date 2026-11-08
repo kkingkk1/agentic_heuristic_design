@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "checked_at_utc": "2026-11-06T16:15:04.967297+00:00",
+  "model_attempts": 1,
+  "retries": 0,
+  "thread_id": "01a1b1a2-cc89-77c0-8f22-7515030d5900",
+  "project_events": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_model_log_validation\\20261107_001318_e887492a\\events.jsonl",
+  "codex_session": "C:\\Users\\a_wei\\.codex\\sessions\\2026\\11\\07\\rollout-2026-11-07T00-13-18-01a1b1a2-cc89-77c0-8f22-7515030d5900.jsonl",
+  "cc_switch_database": "E:\\OneDrive\\project\\vibe_coding\\cc_switch_config\\cc-switch.db",
+  "cc_switch_rows": 1,
+  "requested_and_session_model": "gpt-5.6-luna",
+  "observed_tokens": {
+    "input_tokens": 24403,
+    "cached_input_tokens": 10496,
+    "output_tokens": 119,
+    "reasoning_output_tokens": 49
+  },
+  "cc_switch_matched_fields": [
+    "model",
+    "input_tokens",
+    "cached_input_tokens",
+    "output_tokens"
+  ],
+  "baseline": {
+    "project_events": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_model_smoke\\20261106_101132_14b70dfe\\mcts\\events.jsonl",
+    "stage": "post_thought_0001",
+    "elapsed_seconds": 11.938,
+    "input_tokens": 24534,
+    "output_tokens": 118
+  },
+  "current": {
+    "elapsed_seconds": 6.344,
+    "input_tokens": 24403,
+    "output_tokens": 119
+  },
+  "comparison_note": "同一显式提示与模型调用参数；仅临时会话参数及运行目录不同。实际上下文 token、运行日期和机器负载不同，单次比较不能保证后续速度或并发性能。",
+  "limits": "CC Switch 本次回读不包含 reasoning 输出细分；请求失败或中断且服务端未返回的用量无法由本次核验补全。"
+}

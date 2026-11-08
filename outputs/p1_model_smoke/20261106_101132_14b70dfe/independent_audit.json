@@ -1,0 +1,56 @@
+{
+  "audit_status": "passed",
+  "flow_status": "partial",
+  "methods": [
+    {
+      "method": "proposed",
+      "candidate": "invalid_format",
+      "synthetic": "not_run",
+      "calls": 1
+    },
+    {
+      "method": "eoh",
+      "candidate": "training_passed",
+      "synthetic": "passed",
+      "calls": 1,
+      "route_recomputed": true
+    },
+    {
+      "method": "reevo",
+      "candidate": "training_passed",
+      "synthetic": "passed",
+      "calls": 1,
+      "route_recomputed": true
+    },
+    {
+      "method": "hsevo",
+      "candidate": "training_passed",
+      "synthetic": "passed",
+      "calls": 1,
+      "route_recomputed": true
+    },
+    {
+      "method": "mcts",
+      "candidate": "training_passed",
+      "synthetic": "passed",
+      "calls": 2,
+      "route_recomputed": true
+    },
+    {
+      "method": "roco",
+      "candidate": "training_passed",
+      "synthetic": "passed",
+      "calls": 1,
+      "route_recomputed": true
+    }
+  ],
+  "model_calls": 7,
+  "observed_tokens": {
+    "input_tokens": 167513,
+    "cached_input_tokens": 73472,
+    "output_tokens": 5298,
+    "reasoning_output_tokens": 1232
+  },
+  "formal_test_data_used": false,
+  "note": "独立重算五条合成路线并核对候选文件哈希；本方法输出缺少 code 标签，未执行训练及测试。"
+}

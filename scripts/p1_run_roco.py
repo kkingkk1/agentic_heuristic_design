@@ -17,6 +17,7 @@ from baselines.roco.runtime import RoCoRuntime  # noqa: E402
 from scripts import p0_budget_quota, p0_model_probe as probe, p1_run_generation  # noqa: E402
 from scripts.p0_controller import StopRun  # noqa: E402
 from scripts.p0_runtime import JsonLog, memory_and_priority, quota_gate  # noqa: E402
+from scripts.p1_formal_matrix import formal_run_guard, verify_training_config  # noqa: E402
 
 
 def validate_config(config):
@@ -35,6 +36,7 @@ def main():
     try:
         config = json.loads(Path(args.config).read_text(encoding="utf-8"))
         generations, seed = validate_config(config)
+        verify_training_config(config)
     except (OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
         print(f"配置无效：{exc}", file=sys.stderr)
         return 1
@@ -68,9 +70,11 @@ def main():
             print(f"启动前检查通过；记录：{run_dir}")
             return 0
         runtime.cli = cli
-        controller = RoCoController(runtime, log, population_size=10, initial_count=30, rounds=3,
+        controller = RoCoController(runtime, log, population_size=config["task"]["population_size"],
+                                    initial_count=config["task"]["initial_proposals"], rounds=3,
                                     seed=seed, generations=generations, task_contract=runtime.contract)
-        controller.run()
+        with formal_run_guard(config, run_dir, log):
+            controller.run()
         print(f"RoCo 训练完成；记录：{run_dir}")
         return 0
     except (StopRun, probe.ProbeError, p0_budget_quota.QuotaProbeError, OSError, ValueError, KeyError) as exc:

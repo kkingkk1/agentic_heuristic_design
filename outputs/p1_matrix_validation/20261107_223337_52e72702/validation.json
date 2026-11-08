@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "formal_experiment_started": false,
+  "model_calls": 0,
+  "conditions": 1,
+  "methods": 2,
+  "research_runs": 4,
+  "test_condition_scales": 1,
+  "candidate_test_runs": 4,
+  "candidate_test_instances": 256,
+  "normal_model_calls": 156,
+  "max_model_calls_including_retries": 156,
+  "normal_evaluation_slots": 128,
+  "max_evaluation_starts_including_retries": 128,
+  "max_training_process_tree_cpu_seconds": 72000,
+  "candidate_test_max_wall_seconds_sum": 3600,
+  "candidate_test_max_cpu_seconds_sum": 100800,
+  "reference_test_runs": 2,
+  "reference_test_instances": 128,
+  "reference_test_max_wall_seconds_sum": 1800,
+  "reference_test_max_cpu_seconds_sum": 50400,
+  "primary_comparisons": 1,
+  "model_token_total_limit": null,
+  "recorded_at_utc": "2026-11-07T14:33:37.877211+00:00",
+  "matrix_sha256": "06b8a462c90230754cfbeb22bd56fdd3f22378c909546b352641178ce090f33c",
+  "implementation_sha256": "e8065094d29b7494117359156a697649d0fc2b07049de40c001fd3695ec98316",
+  "implementation_files": 33,
+  "role_comparison": "相同模拟响应下，角色名称、职责及融合描述按方法变化；其他提示模板和输入字段相同。",
+  "paper_prompt_check": "RoCo 对照的提示与项目内论文 Prompt 1–5、7–10 逐项核对，论文未定义情况按项目合同处理。",
+  "role_template_simulations": [
+    {
+      "method": "Controller",
+      "model_call_slots": 39,
+      "evaluation_slots": 32
+    },
+    {
+      "method": "RoCoController",
+      "model_call_slots": 39,
+      "evaluation_slots": 32
+    }
+  ],
+  "related_unittests": {
+    "run": 98,
+    "skipped": 1,
+    "status": "passed"
+  },
+  "historical_p0_replay": "passed",
+  "new_prompt_real_model_verification": "not run"
+}

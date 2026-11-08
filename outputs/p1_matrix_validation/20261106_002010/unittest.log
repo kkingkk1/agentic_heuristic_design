@@ -1,0 +1,11 @@
+test_all_reference_configs_match_method_gates (tests.test_p1_formal_matrix.TestP1FormalMatrix.test_all_reference_configs_match_method_gates) ... ok
+test_all_training_and_test_configs_match_existing_gates (tests.test_p1_formal_matrix.TestP1FormalMatrix.test_all_training_and_test_configs_match_existing_gates) ... ok
+test_duplicate_run_detection_ignores_preflight_but_rejects_started_run (tests.test_p1_formal_matrix.TestP1FormalMatrix.test_duplicate_run_detection_ignores_preflight_but_rejects_started_run) ... ok
+test_guard_rejects_concurrent_research_process (tests.test_p1_formal_matrix.TestP1FormalMatrix.test_guard_rejects_concurrent_research_process) ... ok
+test_matrix_covers_conditions_and_pairs_replicate_seeds (tests.test_p1_formal_matrix.TestP1FormalMatrix.test_matrix_covers_conditions_and_pairs_replicate_seeds) ... ok
+test_tampering_with_seed_budget_source_or_replicate_is_rejected (tests.test_p1_formal_matrix.TestP1FormalMatrix.test_tampering_with_seed_budget_source_or_replicate_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 4.340s
+
+OK

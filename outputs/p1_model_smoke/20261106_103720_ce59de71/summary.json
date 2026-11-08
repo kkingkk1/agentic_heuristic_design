@@ -1,0 +1,17 @@
+{
+  "calls": 1,
+  "results": [
+    {
+      "candidate_id": "c0001",
+      "valid": true,
+      "error": null,
+      "objective": 8.646483529156283,
+      "normal_model_calls": 1,
+      "evaluation_starts": 1,
+      "synthetic_status": "passed",
+      "synthetic_record": "E:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_model_smoke\\20261106_103720_ce59de71\\proposed\\synthetic\\tsp_aco\\50\\result.json",
+      "method": "proposed"
+    }
+  ],
+  "formal_test_data_used": false
+}

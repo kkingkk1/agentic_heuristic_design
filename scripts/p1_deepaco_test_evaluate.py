@@ -21,6 +21,7 @@ if str(ROOT) not in sys.path:
 from baselines.deepaco.reference import CHECKPOINT_BLOBS, CODE_BLOBS, ROOT as SOURCE_ROOT, software_versions, verify_blob  # noqa: E402
 from scripts.p0_runtime import digest, memory_and_priority  # noqa: E402
 from scripts.p0_windows_job import WindowsJob  # noqa: E402
+from scripts.p1_formal_matrix import MATRIX_PATH, verify_reference_config  # noqa: E402
 from scripts.p1_deepaco_tsp import SCALE as TSP_HEURISTIC_SCALE  # noqa: E402
 from scripts.p1_deepaco_worker import load_task  # noqa: E402
 from scripts.p1_runtime import DATA_CONTRACT  # noqa: E402
@@ -237,6 +238,7 @@ def read_reference_complete(stdout_path, config, entry, dataset, instances, eval
 def evaluate_reference(config_path):
     config_path = Path(config_path).resolve()
     config = json.loads(config_path.read_text(encoding="utf-8"))
+    verify_reference_config(config, "deepaco")
     data_contract = json.loads(DATA_CONTRACT.read_text(encoding="utf-8"))
     entry = load_reference_contract(config, data_contract, digest(DATA_CONTRACT))
     name, _method, _direction = TASKS[config["task"]]
@@ -254,7 +256,7 @@ def evaluate_reference(config_path):
         raise ValueError("可用内存低于项目运行阈值。")
     snapshot, implementation = reference_implementation_snapshot(config["task"], config["checkpoint"])
     check_reference_implementation(config, implementation)
-    protected = [config_path, DATA_CONTRACT, RESOURCE_CONFIG, dataset, *(Path(path) for path in implementation)]
+    protected = [config_path, DATA_CONTRACT, RESOURCE_CONFIG, MATRIX_PATH, dataset, *(Path(path) for path in implementation)]
     before = {str(path): digest(path) for path in protected}
     command = [resource_config["python_executable"], "-B", "-u", str(ROOT / "scripts/p1_deepaco_worker.py"),
                "--task", name, "--size", str(config["size"]), "--phase", "test",
@@ -269,6 +271,7 @@ def evaluate_reference(config_path):
     root = ROOT / "outputs/p1_deepaco_test" / (datetime.now().strftime("%Y%m%d_%H%M%S") + "_" + uuid.uuid4().hex[:8])
     root.mkdir(parents=True, exist_ok=False)
     record = {"status": "failed", "method": config["method"], "task": config["task"],
+              "matrix_contract_sha256": config["matrix_contract_sha256"],
               "checkpoint": config["checkpoint"], "checkpoint_scale_mode": config["checkpoint_scale_mode"],
               "size": config["size"], "command": command, "resources": resources, "protected_sha256": before,
               "started_at_utc": datetime.now(timezone.utc).isoformat(),

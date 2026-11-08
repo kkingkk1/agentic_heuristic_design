@@ -1,0 +1,2 @@
+{"event": "calibration_start", "task": "mkp_aco", "size": 200, "seed": 20800200, "iterations": 100, "formal_test_data_used": false}
+{"event": "calibration_complete", "task": "mkp_aco", "size": 200, "seed": 20800200, "iterations": 100, "objective": 43.479135394976254, "solution": [102, 92, 189, 158, 32, 109, 42, 83, 58, 123, 30, 89, 40, 37, 128, 147, 134, 47, 94, 152, 183, 186, 64, 101, 1, 159, 69, 76, 7, 170, 26, 150, 118, 5, 12, 59, 166, 112, 163, 39, 140, 121, 36, 4, 13, 85, 22, 50, 165, 20, 2, 110, 184, 31, 56, 44, 180, 182, 143, 181], "solve_elapsed_seconds": 4.875}

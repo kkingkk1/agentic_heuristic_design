@@ -22,6 +22,7 @@ class TestTaskContracts(unittest.TestCase):
                     self.assertNotIn("return np.ones", contract.task_prompt())
                     code = "import numpy as np\n" + contract.signature + "\n    return np.ones(1)\n"
                     self.assertEqual(contract.parse_proposal(f"<thought>idea</thought><code>{code}</code>")["code"], code.strip())
+                    self.assertEqual(contract.parse_proposal(f"<thought>idea</thought>\n{code}")["code"], code.strip())
 
     def test_wrong_names_types_and_non_module_output_rejected(self):
         contract = load_task_contract("op_aco", black_box=True)
@@ -43,6 +44,30 @@ class TestTaskContracts(unittest.TestCase):
         code = "import numpy as np\n" + contract.signature + "\n    pass"
         with self.assertRaises(probe.ProbeError):
             contract.parse_proposal(f"<thought>idea</thought><code>{code}</code>")
+
+    def test_untagged_module_still_requires_thought_and_valid_code(self):
+        contract = load_task_contract("tsp_aco")
+        code = "import numpy as np\n" + contract.signature + "\n    return np.ones(1)"
+        invalid = (code, f"<thought> </thought>\n{code}", f"<thought>idea</thought>\n```python\n{code}\n```",
+                   f"<thought>idea</thought>\n<code>{code}", "<thought>idea</thought>\nthis is not Python")
+        for text in invalid:
+            with self.subTest(text=text), self.assertRaises(probe.ProbeError):
+                contract.parse_proposal(text)
+
+    def test_controller_passes_unwrapped_module_without_extra_model_call(self):
+        contract = load_task_contract("tsp_aco")
+        code = "import numpy as np\n" + contract.signature + "\n    return np.ones_like(distance_matrix)"
+
+        class Backend(FixtureBackend):
+            def model(self, stage, prompt):
+                self.calls.append((stage, prompt))
+                return f"<thought>Use uniform scores.</thought>\n{code}"
+
+        backend, log = Backend(), MemoryLog()
+        candidate = control.Controller(backend, log, task_contract=contract).batch([("init_01", (), "fixture")])[0]
+        self.assertTrue(candidate.valid)
+        self.assertEqual(candidate.code, code)
+        self.assertEqual((len(backend.calls), len(backend.evaluations)), (1, 1))
 
     def test_task_descriptions_name_the_actual_interface_parameters(self):
         op = load_task_contract("op_aco")
@@ -82,9 +107,9 @@ class TestTaskContracts(unittest.TestCase):
                     self.assertIn(contract.signature, calls["init_01"])
                     self.assertNotIn("return np.", calls["init_01"])
                     expected = "Higher" if contract.direction == "max" else "Lower"
-                    self.assertIn(f"{expected} objective is better", calls["critic_initial"])
-                    self.assertIn(f"a {expected.lower()} objective is better", calls["critic_1"])
-                    self.assertIn(f"A {expected.lower()} objective is better", calls["fusion_1"])
+                    self.assertIn(f"A {expected.lower()} objective score is better", calls["critic_initial"])
+                    self.assertIn(f"A {expected.lower()} objective is better", calls["critic_1"])
+                    self.assertIn(f"A {expected.lower()} objective score is better", calls["fusion_1"])
                     self.assertTrue(all(c.fitness == (c.objective if contract.direction == "max" else -c.objective)
                                         for c in selected))
 
@@ -101,11 +126,11 @@ class TestTaskContracts(unittest.TestCase):
         self.assertTrue({second_pair["a"], second_pair["b"]} <= first_selected)
         registered = {event["candidate_id"]: event for event in log.items if event["event"] == "candidate_registered"}
         self.assertTrue(all(registered[candidate]["generation"] == 2 for candidate in selections[1]["pool"]))
-        self.assertEqual([len(controller.history[role]) for role in ("Q", "E", "I")], [2, 2, 2])
-        mutations = [prompt for stage, prompt in backend.calls if stage == "mutation_A_Q"]
+        self.assertEqual([len(controller.history[role]) for role in ("solution_quality_agent", "speed_agent", "integrator")], [2, 2, 2])
+        mutations = [prompt for stage, prompt in backend.calls if stage == "mutation_A_solution_quality_agent"]
         self.assertEqual(len(mutations), 2)
-        self.assertIn("History reflection: \n", mutations[0])
-        self.assertIn("History reflection: Retain useful changes.", mutations[1])
+        self.assertIn("[History reflection as reference]:\n\n", mutations[0])
+        self.assertIn("[History reflection as reference]:\nRetain useful changes.", mutations[1])
         history = [event for event in log.items if event["event"] == "history_appended"]
         self.assertEqual([event["generation"] for event in history], [1, 1, 1, 2, 2, 2])
 
@@ -120,7 +145,7 @@ class TestTaskContracts(unittest.TestCase):
         controller = control.Controller(backend, log, generations=2)
         with self.assertRaises(control.StopRun):
             controller.run()
-        self.assertEqual([len(controller.history[role]) for role in ("Q", "E", "I")], [1, 1, 1])
+        self.assertEqual([len(controller.history[role]) for role in ("solution_quality_agent", "speed_agent", "integrator")], [1, 1, 1])
         self.assertFalse(any(event.get("generation") == 2 for event in log.items
                              if event["event"] == "candidate_registered"))
         self.assertEqual(log.items[-1]["status"], "stopped")
@@ -133,7 +158,7 @@ class TestTaskContracts(unittest.TestCase):
         self.assertEqual(backend.generation_checks, 6)
         self.assertEqual([event["generation"] for event in log.items if event["event"] == "selection"],
                          list(range(1, 7)))
-        self.assertEqual([len(controller.history[role]) for role in ("Q", "E", "I")], [6, 6, 6])
+        self.assertEqual([len(controller.history[role]) for role in ("solution_quality_agent", "speed_agent", "integrator")], [6, 6, 6])
 
     def test_generation_count_must_be_positive_integer(self):
         for value in (0, -1, 1.5, True):

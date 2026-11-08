@@ -19,12 +19,13 @@ from baselines.reevo.controller import parse_generated, seed_code, source_files,
 from scripts import p1_run_eoh, p1_run_generation, p1_run_hsevo, p1_run_mcts_ahd, p1_run_reevo, p1_run_roco  # noqa: E402
 from scripts.p0_controller import check_modification_scope  # noqa: E402
 from scripts.p0_runtime import digest  # noqa: E402
+from scripts.p1_formal_matrix import verify_training_config  # noqa: E402
 from scripts.p1_runtime import TRAINING  # noqa: E402
 from scripts.p1_task_contract import load_task_contract  # noqa: E402
 
 
 METHODS = {
-    "proposed_qe": ("p1_control", p1_run_generation.validate_config),
+    "proposed_solution_quality_and_speed_agents": ("p1_control", p1_run_generation.validate_config),
     "roco_paper_adapted": ("p1_roco", p1_run_roco.validate_config),
     "eoh_paper_adapted": ("p1_eoh", p1_run_eoh.validate_config),
     "reevo_2f70042_adapted": ("p1_reevo", p1_run_reevo.validate_config),
@@ -37,7 +38,7 @@ def final_candidate(events, method):
     if (not events or events[-1].get("event") != "finish" or events[-1].get("status") != "completed"
             or any(event.get("event") == "preflight_or_run_stopped" for event in events)):
         raise ValueError("研发运行未完整结束，不能冻结候选。")
-    if method in ("proposed_qe", "roco_paper_adapted", "eoh_paper_adapted"):
+    if method in ("proposed_solution_quality_and_speed_agents", "roco_paper_adapted", "eoh_paper_adapted"):
         selections = [event for event in events if event.get("event") == "selection"]
         selected = selections[-1].get("selected") if selections else None
         candidate = selected[0].get("candidate_id") if isinstance(selected, list) and selected else None
@@ -90,11 +91,19 @@ def freeze(run_dir):
     if run_dir.parent != (ROOT / "outputs" / output_name).resolve():
         raise ValueError("研发运行目录不在对应方法的正式输出目录。")
     validate(config)
+    verify_training_config(config)
     events = [json.loads(line) for line in events_path.read_text(encoding="utf-8").splitlines() if line.strip()]
     preflight = [event for event in events if event.get("event") == "preflight"]
     gates = [event for event in events if event.get("event") == "initial_quota_gate"]
+    started = [event for event in events if event.get("event") == "formal_run_started"]
     if len(preflight) != 1 or len(gates) != 1 or not isinstance(preflight[0].get("code_sha256"), dict):
         raise ValueError("正式运行的启动检查或额度门禁记录缺失。")
+    if (len(started) != 1 or started[0].get("matrix_contract_sha256") != config["matrix_contract_sha256"]
+            or started[0].get("task") != config["task"]["name"]
+            or started[0].get("prompt_condition") != config["task"]["prompt_condition"]
+            or started[0].get("method") != method or started[0].get("formal_replicate") != config["formal_replicate"]
+            or started[0].get("selection_seed") != config["task"]["selection_seed"]):
+        raise ValueError("正式研发的矩阵、重复索引或启动记录不一致。")
     for filename, expected in preflight[0]["code_sha256"].items():
         if digest(Path(filename)) != expected:
             raise ValueError(f"受保护文件已变化：{filename}")
@@ -124,6 +133,8 @@ def freeze(run_dir):
         stream.write(code + "\n")
     manifest = {"status": "frozen_after_training", "created_at_utc": datetime.now(timezone.utc).isoformat(),
                 "method": method, "task": task["name"], "prompt_condition": task["prompt_condition"],
+                "matrix_contract_sha256": config["matrix_contract_sha256"],
+                "formal_replicate": config["formal_replicate"], "selection_seed": task["selection_seed"],
                 "source_run": str(run_dir), "source_candidate_id": candidate_id,
                 "source_config_sha256": digest(config_path), "source_events_sha256": digest(events_path),
                 "source_result_sha256": digest(candidate_root / "result.json"),

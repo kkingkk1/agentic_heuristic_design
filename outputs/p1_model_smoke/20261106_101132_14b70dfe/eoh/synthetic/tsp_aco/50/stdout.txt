@@ -1,0 +1,2 @@
+{"event": "calibration_start", "task": "tsp_aco", "size": 50, "seed": 20770050, "iterations": 500, "formal_test_data_used": false}
+{"event": "calibration_complete", "task": "tsp_aco", "size": 50, "seed": 20770050, "iterations": 500, "objective": 5.732042785861385, "solution": [16, 37, 48, 42, 43, 22, 24, 45, 2, 23, 39, 7, 17, 44, 33, 6, 20, 29, 38, 41, 25, 47, 4, 34, 1, 13, 19, 0, 15, 27, 46, 30, 49, 18, 32, 35, 3, 31, 21, 26, 36, 9, 8, 5, 28, 10, 14, 12, 11, 40], "solve_elapsed_seconds": 5.547000000020489}

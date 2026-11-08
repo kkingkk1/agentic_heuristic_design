@@ -1,0 +1,33 @@
+{
+  "scope": "六种入口模拟登录和额度；一项真实训练集评价；不请求模型、不使用正式测试集",
+  "preflight_results": [
+    {
+      "method": "proposed_qe",
+      "status": "preflight_passed"
+    },
+    {
+      "method": "roco_paper_adapted",
+      "status": "preflight_passed"
+    },
+    {
+      "method": "eoh_paper_adapted",
+      "status": "preflight_passed"
+    },
+    {
+      "method": "reevo_2f70042_adapted",
+      "status": "preflight_passed"
+    },
+    {
+      "method": "hsevo_fb569d6_adapted",
+      "status": "preflight_passed"
+    },
+    {
+      "method": "mcts_ahd_ee9c4f4_adapted",
+      "status": "preflight_passed"
+    }
+  ],
+  "training_evaluation_status": "passed",
+  "model_calls": 0,
+  "evaluation_starts": 1,
+  "protected_files": 173
+}

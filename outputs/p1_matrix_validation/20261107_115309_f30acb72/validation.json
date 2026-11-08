@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "formal_experiment_started": false,
+  "model_calls": 0,
+  "conditions": 1,
+  "methods": 2,
+  "research_runs": 4,
+  "test_condition_scales": 1,
+  "candidate_test_runs": 4,
+  "candidate_test_instances": 256,
+  "normal_model_calls": 156,
+  "max_model_calls_including_retries": 156,
+  "normal_evaluation_slots": 128,
+  "max_evaluation_starts_including_retries": 128,
+  "max_training_process_tree_cpu_seconds": 72000,
+  "candidate_test_max_wall_seconds_sum": 3600,
+  "candidate_test_max_cpu_seconds_sum": 100800,
+  "reference_test_runs": 2,
+  "reference_test_instances": 128,
+  "reference_test_max_wall_seconds_sum": 1800,
+  "reference_test_max_cpu_seconds_sum": 50400,
+  "primary_comparisons": 1,
+  "model_token_total_limit": null,
+  "recorded_at_utc": "2026-11-07T03:53:09.052666+00:00",
+  "matrix_sha256": "a7f4dee0c7fae0589bbfebdbb35bd5087f8d1e68d70ca1eac8ae6fe303ba5a4d",
+  "implementation_sha256": "14090e8debf86408542cf84fc94dc9ca1c5d36c31fb03bc252410b7131cd208a",
+  "implementation_files": 33,
+  "related_unittests": {
+    "run": 111,
+    "skipped": 1,
+    "status": "passed"
+  },
+  "historical_p0_replay": "passed",
+  "verification_interruption": {
+    "command": "python -B -c implementation_digest",
+    "cause": "未设置项目 PYTHONPATH，导入 numpy 失败。",
+    "prevention": "设置已安装依赖的 PYTHONPATH 后重新计算和验收。"
+  }
+}

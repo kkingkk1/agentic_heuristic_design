@@ -3,6 +3,7 @@
 import ast
 from dataclasses import dataclass
 from pathlib import Path
+import re
 
 import yaml
 
@@ -29,13 +30,20 @@ class TaskContract:
         return f"{self.description}\n{self.function_description}\nFunction interface: {self.signature}"
 
     def output_prompt(self):
-        return ("Return exactly <thought>algorithm description</thought> followed by "
-                "<code>the complete executable Python module, including import numpy as np "
-                f"and {self.signature}</code>. "
-                "Do not use tools or read files. No other text or Markdown fences.")
+        return ("Return <thought>algorithm description</thought> followed by the complete executable "
+                "Python module, either directly or enclosed in <code> and </code>. "
+                f"The required function interface is {self.signature}\n"
+                "Include import numpy as np. Do not use tools or read files. No other text or Markdown fences.")
 
     def parse_proposal(self, text):
-        thought, code = probe.tagged(text, ("thought", "code"))
+        try:
+            thought, code = probe.tagged(text, ("thought", "code"))
+        except probe.ProbeError as tagged_error:
+            # 一对 thought 标签后若直接跟完整模块，提取原文，不修改候选代码。
+            match = re.fullmatch(r"\s*<thought>\s*(.*?)\s*</thought>\s*(.*?)\s*", text, flags=re.DOTALL)
+            if not match or not all(value.strip() for value in match.groups()):
+                raise tagged_error
+            thought, code = (value.strip() for value in match.groups())
         try:
             module = ast.parse(code)
         except SyntaxError as exc:

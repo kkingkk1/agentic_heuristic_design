@@ -24,6 +24,7 @@ from baselines.neuopt.synthetic_check import ROOT as SOURCE_ROOT, SOURCE_BLOBS, 
 from problems.tsp_gls.lkh_reference import REFERENCE_PATH, load_reference  # noqa: E402
 from scripts.p0_runtime import digest, memory_and_priority  # noqa: E402
 from scripts.p0_windows_job import WindowsJob  # noqa: E402
+from scripts.p1_formal_matrix import MATRIX_PATH, verify_reference_config  # noqa: E402
 from scripts.p1_runtime import DATA_CONTRACT  # noqa: E402
 from scripts.p1_test_evaluate import wait_bounded  # noqa: E402
 
@@ -189,6 +190,7 @@ def resolve_input(config_path):
 
 def evaluate_reference(config_path):
     config_path, config, entry, dataset, reference = resolve_input(config_path)
+    verify_reference_config(config, "neuopt")
     resources_config = json.loads(RESOURCE_CONFIG.read_text(encoding="utf-8"))["resources"]
     if Path(sys.executable).resolve() != Path(resources_config["python_executable"]).resolve():
         raise ValueError("参考测试必须使用项目冻结的 Python。")
@@ -199,7 +201,7 @@ def evaluate_reference(config_path):
         raise ValueError("可用内存低于项目运行阈值。")
     if config["device"] == "cuda" and not torch.cuda.is_available():
         raise ValueError("冻结配置要求 CUDA，但当前不可用。")
-    protected = [config_path, DATA_CONTRACT, RESOURCE_CONFIG, dataset, REFERENCE_PATH,
+    protected = [config_path, DATA_CONTRACT, RESOURCE_CONFIG, MATRIX_PATH, dataset, REFERENCE_PATH,
                  *(Path(path) for path in config["implementation_sha256"])]
     before = {str(path): digest(path) for path in protected}
     command = [resources_config["python_executable"], "-B", "-u", str(Path(__file__).resolve()),
@@ -211,6 +213,8 @@ def evaluate_reference(config_path):
     root = ROOT / "outputs/p1_neuopt_test" / (datetime.now().strftime("%Y%m%d_%H%M%S") + "_" + uuid.uuid4().hex[:8])
     root.mkdir(parents=True, exist_ok=False)
     record = {"status": "failed", "method": METHOD, "task": "tsp_gls", "size": config["size"],
+              "matrix_contract_sha256": config["matrix_contract_sha256"],
+              "gpu_name": config["gpu_name"], "gpu_driver": config["gpu_driver"],
               "command": command, "resources": resources, "protected_sha256": before,
               "started_at_utc": datetime.now(timezone.utc).isoformat(),
               "timeout_seconds": config["whole_dataset_wall_timeout_seconds"],

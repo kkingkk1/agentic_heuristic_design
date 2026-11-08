@@ -20,6 +20,7 @@ if str(ROOT) not in sys.path:
 from scripts.p0_controller import check_modification_scope  # noqa: E402
 from scripts.p0_runtime import digest, memory_and_priority  # noqa: E402
 from scripts.p0_windows_job import WindowsJob  # noqa: E402
+from scripts.p1_formal_matrix import MATRIX_PATH, verify_test_config, verify_training_config  # noqa: E402
 from scripts.p1_runtime import DATA_CONTRACT  # noqa: E402
 from scripts.p1_task_contract import load_task_contract  # noqa: E402
 from problems.tsp_gls.lkh_reference import (ABS_TOLERANCE, REL_TOLERANCE, REFERENCE_PATH,
@@ -159,6 +160,7 @@ def evaluate(candidate_dir, config_path):
     if not isinstance(candidate_id, str) or re.fullmatch(r"c[0-9]{4,}", candidate_id) is None:
         raise ValueError("冻结候选来源 ID 无效。")
     config = json.loads(config_path.read_text(encoding="utf-8"))
+    verify_test_config(config)
     data_contract = json.loads(DATA_CONTRACT.read_text(encoding="utf-8"))
     entry = load_test_contract(config, manifest, data_contract)
     if digest(candidate_path) != manifest.get("candidate_sha256"):
@@ -168,8 +170,14 @@ def evaluate(candidate_dir, config_path):
     if digest(train_config) != manifest.get("source_config_sha256"):
         raise ValueError("原研发运行配置已变化。")
     training = json.loads(train_config.read_text(encoding="utf-8"))
+    verify_training_config(training)
     if training.get("status") != "frozen" or training.get("method", {}).get("id") != manifest.get("method"):
         raise ValueError("原研发运行的状态或方法身份不符。")
+    if (manifest.get("matrix_contract_sha256") != config["matrix_contract_sha256"]
+            or manifest.get("matrix_contract_sha256") != training["matrix_contract_sha256"]
+            or manifest.get("formal_replicate") != training["formal_replicate"]
+            or manifest.get("selection_seed") != training["task"]["selection_seed"]):
+        raise ValueError("候选、研发和测试配置的矩阵或重复索引不一致。")
     train_events = source_run / "events.jsonl"
     source_candidate = source_run / "candidates" / manifest["source_candidate_id"]
     train_result, train_stdout = source_candidate / "result.json", source_candidate / "stdout.txt"
@@ -198,7 +206,7 @@ def evaluate(candidate_dir, config_path):
         training_sources.append(reference_code)
     if any(source_hashes.get(str(path)) != digest(path) for path in training_sources):
         raise ValueError("测试评价代码、求解器或数据合同与研发运行时不一致。")
-    protected = [candidate_path, manifest_path, config_path, DATA_CONTRACT, train_config, train_events,
+    protected = [candidate_path, manifest_path, config_path, DATA_CONTRACT, MATRIX_PATH, train_config, train_events,
                  train_result, train_stdout, dataset, evaluator, common_evaluator, solver,
                  Path(__file__).resolve()]
     if lkh_reference is not None:
@@ -223,6 +231,9 @@ def evaluate(candidate_dir, config_path):
     stdout_path, stderr_path = root / "stdout.txt", root / "stderr.txt"
     record = {"status": "failed", "started_at_utc": datetime.now(timezone.utc).isoformat(),
               "method": manifest["method"], "candidate_id": manifest["source_candidate_id"],
+              "matrix_contract_sha256": manifest["matrix_contract_sha256"],
+              "task": manifest["task"], "prompt_condition": manifest["prompt_condition"],
+              "formal_replicate": manifest["formal_replicate"], "source_run": manifest["source_run"],
               "candidate_sha256": manifest["candidate_sha256"], "size": config["size"],
               "command": command, "resources": resources, "protected_sha256": before,
               "timeout_seconds": config["whole_dataset_wall_timeout_seconds"],

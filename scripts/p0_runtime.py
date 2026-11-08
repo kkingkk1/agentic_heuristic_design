@@ -33,6 +33,13 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def generation_requirements(population_size: int) -> tuple[int, int]:
+    """三轮协作一代的正常模型调用和候选评价槽位。"""
+    if type(population_size) is not int or population_size < 2:
+        raise ValueError("种群至少需要两个不同候选。")
+    return 4 * population_size + 25, 4 * population_size + 18
+
+
 def quota_gate(quota, required, *, allow_unquantified=False):
     """只允许显式接受不可计数的余量；已知不足或不可用始终停止。"""
     if quota.get("ordinary_usage_allowed") is not True:
@@ -182,11 +189,12 @@ class Budget:
     def before_generation(self):
         with self.lock:
             budget = self.cfg["budget"]
-            if budget["normal_model_calls"] - self.model_normal < 65:
+            model_slots, evaluation_slots = generation_requirements(self.cfg["task"]["population_size"])
+            if budget["normal_model_calls"] - self.model_normal < model_slots:
                 raise StopRun("剩余正常模型调用不足以覆盖一代。")
             remaining_retries = budget["additional_infrastructure_evaluation_starts"] - self.eval_retries
-            needed_evaluations = 58 + remaining_retries
-            if (budget["normal_code_generation_slots"] - self.eval_normal < 58
+            needed_evaluations = evaluation_slots + remaining_retries
+            if (budget["normal_code_generation_slots"] - self.eval_normal < evaluation_slots
                     or budget["max_initialization_and_generation_evaluation_starts"] - self.eval_starts < needed_evaluations):
                 raise StopRun("剩余评价启动次数不足以覆盖一代及基础设施重验预留。")
             remaining_cpu = self.cpu_limit - self.used_cpu()
@@ -266,7 +274,8 @@ class Runtime:
         except p0_budget_quota.QuotaProbeError as exc:
             raise StopRun(f"无法回读订阅额度：{exc}") from exc
         self.log.event("generation_quota", quota=quota)
-        required = 65 + (self.cfg["budget"]["additional_infrastructure_retry_calls"] - self.budget.model_retries)
+        model_slots, _ = generation_requirements(self.cfg["task"]["population_size"])
+        required = model_slots + (self.cfg["budget"]["additional_infrastructure_retry_calls"] - self.budget.model_retries)
         mode = quota_gate(quota, required, allow_unquantified=self.allow_unquantified_quota)
         self.log.event("generation_quota_gate", mode=mode, required_model_calls=required)
 
@@ -285,7 +294,7 @@ class Runtime:
                 self.budget.model_start(retry=retry)
                 if self.cli is None:
                     self.cli = probe.cli_command()
-                command = self.cli + ["exec", "--ignore-user-config", "--skip-git-repo-check", "--ephemeral",
+                command = self.cli + ["exec", "--ignore-user-config", "--skip-git-repo-check",
                                       "--json", "--sandbox", "read-only", "--model", probe.MODEL]
                 command += probe.HTTPS_CONFIG + RETRY_CONFIG + ["--cd", str(self.run_dir), "-"]
                 self.log.event("model_attempt", stage=stage, retry=retry, prompt=prompt, command=command,
@@ -306,6 +315,10 @@ class Runtime:
                         self.cancelled.set()
                         raise StopRun("模型额度或限流失败；未自动重置。") from exc
                     if re.search(r"connection (?:failed|refused|reset)|request timed out|error sending request", raw, re.I):
+                        if self.cfg["budget"]["additional_infrastructure_retry_calls"] == 0:
+                            self.log.event("infrastructure_retry_unavailable", stage=stage, reason=str(exc))
+                            self.cancelled.set()
+                            raise StopRun("模型连接失败；冻结合同不允许自动重试。") from exc
                         self.log.event("infrastructure_retry", stage=stage, reason=str(exc))
                         retry = True
                         continue

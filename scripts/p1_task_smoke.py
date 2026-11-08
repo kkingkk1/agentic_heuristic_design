@@ -48,7 +48,7 @@ def make_config(name, black_box):
     contract = load_task_contract(name, black_box=black_box)
     evaluator, dataset, dataset_hash = TRAINING[name]
     count, ants, iterations, generator_seed = TRAINING_PARAMETERS[name]
-    config = smoke.make_config("proposed_qe", 1, 1)
+    config = smoke.make_config("proposed_solution_quality_and_speed_agents", 1, 1)
     config["task"].update({
         "name": name,
         "prompt_condition": "black_box" if black_box else "white_box",

@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "formal_experiment_started": false,
+  "model_calls": 0,
+  "conditions": 1,
+  "methods": 2,
+  "research_runs": 4,
+  "test_condition_scales": 1,
+  "candidate_test_runs": 4,
+  "candidate_test_instances": 256,
+  "normal_model_calls": 156,
+  "max_model_calls_including_retries": 156,
+  "normal_evaluation_slots": 128,
+  "max_evaluation_starts_including_retries": 128,
+  "max_training_process_tree_cpu_seconds": 72000,
+  "candidate_test_max_wall_seconds_sum": 3600,
+  "candidate_test_max_cpu_seconds_sum": 100800,
+  "reference_test_runs": 2,
+  "reference_test_instances": 128,
+  "reference_test_max_wall_seconds_sum": 1800,
+  "reference_test_max_cpu_seconds_sum": 50400,
+  "primary_comparisons": 1,
+  "model_token_total_limit": null,
+  "recorded_at_utc": "2026-11-07T03:48:59.182902+00:00",
+  "matrix_sha256": "6a1fe90975d2764a941efe2be615fa158ff6e0594c64656d92e7de438e8f2b2e",
+  "implementation_sha256": "5d4e9633225034cfe02d14f76c9487ca45c0b755c60eb5831fdfa53427d351d0",
+  "implementation_files": 33,
+  "related_unittests": {
+    "run": 69,
+    "skipped": 1,
+    "status": "passed"
+  },
+  "other_integrated_methods_unittests": {
+    "run": 42,
+    "skipped": 0,
+    "status": "passed"
+  },
+  "historical_p0_replay": "passed"
+}

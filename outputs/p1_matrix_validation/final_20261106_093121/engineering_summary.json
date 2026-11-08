@@ -1,0 +1,40 @@
+{
+  "scope": "六种入口模拟登录和额度；一项真实训练集评价；不请求模型、不使用正式测试集",
+  "matrix_contract_sha256": "6b958d097033a6d8fdb787ff1ba8fa6d250ff52d05d4776bc012413d725af61c",
+  "preflight_results": [
+    {
+      "method": "proposed_qe",
+      "status": "preflight_passed",
+      "login_and_quota": "mocked"
+    },
+    {
+      "method": "roco_paper_adapted",
+      "status": "preflight_passed",
+      "login_and_quota": "mocked"
+    },
+    {
+      "method": "eoh_paper_adapted",
+      "status": "preflight_passed",
+      "login_and_quota": "mocked"
+    },
+    {
+      "method": "reevo_2f70042_adapted",
+      "status": "preflight_passed",
+      "login_and_quota": "mocked"
+    },
+    {
+      "method": "hsevo_fb569d6_adapted",
+      "status": "preflight_passed",
+      "login_and_quota": "mocked"
+    },
+    {
+      "method": "mcts_ahd_ee9c4f4_adapted",
+      "status": "preflight_passed",
+      "login_and_quota": "mocked"
+    }
+  ],
+  "training_evaluation_status": "passed",
+  "model_calls": 0,
+  "evaluation_starts": 1,
+  "protected_files": 173
+}

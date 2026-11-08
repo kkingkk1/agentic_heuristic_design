@@ -25,7 +25,8 @@ def main():
     report = {"status": "failed", "fixture": "全部模型响应与评价分数均为人工构造，不代表真实运行。"}
     try:
         backend = FixtureBackend()
-        Controller(backend, log).run()
+        controller = Controller(backend, log)
+        controller.run()
         rows = [json.loads(line) for line in log.path.read_text(encoding="utf-8").splitlines()]
         assert [row["event_index"] for row in rows] == list(range(1, len(rows) + 1))
         registrations = [row for row in rows if row["event"] == "candidate_registered"]
@@ -39,8 +40,9 @@ def main():
                           "elite_fusion": 1, "elite_mutation": 6}
         expected_stages = [f"eoh_{op}_{index:02d}" for op in ("E1", "E2", "M1", "M2")
                            for index in range(1, 11)]
-        expected_stages += ["round_3_Q", "round_3_E", "fusion_3", "fusion_final"]
-        expected_stages += [f"mutation_{elite}_{role}" for elite in ("A", "B") for role in ("Q", "E", "I")]
+        expected_stages += [*(f"round_3_{role}" for role in controller.design_roles), "fusion_3", "fusion_final"]
+        expected_stages += [f"mutation_{elite}_{role}" for elite in ("A", "B")
+                            for role in (*controller.design_roles, controller.integrator_role)]
         expected_pool = [stages[stage]["candidate_id"] for stage in expected_stages]
         selection = next(row for row in rows if row["event"] == "selection")
         assert selection["pool"] == expected_pool

@@ -18,6 +18,7 @@ from baselines.mcts_ahd.runtime import MCTSAHDRuntime  # noqa: E402
 from scripts import p0_budget_quota, p0_model_probe as probe  # noqa: E402
 from scripts.p0_controller import StopRun  # noqa: E402
 from scripts.p0_runtime import JsonLog, memory_and_priority, quota_gate  # noqa: E402
+from scripts.p1_formal_matrix import formal_run_guard, verify_training_config  # noqa: E402
 
 
 def validate_config(config):
@@ -68,6 +69,7 @@ def main():
     try:
         config = json.loads(Path(args.config).read_text(encoding="utf-8"))
         initial, maximum, seed = validate_config(config)
+        verify_training_config(config)
     except (OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
         print(f"配置无效：{exc}", file=sys.stderr)
         return 1
@@ -104,7 +106,8 @@ def main():
         runtime.cli = cli
         controller = MCTSAHDController(runtime, log, runtime.contract, initial_size=initial, population_size=10,
                                        max_evaluations=maximum, seed=seed)
-        controller.run()
+        with formal_run_guard(config, run_dir, log):
+            controller.run()
         print(f"MCTS-AHD 训练完成；记录：{run_dir}")
         return 0
     except (StopRun, probe.ProbeError, p0_budget_quota.QuotaProbeError, OSError, ValueError, KeyError) as exc:

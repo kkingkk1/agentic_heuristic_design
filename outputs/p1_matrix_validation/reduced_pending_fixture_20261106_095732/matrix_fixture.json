@@ -1,0 +1,189 @@
+{
+  "status": "frozen",
+  "contract_id": "p1_formal_20261106_v2",
+  "scope": "仅供离线测试的临时矩阵副本，不是正式合同。",
+  "data_contract_sha256": "fbf84d0bf7ee51071089a01863354abbdb13bfd24d5b7802ba115fcfd2edd0a1",
+  "resource_config_sha256": "9b6062a4f7a2fd43a845007700c887f1db7442bf7339d49b32a7a566aa965555",
+  "implementation_sha256": "ddb5486f4259fae8ca2a68b30600f6f07e612acab128550e2f110551c8a2c08b",
+  "training_software_versions": {
+    "python": "3.12.12",
+    "numpy": "2.3.5",
+    "scipy": "1.18.0",
+    "torch": "2.13.0+cu126",
+    "torch_cuda": "12.6",
+    "pyyaml": "6.0.2",
+    "numba": "0.68.1",
+    "llvmlite": "0.50.0"
+  },
+  "deepaco_extra_versions": {
+    "torch-geometric": "2.7.0",
+    "pyparsing": "3.3.2",
+    "xxhash": "3.6.0"
+  },
+  "selection_seeds": [
+    2026110601,
+    2026110602,
+    2026110603
+  ],
+  "research_repeats": 3,
+  "solver_repeats_per_instance": 1,
+  "normal_and_retry_evaluation_limit": 88,
+  "model_retry_limit": 2,
+  "evaluation_retry_reservation": 10,
+  "model_cli_limit_per_research": 178,
+  "training_process_tree_cpu_seconds": 18000,
+  "max_concurrent_research_runs": 1,
+  "token_limits": {
+    "input_including_cached": null,
+    "output": null,
+    "policy": "不设 token 总上限；按已回读输入、缓存输入和输出分别累计。失败或缺失用量标记未知，不按零计算。"
+  },
+  "selection_randomness": "同一重复索引在各任务和方法使用同一个选择种子；模型未提供可固定种子，保存实际提示、响应和顺序。",
+  "test_randomness": "使用数据合同的逐规模 evaluation_seed_base 加实例索引；训练使用数据合同已冻结的评价种子。",
+  "reference_randomness": "每实例求解一次，沿用测试数据合同的种子；LKH 路线沿用已生成参考，不声称求解器种子可控。",
+  "comparison": {
+    "primary": "每个任务、提示条件和测试规模中，本方法分别比较五个 AHD 对照。",
+    "primary_family_size": 210,
+    "statistical_unit": "完整独立研发运行；64 个测试实例不是独立研发重复。",
+    "analysis": "报告三次研发逐次结果、均值和范围；不以这三次重复宣称显著性。任一重复失败时标为不完整，不以成功子集冒充完整比较。",
+    "references": "传统 ACO、DeepACO、KGLS、NeuOpt 和 GNNGLS 分别报告求解参考及其成本，不混入 AHD 研发重复。"
+  },
+  "test_wall_seconds": {
+    "tsp_aco": {
+      "50": 1800,
+      "100": 3240,
+      "200": 6900
+    },
+    "op_aco": {
+      "50": 2220,
+      "100": 4320,
+      "200": 5700,
+      "500": 11280
+    },
+    "cvrp_aco": {
+      "50": 3240,
+      "100": 5280,
+      "200": 10680,
+      "500": 33840
+    },
+    "mkp_aco": {
+      "100": 1200,
+      "200": 1860,
+      "300": 2340,
+      "500": 6300,
+      "700": 9180
+    },
+    "bpp_offline_aco": {
+      "500": 2400,
+      "700": 3540,
+      "1000": 5460
+    },
+    "tsp_gls": {
+      "20": 1260,
+      "50": 900,
+      "100": 960,
+      "200": 1020
+    }
+  },
+  "test_process_tree_cpu_multiplier": 28,
+  "deepaco_checkpoint": {
+    "tsp_aco": {
+      "50": "tsp100",
+      "100": "tsp100",
+      "200": "tsp100"
+    },
+    "op_aco": {
+      "50": "op100",
+      "100": "op100",
+      "200": "op200",
+      "500": "op300"
+    },
+    "cvrp_aco": {
+      "50": "cvrp20",
+      "100": "cvrp100",
+      "200": "cvrp100",
+      "500": "cvrp500"
+    },
+    "mkp_aco": {
+      "100": "mkp300",
+      "200": "mkp300",
+      "300": "mkp300",
+      "500": "mkp500",
+      "700": "mkp500"
+    },
+    "bpp_offline_aco": {
+      "500": "bpp120",
+      "700": "bpp120",
+      "1000": "bpp120"
+    }
+  },
+  "deepaco_k_sparse": 20,
+  "neuopt": {
+    "device": "cuda",
+    "gpu_name": "NVIDIA GeForce RTX 3060",
+    "driver_version_at_freeze": "576.02",
+    "steps": {
+      "20": 500,
+      "50": 4000,
+      "100": 5000,
+      "200": 5000
+    },
+    "test_wall_seconds": {
+      "20": 7020,
+      "50": 68700,
+      "100": 117840,
+      "200": 138060
+    },
+    "test_process_tree_cpu_multiplier": 2
+  },
+  "gnngls": {
+    "device": "cpu",
+    "software_versions": {
+      "python": "3.12.12",
+      "numpy": "1.26.4",
+      "scipy": "1.17.1",
+      "torch": "2.3.0",
+      "torchdata": "0.7.1",
+      "dgl": "2.2.1",
+      "networkx": "3.6.1",
+      "pandas": "3.0.3"
+    },
+    "runtime_library_versions": {
+      "mkl": "2021.4.0",
+      "intel-openmp": "2021.4.0",
+      "tbb": "2021.13.1"
+    },
+    "checkpoint_and_scaler_size": {
+      "20": 20,
+      "50": 50,
+      "100": 100,
+      "200": 100
+    },
+    "search_time_limit_seconds": {
+      "20": 10,
+      "50": 10,
+      "100": 10,
+      "200": 60
+    },
+    "perturbation_moves": 20,
+    "test_wall_seconds": {
+      "20": 2520,
+      "50": 2520,
+      "100": 2520,
+      "200": 12120
+    },
+    "test_process_tree_cpu_multiplier": 2
+  },
+  "budget_evidence": [
+    "outputs/p1_task_smoke/20261105_133602_b6f6a25c/summary.json",
+    "outputs/p1_test_calibration/20261106_002738_4f709871/summary.json",
+    "outputs/p1_neuopt/20261106_000223_cb7eee5b/result.json",
+    "outputs/p1_neuopt/20261104_184318_db603cb8/result.json",
+    "outputs/p1_neuopt/20261104_184318_5141d8ac/result.json",
+    "outputs/p1_neuopt/20261104_184318_7c19a812/result.json",
+    "outputs/p1_neuopt/20261104_184318_aed07d09/result.json",
+    "outputs/p1_gnngls/20261105_191819_7900816c/result.json"
+  ],
+  "budget_note": "候选和 ACO／KGLS 参考的测试墙钟上限为当前实现的合成单例耗时乘 64 和 3，再加 600 秒并向上取整至分钟。NeuOpt 使用各规模旧 float32 每步耗时与 TSP200 新 float64 每步耗时的较大值，按步数乘 64 和 3，再加 600 秒。GNNGLS 使用搜索时限乘 64 和 3，再加 600 秒。样本不是耗时上界，超时记失败，不删去。",
+  "concurrency_note": "每个研发运行沿用冻结资源中的四个并发模型调用及四个并发评价；独立研发运行按顺序启动，避免把每运行上限误当作全局上限。"
+}

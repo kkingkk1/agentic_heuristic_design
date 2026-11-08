@@ -1,3 +1,4 @@
+import copy
 import json
 import os
 from pathlib import Path
@@ -9,13 +10,25 @@ import unittest
 from unittest.mock import patch
 
 from scripts import p0_controller as control
-from scripts.p0_runtime import Budget, Runtime
+from scripts.p0_runtime import Budget, Runtime, generation_requirements
 from scripts.p0_run_generation import quota_gate
 from scripts.p0_windows_job import WindowsJob
 
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = json.loads((ROOT / "cfg" / "p0_tsp_aco.json").read_text(encoding="utf-8"))
+
+
+def small_config():
+    config = copy.deepcopy(CONFIG)
+    config["task"].update(population_size=2, initial_proposals=6)
+    config["budget"].update(normal_model_calls=39, normal_code_generation_slots=32,
+                            additional_infrastructure_retry_calls=0,
+                            additional_infrastructure_evaluation_starts=0,
+                            max_initialization_and_generation_model_cli_invocations=39,
+                            max_initialization_and_generation_evaluation_starts=32,
+                            future_initialization_and_generation_eval_process_tree_cpu_seconds=18000)
+    return config
 
 
 class MemoryLog:
@@ -44,13 +57,14 @@ class FixtureBackend:
             self.calls.append((stage, prompt))
         if stage.startswith("critic"):
             return "<ref>Keep the useful features.</ref><ans>Improve the edge scores.</ans>"
-        if stage in ("reflection_Q", "reflection_E"):
-            return "<ans>Retain useful changes.</ans>"
-        if stage == "reflection_I":
+        if stage == "reflection_integrator":
             return "Combine both lessons."
+        if stage.startswith("reflection_"):
+            return "<ans>Retain useful changes.</ans>"
         if stage in self.invalid:
             return "<thought>bad</thought><code>invalid syntax !!!</code>"
-        marker = stage
+        marker = (stage.replace("solution_quality_agent", "first_role").replace("explorer", "first_role")
+                  .replace("speed_agent", "second_role").replace("exploiter", "second_role"))
         if self.duplicate_initial and stage.startswith("init_"):
             marker = "identical_initial"
         if self.duplicate_generation and not stage.startswith("init_"):
@@ -70,8 +84,9 @@ class FixtureBackend:
             self.evaluations.append(candidate.stage)
         if candidate.stage in self.runtime_invalid:
             return {"status": "candidate_error", "error": "fixture runtime error"}
-        # 第 2 轮 Q 分数下降，但仍是有效提案，必须续写。
-        objective = 2000.0 if candidate.stage == "round_2_Q" else float(1000 - candidate.sequence)
+        # 第 2 轮第一分支分数下降，但仍是有效提案，必须续写。
+        objective = (2000.0 if candidate.stage in ("round_2_solution_quality_agent", "round_2_explorer")
+                     else float(1000 - candidate.sequence))
         return {"status": "passed", "average": objective, "fitness": -objective}
 
     def before_generation(self):
@@ -90,53 +105,53 @@ class ControllerTests(unittest.TestCase):
         self.assertEqual(len(self.backend.evaluations), 88)
         self.assertEqual(len(selected), 10)
         self.assertEqual(self.backend.generation_checks, 1)
-        self.assertEqual([len(controller.history[r]) for r in ("Q", "E", "I")], [1, 1, 1])
+        self.assertEqual([len(controller.history[r]) for r in ("solution_quality_agent", "speed_agent", "integrator")], [1, 1, 1])
         calls = dict(self.backend.calls)
         self.assertNotIn("return np.", calls["init_01"])
         self.assertIn("heuristics_v2(distance_matrix: np.ndarray)", calls["init_01"])
         self.assertNotIn("Objective score:", calls["eoh_E1_01"])
         pair = next(item for item in self.log.items if item["event"] == "elite_pair")
         registered = next(item for item in self.log.items if item["event"] == "candidate_registered"
-                          and item["stage"] == "round_1_Q")
+                          and item["stage"] == "round_1_solution_quality_agent")
         self.assertEqual((registered["source_role"], registered["operator"],
-                          registered["generation"], registered["round"]), ("Q", "continuation", 1, 1))
+                          registered["generation"], registered["round"]), ("solution_quality_agent", "continuation", 1, 1))
         candidates = {c.candidate_id: c for c in controller.candidates}
         a, b = candidates[pair["a"]], candidates[pair["b"]]
-        for role in ("Q", "E"):
+        for role in ("solution_quality_agent", "speed_agent"):
             prompt = calls[f"start_{role}"]
             self.assertIn(b.code, prompt)
             self.assertNotIn(a.code, prompt)
-        q1 = next(c for c in controller.candidates if c.stage == "round_1_Q")
-        e1 = next(c for c in controller.candidates if c.stage == "round_1_E")
-        self.assertIn(q1.code, calls["round_2_Q"])
-        self.assertNotIn(e1.code, calls["round_2_Q"])
+        q1 = next(c for c in controller.candidates if c.stage == "round_1_solution_quality_agent")
+        e1 = next(c for c in controller.candidates if c.stage == "round_1_speed_agent")
+        self.assertIn(q1.code, calls["round_2_solution_quality_agent"])
+        self.assertNotIn(e1.code, calls["round_2_solution_quality_agent"])
         self.assertNotIn("Critic's feedback", calls["fusion_1"])
-        self.assertIn("long-term innovation", calls["fusion_1"])
-        self.assertIn("short-term refinement", calls["fusion_final"])
-        self.assertIn("Based on the feedback and reflection", calls["start_Q"])
+        self.assertIn("solution quality contribution", calls["fusion_1"])
+        self.assertIn("computational efficiency improvement", calls["fusion_final"])
+        self.assertIn("Based on the critic's feedback and the reflection", calls["start_solution_quality_agent"])
         self.assertNotIn(q1.thought, calls["fusion_final"])
-        self.assertNotIn(a.thought, calls["mutation_A_Q"])
-        self.assertNotIn(str(a.objective), calls["mutation_A_Q"])
+        self.assertNotIn(a.thought, calls["mutation_A_solution_quality_agent"])
+        self.assertNotIn(str(a.objective), calls["mutation_A_solution_quality_agent"])
         transitions = {(x["role"], x["round"]): x for x in self.log.items if x["event"] == "branch_transition"}
         for turn in (1, 2, 3):
-            for role in ("Q", "E"):
+            for role in ("solution_quality_agent", "speed_agent"):
                 previous = candidates[transitions[role, turn]["previous"]]
-                other = candidates[transitions["E" if role == "Q" else "Q", turn]["previous"]]
+                other = candidates[transitions["speed_agent" if role == "solution_quality_agent" else "solution_quality_agent", turn]["previous"]]
                 self.assertIn(previous.code, calls[f"round_{turn}_{role}"])
                 if previous.code != other.code:
                     self.assertNotIn(other.code, calls[f"round_{turn}_{role}"])
-            q = candidates[transitions["Q", turn]["proposal"]]
-            e = candidates[transitions["E", turn]["proposal"]]
+            q = candidates[transitions["solution_quality_agent", turn]["proposal"]]
+            e = candidates[transitions["speed_agent", turn]["proposal"]]
             fusion_prompt = calls[f"fusion_{turn}"]
             self.assertIn(q.thought, fusion_prompt)
             self.assertIn(e.thought, fusion_prompt)
             self.assertNotIn("Critic's feedback", fusion_prompt)
-        for role in ("Q", "E"):
+        for role in ("solution_quality_agent", "speed_agent"):
             reflection_prompt = calls[f"reflection_{role}"]
             self.assertNotIn("Algorithm description:", reflection_prompt)
             self.assertNotIn("Code:\n", reflection_prompt)
         for elite_name, elite, other in (("A", a, b), ("B", b, a)):
-            for role in ("Q", "E", "I"):
+            for role in ("solution_quality_agent", "speed_agent", "integrator"):
                 mutation_prompt = calls[f"mutation_{elite_name}_{role}"]
                 self.assertIn(elite.code, mutation_prompt)
                 self.assertNotIn(elite.thought, mutation_prompt)
@@ -150,21 +165,21 @@ class ControllerTests(unittest.TestCase):
                             if item["event"] == "history_appended"))
 
     def test_invalid_proposals_fall_back_skip_fusions_and_do_not_retry(self):
-        controller = self.make(invalid={"start_Q", "round_1_Q"}, runtime_invalid={"round_3_E"})
+        controller = self.make(invalid={"start_solution_quality_agent", "round_1_solution_quality_agent"}, runtime_invalid={"round_3_speed_agent"})
         controller.run()
         transitions = {(x["role"], x["round"]): x for x in self.log.items if x["event"] == "branch_transition"}
-        self.assertEqual(transitions["Q", 0]["current"], transitions["Q", 0]["previous"])
-        self.assertEqual(transitions["Q", 1]["current"], transitions["Q", 1]["previous"])
-        self.assertEqual(transitions["Q", 2]["current"], transitions["Q", 2]["proposal"])
-        self.assertGreater(transitions["Q", 2]["to_objective"], transitions["Q", 2]["from_objective"])
-        self.assertEqual(transitions["Q", 3]["previous"], transitions["Q", 2]["proposal"])
-        self.assertEqual(transitions["E", 3]["current"], transitions["E", 3]["previous"])
+        self.assertEqual(transitions["solution_quality_agent", 0]["current"], transitions["solution_quality_agent", 0]["previous"])
+        self.assertEqual(transitions["solution_quality_agent", 1]["current"], transitions["solution_quality_agent", 1]["previous"])
+        self.assertEqual(transitions["solution_quality_agent", 2]["current"], transitions["solution_quality_agent", 2]["proposal"])
+        self.assertGreater(transitions["solution_quality_agent", 2]["to_objective"], transitions["solution_quality_agent", 2]["from_objective"])
+        self.assertEqual(transitions["solution_quality_agent", 3]["previous"], transitions["solution_quality_agent", 2]["proposal"])
+        self.assertEqual(transitions["speed_agent", 3]["current"], transitions["speed_agent", 3]["previous"])
         skipped = {x["stage"] for x in self.log.items if x["event"] == "slot_skipped"}
         self.assertEqual(skipped, {"fusion_1", "fusion_3"})
-        self.assertNotIn("round_1_Q", self.backend.evaluations)
-        self.assertEqual(sum(stage == "round_3_E" for stage, _ in self.backend.calls), 1)
+        self.assertNotIn("round_1_solution_quality_agent", self.backend.evaluations)
+        self.assertEqual(sum(stage == "round_3_speed_agent" for stage, _ in self.backend.calls), 1)
         selection = next(x for x in self.log.items if x["event"] == "selection")
-        self.assertNotIn(transitions["E", 3]["current"], selection["pool"])
+        self.assertNotIn(transitions["speed_agent", 3]["current"], selection["pool"])
 
     def test_too_few_initial_or_final_candidates_stops_without_history(self):
         for options in ({"duplicate_initial": True}, {"duplicate_generation": True}):
@@ -214,18 +229,43 @@ class ControllerTests(unittest.TestCase):
                 control.check_modification_scope(code)
 
     def test_critic_instructions_follow_objective_order_and_ties(self):
-        q = control.Candidate("q", 1, "round_1_Q", (), thought="q", code="q", objective=5, fitness=-5)
-        better = control.Candidate("e", 2, "round_1_E", (), thought="e", code="e", objective=4, fitness=-4)
-        worse = control.Candidate("e", 2, "round_1_E", (), thought="e", code="e", objective=6, fitness=-6)
-        tied = control.Candidate("e", 2, "round_1_E", (), thought="e", code="e", objective=5, fitness=-5)
-        self.assertIn("better objective", control.round_critic_prompt(q, better))
-        self.assertIn("Better algorithm (E)", control.round_critic_prompt(q, better))
-        self.assertIn("worse objective", control.round_critic_prompt(q, worse))
-        self.assertIn("Worse algorithm (E)", control.round_critic_prompt(q, worse))
+        q = control.Candidate("q", 1, "round_1_solution_quality_agent", (), thought="q", code="q", objective=5, fitness=-5)
+        better = control.Candidate("e", 2, "round_1_speed_agent", (), thought="e", code="e", objective=4, fitness=-4)
+        worse = control.Candidate("e", 2, "round_1_speed_agent", (), thought="e", code="e", objective=6, fitness=-6)
+        tied = control.Candidate("e", 2, "round_1_speed_agent", (), thought="e", code="e", objective=5, fitness=-5)
+        self.assertIn("Current code is better", control.round_critic_prompt(q, better))
+        self.assertIn("Better and current code: e", control.round_critic_prompt(q, better))
+        self.assertIn("current code is worse", control.round_critic_prompt(q, worse))
+        self.assertIn("Worse and current code: e", control.round_critic_prompt(q, worse))
         self.assertIn("objectives are tied", control.round_critic_prompt(q, tied))
+        q.fitness = 5
+        better.objective = better.fitness = 6
+        prompt = control.round_critic_prompt(q, better, direction="max")
+        self.assertIn("A higher objective is better", prompt)
+        self.assertIn("Better and current code: e", prompt)
 
 
 class BudgetTests(unittest.TestCase):
+    def test_generation_slots_follow_population_size(self):
+        self.assertEqual(generation_requirements(2), (33, 26))
+        self.assertEqual(generation_requirements(10), (65, 58))
+        for invalid in (True, 1, 2.0):
+            with self.subTest(invalid=invalid), self.assertRaises(ValueError):
+                generation_requirements(invalid)
+
+    def test_small_generation_requires_exact_remaining_slots(self):
+        budget = Budget(small_config(), MemoryLog())
+        budget.model_normal = budget.eval_starts = budget.eval_normal = 6
+        budget.eval_cpu_samples = [1.0]
+        budget.before_generation()
+        budget.model_normal = 7
+        with self.assertRaisesRegex(control.StopRun, "模型调用不足"):
+            budget.before_generation()
+        budget.model_normal = 6
+        budget.eval_starts = budget.eval_normal = 7
+        with self.assertRaisesRegex(control.StopRun, "评价启动次数不足"):
+            budget.before_generation()
+
     def test_reserves_across_concurrent_starts_and_counts_completed_children(self):
         log = MemoryLog()
         budget = Budget(CONFIG, log)
@@ -337,6 +377,17 @@ class BudgetTests(unittest.TestCase):
 
 
 class ModelRuntimeTests(unittest.TestCase):
+    def test_small_generation_quota_requires_33_calls(self):
+        log = MemoryLog()
+        backend = Runtime(ROOT, small_config(), log, cli=["fixture-cli"])
+        backend.budget.model_normal = backend.budget.eval_starts = backend.budget.eval_normal = 6
+        backend.budget.eval_cpu_samples = [1.0]
+        quota = {"ordinary_usage_allowed": True, "remaining_model_calls": 33}
+        with patch("scripts.p0_budget_quota.read_limits", return_value=quota):
+            backend.before_generation()
+        gate = next(item for item in log.items if item["event"] == "generation_quota_gate")
+        self.assertEqual(gate["required_model_calls"], 33)
+
     def test_generation_quota_gate_rechecks_and_respects_only_explicit_exception(self):
         quota = {"ordinary_usage_allowed": True, "remaining_model_calls": None}
         for accepted in (False, True):
@@ -362,7 +413,8 @@ class ModelRuntimeTests(unittest.TestCase):
         runner.assert_not_called()
 
     def test_known_network_failure_uses_only_infrastructure_retry_budget(self):
-        backend = Runtime(ROOT, CONFIG, MemoryLog(), cli=["fixture-cli"])
+        log = MemoryLog()
+        backend = Runtime(ROOT, CONFIG, log, cli=["fixture-cli"])
         events = [
             {"type": "item.completed", "item": {"type": "agent_message", "text": "answer"}},
             {"type": "turn.completed", "usage": {"input_tokens": 1}},
@@ -375,6 +427,29 @@ class ModelRuntimeTests(unittest.TestCase):
             self.assertEqual(backend.model("fixture", "prompt"), "answer")
         self.assertEqual(runner.call_count, 2)
         self.assertEqual((backend.budget.model_normal, backend.budget.model_retries), (1, 1))
+        for call in runner.call_args_list:
+            command = call.args[0]
+            self.assertNotIn("--ephemeral", command)
+            self.assertNotIn("resume", command)
+            self.assertEqual(command[command.index("--model") + 1], "gpt-5.6-luna")
+            self.assertIn("model_providers.p0_chatgpt_https.supports_websockets=false", command)
+            self.assertIn("model_providers.p0_chatgpt_https.requires_openai_auth=true", command)
+        processes = [event["result"] for event in log.items if event["event"] == "model_process"]
+        self.assertEqual([process["exit_code"] for process in processes], [1, 0])
+        self.assertEqual(processes[0]["stderr"], "connection refused")
+
+    def test_small_batch_network_failure_does_not_start_retry(self):
+        log = MemoryLog()
+        backend = Runtime(ROOT, small_config(), log, cli=["fixture-cli"])
+        result = {"exit_code": 1, "stdout": "", "stderr": "connection refused"}
+        with patch("scripts.p0_model_probe.run_command", return_value=result) as runner:
+            with self.assertRaises(control.StopRun):
+                backend.model("fixture", "prompt")
+        self.assertEqual(runner.call_count, 1)
+        self.assertEqual((backend.budget.model_normal, backend.budget.model_retries), (1, 0))
+        events = [item["event"] for item in log.items]
+        self.assertIn("infrastructure_retry_unavailable", events)
+        self.assertNotIn("infrastructure_retry", events)
 
     def test_rate_limit_stops_without_retry_or_reset(self):
         backend = Runtime(ROOT, CONFIG, MemoryLog(), cli=["fixture-cli"])

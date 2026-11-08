@@ -87,7 +87,7 @@ class TestFormalRunGate(unittest.TestCase):
     def config():
         config = TestTaskRuntime.config("mkp_aco", False)
         config["status"] = "frozen"
-        config["method"] = {"id": "proposed_qe"}
+        config["method"] = {"id": "proposed_solution_quality_and_speed_agents"}
         config["task"].update({"generations": 6, "selection_seed": 20261103,
                                "initial_proposals": 30, "population_size": 10,
                                "collaboration_rounds": 3,

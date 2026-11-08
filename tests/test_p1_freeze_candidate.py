@@ -6,7 +6,7 @@ from scripts.p1_task_contract import load_task_contract
 
 class TestCandidateFreeze(unittest.TestCase):
     def test_each_method_reads_its_actual_final_selection(self):
-        for method in ("proposed_qe", "roco_paper_adapted", "eoh_paper_adapted"):
+        for method in ("proposed_solution_quality_and_speed_agents", "roco_paper_adapted", "eoh_paper_adapted"):
             events = [{"event": "selection", "selected": [{"candidate_id": "c0007"}]},
                       {"event": "finish", "status": "completed"}]
             self.assertEqual(freeze.final_candidate(events, method), "c0007")
@@ -23,8 +23,10 @@ class TestCandidateFreeze(unittest.TestCase):
         contract = load_task_contract("tsp_aco")
         code = "import numpy as np\n" + contract.signature + "\n    return np.ones_like(distance_matrix)"
         registration = {"event": "candidate_registered", "candidate_id": "c0001", "stage": "init_01"}
-        for method, response in (("proposed_qe", f"<thought>x</thought><code>{code}</code>"),
+        for method, response in (("proposed_solution_quality_and_speed_agents", f"<thought>x</thought><code>{code}</code>"),
+                                 ("proposed_solution_quality_and_speed_agents", f"<thought>x</thought>\n{code}"),
                                  ("roco_paper_adapted", f"<thought>x</thought><code>{code}</code>"),
+                                 ("roco_paper_adapted", f"<thought>x</thought>\n{code}"),
                                  ("eoh_paper_adapted", "{idea}\n" + code),
                                  ("mcts_ahd_ee9c4f4_adapted", "Useful ideas.\n{idea}\n" + code),
                                  ("reevo_2f70042_adapted", "```python\n" + code + "\n```"),

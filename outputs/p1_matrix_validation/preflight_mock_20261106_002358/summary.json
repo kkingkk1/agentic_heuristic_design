@@ -1,0 +1,35 @@
+{
+  "scope": "离线模拟登录和额度，不请求模型，不使用正式测试集",
+  "results": [
+    {
+      "method": "proposed_qe",
+      "status": "preflight_passed",
+      "model_calls": 0
+    },
+    {
+      "method": "roco_paper_adapted",
+      "status": "preflight_passed",
+      "model_calls": 0
+    },
+    {
+      "method": "eoh_paper_adapted",
+      "status": "preflight_passed",
+      "model_calls": 0
+    },
+    {
+      "method": "reevo_2f70042_adapted",
+      "status": "preflight_passed",
+      "model_calls": 0
+    },
+    {
+      "method": "hsevo_fb569d6_adapted",
+      "status": "preflight_passed",
+      "model_calls": 0
+    },
+    {
+      "method": "mcts_ahd_ee9c4f4_adapted",
+      "status": "preflight_passed",
+      "model_calls": 0
+    }
+  ]
+}
