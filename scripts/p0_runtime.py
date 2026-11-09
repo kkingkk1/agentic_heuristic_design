@@ -346,6 +346,8 @@ class Runtime:
                         "PYTHONPATH": os.pathsep.join(self.cfg["resources"]["pythonpath"])})
             command = [self.cfg["resources"]["python_executable"], "-B", "-u",
                        str(self.eval_script), str(self.problem_size), str(root), "train"]
+            if self.cfg["task"].get("evaluation_mode") == "quality_per_time":
+                command.extend(["--stagnation-rounds", str(self.cfg["task"]["stagnation_rounds"])])
             start = time.monotonic()
             result = {"status": "infrastructure_error", "command": command, "resources": resources,
                       "started_at_utc": utc_now(), "candidate_id": candidate.candidate_id}

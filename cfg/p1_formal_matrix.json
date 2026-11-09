@@ -2,6 +2,7 @@
   "status": "frozen",
   "contract_id": "p1_tsp50_small_20261107",
   "scope": "只冻结 TSP-ACO 白盒 TSP50 的本方法与 RoCo 小规模对照；不授权启动正式实验。其他任务、规模与对照不在本批矩阵中。",
+  "speed_evaluation": {"status": "pending", "stagnation_rounds": null},
   "conditions": [{"task": "tsp_aco", "prompt_condition": "white_box", "test_sizes": [50]}],
   "method_ids": ["proposed_solution_quality_and_speed_agents", "roco_paper_adapted"],
   "initial_proposals": 6,
@@ -9,7 +10,7 @@
   "collaboration_rounds": 3,
   "data_contract_sha256": "fbf84d0bf7ee51071089a01863354abbdb13bfd24d5b7802ba115fcfd2edd0a1",
   "resource_config_sha256": "9b6062a4f7a2fd43a845007700c887f1db7442bf7339d49b32a7a566aa965555",
-  "implementation_sha256": "e8065094d29b7494117359156a697649d0fc2b07049de40c001fd3695ec98316",
+  "implementation_sha256": "b2482ab3d45c1fa22b54ff7067ec91f5489cd409412bde7ed25502670b611599",
   "training_software_versions": {
     "python": "3.12.12",
     "numpy": "2.3.5",

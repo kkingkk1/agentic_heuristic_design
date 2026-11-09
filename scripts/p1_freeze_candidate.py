@@ -122,10 +122,15 @@ def freeze(run_dir):
     if (record.get("status") != "passed" or len(evaluations) != 1 or evaluations[0] != record
             or record.get("candidate_id") != candidate_id):
         raise ValueError("候选评价记录缺失、不一致或未通过。")
-    checked = TRAINING[task["name"]][0].read_complete(candidate_root / "stdout.txt")
+    read_options = ({"stagnation_rounds": task["stagnation_rounds"]}
+                    if task.get("evaluation_mode") == "quality_per_time" else {})
+    checked = TRAINING[task["name"]][0].read_complete(candidate_root / "stdout.txt", **read_options)
     if (not math.isclose(checked["average"], record["average"], rel_tol=1e-12, abs_tol=1e-12)
             or checked["fitness"] != record["fitness"] or checked["objectives"] != record["objectives"]):
         raise ValueError("训练评价独立重读与结果记录不一致。")
+    if read_options and (checked["solve_wall_seconds"] != record.get("solve_wall_seconds")
+                         or checked["stopping_reasons"] != record.get("stopping_reasons")):
+        raise ValueError("训练逐例时间或停止原因与结果记录不一致。")
     destination = ROOT / "outputs/p1_frozen_candidates" / method / run_dir.name
     destination.mkdir(parents=True, exist_ok=False)
     frozen = destination / "candidate.py"

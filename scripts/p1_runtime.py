@@ -1,6 +1,7 @@
 """将 P0 的登录模型和进程树预算监督用于已接入的 ACO 任务。"""
 
 import json
+from functools import partial
 from pathlib import Path
 import threading
 
@@ -50,6 +51,13 @@ class TaskRuntime(Runtime):
         if (name not in TRAINING or condition not in ("white_box", "black_box")
                 or (name == "tsp_gls" and condition != "white_box")):
             raise ValueError("任务名称或白盒／黑盒条件无效。")
+        mode = task.get("evaluation_mode", "final_quality")
+        stagnation_rounds = task.get("stagnation_rounds")
+        if (mode not in ("final_quality", "quality_per_time")
+                or (mode == "final_quality" and stagnation_rounds is not None)
+                or (mode == "quality_per_time" and (name != "tsp_aco"
+                    or type(stagnation_rounds) is not int or stagnation_rounds < 1))):
+            raise ValueError("评价设置或停滞轮数无效；速度设置目前只支持 TSP-ACO。")
         contract = load_task_contract(name, black_box=condition == "black_box")
         module, dataset, expected_hash = TRAINING[name]
         expected_timeout = module.TIMEOUT_SECONDS
@@ -86,7 +94,8 @@ class TaskRuntime(Runtime):
         self.problem_name, self.problem_size = name, contract.train_size
         task_dir = ROOT / "problems" / name
         self.eval_script = task_dir / ("eval_black_box.py" if contract.black_box else "eval.py")
-        self.read_complete = module.read_complete
+        self.read_complete = (partial(module.read_complete, stagnation_rounds=stagnation_rounds)
+                              if mode == "quality_per_time" else module.read_complete)
         self.additional_candidate_faults = ("候选签名", "候选必须定义", "启发式转换后含非有限值")
         self.budget = Budget(config, log)
         self.model_slots = threading.BoundedSemaphore(config["resources"]["max_concurrent_model_calls"])

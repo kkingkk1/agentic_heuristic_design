@@ -181,7 +181,15 @@ def _matrix_hash():
     return digest(MATRIX_PATH)
 
 
-def training_config(matrix, task, condition, method, replicate):
+def speed_stagnation(matrix, task, mode):
+    if mode == "final_quality":
+        return None
+    if mode == "quality_per_time" and task == "tsp_aco":
+        raise ValueError("速度设置尚未单独冻结停滞轮数与预算，目前只允许工程验证。")
+    raise ValueError("评价设置或任务无效。")
+
+
+def training_config(matrix, task, condition, method, replicate, *, evaluation_mode="final_quality"):
     if (task, condition) not in conditions() or method not in METHODS:
         raise ValueError("任务、提示条件或方法不在 P1 矩阵中。")
     if type(replicate) is not int or not 1 <= replicate <= matrix["research_repeats"]:
@@ -206,6 +214,7 @@ def training_config(matrix, task, condition, method, replicate):
         "selection_seed": matrix["selection_seeds"][replicate - 1], "population_size": matrix["population_size"],
         "reference_seed_in_prompt_or_population": method in ("reevo_2f70042_adapted", "hsevo_fb569d6_adapted"),
     }
+    speed_stagnation(matrix, task, evaluation_mode)
     if task == "tsp_gls":
         task_config["perturbation_moves"] = 30
     if method == "mcts_ahd_ee9c4f4_adapted":
@@ -238,18 +247,20 @@ def training_config(matrix, task, condition, method, replicate):
             "model": copy.deepcopy(source["model"]), "resources": resources, "budget": budget}
 
 
-def test_config(matrix, task, condition, size):
+def test_config(matrix, task, condition, size, *, evaluation_mode="final_quality"):
     if ((task, condition) not in conditions() or type(size) is not int
             or size not in PILOT_SIZES[task]):
         raise ValueError("测试任务、提示条件或规模无效。")
     timeout = matrix.get("test_wall_seconds", {}).get(task, {}).get(str(size))
     if type(timeout) is not int or timeout <= 0:
         raise ValueError("测试规模没有冻结的预算。")
-    return {"status": "frozen", "matrix_contract_sha256": _matrix_hash(), "task": task,
-            "prompt_condition": condition, "size": size, "data_contract_sha256": digest(DATA_CONTRACT),
-            "solver_repeats_per_instance": matrix["solver_repeats_per_instance"],
-            "whole_dataset_wall_timeout_seconds": timeout,
-            "process_tree_cpu_seconds": timeout * matrix["test_process_tree_cpu_multiplier"]}
+    config = {"status": "frozen", "matrix_contract_sha256": _matrix_hash(), "task": task,
+              "prompt_condition": condition, "size": size, "data_contract_sha256": digest(DATA_CONTRACT),
+              "solver_repeats_per_instance": matrix["solver_repeats_per_instance"],
+              "whole_dataset_wall_timeout_seconds": timeout,
+              "process_tree_cpu_seconds": timeout * matrix["test_process_tree_cpu_multiplier"]}
+    speed_stagnation(matrix, task, evaluation_mode)
+    return config
 
 
 def verify_training_config(config):
@@ -261,7 +272,8 @@ def verify_training_config(config):
     if not isinstance(task, dict) or not isinstance(method, dict):
         raise ValueError("P1 研发任务或方法无效。")
     expected = training_config(matrix, task.get("name"), task.get("prompt_condition"),
-                               method.get("id"), config.get("formal_replicate"))
+                               method.get("id"), config.get("formal_replicate"),
+                               evaluation_mode=task.get("evaluation_mode", "final_quality"))
     if config != expected:
         raise ValueError("研发配置与冻结的 P1 矩阵、重复索引或预算不一致。")
     return matrix
@@ -269,7 +281,8 @@ def verify_training_config(config):
 
 def run_identity(config):
     return (config["task"]["name"], config["task"]["prompt_condition"],
-            config["method"]["id"], config["formal_replicate"])
+            config["method"]["id"], config["formal_replicate"],
+            config["task"].get("evaluation_mode", "final_quality"))
 
 
 def previously_started(config, current_dir):
@@ -336,7 +349,8 @@ def verify_test_config(config):
     matrix, _ = load_matrix()
     if not isinstance(config, dict):
         raise ValueError("P1 测试配置不是对象。")
-    expected = test_config(matrix, config.get("task"), config.get("prompt_condition"), config.get("size"))
+    expected = test_config(matrix, config.get("task"), config.get("prompt_condition"), config.get("size"),
+                           evaluation_mode=config.get("evaluation_mode", "final_quality"))
     if config != expected:
         raise ValueError("测试配置与冻结的 P1 矩阵或预算不一致。")
     return matrix
@@ -534,10 +548,12 @@ def main():
     train.add_argument("--condition", required=True, choices=("white_box", "black_box"))
     train.add_argument("--method", required=True, choices=tuple(METHODS))
     train.add_argument("--replicate", required=True, type=int)
+    train.add_argument("--evaluation-mode", choices=("final_quality", "quality_per_time"), default="final_quality")
     test = sub.add_parser("test-config", help="生成一个任务条件和规模的测试配置")
     test.add_argument("--task", required=True, choices=TASKS)
     test.add_argument("--condition", required=True, choices=("white_box", "black_box"))
     test.add_argument("--size", required=True, type=int)
+    test.add_argument("--evaluation-mode", choices=("final_quality", "quality_per_time"), default="final_quality")
     reference = sub.add_parser("reference-config", help="生成一个求解参考的测试配置")
     reference.add_argument("--kind", required=True, choices=("expert", "deepaco", "neuopt", "gnngls"))
     reference.add_argument("--task", required=True, choices=TASKS)
@@ -550,9 +566,10 @@ def main():
         if args.command in (None, "check"):
             result = verify_expansion(matrix, data)
         elif args.command == "train-config":
-            result = training_config(matrix, args.task, args.condition, args.method, args.replicate)
+            result = training_config(matrix, args.task, args.condition, args.method, args.replicate,
+                                     evaluation_mode=args.evaluation_mode)
         elif args.command == "test-config":
-            result = test_config(matrix, args.task, args.condition, args.size)
+            result = test_config(matrix, args.task, args.condition, args.size, evaluation_mode=args.evaluation_mode)
         else:
             result = reference_config(matrix, data, args.kind, args.task, args.size)
         text = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False) + "\n"

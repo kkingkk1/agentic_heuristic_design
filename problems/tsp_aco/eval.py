@@ -8,6 +8,7 @@ import math
 from pathlib import Path
 import random
 import sys
+from time import perf_counter
 
 import numpy as np
 from scipy.spatial import distance_matrix
@@ -119,7 +120,7 @@ class CheckedACO(ACO):
         return costs
 
 
-def solve(node_pos, heuristic, n_iterations=N_ITERATIONS, *, black_box=False):
+def solve(node_pos, heuristic, n_iterations=N_ITERATIONS, *, black_box=False, stagnation_rounds=None):
     dist_mat = distance_matrix(node_pos, node_pos)
     if not np.isfinite(dist_mat).all():
         raise ValueError("距离矩阵含非有限值。")
@@ -128,9 +129,10 @@ def solve(node_pos, heuristic, n_iterations=N_ITERATIONS, *, black_box=False):
         raise ValueError("实例含重复城市或无效距离。")
     heu = checked_heuristic(heuristic, dist_mat, black_box=black_box)
     aco = CheckedACO(dist_mat, heu, n_ants=N_ANTS)
-    obj = float(aco.run(n_iterations).item())
-    if aco.checked_iterations != n_iterations or aco.shortest_path is None:
-        raise ValueError("求解未完成全部迭代。")
+    obj = float(aco.run(n_iterations, stagnation_rounds=stagnation_rounds).item())
+    if ((stagnation_rounds is None and aco.checked_iterations != n_iterations)
+            or not 1 <= aco.checked_iterations <= n_iterations or aco.shortest_path is None):
+        raise ValueError("求解未按停止规则完成。")
     tour = aco.shortest_path.detach().cpu().numpy().astype(np.int64)
     if tour.shape != (len(node_pos),) or not np.array_equal(np.sort(tour), np.arange(len(node_pos))):
         raise ValueError("最优路径不是城市排列。")
@@ -164,9 +166,14 @@ def candidate_hash(root):
 
 
 def main(*, black_box=False):
-    if len(sys.argv) != 4:
-        raise ValueError("用法：eval.py <规模> <候选任务运行根目录> <train|test>")
-    size_text, root, phase = sys.argv[1:]
+    if len(sys.argv) not in (4, 6):
+        raise ValueError("用法：eval.py <规模> <候选任务运行根目录> <train|test> [--stagnation-rounds 正整数]")
+    size_text, root, phase = sys.argv[1:4]
+    stagnation_rounds = None
+    if len(sys.argv) == 6:
+        if sys.argv[4] != "--stagnation-rounds" or not sys.argv[5].isdigit() or int(sys.argv[5]) < 1:
+            raise ValueError("停滞轮数必须是正整数。")
+        stagnation_rounds = int(sys.argv[5])
     if phase == "train" and size_text == "50":
         dataset, count, iterations, seed_base, prefix = DATASET, N_INSTANCES, N_ITERATIONS, SEED_BASE, EVENT_PREFIX
         node_positions = np.load(dataset, allow_pickle=False)
@@ -188,21 +195,33 @@ def main(*, black_box=False):
              "torch_threads": torch.get_num_threads()}
     if code_hash is not None:
         start["candidate_sha256"] = code_hash
+    if stagnation_rounds is not None:
+        start.update({"evaluation_mode": "quality_per_time", "stagnation_rounds": stagnation_rounds,
+                      "time_scope": "solve_wall_seconds_including_preparation_and_validation"})
     emit(start, prefix)
-    objs = []
+    objs, solve_times = [], []
     for index, node_pos in enumerate(node_positions):
         seed = seed_base + index
         random.seed(seed)
         np.random.seed(seed)
         torch.manual_seed(seed)
-        if black_box:
-            obj, tour, completed_iterations = solve(node_pos, heuristic, iterations, black_box=True)
-        else:
-            obj, tour, completed_iterations = solve(node_pos, heuristic, iterations)
+        options = {"black_box": True} if black_box else {}
+        if stagnation_rounds is not None:
+            options["stagnation_rounds"] = stagnation_rounds
+        started = perf_counter() if stagnation_rounds is not None else None
+        obj, tour, completed_iterations = solve(node_pos, heuristic, iterations, **options)
+        elapsed = perf_counter() - started if started is not None else None
         objs.append(obj)
         print(f"[*] Instance {index}: {obj}", flush=True)
-        emit({"event": "instance", "index": index, "seed": seed, "objective": obj,
-              "iterations": completed_iterations, "tour": tour}, prefix)
+        instance = {"event": "instance", "index": index, "seed": seed, "objective": obj,
+                    "iterations": completed_iterations, "tour": tour}
+        if elapsed is not None:
+            if not math.isfinite(elapsed) or elapsed <= 0:
+                raise ValueError("完整求解时间必须为有限正数。")
+            solve_times.append(elapsed)
+            instance.update({"solve_wall_seconds": elapsed, "stop_reason":
+                             "stagnation" if completed_iterations < iterations else "iteration_limit"})
+        emit(instance, prefix)
     if phase == "test":
         if sha256(dataset.read_bytes()).hexdigest() != TEST_DATASET_SHA256[size]:
             raise ValueError("评价期间测试集发生变化；不生成完成事件。")
@@ -211,7 +230,11 @@ def main(*, black_box=False):
     average = float(np.mean(objs))
     print("[*] Average:", flush=True)
     print(average, flush=True)
-    emit({"event": "complete", "instance_count": len(objs), "average": average}, prefix)
+    complete = {"event": "complete", "instance_count": len(objs), "average": average}
+    if stagnation_rounds is not None:
+        mean_time = math.fsum(solve_times) / len(solve_times)
+        complete.update({"average_solve_wall_seconds": mean_time, "fitness": 1.0 / (average * mean_time)})
+    emit(complete, prefix)
 
 
 if __name__ == "__main__":

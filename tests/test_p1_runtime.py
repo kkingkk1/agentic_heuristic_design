@@ -81,6 +81,23 @@ class TestTaskRuntime(unittest.TestCase):
             with self.subTest(field=field), self.assertRaises(ValueError):
                 self.create(config)
 
+    def test_speed_mode_binds_tsp_reader_and_requires_stagnation_window(self):
+        config = self.config("tsp_aco", False)
+        config["task"].update(evaluation_mode="quality_per_time", stagnation_rounds=2)
+        runtime = self.create(config)
+        self.assertIs(runtime.read_complete.func, p1_runtime.TRAINING["tsp_aco"][0].read_complete)
+        self.assertEqual(runtime.read_complete.keywords, {"stagnation_rounds": 2})
+        with self.assertRaisesRegex(StopRun, "工程配置禁止请求模型"):
+            runtime.model("test", "must not be sent")
+        for invalid in (None, 0, True):
+            config["task"]["stagnation_rounds"] = invalid
+            with self.subTest(stagnation_rounds=invalid), self.assertRaises(ValueError):
+                self.create(config)
+        unsupported = self.config("op_aco", False)
+        unsupported["task"].update(evaluation_mode="quality_per_time", stagnation_rounds=2)
+        with self.assertRaisesRegex(ValueError, "只支持 TSP-ACO"):
+            self.create(unsupported)
+
 
 class TestFormalRunGate(unittest.TestCase):
     @staticmethod

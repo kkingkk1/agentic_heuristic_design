@@ -38,7 +38,7 @@ def process_cpu_seconds(process):
     return {"user": seconds(user), "kernel": seconds(kernel)}
 
 
-def read_complete(stdout_path):
+def read_complete(stdout_path, *, stagnation_rounds=None):
     """只接受五个完整实例和平均值；部分输出不产生 Fitness。"""
     events = []
     for line in stdout_path.read_text(encoding="utf-8").splitlines():
@@ -51,19 +51,36 @@ def read_complete(stdout_path):
     if (start.get("n_ants") != 30 or start.get("n_iterations") != 200
             or start.get("seed_base") != 20261103 or complete.get("instance_count") != 5):
         raise ValueError("评价配置或实例数量不符合 P0 合同。")
+    if stagnation_rounds is None and start.get("evaluation_mode") is not None:
+        raise ValueError("质量设置不能接收速度评价事件。")
+    if stagnation_rounds is not None and (type(stagnation_rounds) is not int or stagnation_rounds < 1
+            or start.get("evaluation_mode") != "quality_per_time"
+            or start.get("stagnation_rounds") != stagnation_rounds
+            or start.get("time_scope") != "solve_wall_seconds_including_preparation_and_validation"):
+        raise ValueError("速度设置或计时范围不符合合同。")
+    times = []
     for index, instance in enumerate(instances):
         obj = instance.get("objective")
         tour = instance.get("tour")
         if (
             instance.get("index") != index
             or instance.get("seed") != start.get("seed_base") + index
-            or instance.get("iterations") != 200
+            or (stagnation_rounds is None and instance.get("iterations") != 200)
             or not isinstance(obj, (int, float)) or isinstance(obj, bool)
             or not math.isfinite(obj) or obj <= 0
             or not isinstance(tour, list) or len(tour) != 50
             or any(type(city) is not int for city in tour) or sorted(tour) != list(range(50))
         ):
             raise ValueError(f"实例 {index} 的输出不完整或无效。")
+        if stagnation_rounds is not None:
+            iterations, elapsed = instance.get("iterations"), instance.get("solve_wall_seconds")
+            if (type(iterations) is not int or not 1 <= iterations <= 200
+                    or (iterations < 200 and iterations <= stagnation_rounds)
+                    or instance.get("stop_reason") != ("stagnation" if iterations < 200 else "iteration_limit")
+                    or isinstance(elapsed, bool) or not isinstance(elapsed, (int, float))
+                    or not math.isfinite(elapsed) or elapsed <= 0):
+                raise ValueError(f"实例 {index} 的停止原因或完整求解时间无效。")
+            times.append(float(elapsed))
     average = complete.get("average")
     if (
         not isinstance(average, (int, float)) or isinstance(average, bool)
@@ -72,8 +89,23 @@ def read_complete(stdout_path):
                             rel_tol=1e-12, abs_tol=1e-12)
     ):
         raise ValueError("平均目标与逐实例结果不一致。")
-    return {"objectives": [item["objective"] for item in instances],
-            "average": average, "fitness": -average, "start": start}
+    result = {"objectives": [item["objective"] for item in instances],
+              "average": average, "fitness": -average, "start": start}
+    if stagnation_rounds is not None:
+        mean_time = math.fsum(times) / len(times)
+        fitness = 1.0 / (average * mean_time)
+        reported_time, reported_fitness = complete.get("average_solve_wall_seconds"), complete.get("fitness")
+        if (not math.isfinite(fitness) or isinstance(reported_time, bool) or isinstance(reported_fitness, bool)
+                or not isinstance(reported_time, (int, float)) or not isinstance(reported_fitness, (int, float))
+                or not math.isfinite(reported_time) or not math.isfinite(reported_fitness)
+                or not math.isclose(reported_time, mean_time,
+                                    rel_tol=1e-12, abs_tol=1e-12)
+                or not math.isclose(reported_fitness, fitness, rel_tol=1e-12, abs_tol=1e-12)):
+            raise ValueError("平均时间或速度 Fitness 与逐实例结果不一致。")
+        result.update({"fitness": fitness, "average_solve_wall_seconds": mean_time,
+                       "solve_wall_seconds": times, "evaluation_mode": "quality_per_time",
+                       "stopping_reasons": [item["stop_reason"] for item in instances]})
+    return result
 
 
 def terminate_tree(process):

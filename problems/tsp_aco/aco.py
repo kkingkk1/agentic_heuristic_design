@@ -29,8 +29,12 @@ class ACO():
         self.device = device
 
     @torch.no_grad()
-    def run(self, n_iterations):
-        for _ in range(n_iterations):
+    def run(self, n_iterations, *, stagnation_rounds=None):
+        if stagnation_rounds is not None and (type(stagnation_rounds) is not int or stagnation_rounds < 1):
+            raise ValueError('停滞轮数必须为正整数。')
+        stagnant = 0
+        self.stop_reason = 'iteration_limit'
+        for iteration in range(n_iterations):
             paths = self.gen_path(require_prob=False)
             costs = self.gen_path_costs(paths)
             
@@ -38,8 +42,14 @@ class ACO():
             if best_cost < self.lowest_cost:
                 self.shortest_path = paths[:, best_idx]
                 self.lowest_cost = best_cost
+                stagnant = 0
+            else:
+                stagnant += 1
             
             self.update_pheronome(paths, costs)
+            if stagnation_rounds is not None and stagnant >= stagnation_rounds and iteration + 1 < n_iterations:
+                self.stop_reason = 'stagnation'
+                break
 
         return self.lowest_cost
        

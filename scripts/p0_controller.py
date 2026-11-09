@@ -174,6 +174,14 @@ class Controller:
         self.task = TASK if task_contract is None else task_contract.task_prompt()
         self.output = OUTPUT if task_contract is None else task_contract.output_prompt()
         self.direction = "min" if task_contract is None else task_contract.direction
+        config = getattr(backend, "cfg", {})
+        self.evaluation_mode = config.get("task", {}).get("evaluation_mode", "final_quality")
+        if self.evaluation_mode == "quality_per_time":
+            self.direction = "max"
+            self.task += ("\nEvaluation objective score: 1 / (mean final tour length * mean complete "
+                          "solver wall time). Higher scores are better. All candidates use the same stopping rule.")
+        elif self.evaluation_mode != "final_quality":
+            raise ValueError("未知评价设置。")
         if self.direction not in ("min", "max"):
             raise ValueError("目标方向必须为 min 或 max。")
         self.parse_proposal = probe.parse_proposal if task_contract is None else task_contract.parse_proposal
@@ -261,12 +269,20 @@ class Controller:
                     or not isinstance(fitness, (int, float)) or isinstance(fitness, bool)):
                 raise StopRun("评价器返回了无效分数类型。")
             import math
-            expected_fitness = -objective if self.direction == "min" else objective
+            if self.evaluation_mode == "quality_per_time":
+                elapsed = result.get("average_solve_wall_seconds")
+                if (not isinstance(elapsed, (int, float)) or isinstance(elapsed, bool)
+                        or not math.isfinite(elapsed) or elapsed <= 0 or objective <= 0):
+                    raise StopRun("速度评价返回无效的平均求解时间或路线长度。")
+                expected_fitness = 1.0 / (objective * elapsed)
+            else:
+                expected_fitness = -objective if self.direction == "min" else objective
             if not math.isfinite(objective) or not math.isfinite(fitness) or fitness != expected_fitness:
                 raise StopRun("评价器返回的目标或 Fitness 不可信。")
             with self._lock:
                 candidate.completed_order = result.get("completed_monotonic_ns", time.monotonic_ns())
-            candidate.objective, candidate.fitness = float(objective), float(fitness)
+            candidate.objective = float(fitness if self.evaluation_mode == "quality_per_time" else objective)
+            candidate.fitness = float(fitness)
             candidate.evaluation_origin = candidate.candidate_id
             return candidate
         except StopRun:

@@ -53,7 +53,8 @@ def load_test_contract(config, manifest, data_contract):
     return entries[0]
 
 
-def read_complete(stdout_path, entry, manifest, direction, dataset, expected_ants, lkh_reference=None):
+def read_complete(stdout_path, entry, manifest, direction, dataset, expected_ants, lkh_reference=None,
+                  *, stagnation_rounds=None):
     events = [json.loads(line[len(PREFIX):]) for line in stdout_path.read_text(encoding="utf-8").splitlines()
               if line.startswith(PREFIX)]
     if [event.get("event") for event in events] != ["start"] + ["instance"] * 64 + ["complete"]:
@@ -72,13 +73,21 @@ def read_complete(stdout_path, entry, manifest, direction, dataset, expected_ant
     if "max_path_length" in entry and start.get("max_len") != entry["max_path_length"]:
         raise ValueError("OP 测试路径长度限制不符。")
     is_gls = manifest.get("task") == "tsp_gls"
+    if stagnation_rounds is None and start.get("evaluation_mode") is not None:
+        raise ValueError("质量设置不能接收速度测试事件。")
+    if stagnation_rounds is not None and (manifest.get("task") != "tsp_aco" or direction != "min"
+            or type(stagnation_rounds) is not int or stagnation_rounds < 1
+            or start.get("evaluation_mode") != "quality_per_time"
+            or start.get("stagnation_rounds") != stagnation_rounds
+            or start.get("time_scope") != "solve_wall_seconds_including_preparation_and_validation"):
+        raise ValueError("测试速度设置或计时范围无效。")
     if is_gls and (lkh_reference is None or direction != "min"
                    or start.get("lkh_reference_sha256") != lkh_reference["sha256"]
                    or start.get("lkh_reference_mean") != lkh_reference["mean"]
                    or start.get("lkh_absolute_tolerance") != ABS_TOLERANCE
                    or start.get("lkh_relative_tolerance") != REL_TOLERANCE):
         raise ValueError("GLS 的 LKH 参考或停止容差不符。")
-    objectives, actual_iterations, stopping_reasons = [], [], []
+    objectives, actual_iterations, stopping_reasons, solve_times = [], [], [], []
     for index, event in enumerate(events[1:-1]):
         objective = event.get("objective")
         if (event.get("index") != index or event.get("seed") != entry["evaluation_seed_base"] + index
@@ -96,6 +105,17 @@ def read_complete(stdout_path, entry, manifest, direction, dataset, expected_ant
                 raise ValueError(f"GLS 实例 {index} 的停止原因不符。")
             actual_iterations.append(iterations)
             stopping_reasons.append(reason)
+        elif stagnation_rounds is not None:
+            elapsed = event.get("solve_wall_seconds")
+            if (objective <= 0 or type(iterations) is not int or not 1 <= iterations <= entry["iterations"]
+                    or (iterations < entry["iterations"] and iterations <= stagnation_rounds)
+                    or event.get("stop_reason") != ("stagnation" if iterations < entry["iterations"] else "iteration_limit")
+                    or isinstance(elapsed, bool) or not isinstance(elapsed, (int, float))
+                    or not math.isfinite(elapsed) or elapsed <= 0):
+                raise ValueError(f"测试实例 {index} 的停止原因或完整求解时间无效。")
+            actual_iterations.append(iterations)
+            stopping_reasons.append(event["stop_reason"])
+            solve_times.append(float(elapsed))
         elif iterations != entry["iterations"]:
             raise ValueError(f"测试实例 {index} 的迭代数不符。")
         objectives.append(float(objective))
@@ -104,12 +124,28 @@ def read_complete(stdout_path, entry, manifest, direction, dataset, expected_ant
             or not math.isclose(average, math.fsum(objectives) / 64, rel_tol=1e-12, abs_tol=1e-12)):
         raise ValueError("测试平均目标与逐实例结果不一致。")
     fitness = -average if direction == "min" else average
+    if stagnation_rounds is not None:
+        if average <= 0:
+            raise ValueError("平均路线长度必须为正。")
+        mean_time = math.fsum(solve_times) / len(solve_times)
+        fitness = 1.0 / (average * mean_time)
+        reported_time = complete.get("average_solve_wall_seconds")
+        if (isinstance(reported_time, bool) or not isinstance(reported_time, (int, float))
+                or not math.isfinite(reported_time) or not math.isfinite(fitness)
+                or not math.isclose(reported_time, mean_time, rel_tol=1e-12, abs_tol=1e-12)):
+            raise ValueError("测试平均时间与逐实例记录不一致。")
+    if stagnation_rounds is not None and "fitness" not in complete:
+        raise ValueError("测试速度 Fitness 缺失。")
     if "fitness" in complete:
         supplied = complete["fitness"]
         if (isinstance(supplied, bool) or not isinstance(supplied, (int, float))
                 or not math.isfinite(supplied) or supplied != fitness):
             raise ValueError("测试 Fitness 与目标方向不一致。")
     output = {"objectives": objectives, "average": average, "fitness": fitness, "start": start}
+    if stagnation_rounds is not None:
+        output.update({"evaluation_mode": "quality_per_time", "average_solve_wall_seconds": mean_time,
+                       "solve_wall_seconds": solve_times, "actual_iterations": actual_iterations,
+                       "stopping_reasons": stopping_reasons})
     if is_gls:
         gap = (average / lkh_reference["mean"] - 1.0) * 100.0
         supplied_gap = complete.get("lkh_gap_percent")
@@ -171,6 +207,12 @@ def evaluate(candidate_dir, config_path):
         raise ValueError("原研发运行配置已变化。")
     training = json.loads(train_config.read_text(encoding="utf-8"))
     verify_training_config(training)
+    training_task = training.get("task", {})
+    mode = training_task.get("evaluation_mode", "final_quality")
+    stagnation_rounds = training_task.get("stagnation_rounds") if mode == "quality_per_time" else None
+    if (config.get("evaluation_mode", "final_quality") != mode
+            or config.get("stagnation_rounds") != stagnation_rounds):
+        raise ValueError("研发与测试的评价设置或停滞轮数不一致。")
     if training.get("status") != "frozen" or training.get("method", {}).get("id") != manifest.get("method"):
         raise ValueError("原研发运行的状态或方法身份不符。")
     if (manifest.get("matrix_contract_sha256") != config["matrix_contract_sha256"]
@@ -224,6 +266,8 @@ def evaluate(candidate_dir, config_path):
     if digest(copied) != manifest["candidate_sha256"]:
         raise ValueError("测试副本与冻结候选不一致。")
     command = [training["resources"]["python_executable"], "-B", "-u", str(evaluator), str(config["size"]), str(root), "test"]
+    if stagnation_rounds is not None:
+        command.extend(["--stagnation-rounds", str(stagnation_rounds)])
     env = os.environ.copy()
     env.update(training["resources"]["thread_environment"])
     env.update({"PYTHONUTF8": "1", "PYTHONDONTWRITEBYTECODE": "1",
@@ -261,7 +305,7 @@ def evaluate(candidate_dir, config_path):
         if record["status"] == "failed" and record.get("exit_code") == 0:
             expected_ants = data_contract["tasks"][manifest["task"]]["train"]["ants"]
             record.update(read_complete(stdout_path, entry, manifest, contract.direction, dataset,
-                                        expected_ants, lkh_reference))
+                                        expected_ants, lkh_reference, stagnation_rounds=stagnation_rounds))
             record["status"] = "passed"
     except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError) as exc:
         record["status"], record["error"] = "infrastructure_error", f"{type(exc).__name__}: {exc}"
