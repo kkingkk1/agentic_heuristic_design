@@ -1,0 +1,60 @@
+import numpy as np
+
+
+def heuristics_v2(distance_matrix: np.ndarray) -> np.ndarray:
+    """Return edge desirability indicators for stochastic TSP solution sampling."""
+    distances = np.asarray(distance_matrix, dtype=float)
+
+    if distances.ndim != 2 or distances.shape[0] != distances.shape[1]:
+        raise ValueError("distance_matrix must be a square 2D array")
+
+    n = distances.shape[0]
+    if n == 0:
+        return np.empty((0, 0), dtype=float)
+    if n == 1:
+        return np.zeros((1, 1), dtype=float)
+
+    d = 0.5 * (distances + distances.T)
+    finite_positive = np.isfinite(d) & (d > 0)
+    positive_values = d[finite_positive]
+
+    if positive_values.size == 0:
+        return np.zeros_like(d, dtype=float)
+
+    fallback = float(np.max(positive_values))
+    d = np.where(finite_positive, d, fallback)
+    np.fill_diagonal(d, np.inf)
+
+    local_scale = np.min(d, axis=1)
+    local_scale = np.maximum(local_scale, np.finfo(float).eps)
+
+    visibility = 1.0 / np.maximum(d, np.finfo(float).eps)
+    relative_length = d / np.sqrt(
+        local_scale[:, None] * local_scale[None, :]
+    )
+
+    proximity = 1.0 / (1.0 + relative_length)
+    long_edge_penalty = np.exp(-0.7 * np.maximum(relative_length - 1.0, 0.0))
+
+    ranks = np.argsort(np.argsort(d, axis=1), axis=1)
+    neighbor_strength = np.exp(
+        -ranks.astype(float) / max(1.0, np.sqrt(float(n)))
+    )
+    mutual_neighbor_bonus = np.sqrt(
+        neighbor_strength * neighbor_strength.T
+    )
+
+    scale = np.sqrt(
+        np.maximum(local_scale[:, None] * local_scale[None, :], np.finfo(float).eps)
+    )
+    score = (visibility * scale) * proximity * long_edge_penalty
+    score *= 0.75 + 0.75 * mutual_neighbor_bonus
+
+    score = 0.5 * (score + score.T)
+    np.fill_diagonal(score, 0.0)
+
+    maximum = np.max(score)
+    if np.isfinite(maximum) and maximum > 0:
+        score /= maximum
+
+    return np.nan_to_num(score, nan=0.0, posinf=0.0, neginf=0.0)

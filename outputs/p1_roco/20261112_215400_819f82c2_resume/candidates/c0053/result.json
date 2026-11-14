@@ -1,0 +1,30 @@
+{
+  "status": "candidate_error",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\eval.py",
+    "50",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_215400_819f82c2_resume\\candidates\\c0053",
+    "train"
+  ],
+  "resources": {
+    "available_memory_bytes": 40602804224,
+    "priority": "Normal"
+  },
+  "started_at_utc": "2026-11-12T14:00:17.257300+00:00",
+  "candidate_id": "c0053",
+  "pid": 7292,
+  "exit_code": 1,
+  "error": "候选运行或输出非法；详见 stderr.txt。",
+  "process_tree_cpu": {
+    "user_seconds": 1.21875,
+    "kernel_seconds": 0.453125,
+    "cpu_seconds": 1.671875,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 1.7809999999881256
+}

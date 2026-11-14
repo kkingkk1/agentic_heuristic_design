@@ -31,41 +31,54 @@ class TestP1MatrixStatus(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "未冻结"):
             matrix.load_matrix()
 
+    def test_current_scope_contains_only_two_methods_on_tsp50(self):
+        config, data = matrix.load_matrix(allow_pending=True)
+        self.assertEqual(matrix.conditions(), [("tsp_aco", "white_box")])
+        self.assertEqual(matrix.test_cells(data), [("tsp_aco", "white_box", 50)])
+        self.assertEqual(set(matrix.METHODS), {"proposed_solution_quality_and_speed_agents", "roco_paper_adapted"})
+        self.assertEqual(matrix.reference_cells(data), [])
+        summary = matrix.summary(config, data)
+        self.assertEqual((summary["research_runs"], summary["candidate_test_runs"],
+                          summary["reference_test_runs"]), (6, 6, 0))
+        self.assertEqual((summary["normal_model_calls"], summary["normal_evaluation_slots"]), (2520, 2268))
+        for kind in ("expert", "deepaco"):
+            with self.subTest(kind=kind), self.assertRaisesRegex(ValueError, "不在 P1 矩阵中"):
+                matrix.reference_config(config, data, kind, "tsp_aco", 50)
+
 
 class TestP1FormalMatrix(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         config, _ = matrix.load_matrix(allow_pending=True)
         if config["status"] == "pending":
-            raise unittest.SkipTest("矩阵正在缩减预算；冻结后再验证正式合同。")
+            raise unittest.SkipTest("矩阵待重新核验并冻结；冻结后再验证正式合同。")
         cls.matrix, cls.data = matrix.load_matrix()
 
     def test_matrix_covers_conditions_and_pairs_replicate_seeds(self):
         cells = matrix.run_cells(self.matrix)
-        self.assertEqual(len(cells), 4)
-        self.assertEqual(len(set(cells)), 4)
+        self.assertEqual(len(cells), 6)
+        self.assertEqual(len(set(cells)), 6)
         self.assertEqual(matrix.conditions(), [("tsp_aco", "white_box")])
         for task, condition in matrix.conditions():
             seeds = {}
             for method in matrix.METHODS:
                 values = [matrix.training_config(self.matrix, task, condition, method, index)
-                          ["task"]["selection_seed"] for index in (1, 2)]
+                          ["task"]["selection_seed"] for index in (1, 2, 3)]
                 seeds[method] = values
             self.assertTrue(all(value == self.matrix["selection_seeds"] for value in seeds.values()))
         self.assertEqual(matrix.test_cells(self.data), [("tsp_aco", "white_box", 50)])
-        self.assertEqual(matrix.reference_cells(self.data), [("expert", "tsp_aco", 50),
-                                                             ("deepaco", "tsp_aco", 50)])
+        self.assertEqual(matrix.reference_cells(self.data), [])
         self.assertEqual(matrix.summary(self.matrix, self.data), {
-            "conditions": 1, "methods": 2, "research_runs": 4, "test_condition_scales": 1,
-            "candidate_test_runs": 4, "candidate_test_instances": 256,
-            "normal_model_calls": 156, "max_model_calls_including_retries": 156,
-            "normal_evaluation_slots": 128, "max_evaluation_starts_including_retries": 128,
-            "max_training_process_tree_cpu_seconds": 72000,
-            "candidate_test_max_wall_seconds_sum": 3600,
-            "candidate_test_max_cpu_seconds_sum": 100800,
-            "reference_test_runs": 2, "reference_test_instances": 128,
-            "reference_test_max_wall_seconds_sum": 1800,
-            "reference_test_max_cpu_seconds_sum": 50400,
+            "conditions": 1, "methods": 2, "research_runs": 6, "test_condition_scales": 1,
+            "candidate_test_runs": 6, "candidate_test_instances": 384,
+            "normal_model_calls": 2520, "max_model_calls_including_retries": 2520,
+            "normal_evaluation_slots": 2268, "max_evaluation_starts_including_retries": 2268,
+            "max_training_process_tree_cpu_seconds": 108000,
+            "candidate_test_max_wall_seconds_sum": 5400,
+            "candidate_test_max_cpu_seconds_sum": 151200,
+            "reference_test_runs": 0, "reference_test_instances": 0,
+            "reference_test_max_wall_seconds_sum": 0,
+            "reference_test_max_cpu_seconds_sum": 0,
             "primary_comparisons": 1, "model_token_total_limit": None,
         })
 
@@ -75,9 +88,10 @@ class TestP1FormalMatrix(unittest.TestCase):
                 config = matrix.training_config(self.matrix, task, condition, method, repeat)
                 RUN_VALIDATORS[method][1](config)
                 self.assertEqual((config["task"]["initial_proposals"], config["task"]["population_size"],
-                                  config["task"]["collaboration_rounds"]), (6, 2, 3))
-                self.assertEqual(config["budget"]["max_initialization_and_generation_evaluation_starts"], 32)
-                self.assertEqual(config["budget"]["max_initialization_and_generation_model_cli_invocations"], 39)
+                                  config["task"]["collaboration_rounds"]), (30, 10, 3))
+                self.assertEqual(config["task"]["generations"], 6)
+                self.assertEqual(config["budget"]["max_initialization_and_generation_evaluation_starts"], 378)
+                self.assertEqual(config["budget"]["max_initialization_and_generation_model_cli_invocations"], 420)
                 self.assertEqual(config["budget"]["additional_infrastructure_retry_calls"], 0)
                 self.assertEqual(config["budget"]["additional_infrastructure_evaluation_starts"], 0)
         for task, condition, size in matrix.test_cells(self.data):
@@ -90,7 +104,7 @@ class TestP1FormalMatrix(unittest.TestCase):
         config = matrix.training_config(self.matrix, "tsp_aco", "white_box", "proposed_solution_quality_and_speed_agents", 1)
         matrix.verify_training_config(config)
         for section, field, value in (("task", "selection_seed", 1),
-                                      ("task", "population_size", 10),
+                                      ("task", "population_size", 2),
                                       ("budget", "normal_model_calls", 96),
                                       ("model", "name", "other"),
                                       (None, "formal_replicate", 2),
@@ -107,7 +121,7 @@ class TestP1FormalMatrix(unittest.TestCase):
         with self.assertRaises(ValueError):
             matrix.training_config(self.matrix, "tsp_aco", "white_box", "eoh", 1)
         with self.assertRaises(ValueError):
-            matrix.training_config(self.matrix, "tsp_aco", "white_box", "proposed_solution_quality_and_speed_agents", 3)
+            matrix.training_config(self.matrix, "tsp_aco", "white_box", "proposed_solution_quality_and_speed_agents", 4)
         with self.assertRaises(ValueError):
             matrix.test_config(self.matrix, "tsp_aco", "white_box", 100)
         test = matrix.test_config(self.matrix, "tsp_aco", "white_box", 50)
@@ -116,22 +130,24 @@ class TestP1FormalMatrix(unittest.TestCase):
             matrix.verify_test_config(dict(test, solver_repeats_per_instance=2))
 
     def test_all_reference_configs_match_method_gates(self):
-        for kind, task, size in matrix.reference_cells(self.data):
-            with self.subTest(kind=kind, task=task, size=size):
-                config = matrix.reference_config(self.matrix, self.data, kind, task, size)
-                if kind == "expert":
-                    p1_reference_test_evaluate.load_reference_contract(
-                        config, self.data, digest(matrix.DATA_CONTRACT), digest(matrix.RESOURCE_PATH))
-                elif kind == "deepaco":
-                    p1_deepaco_test_evaluate.load_reference_contract(config, self.data, digest(matrix.DATA_CONTRACT))
-        config = matrix.reference_config(self.matrix, self.data, "deepaco", "tsp_aco", 50)
-        self.assertEqual((config["checkpoint"], config["checkpoint_scale_mode"]), ("tsp100", "cross_scale"))
-        with self.assertRaises(ValueError):
-            matrix.reference_config(self.matrix, self.data, "gnngls", "tsp_gls", 200)
-        expert = matrix.reference_config(self.matrix, self.data, "expert", "tsp_aco", 50)
-        matrix.verify_reference_config(expert, "expert")
-        with self.assertRaises(ValueError):
-            matrix.verify_reference_config(dict(expert, whole_dataset_wall_timeout_seconds=1), "expert")
+        optional = [("expert", "tsp_aco", 50), ("deepaco", "tsp_aco", 50)]
+        with patch.object(matrix, "reference_cells", return_value=optional):
+            for kind, task, size in optional:
+                with self.subTest(kind=kind, task=task, size=size):
+                    config = matrix.reference_config(self.matrix, self.data, kind, task, size)
+                    if kind == "expert":
+                        p1_reference_test_evaluate.load_reference_contract(
+                            config, self.data, digest(matrix.DATA_CONTRACT), digest(matrix.RESOURCE_PATH))
+                    elif kind == "deepaco":
+                        p1_deepaco_test_evaluate.load_reference_contract(config, self.data, digest(matrix.DATA_CONTRACT))
+            config = matrix.reference_config(self.matrix, self.data, "deepaco", "tsp_aco", 50)
+            self.assertEqual((config["checkpoint"], config["checkpoint_scale_mode"]), ("tsp100", "cross_scale"))
+            with self.assertRaises(ValueError):
+                matrix.reference_config(self.matrix, self.data, "gnngls", "tsp_gls", 200)
+            expert = matrix.reference_config(self.matrix, self.data, "expert", "tsp_aco", 50)
+            matrix.verify_reference_config(expert, "expert")
+            with self.assertRaises(ValueError):
+                matrix.verify_reference_config(dict(expert, whole_dataset_wall_timeout_seconds=1), "expert")
 
     def test_duplicate_run_detection_ignores_preflight_but_rejects_started_run(self):
         config = matrix.training_config(self.matrix, "tsp_aco", "white_box", "proposed_solution_quality_and_speed_agents", 1)

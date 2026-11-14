@@ -8,6 +8,7 @@ import math
 from pathlib import Path
 import random
 import sys
+from time import perf_counter
 
 import numpy as np
 import torch
@@ -276,6 +277,8 @@ def main(*, black_box=False, deepaco_model=None, k_sparse=None):
     start = {"event": "start", "dataset": str(dataset), "seed_base": seed_base, "n_ants": N_ANTS,
              "n_iterations": iterations, "n_nodes": size, "max_len": max_len,
              "numpy": np.__version__, "torch": torch.__version__, "torch_threads": torch.get_num_threads()}
+    if phase == "train":
+        start["time_scope"] = "solve_wall_seconds_including_preparation_and_validation"
     if code_hash is not None:
         start["candidate_sha256"] = code_hash
     if deepaco_model is not None:
@@ -284,20 +287,30 @@ def main(*, black_box=False, deepaco_model=None, k_sparse=None):
                               "k_sparse": k_sparse, "compute_dtype": "float64", "source_sha256": reference_snapshot,
                               "software_versions": software_versions("op")}
     emit(start)
-    objectives = []
+    objectives, solve_times = [], []
     for index, points in enumerate(positions):
         seed = seed_base + index
         random.seed(seed)
         np.random.seed(seed)
         torch.manual_seed(seed)
+        if phase == "train":
+            started = perf_counter()
         if deepaco_model is None:
             objective, solution, distance, completed_iterations = solve(points, heuristic, iterations, max_len)
         else:
             objective, solution, distance, completed_iterations = solve_deepaco(
                 points, deepaco_model, k_sparse=k_sparse, n_iterations=iterations, max_len=max_len)
+        if phase == "train":
+            elapsed = perf_counter() - started
+            if not math.isfinite(elapsed) or elapsed <= 0:
+                raise ValueError("单例完整求解时间无效。")
+            solve_times.append(elapsed)
         objectives.append(objective)
-        emit({"event": "instance", "index": index, "seed": seed, "objective": objective,
-              "iterations": completed_iterations, "solution": solution, "distance": distance})
+        event = {"event": "instance", "index": index, "seed": seed, "objective": objective,
+                 "iterations": completed_iterations, "solution": solution, "distance": distance}
+        if phase == "train":
+            event["solve_wall_seconds"] = elapsed
+        emit(event)
     if sha256(dataset.read_bytes()).hexdigest() != expected_hash:
         raise ValueError("评价期间实例集发生变化；不生成完成事件。")
     if code_hash is not None and candidate_hash(root) != code_hash:
@@ -305,7 +318,10 @@ def main(*, black_box=False, deepaco_model=None, k_sparse=None):
     if reference_snapshot is not None and deepaco_model.source_snapshot() != reference_snapshot:
         raise ValueError("评价期间 DeepACO 来源文件发生变化；不生成完成事件。")
     average = float(np.mean(objectives))
-    emit({"event": "complete", "instance_count": len(objectives), "average": average, "fitness": average})
+    complete = {"event": "complete", "instance_count": len(objectives), "average": average, "fitness": average}
+    if phase == "train":
+        complete["average_solve_wall_seconds"] = math.fsum(solve_times) / len(solve_times)
+    emit(complete)
 
 
 if __name__ == "__main__":

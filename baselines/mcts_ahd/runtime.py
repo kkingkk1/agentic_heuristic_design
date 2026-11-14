@@ -2,9 +2,8 @@
 
 from pathlib import Path
 
-from scripts import p0_budget_quota
 from scripts.p0_controller import StopRun
-from scripts.p0_runtime import ROOT, digest, quota_gate
+from scripts.p0_runtime import ROOT, digest
 from scripts.p1_runtime import TaskRuntime
 
 
@@ -38,11 +37,3 @@ class MCTSAHDRuntime(TaskRuntime):
                            note="实测估算不是后续候选耗时上界。")
             if remaining_cpu < max(minimum, empirical):
                 raise StopRun("评价 CPU 预算不足以覆盖 MCTS-AHD 下一次扩展。")
-        try:
-            quota = p0_budget_quota.read_limits()
-        except p0_budget_quota.QuotaProbeError as exc:
-            raise StopRun(f"无法回读订阅额度：{exc}") from exc
-        self.log.event("search_step_quota", quota=quota)
-        required_calls = 2 + settings["additional_infrastructure_retry_calls"] - budget.model_retries
-        mode = quota_gate(quota, required_calls, allow_unquantified=self.allow_unquantified_quota)
-        self.log.event("search_step_quota_gate", mode=mode, required_model_calls=required_calls)

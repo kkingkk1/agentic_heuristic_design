@@ -15,9 +15,9 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from scripts import p0_budget_quota, p0_model_probe as probe, p1_model_smoke as smoke  # noqa: E402
+from scripts import p0_model_probe as probe, p1_model_smoke as smoke  # noqa: E402
 from scripts.p0_controller import Controller, StopRun  # noqa: E402
-from scripts.p0_runtime import JsonLog, digest, memory_and_priority, quota_gate  # noqa: E402
+from scripts.p0_runtime import JsonLog, digest, memory_and_priority  # noqa: E402
 from scripts.p1_runtime import TRAINING, TRAINING_PARAMETERS, TaskRuntime  # noqa: E402
 from scripts.p1_task_contract import load_task_contract  # noqa: E402
 
@@ -88,8 +88,7 @@ def run_one(backend, log):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", action="store_true", help="执行有界检查；默认只打印方案")
-    parser.add_argument("--allow-unquantified-quota", action="store_true",
-                        help="本次小预算检查接受订阅余量无法换算为调用次数")
+    parser.add_argument("--allow-unquantified-quota", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args()
     if not args.run:
         print(json.dumps(plan(), ensure_ascii=False, indent=2))
@@ -103,16 +102,14 @@ def main():
         if (login.get("exit_code") != 0
                 or "Logged in using ChatGPT" not in (login.get("stdout", "") + login.get("stderr", ""))):
             raise StopRun("无法确认 Codex CLI 的 ChatGPT 登录。")
-        quota = p0_budget_quota.read_limits()
-        mode = quota_gate(quota, MAX_CALLS, allow_unquantified=args.allow_unquantified_quota)
-    except (StopRun, probe.ProbeError, p0_budget_quota.QuotaProbeError, OSError) as exc:
+    except (StopRun, probe.ProbeError, OSError) as exc:
         print(f"启动前检查失败：{type(exc).__name__}: {exc}", file=sys.stderr)
         return 1
 
     root = ROOT / "outputs/p1_task_smoke" / (datetime.now().strftime("%Y%m%d_%H%M%S") + "_" + uuid.uuid4().hex[:8])
     root.mkdir(parents=True, exist_ok=False)
     with (root / "preflight.json").open("x", encoding="utf-8", newline="\n") as stream:
-        json.dump({"plan": plan(), "resources": resources, "quota": quota, "quota_gate": mode},
+        json.dump({"plan": plan(), "resources": resources},
                   stream, ensure_ascii=False, indent=2, allow_nan=False)
         stream.write("\n")
     counters = {"calls": 0, "lock": threading.Lock(), "stop": threading.Event()}

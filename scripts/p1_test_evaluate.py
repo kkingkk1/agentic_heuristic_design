@@ -81,13 +81,19 @@ def read_complete(stdout_path, entry, manifest, direction, dataset, expected_ant
             or start.get("stagnation_rounds") != stagnation_rounds
             or start.get("time_scope") != "solve_wall_seconds_including_preparation_and_validation"):
         raise ValueError("测试速度设置或计时范围无效。")
+    scope, heuristic_scope = start.get("time_scope"), start.get("heuristic_time_scope")
+    if (scope not in (None, "solve_wall_seconds_including_preparation_and_validation")
+            or heuristic_scope not in (None, "heuristic_function_only")
+            or (heuristic_scope is not None and scope is None)
+            or (scope is not None and manifest.get("task") != "tsp_aco")):
+        raise ValueError("测试计时范围无效。")
     if is_gls and (lkh_reference is None or direction != "min"
                    or start.get("lkh_reference_sha256") != lkh_reference["sha256"]
                    or start.get("lkh_reference_mean") != lkh_reference["mean"]
                    or start.get("lkh_absolute_tolerance") != ABS_TOLERANCE
                    or start.get("lkh_relative_tolerance") != REL_TOLERANCE):
         raise ValueError("GLS 的 LKH 参考或停止容差不符。")
-    objectives, actual_iterations, stopping_reasons, solve_times = [], [], [], []
+    objectives, actual_iterations, stopping_reasons, solve_times, heuristic_times = [], [], [], [], []
     for index, event in enumerate(events[1:-1]):
         objective = event.get("objective")
         if (event.get("index") != index or event.get("seed") != entry["evaluation_seed_base"] + index
@@ -106,34 +112,56 @@ def read_complete(stdout_path, entry, manifest, direction, dataset, expected_ant
             actual_iterations.append(iterations)
             stopping_reasons.append(reason)
         elif stagnation_rounds is not None:
-            elapsed = event.get("solve_wall_seconds")
             if (objective <= 0 or type(iterations) is not int or not 1 <= iterations <= entry["iterations"]
                     or (iterations < entry["iterations"] and iterations <= stagnation_rounds)
-                    or event.get("stop_reason") != ("stagnation" if iterations < entry["iterations"] else "iteration_limit")
-                    or isinstance(elapsed, bool) or not isinstance(elapsed, (int, float))
-                    or not math.isfinite(elapsed) or elapsed <= 0):
-                raise ValueError(f"测试实例 {index} 的停止原因或完整求解时间无效。")
+                    or event.get("stop_reason") != ("stagnation" if iterations < entry["iterations"] else "iteration_limit")):
+                raise ValueError(f"测试实例 {index} 的停止原因无效。")
             actual_iterations.append(iterations)
             stopping_reasons.append(event["stop_reason"])
-            solve_times.append(float(elapsed))
         elif iterations != entry["iterations"]:
             raise ValueError(f"测试实例 {index} 的迭代数不符。")
+        if scope is not None:
+            elapsed = event.get("solve_wall_seconds")
+            if (isinstance(elapsed, bool) or not isinstance(elapsed, (int, float))
+                    or not math.isfinite(elapsed) or elapsed <= 0):
+                raise ValueError(f"测试实例 {index} 的完整求解时间无效。")
+            solve_times.append(float(elapsed))
+        elif "solve_wall_seconds" in event:
+            raise ValueError(f"测试实例 {index} 的求解时间缺少计时范围。")
+        if heuristic_scope is not None:
+            heuristic_elapsed = event.get("heuristic_wall_seconds")
+            if (isinstance(heuristic_elapsed, bool) or not isinstance(heuristic_elapsed, (int, float))
+                    or not math.isfinite(heuristic_elapsed) or not 0 <= heuristic_elapsed <= elapsed):
+                raise ValueError(f"测试实例 {index} 的启发式函数时间无效。")
+            heuristic_times.append(float(heuristic_elapsed))
+        elif "heuristic_wall_seconds" in event:
+            raise ValueError(f"测试实例 {index} 的启发式时间缺少计时范围。")
         objectives.append(float(objective))
     average = complete.get("average")
     if (isinstance(average, bool) or not isinstance(average, (int, float)) or not math.isfinite(average)
             or not math.isclose(average, math.fsum(objectives) / 64, rel_tol=1e-12, abs_tol=1e-12)):
         raise ValueError("测试平均目标与逐实例结果不一致。")
     fitness = -average if direction == "min" else average
+    if scope is not None:
+        mean_time = math.fsum(solve_times) / len(solve_times)
+        reported_time = complete.get("average_solve_wall_seconds")
+        if (isinstance(reported_time, bool) or not isinstance(reported_time, (int, float))
+                or not math.isfinite(reported_time)
+                or not math.isclose(reported_time, mean_time, rel_tol=1e-12, abs_tol=1e-12)):
+            raise ValueError("测试平均时间与逐实例记录不一致。")
+    if heuristic_scope is not None:
+        mean_heuristic = math.fsum(heuristic_times) / len(heuristic_times)
+        reported_heuristic = complete.get("average_heuristic_wall_seconds")
+        if (isinstance(reported_heuristic, bool) or not isinstance(reported_heuristic, (int, float))
+                or not math.isfinite(reported_heuristic)
+                or not math.isclose(reported_heuristic, mean_heuristic, rel_tol=1e-12, abs_tol=1e-12)):
+            raise ValueError("测试平均启发式时间与逐实例记录不一致。")
     if stagnation_rounds is not None:
         if average <= 0:
             raise ValueError("平均路线长度必须为正。")
-        mean_time = math.fsum(solve_times) / len(solve_times)
         fitness = 1.0 / (average * mean_time)
-        reported_time = complete.get("average_solve_wall_seconds")
-        if (isinstance(reported_time, bool) or not isinstance(reported_time, (int, float))
-                or not math.isfinite(reported_time) or not math.isfinite(fitness)
-                or not math.isclose(reported_time, mean_time, rel_tol=1e-12, abs_tol=1e-12)):
-            raise ValueError("测试平均时间与逐实例记录不一致。")
+        if not math.isfinite(fitness):
+            raise ValueError("速度 Fitness 无效。")
     if stagnation_rounds is not None and "fitness" not in complete:
         raise ValueError("测试速度 Fitness 缺失。")
     if "fitness" in complete:
@@ -142,9 +170,13 @@ def read_complete(stdout_path, entry, manifest, direction, dataset, expected_ant
                 or not math.isfinite(supplied) or supplied != fitness):
             raise ValueError("测试 Fitness 与目标方向不一致。")
     output = {"objectives": objectives, "average": average, "fitness": fitness, "start": start}
+    if scope is not None:
+        output.update({"average_solve_wall_seconds": mean_time, "solve_wall_seconds": solve_times})
+    if heuristic_scope is not None:
+        output.update({"average_heuristic_wall_seconds": mean_heuristic,
+                       "heuristic_wall_seconds": heuristic_times})
     if stagnation_rounds is not None:
-        output.update({"evaluation_mode": "quality_per_time", "average_solve_wall_seconds": mean_time,
-                       "solve_wall_seconds": solve_times, "actual_iterations": actual_iterations,
+        output.update({"evaluation_mode": "quality_per_time", "actual_iterations": actual_iterations,
                        "stopping_reasons": stopping_reasons})
     if is_gls:
         gap = (average / lkh_reference["mean"] - 1.0) * 100.0

@@ -1,0 +1,18 @@
+F:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py:133: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  dist_mat = distance_matrix(node_pos, node_pos)
+F:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py:133: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  dist_mat = distance_matrix(node_pos, node_pos)
+F:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py:133: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  dist_mat = distance_matrix(node_pos, node_pos)
+F:\OneDrive\project\static_determine\agentic_heuristic_design\outputs\p1_roco\20261112_183109_ae37c237_resume\candidates\c0311\problems\tsp_aco\gpt.py:126: RuntimeWarning: divide by zero encountered in log
+  np.where(row_prob > 0.0, row_prob * np.log(row_prob), 0.0),
+F:\OneDrive\project\static_determine\agentic_heuristic_design\outputs\p1_roco\20261112_183109_ae37c237_resume\candidates\c0311\problems\tsp_aco\gpt.py:126: RuntimeWarning: invalid value encountered in multiply
+  np.where(row_prob > 0.0, row_prob * np.log(row_prob), 0.0),
+F:\OneDrive\project\static_determine\agentic_heuristic_design\outputs\p1_roco\20261112_183109_ae37c237_resume\candidates\c0311\problems\tsp_aco\gpt.py:130: RuntimeWarning: divide by zero encountered in log
+  np.where(col_prob > 0.0, col_prob * np.log(col_prob), 0.0),
+F:\OneDrive\project\static_determine\agentic_heuristic_design\outputs\p1_roco\20261112_183109_ae37c237_resume\candidates\c0311\problems\tsp_aco\gpt.py:130: RuntimeWarning: invalid value encountered in multiply
+  np.where(col_prob > 0.0, col_prob * np.log(col_prob), 0.0),
+F:\OneDrive\project\static_determine\agentic_heuristic_design\outputs\p1_roco\20261112_183109_ae37c237_resume\candidates\c0311\problems\tsp_aco\gpt.py:152: RuntimeWarning: divide by zero encountered in log
+  quality_log = np.where(quality > 0.0, quality * np.log(quality), 0.0)
+F:\OneDrive\project\static_determine\agentic_heuristic_design\outputs\p1_roco\20261112_183109_ae37c237_resume\candidates\c0311\problems\tsp_aco\gpt.py:152: RuntimeWarning: invalid value encountered in multiply
+  quality_log = np.where(quality > 0.0, quality * np.log(quality), 0.0)

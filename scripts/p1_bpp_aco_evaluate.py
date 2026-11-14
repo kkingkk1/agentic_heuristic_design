@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from scripts.p0_controller import check_modification_scope  # noqa: E402
+from scripts.p0_controller import check_modification_scope, read_solve_timing  # noqa: E402
 from scripts.p0_windows_job import WindowsJob  # noqa: E402
 from scripts.p1_job_supervision import wait_for_job  # noqa: E402
 
@@ -67,7 +67,9 @@ def read_complete(stdout_path):
             or not isinstance(fitness, (int, float)) or isinstance(fitness, bool) or not math.isfinite(fitness)
             or fitness != -average or not math.isclose(average, math.fsum(objectives) / 5, rel_tol=1e-12, abs_tol=1e-12)):
         raise ValueError("平均目标或 Fitness 与逐实例结果不一致。")
-    return {"objectives": objectives, "average": average, "fitness": fitness, "start": start}
+    result = {"objectives": objectives, "average": average, "fitness": fitness, "start": start}
+    result.update(read_solve_timing(start, events[1:-1], complete))
+    return result
 
 
 def evaluate(root_dir, *, black_box=False):
@@ -80,7 +82,8 @@ def evaluate(root_dir, *, black_box=False):
     if any(path.exists() for path in (stdout_path, stderr_path, record_path)):
         raise ValueError("运行目录已含评价输出；请使用新的独立运行目录。")
     protected = [candidate, TASK / "aco.py", TASK / "eval.py", TASK / "eval_black_box.py", DATASET,
-                 ROOT / "scripts" / "p1_job_supervision.py", Path(__file__).resolve()]
+                 ROOT / "scripts" / "p0_controller.py", ROOT / "scripts" / "p1_job_supervision.py",
+                 Path(__file__).resolve()]
     before = {str(path): digest(path) for path in protected}
     if before[str(DATASET)] != DATASET_SHA256:
         raise ValueError("训练集哈希不匹配。")

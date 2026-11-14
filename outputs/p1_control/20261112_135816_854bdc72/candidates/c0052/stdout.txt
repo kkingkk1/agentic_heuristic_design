@@ -1,0 +1,16 @@
+[*] Running ...
+[*] Dataset loaded: F:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\dataset\train50_dataset.npy with 5 instances.
+P0_JSON {"event": "start", "dataset": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy", "seed_base": 20261103, "n_ants": 30, "n_iterations": 200, "numpy": "2.3.5", "torch": "2.13.0+cu126", "torch_threads": 1, "time_scope": "solve_wall_seconds_including_preparation_and_validation", "heuristic_time_scope": "heuristic_function_only"}
+[*] Instance 0: 6.373213652009546
+P0_JSON {"event": "instance", "index": 0, "seed": 20261103, "objective": 6.373213652009546, "iterations": 200, "tour": [27, 9, 43, 28, 4, 29, 41, 12, 15, 2, 16, 42, 26, 32, 31, 36, 8, 34, 20, 11, 39, 23, 25, 0, 21, 49, 45, 30, 24, 14, 40, 5, 7, 10, 38, 47, 22, 44, 35, 17, 6, 48, 1, 13, 3, 18, 37, 19, 46, 33], "solve_wall_seconds": 1.5102560000086669, "heuristic_wall_seconds": 0.0005376000190153718}
+[*] Instance 1: 7.346155363371386
+P0_JSON {"event": "instance", "index": 1, "seed": 20261104, "objective": 7.346155363371386, "iterations": 200, "tour": [45, 23, 7, 16, 2, 18, 21, 25, 32, 31, 28, 10, 34, 49, 27, 9, 0, 41, 39, 29, 11, 1, 40, 35, 24, 48, 42, 12, 26, 14, 17, 5, 8, 44, 33, 15, 19, 13, 43, 38, 6, 36, 4, 20, 3, 30, 37, 46, 22, 47], "solve_wall_seconds": 1.5200049999984913, "heuristic_wall_seconds": 0.0004896000027656555}
+[*] Instance 2: 7.343509179126282
+P0_JSON {"event": "instance", "index": 2, "seed": 20261105, "objective": 7.343509179126282, "iterations": 200, "tour": [17, 13, 10, 36, 41, 26, 49, 44, 19, 33, 42, 29, 27, 37, 9, 1, 16, 11, 46, 0, 38, 43, 34, 32, 2, 48, 30, 6, 18, 45, 15, 5, 24, 28, 31, 25, 12, 35, 14, 21, 23, 39, 3, 22, 40, 20, 4, 8, 7, 47], "solve_wall_seconds": 1.5554984000045806, "heuristic_wall_seconds": 0.00043020001612603664}
+[*] Instance 3: 7.137614384325585
+P0_JSON {"event": "instance", "index": 3, "seed": 20261106, "objective": 7.137614384325585, "iterations": 200, "tour": [19, 44, 32, 38, 47, 20, 28, 25, 48, 16, 0, 23, 33, 43, 3, 42, 49, 7, 17, 46, 36, 15, 27, 6, 14, 24, 31, 37, 40, 2, 5, 21, 12, 29, 18, 4, 45, 13, 34, 30, 1, 8, 41, 39, 26, 11, 35, 10, 9, 22], "solve_wall_seconds": 1.5693725000019185, "heuristic_wall_seconds": 0.00043799998820759356}
+[*] Instance 4: 6.777131718548219
+P0_JSON {"event": "instance", "index": 4, "seed": 20261107, "objective": 6.777131718548219, "iterations": 200, "tour": [44, 4, 29, 39, 46, 37, 30, 47, 21, 1, 38, 43, 3, 15, 33, 23, 34, 17, 22, 16, 26, 9, 20, 24, 0, 6, 48, 19, 11, 8, 12, 27, 25, 2, 14, 42, 10, 5, 7, 31, 28, 35, 13, 36, 40, 41, 18, 32, 49, 45], "solve_wall_seconds": 1.518019799987087, "heuristic_wall_seconds": 0.0004349999944679439}
+[*] Average:
+6.995524859476203
+P0_JSON {"event": "complete", "instance_count": 5, "average": 6.995524859476203, "average_solve_wall_seconds": 1.5346303400001489, "average_heuristic_wall_seconds": 0.0004660800041165203}

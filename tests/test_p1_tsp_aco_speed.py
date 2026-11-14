@@ -70,7 +70,8 @@ class FakeBackend:
     def evaluate(self, candidate):
         objective, elapsed = next(self.results)
         return {"status": "passed", "average": objective, "average_solve_wall_seconds": elapsed,
-                "fitness": 1.0 / (objective * elapsed)}
+                "fitness": 1.0 / (objective * elapsed),
+                "start": {"time_scope": "solve_wall_seconds_including_preparation_and_validation"}}
 
 
 def output_events():
@@ -123,18 +124,24 @@ class TestSpeedEvaluation(unittest.TestCase):
 
     def test_training_entrypoint_reports_per_instance_time_and_score(self):
         stream = io.StringIO()
-        values = [(float(i + 4), list(range(50)), 4) for i in range(5)]
+        values = iter((float(i + 4), list(range(50)), 4) for i in range(5))
+
+        def fake_solve(*args, **kwargs):
+            kwargs["timings"]["heuristic_wall_seconds"] = 0.1
+            return next(values)
+
         clock = [value for i in range(5) for value in (10.0 * (i + 1), 10.0 * (i + 1) + i + 1)]
         args = ["eval.py", "50", "candidate", "train", "--stagnation-rounds", "2"]
         with patch.object(sys, "argv", args), patch.object(task.np, "load", return_value=np.zeros((5, 50, 2))), \
                 patch.object(task, "load_heuristic", return_value=object()), \
-                patch.object(task, "solve", side_effect=values) as solve, \
+                patch.object(task, "solve", side_effect=fake_solve) as solve, \
                 patch.object(task, "perf_counter", side_effect=clock), contextlib.redirect_stdout(stream):
             task.main()
         events = [json.loads(line.removeprefix("P0_JSON ")) for line in stream.getvalue().splitlines()
                   if line.startswith("P0_JSON ")]
         result = read_events(events)
         self.assertEqual(result["fitness"], 1.0 / 18.0)
+        self.assertEqual(result["heuristic_wall_seconds"], [0.1] * 5)
         self.assertTrue(all(call.kwargs["stagnation_rounds"] == 2 for call in solve.call_args_list))
 
     def test_test_entrypoint_validates_all_64_instance_times(self):
@@ -176,7 +183,7 @@ class TestSpeedEvaluation(unittest.TestCase):
                 self.assertEqual(controller.select([first, second], 1), [second])
                 self.assertEqual(controller.direction, "max")
                 self.assertIn("Higher scores are better", controller.task)
-                self.assertIn("higher objective is better", controller.branch_critic_prompt(first, second).lower())
+                self.assertIn("higher objective score is better", controller.branch_critic_prompt(first, second).lower())
 
     def test_speed_is_pending_until_its_stopping_rule_is_frozen(self):
         configuration = json.loads(matrix.MATRIX_PATH.read_text(encoding="utf-8"))

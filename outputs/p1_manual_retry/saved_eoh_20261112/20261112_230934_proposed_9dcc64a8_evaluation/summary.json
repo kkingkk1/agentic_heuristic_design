@@ -1,0 +1,29 @@
+{
+  "status": "completed",
+  "source_events": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_230214_43fec153_resume\\events.jsonl",
+  "source_events_sha256": "cd024057a09ba6855e170422206240cde52a379841e8c3cad18539f234dd2083",
+  "new_model_calls": 0,
+  "prior_model_calls": 361,
+  "prior_evaluations": 318,
+  "new_evaluations": 3,
+  "results": [
+    {
+      "candidate_id": "c0323",
+      "status": "passed",
+      "average": 6.135360906111777,
+      "error": null
+    },
+    {
+      "candidate_id": "c0325",
+      "status": "passed",
+      "average": 8.731236182911907,
+      "error": null
+    },
+    {
+      "candidate_id": "c0326",
+      "status": "passed",
+      "average": 14.196113834990104,
+      "error": null
+    }
+  ]
+}

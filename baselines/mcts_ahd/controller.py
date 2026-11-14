@@ -74,6 +74,8 @@ def refine_prompt(contract, candidate):
 class MCTSAHDController(Controller):
     """树节点、渐进扩展、UCT 衰减、路径提示与独立思想重述。"""
 
+    role_specific_critic = False
+
     def __init__(self, backend, log, contract, *, initial_size=None, population_size=10,
                  max_evaluations=50, seed=20261103):
         initial_size = (10 if contract.black_box else 4) if initial_size is None else initial_size

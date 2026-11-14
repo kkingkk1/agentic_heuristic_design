@@ -1,0 +1,20 @@
+{
+  "status": "frozen_after_training",
+  "created_at_utc": "2026-11-13T11:23:36.563066+00:00",
+  "method": "proposed_solution_quality_and_speed_agents",
+  "task": "tsp_aco",
+  "prompt_condition": "white_box",
+  "matrix_contract_sha256": "a169698d296bd79094f11488741fca47f1ff67574e3c90501c6ae7789fde3d71",
+  "formal_replicate": 3,
+  "selection_seed": 2026110603,
+  "source_run": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_182734_19e8e233_resume",
+  "source_candidate_id": "c0333",
+  "source_config_sha256": "930f2cc627a149d197e044ced2861925fe450131f4f0ff47610bc0a9715871d2",
+  "source_events_sha256": "91b45893e7b220527a22bdf4dc0f96ec9c72fa81a7bca5a91fadf2c3c55bebfe",
+  "source_result_sha256": "8b0b1b6a7f605f4e16ecd1cc9d01257325a29bb0a2d4ab96490567c805f65a7d",
+  "source_stdout_sha256": "767a6b5e8099f24dac64a25d6707e8acd674e72b60f86ccab6d01adf6a7a4a54",
+  "candidate_sha256": "fa972a6aa4b92268ae294c7eb1ede09f09f8c36b7ed834f1f1d95dc9126433e5",
+  "train_objective": 5.7804493629799225,
+  "train_fitness": -5.7804493629799225,
+  "note": "训练完成后冻结；尚未执行测试。"
+}

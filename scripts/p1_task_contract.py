@@ -27,7 +27,11 @@ class TaskContract:
 
     def task_prompt(self):
         """只提供任务、待设计模块、接口和对应提示条件的必要上下文。"""
-        return f"{self.description}\n{self.function_description}\nFunction interface: {self.signature}"
+        if self.direction not in ("min", "max"):
+            raise ValueError("任务目标方向必须为 min 或 max。")
+        objective = "minimize" if self.direction == "min" else "maximize"
+        return (f"{self.description}\nOriginal task objective: {objective} the final objective value.\n"
+                f"{self.function_description}\nFunction interface: {self.signature}")
 
     def output_prompt(self):
         return ("Return <thought>algorithm description</thought> followed by the complete executable "

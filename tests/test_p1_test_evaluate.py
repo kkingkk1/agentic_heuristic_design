@@ -61,6 +61,21 @@ class TestP1TestSupervisor(unittest.TestCase):
             with self.subTest(key=key), self.assertRaises(ValueError):
                 test_runner.load_test_contract(config, self.manifest, self.data)
 
+    def test_quality_mode_retains_timing_without_changing_fitness(self):
+        events = self.events()
+        events[0].update(time_scope="solve_wall_seconds_including_preparation_and_validation",
+                         heuristic_time_scope="heuristic_function_only")
+        for instance in events[1:-1]:
+            instance.update(solve_wall_seconds=2.0, heuristic_wall_seconds=0.5)
+        events[-1].update(average_solve_wall_seconds=2.0, average_heuristic_wall_seconds=0.5)
+        result = self.read(events)
+        self.assertEqual(result["fitness"], -32.5)
+        self.assertEqual(result["solve_wall_seconds"], [2.0] * 64)
+        self.assertEqual(result["heuristic_wall_seconds"], [0.5] * 64)
+        events[1].pop("heuristic_wall_seconds")
+        with self.assertRaisesRegex(ValueError, "启发式函数时间"):
+            self.read(events)
+
     def test_missing_or_inconsistent_test_evidence_is_rejected(self):
         variants = []
         events = self.events(); events[0]["candidate_sha256"] = "0" * 64; variants.append(events)

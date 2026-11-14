@@ -225,6 +225,19 @@ class TestReferenceCompletion(unittest.TestCase):
                 if name == "bpp":
                     self.assertEqual((result["average"], result["fitness"]), (1.0, -1.0))
 
+    def test_tsp_complete_solve_timing_is_checked_and_recorded(self):
+        *_, rows = self.events("tsp")
+        rows[0]["time_scope"] = "solve_wall_seconds_including_preparation_and_validation"
+        for row in rows[1:-1]:
+            row["solve_wall_seconds"] = 2.0
+        rows[-1]["average_solve_wall_seconds"] = 2.0
+        result = self.read("tsp", rows)
+        self.assertEqual(result["solve_wall_seconds"], [2.0] * 64)
+        self.assertEqual(result["average_solve_wall_seconds"], 2.0)
+        rows[1]["solve_wall_seconds"] = 0.0
+        with self.assertRaisesRegex(ValueError, "求解时间无效"):
+            self.read("tsp", rows)
+
     def test_wrong_reference_objective_or_solution_never_completes(self):
         for name in ("tsp", "op", "bpp", "cvrp", "mkp"):
             _config, _entry, _dataset, _instances, _evaluator, _snapshot, _ants, rows = self.events(name)

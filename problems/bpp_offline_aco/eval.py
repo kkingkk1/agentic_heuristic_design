@@ -8,6 +8,7 @@ import math
 from pathlib import Path
 import random
 import sys
+from time import perf_counter
 
 import numpy as np
 
@@ -239,6 +240,8 @@ def main(*, black_box=False, deepaco_model=None):
         reference_snapshot = deepaco_model.source_snapshot()
     start = {"event": "start", "dataset": str(dataset), "seed_base": seed_base, "n_ants": N_ANTS,
              "n_iterations": iterations, "n_items": size, "capacity": CAPACITY, "numpy": np.__version__}
+    if phase == "train":
+        start["time_scope"] = "solve_wall_seconds_including_preparation_and_validation"
     if code_hash is not None:
         start["candidate_sha256"] = code_hash
     if deepaco_model is not None:
@@ -247,22 +250,33 @@ def main(*, black_box=False, deepaco_model=None):
                               "compute_dtype": "float64", "source_sha256": reference_snapshot,
                               "software_versions": software_versions("bpp")}
     emit(start)
-    objectives = []
+    objectives, solve_times = [], []
     for index, demand in enumerate(demands):
         seed = seed_base + index
         random.seed(seed)
         np.random.seed(seed)
+        source_fitness = None
         if deepaco_model is None:
             source_aco.uniform_generator = source_aco.uniform_number_generator()
-            objective, solution, completed_iterations = solve(demand, heuristic, iterations)
-            source_fitness = None
         else:
             torch.manual_seed(seed)
+        if phase == "train":
+            started = perf_counter()
+        if deepaco_model is None:
+            objective, solution, completed_iterations = solve(demand, heuristic, iterations)
+        else:
             objective, solution, completed_iterations, source_fitness = solve_deepaco(
                 demand, deepaco_model, n_iterations=iterations)
+        if phase == "train":
+            elapsed = perf_counter() - started
+            if not math.isfinite(elapsed) or elapsed <= 0:
+                raise ValueError("单例完整求解时间无效。")
+            solve_times.append(elapsed)
         objectives.append(objective)
         event = {"event": "instance", "index": index, "seed": seed, "objective": objective,
                  "iterations": completed_iterations, "solution": solution}
+        if phase == "train":
+            event["solve_wall_seconds"] = elapsed
         if source_fitness is not None:
             event["source_fitness"] = source_fitness
         emit(event)
@@ -275,7 +289,10 @@ def main(*, black_box=False, deepaco_model=None):
     average = float(np.mean(objectives))
     if not math.isfinite(average):
         raise ValueError("平均箱数无效。")
-    emit({"event": "complete", "instance_count": len(objectives), "average": average, "fitness": -average})
+    complete = {"event": "complete", "instance_count": len(objectives), "average": average, "fitness": -average}
+    if phase == "train":
+        complete["average_solve_wall_seconds"] = math.fsum(solve_times) / len(solve_times)
+    emit(complete)
 
 
 if __name__ == "__main__":

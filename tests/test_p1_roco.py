@@ -12,7 +12,7 @@ from baselines.roco.paper_controller import RoCoController
 from baselines.roco.runtime import RoCoRuntime
 from scripts import p1_run_generation, p1_run_roco
 from scripts import p1_formal_matrix as matrix
-from scripts.p0_controller import Candidate, Controller
+from scripts.p0_controller import Candidate, Controller, SOLVER_TIME_SCOPE, timing_description
 from scripts.p1_task_contract import TASKS, load_task_contract
 from tests.test_p0_controller import FixtureBackend, MemoryLog
 from tests import test_p1_runtime as runtime_tests
@@ -53,7 +53,7 @@ def normalize_role_wording(prompt, proposed, roco):
 
 
 class TestRoCo(unittest.TestCase):
-    def test_roco_prompts_against_project_paper(self):
+    def test_roco_paper_prompts_and_disclosed_shared_clarifications(self):
         paper = (Path(__file__).resolve().parents[1] / "vault/References/RoCo/mineru/full.md").read_text(
             encoding="utf-8").split("## Prompts of RoCo", 1)[1]
         blocks = [match.group(1) for match in re.finditer(r"```txt\s*\n(.*?)\n```", paper, re.S)]
@@ -76,24 +76,31 @@ class TestRoCo(unittest.TestCase):
         expected = fill(blocks[3], **common, explorer_algorithm=q.thought, explorer_code=q.code,
                         explorer_obj=q.objective, exploiter_algorithm=e.thought, exploiter_code=e.code,
                         exploiter_obj=e.objective)
-        self.assertEqual(expected, " ".join(roco.round_fusion_prompt([q, e], "Lower").split()))
+        evidence_limit = "Do not claim measured runtime, quality preservation or causality beyond the supplied evidence.\n"
+        actual = roco.round_fusion_prompt([q, e], "Lower")
+        self.assertIn(evidence_limit, actual)
+        self.assertEqual(expected, " ".join(actual.replace(evidence_limit, "").split()))
         expected = fill(blocks[4], **common, explorer_code=q.code, explorer_obj=q.objective,
                         exploiter_code=e.code, exploiter_obj=e.objective, summary="REFLECTION")
-        self.assertEqual(expected, " ".join(roco.final_fusion_prompt([q, e], ["REFLECTION"]).split()))
-        for value, source in ((4, blocks[9]), (6, blocks[8])):
+        actual = roco.final_fusion_prompt([q, e], ["REFLECTION"])
+        self.assertIn(evidence_limit, actual)
+        self.assertEqual(expected, " ".join(actual.replace(evidence_limit, "").split()))
+        for value in (4, 6):
             e.objective, e.fitness = value, -value
-            worse, better = (q, e) if value == 4 else (e, q)
-            if value == 6:
-                source = source.replace("Worse and prior code:", "Worse and current code:")
-                source = source.replace("Better and current code:", "Better and prior code:")
-            expected = fill(source, task_description=roco.task, first_alg=worse.thought, first_code=worse.code,
-                            first_obj=worse.objective, second_alg=better.thought, second_code=better.code,
-                            second_obj=better.objective, invalid_ind_prompt="")
-            actual = roco.branch_critic_prompt(q, e).replace("A lower objective is better.\n", "")
-            self.assertEqual(expected, " ".join(actual.split()))
+            actual = roco.branch_critic_prompt(q, e)
+            for item in (roco.task, q.thought, q.code, str(q.objective), e.thought, e.code, str(e.objective),
+                         "<ref>", "<ans>"):
+                self.assertIn(item, actual)
+            self.assertIn("do not assume either is the other's parent", actual)
+            self.assertNotIn("prior code", actual.lower())
+            self.assertNotIn("current code", actual.lower())
         changes = {"explorer": [{"from_objective": 5, "proposal_objective": 4, "to_objective": 4}]}
         actual = roco.long_reflection_prompt("explorer", ["REFLECTION"], changes)
         actual = actual.replace(f"Objective changes: {changes['explorer']}\n", "")
+        caution = ("Treat causal explanations as hypotheses; a combined score does not establish "
+                   "separate runtime or quality changes. ")
+        self.assertIn(caution, actual)
+        actual = actual.replace(caution, "")
         expected = fill(blocks[10], task_description=roco.task, reflection="REFLECTION", role="Explorer",
                         role_description=roco.role_focus("explorer"))
         self.assertEqual(expected, " ".join(actual.split()))
@@ -105,9 +112,10 @@ class TestRoCo(unittest.TestCase):
         pair = next(event for event in log.items if event["event"] == "elite_pair")
         a, b = by_id[pair["a"]], by_id[pair["b"]]
         calls = dict(backend.calls)
-        expected = fill(blocks[5] + "\n" + blocks[6], task_description=roco.task, first_code=a.code,
-                        first_objective=a.objective, second_code=b.code, second_objective=b.objective)
-        self.assertEqual(expected, " ".join(calls["critic_initial"].split()))
+        initial = calls["critic_initial"]
+        for item in (roco.task, a.code, b.code, str(a.objective), str(b.objective), "<ref>", "<ans>"):
+            self.assertIn(item, initial)
+        self.assertIn("without assuming a parent-child relationship", initial)
         expected = fill(blocks[11], **common, history_reflection="", reflection="Retain useful changes.",
                         elitist_code=a.code)
         self.assertEqual(expected, " ".join(calls["mutation_A_explorer"].split()))
@@ -117,11 +125,16 @@ class TestRoCo(unittest.TestCase):
         proposed = Controller(None, None, task_contract=contract)
         roco = RoCoController(None, None, task_contract=contract)
         q = Candidate("q", 1, "fixture", (), thought="first idea", code="first code",
-                      objective=5.0, fitness=-5.0)
+                      objective=5.0, fitness=-5.0, raw_objective=5.0,
+                      timing_seconds=2.0, timing_scope=SOLVER_TIME_SCOPE)
         candidates = [Candidate("e", 2, "fixture", (), thought="second idea", code="second code",
-                                objective=value, fitness=-value) for value in (4.0, 5.0, 6.0)]
+                                objective=value, fitness=-value, raw_objective=value,
+                                timing_seconds=3.0, timing_scope=SOLVER_TIME_SCOPE) for value in (4.0, 5.0, 6.0)]
         for candidate in candidates:
-            self.assertEqual(proposed.branch_critic_prompt(q, candidate), roco.branch_critic_prompt(q, candidate))
+            self.assertIn("<quality_ref>", proposed.branch_critic_prompt(q, candidate))
+            self.assertIn("measured timing", proposed.branch_critic_prompt(q, candidate))
+            self.assertIn("<ref>", roco.branch_critic_prompt(q, candidate))
+            self.assertNotIn("measured timing", roco.branch_critic_prompt(q, candidate))
         pair = [q, candidates[0]]
         prompt_pairs = [
             (proposed.round_fusion_prompt(pair, "Lower"), roco.round_fusion_prompt(pair, "Lower")),
@@ -131,8 +144,18 @@ class TestRoCo(unittest.TestCase):
         ]
         critic = {"advice": "feedback", "reflection": "reflection"}
         for proposed_role, roco_role in zip(proposed.design_roles, roco.design_roles):
+            own_prompt = proposed.branch_prompt(proposed_role, q, critic)
+            if proposed_role == "speed_agent":
+                start = own_prompt.index("\nYour current candidate's mean raw objective:")
+                end = own_prompt.index("\nReflection:", start)
+                evidence = own_prompt[start:end]
+                self.assertIn(timing_description(q), evidence)
+                self.assertIn("benefit per solve second: 0.1", evidence)
+                self.assertIn("A single measurement can be affected by concurrent load", evidence)
+                self.assertNotIn("benefit per solve second", roco.branch_prompt(roco_role, q, critic))
+                own_prompt = own_prompt[:start] + own_prompt[end:]
             prompt_pairs.extend([
-                (proposed.branch_prompt(proposed_role, q, critic), roco.branch_prompt(roco_role, q, critic)),
+                (own_prompt, roco.branch_prompt(roco_role, q, critic)),
                 (proposed.long_reflection_prompt(proposed_role, ["reflection"], {proposed_role: [1]}),
                  roco.long_reflection_prompt(roco_role, ["reflection"], {roco_role: [1]})),
             ])
@@ -174,7 +197,15 @@ class TestRoCo(unittest.TestCase):
                 for own_role, baseline_role in zip(proposed.design_roles, roco.design_roles):
                     counterpart = counterpart.replace(own_role, baseline_role)
                 self.assertIn(counterpart, second)
-                self.assertEqual(normalize_role_wording(prompt, proposed, roco), second[counterpart])
+                changed_feedback = (stage.startswith("critic_") or stage.startswith("start_")
+                                    or stage.startswith("round_") or stage == "fusion_final"
+                                    or stage in ("reflection_solution_quality_agent", "reflection_speed_agent"))
+                if not changed_feedback:
+                    self.assertEqual(normalize_role_wording(prompt, proposed, roco), second[counterpart])
+        self.assertIn("QUALITY_ADVICE", first["round_1_solution_quality_agent"])
+        self.assertNotIn("SPEED_ADVICE", first["round_1_solution_quality_agent"])
+        self.assertIn("SPEED_ADVICE", first["round_1_speed_agent"])
+        self.assertNotIn("QUALITY_ADVICE", first["round_1_speed_agent"])
 
     def test_initial_critic_does_not_claim_a_tied_pair_is_better(self):
         contract = load_task_contract("tsp_aco")
@@ -182,7 +213,8 @@ class TestRoCo(unittest.TestCase):
         class TiedBackend(RoCoBackend):
             def evaluate(self, candidate):
                 super().evaluate(candidate)
-                return {"status": "passed", "average": 1.0, "fitness": -1.0}
+                return {"status": "passed", "average": 1.0, "fitness": -1.0,
+                        "average_solve_wall_seconds": 1.0, "start": {"time_scope": SOLVER_TIME_SCOPE}}
 
         for controller_class in (Controller, RoCoController):
             with self.subTest(controller=controller_class.__name__):
@@ -190,7 +222,7 @@ class TestRoCo(unittest.TestCase):
                 controller_class(backend, log, population_size=2, initial_count=6,
                                  rounds=3, task_contract=contract).run()
                 prompt = dict(backend.calls)["critic_initial"]
-                self.assertIn("The objectives are tied", prompt)
+                self.assertIn("The objective scores are tied", prompt)
                 self.assertNotIn("Better code:", prompt)
                 self.assertNotIn("Worse code:", prompt)
 
@@ -253,7 +285,7 @@ class TestRoCo(unittest.TestCase):
 
 
 class TestRoCoRunGate(unittest.TestCase):
-    def test_entrypoints_pass_frozen_small_population_to_controllers(self):
+    def test_entrypoints_pass_frozen_population_to_controllers(self):
         frozen, _ = matrix.load_matrix(allow_pending=True)
         for module, method, runtime_name, controller_name in (
                 (p1_run_generation, "proposed_solution_quality_and_speed_agents", "TaskRuntime", "Controller"),
@@ -275,14 +307,14 @@ class TestRoCoRunGate(unittest.TestCase):
                 probe = stack.enter_context(patch.object(module.probe, "run_command", side_effect=[
                     {"exit_code": 0, "stdout": "fixture"},
                     {"exit_code": 0, "stdout": "Logged in using ChatGPT"}]))
-                stack.enter_context(patch.object(module.p0_budget_quota, "read_limits", return_value={
-                    "ordinary_usage_allowed": True, "remaining_model_calls": 39}))
+                stack.enter_context(patch("scripts.p0_budget_quota.read_limits",
+                                          side_effect=AssertionError("unexpected quota probe")))
                 stack.enter_context(patch.object(module, "formal_run_guard", return_value=nullcontext()))
                 constructor = stack.enter_context(patch.object(module, controller_name, return_value=controller))
                 stack.enter_context(patch("builtins.print"))
                 self.assertEqual(module.main(), 0)
-                self.assertEqual(constructor.call_args.kwargs["population_size"], 2)
-                self.assertEqual(constructor.call_args.kwargs["initial_count"], 6)
+                self.assertEqual(constructor.call_args.kwargs["population_size"], 10)
+                self.assertEqual(constructor.call_args.kwargs["initial_count"], 30)
                 self.assertEqual(constructor.call_args.kwargs["rounds"], 3)
                 controller.run.assert_called_once_with()
                 self.assertEqual(probe.call_count, 2)  # 模拟版本与登录检查；没有模型请求。

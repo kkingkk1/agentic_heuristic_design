@@ -62,6 +62,8 @@ def make_prompt(contract, operator, parents):
 class EoHController(Controller):
     """论文同步代际流程；保留 2024 官方代码的排名抽样与五位小数去重。"""
 
+    role_specific_critic = False
+
     def __init__(self, backend, log, contract, *, population_size=10, generations=1, seed=20261103):
         super().__init__(backend, log, population_size=population_size, initial_count=population_size,
                          rounds=3, seed=seed, task_contract=contract, generations=generations)

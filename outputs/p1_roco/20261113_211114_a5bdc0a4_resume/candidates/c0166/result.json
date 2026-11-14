@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\eval.py",
+    "50",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_211114_a5bdc0a4_resume\\candidates\\c0166",
+    "train"
+  ],
+  "resources": {
+    "available_memory_bytes": 39773265920,
+    "priority": "Normal"
+  },
+  "started_at_utc": "2026-11-13T13:13:34.829230+00:00",
+  "candidate_id": "c0166",
+  "pid": 39096,
+  "exit_code": 0,
+  "objectives": [
+    6.11638377260628,
+    6.595631289435892,
+    7.131220410817494,
+    6.913423499260151,
+    6.757250862641632
+  ],
+  "average": 6.70278196695229,
+  "fitness": -6.70278196695229,
+  "start": {
+    "event": "start",
+    "dataset": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy",
+    "seed_base": 20261103,
+    "n_ants": 30,
+    "n_iterations": 200,
+    "numpy": "2.3.5",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1,
+    "time_scope": "solve_wall_seconds_including_preparation_and_validation",
+    "heuristic_time_scope": "heuristic_function_only"
+  },
+  "average_solve_wall_seconds": 3.9848845399916173,
+  "solve_wall_seconds": [
+    2.5060521999839693,
+    2.473489800002426,
+    3.3738966999808326,
+    5.7716128999891225,
+    5.799371100001736
+  ],
+  "average_heuristic_wall_seconds": 1.4908125199901405,
+  "heuristic_wall_seconds": [
+    0.9014689000032376,
+    0.8843013999867253,
+    0.8775821999879554,
+    2.3911611999792513,
+    2.3995488999935333
+  ],
+  "completed_monotonic_ns": 248849421000000,
+  "process_tree_cpu": {
+    "user_seconds": 20.8125,
+    "kernel_seconds": 0.6875,
+    "cpu_seconds": 21.5,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 21.60899999999674
+}

@@ -115,8 +115,7 @@ class TestMCTSAHDRunGate(unittest.TestCase):
 
     def test_search_step_checks_two_calls_and_one_evaluation(self):
         runtime = runtime_tests.TestTaskRuntime.create(self.config(), runtime_class=MCTSAHDRuntime)
-        quota = {"ordinary_usage_allowed": True, "remaining_model_calls": 1000}
-        with patch("baselines.mcts_ahd.runtime.p0_budget_quota.read_limits", return_value=quota):
+        with patch("scripts.p0_budget_quota.read_limits", side_effect=AssertionError("unexpected quota probe")):
             runtime.before_search_step()
         runtime.cfg["budget"]["normal_model_calls"] = 1
         with self.assertRaisesRegex(StopRun, "思想重述"):

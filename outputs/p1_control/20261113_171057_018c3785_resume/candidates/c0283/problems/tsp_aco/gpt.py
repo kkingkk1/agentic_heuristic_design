@@ -1,0 +1,122 @@
+import numpy as np
+
+
+def heuristics_v2(distance_matrix: np.ndarray) -> np.ndarray:
+    """Return finite-safe, regret-aware edge priors for a directed TSP."""
+    d = np.asarray(distance_matrix, dtype=float)
+
+    if d.ndim != 2 or d.shape[0] != d.shape[1]:
+        raise ValueError("distance_matrix must be a square 2-D array")
+
+    n = d.shape[0]
+    if n == 0:
+        return np.empty((0, 0), dtype=float)
+    if n == 1:
+        return np.zeros((1, 1), dtype=float)
+
+    valid = np.isfinite(d) & (d >= 0.0)
+    np.fill_diagonal(valid, False)
+
+    if not np.any(valid):
+        return np.zeros((n, n), dtype=float)
+
+    tiny = np.finfo(float).eps
+    positive = d[valid & (d > 0.0)]
+    scale = float(np.median(positive)) if positive.size else 1.0
+    if not np.isfinite(scale) or scale <= 0.0:
+        scale = 1.0
+    scale = max(scale, tiny)
+
+    safe_d = np.where(valid, d, np.inf)
+
+    row_has = valid.any(axis=1)
+    col_has = valid.any(axis=0)
+
+    row_candidates = np.partition(safe_d, 1, axis=1)
+    col_candidates = np.partition(safe_d, 1, axis=0)
+
+    row_min = np.full(n, scale, dtype=float)
+    col_min = np.full(n, scale, dtype=float)
+    row_second = np.full(n, scale, dtype=float)
+    col_second = np.full(n, scale, dtype=float)
+
+    row_min[row_has] = row_candidates[row_has, 0]
+    row_second[row_has] = row_candidates[row_has, 1]
+    col_min[col_has] = col_candidates[0, col_has]
+    col_second[col_has] = col_candidates[1, col_has]
+
+    row_gap = np.maximum(row_second - row_min, 0.0)
+    col_gap = np.maximum(col_second - col_min, 0.0)
+    row_gap[~np.isfinite(row_gap)] = 0.0
+    col_gap[~np.isfinite(col_gap)] = 0.0
+
+    row_positive = row_gap[row_gap > 0.0]
+    col_positive = col_gap[col_gap > 0.0]
+
+    row_scale = (
+        float(np.median(row_positive))
+        if row_positive.size
+        else scale
+    )
+    col_scale = (
+        float(np.median(col_positive))
+        if col_positive.size
+        else scale
+    )
+
+    if not np.isfinite(row_scale) or row_scale <= 0.0:
+        row_scale = scale
+    if not np.isfinite(col_scale) or col_scale <= 0.0:
+        col_scale = scale
+
+    row_delta = np.maximum(
+        np.where(valid, safe_d - row_min[:, None], 0.0),
+        0.0,
+    )
+    col_delta = np.maximum(
+        np.where(valid, safe_d - col_min[None, :], 0.0),
+        0.0,
+    )
+
+    row_regret = np.exp(-np.clip(row_delta / row_scale, 0.0, 60.0))
+    col_regret = np.exp(-np.clip(col_delta / col_scale, 0.0, 60.0))
+    regret = np.sqrt(row_regret * col_regret)
+    regret[~valid] = 0.0
+
+    temperature = max(0.42 * scale, tiny)
+    local_affinity = np.exp(
+        -np.clip(row_delta / temperature, 0.0, 60.0)
+    )
+    local_affinity[~valid] = 0.0
+
+    balanced = local_affinity.copy()
+
+    for _ in range(4):
+        row_sum = balanced.sum(axis=1, keepdims=True)
+        balanced = np.divide(
+            balanced,
+            row_sum,
+            out=np.zeros_like(balanced),
+            where=np.isfinite(row_sum) & (row_sum > 0.0),
+        )
+
+        col_sum = balanced.sum(axis=0, keepdims=True)
+        balanced = np.divide(
+            balanced,
+            col_sum,
+            out=np.zeros_like(balanced),
+            where=np.isfinite(col_sum) & (col_sum > 0.0),
+        )
+
+    combined = 0.55 * balanced + 0.45 * local_affinity
+    score = combined * np.power(regret + tiny, 0.8)
+
+    score[~valid] = 0.0
+    score[~np.isfinite(score)] = 0.0
+
+    maximum = float(score.max())
+    if np.isfinite(maximum) and maximum > 0.0:
+        score /= maximum
+
+    np.fill_diagonal(score, 0.0)
+    return score.astype(float, copy=False)

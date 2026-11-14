@@ -1,10 +1,46 @@
+import json
+from pathlib import Path
 import unittest
+from unittest.mock import patch
 
 from scripts import p1_freeze_candidate as freeze
 from scripts.p1_task_contract import load_task_contract
 
 
 class TestCandidateFreeze(unittest.TestCase):
+    def test_formal_preflight_needs_no_subscription_gate_but_still_requires_start_record(self):
+        method = "proposed_solution_quality_and_speed_agents"
+        config = {"method": {"id": method}, "matrix_contract_sha256": "matrix",
+                  "formal_replicate": 1,
+                  "task": {"name": "tsp_aco", "prompt_condition": "white_box", "selection_seed": 1}}
+        preflight = {"event": "preflight", "code_sha256": {}}
+        started = {"event": "formal_run_started", "matrix_contract_sha256": "matrix",
+                   "task": "tsp_aco", "prompt_condition": "white_box", "method": method,
+                   "formal_replicate": 1, "selection_seed": 1}
+        events = [preflight, started]
+
+        def read(path, *args, **kwargs):
+            if path.name == "config.json":
+                return json.dumps(config)
+            if path.name == "events.jsonl":
+                return "\n".join(json.dumps(event) for event in events)
+            raise AssertionError(f"unexpected read: {path}")
+
+        directory = freeze.ROOT / "outputs/p1_control/fixture_no_quota_gate"
+        with patch.object(Path, "read_text", autospec=True, side_effect=read), \
+             patch.dict(freeze.METHODS, {method: ("p1_control", lambda _config: None)}), \
+             patch.object(freeze, "verify_training_config"), \
+             patch.object(freeze, "final_candidate", side_effect=ValueError("reached final candidate")) as final:
+            with self.assertRaisesRegex(ValueError, "reached final candidate"):
+                freeze.freeze(directory)
+            final.assert_called_once()
+            events[:] = [preflight]
+            with self.assertRaisesRegex(ValueError, "启动记录不一致"):
+                freeze.freeze(directory)
+            events[:] = [started]
+            with self.assertRaisesRegex(ValueError, "启动检查"):
+                freeze.freeze(directory)
+
     def test_each_method_reads_its_actual_final_selection(self):
         for method in ("proposed_solution_quality_and_speed_agents", "roco_paper_adapted", "eoh_paper_adapted"):
             events = [{"event": "selection", "selected": [{"candidate_id": "c0007"}]},

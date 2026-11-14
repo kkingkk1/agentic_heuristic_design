@@ -30,19 +30,22 @@ class ProtocolTests(unittest.TestCase):
             with self.subTest(text=text), self.assertRaises(probe.ProbeError):
                 probe.parse_proposal(text)
 
-    def test_critic_requires_paper_tags_and_word_limits(self):
-        parsed = probe.parse_critic("<ref>Prefer distance-based scores.</ref><ans>Replace uniform edges.</ans>")
-        self.assertEqual(parsed["reflection"], "Prefer distance-based scores.")
-        with self.assertRaises(probe.ProbeError):
-            probe.parse_critic("<ans>Missing reflection.</ans>")
-        with self.assertRaises(probe.ProbeError):
-            probe.parse_critic(f"<ref>{'word ' * 20}</ref><ans>Improve.</ans>")
+    def test_critic_keeps_full_feedback_and_requires_tags(self):
+        reflection = " ".join(f"reflection{i}" for i in range(22))
+        advice = " ".join(f"advice{i}" for i in range(45))
+        parsed = probe.parse_critic(f"<ref>{reflection}</ref><ans>{advice}</ans>")
+        self.assertEqual(parsed, {"reflection": reflection, "advice": advice})
+        for invalid in ("<ans>Missing reflection.</ans>", "<ref> </ref><ans>Advice.</ans>"):
+            with self.subTest(invalid=invalid), self.assertRaises(probe.ProbeError):
+                probe.parse_critic(invalid)
 
     def test_long_term_and_merge_protocols(self):
         self.assertEqual(probe.parse_long_term("<ans>Retain useful hints.</ans>"), "Retain useful hints.")
         self.assertEqual(probe.parse_merge("Combine both insights."), "Combine both insights.")
+        long_reflection = " ".join(f"word{i}" for i in range(55))
+        self.assertEqual(probe.parse_long_term(f"<ans>{long_reflection}</ans>"), long_reflection)
         with self.assertRaises(probe.ProbeError):
-            probe.parse_long_term(f"<ans>{'word ' * 50}</ans>")
+            probe.parse_long_term("<ans> </ans>")
         with self.assertRaises(probe.ProbeError):
             probe.parse_merge("<ans>Unexpected wrapper.</ans>")
 

@@ -6,7 +6,9 @@ import ast
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, replace
 import hashlib
+import math
 import random
+import re
 import threading
 import time
 from typing import Any
@@ -39,6 +41,9 @@ class Candidate:
     completed_order: int | None = None
     evaluation_origin: str | None = None
     error: str | None = None
+    raw_objective: float | None = None
+    timing_seconds: float | None = None
+    timing_scope: str | None = None
 
     @property
     def valid(self):
@@ -78,16 +83,34 @@ DESIGN_ROLES = ("solution_quality_agent", "speed_agent")
 INTEGRATOR_ROLE = "integrator"
 ROLE_DETAILS = {
     "solution_quality_agent": {
-        "label": "Solution Quality Agent", "focus": "improving the objective value",
+        "label": "Solution Quality Agent",
+        "focus": "improving final-solution quality according to the task objective",
         "identity": "Act as the Solution Quality Agent.\n",
         "opening": "Here is an algorithm proposed by previous agents:",
-        "direction": "focusing on {focus}. Use the critic's feedback to improve solution quality while preserving feasibility.",
+        "direction": (
+            "focusing on {focus}. Propose a change to the editable heuristic that may improve the "
+            "solver's final solutions in the stated task direction. The heuristic's returned values "
+            "guide the solver; they are not the final objective. Preserve feasibility, the required "
+            "interface, the task objective, solver, evaluator and stopping rules. Use the critic's "
+            "feedback as hypotheses, not proof of causation. A combined score does not separately "
+            "establish quality or runtime changes; distinguish expected effects from supplied observations."
+        ),
     },
     "speed_agent": {
-        "label": "Speed Agent", "focus": "reducing computational cost",
+        "label": "Speed Agent",
+        "focus": "improving final-solution quality benefit per complete solver runtime",
         "identity": "Act as the Speed Agent.\n",
         "opening": "Here are some algorithms proposed by previous agents:",
-        "direction": "to refine and improve it through {focus}. Use the critic's feedback to reduce computational work while preserving feasibility and the task objective.",
+        "direction": (
+            "to refine and improve it through {focus}. Change only the editable heuristic: an equivalent "
+            "implementation or a different guidance rule is valid. Explain how it may improve final "
+            "solution benefit per complete solve time, including possible quality and runtime effects. "
+            "Shorter code or a faster heuristic alone does not "
+            "prove a faster complete solver; model response time is a different cost. Preserve feasibility, "
+            "the required interface, the task objective, solver, evaluator and stopping rules. Treat the "
+            "critic's explanations as hypotheses. A combined score does not separately establish runtime "
+            "or quality changes; do not invent measurements or claim quality preservation without evidence."
+        ),
     },
 }
 
@@ -108,46 +131,198 @@ def role_prompt(role: str, candidate: Candidate, critic: dict[str, str], *, task
 def round_critic_prompt(first: Candidate, second: Candidate, *, task: str = TASK, direction: str = "min") -> str:
     better_direction = "lower" if direction == "min" else "higher"
     if second.fitness == first.fitness:
-        return (f"{task}\nAs an optimization expert in the domain of heuristic optimization, compare:\n"
-                f"First algorithm description: {first.thought}\nFirst code: {first.code}\n"
-                f"First objective value: {first.objective}\nSecond algorithm description: {second.thought}\n"
-                f"Second code: {second.code}\nSecond objective value: {second.objective}\n"
-                "The objectives are tied. Compare the designs without claiming either score is better. "
-                "Reflect on the evolution direction and provide targeted feedback.\n"
-                "Format your response as:\n<ref>Your reflection about current code</ref> "
-                "<ans>Specific critique and actionable suggestions (max 40 words)</ans>\n"
-                "Let's think step by step and be constructive in your analysis.")
-    current_better = second.fitness > first.fitness
-    worse, better = (first, second) if current_better else (second, first)
-    worse_position, better_position = (("prior", "current") if current_better else ("current", "prior"))
-    if current_better:
-        instruction = ("First reflect on the evolution direction of the current code: (Note: Current code is better)\n"
-                       "What successful evolutionary patterns can we identify? Which design improvements were "
-                       'most effective? Such as "..benefits", "..gains" and so on.\n\n'
-                       "Then provide targeted feedback for the current code: Recommend how to further leverage "
-                       "successful strategies.\n")
+        comparison = "The objective scores are tied. Do not claim either score is better."
     else:
-        instruction = ("First, consider and reflect on the evolution direction of the current code:\n"
-                       '**Note: current code is worse**: Why did this evolution direction fail? What design choices '
-                       'or implementation changes were counterproductive? Such as "avoid..." and so on.\n\n'
-                       "Then provide targeted feedback for the current code: For the current worse code: "
-                       "Suggest how to correct the evolution path\n")
+        better = "A" if first.fitness > second.fitness else "B"
+        comparison = f"Candidate {better} has the better score. A {better_direction} objective score is better."
     # 论文未展开 invalid_ind_prompt；已确认合同只记录技术错误，不向角色追加错误报告。
     return (f"{task}\nAs an optimization expert in the domain of heuristic optimization, compare:\n"
-            f"Worse algorithm description: {worse.thought}\nWorse and {worse_position} code: {worse.code}\n"
-            f"Worse objective value: {worse.objective}\nBetter algorithm description: {better.thought}\n"
-            f"Better and {better_position} code: {better.code}\nBetter objective value: {better.objective}\n\n"
-            f"A {better_direction} objective is better.\n{instruction}"
-            "Format your response as:\n<ref>Your reflection about current code</ref> "
+            f"Candidate A algorithm description: {first.thought}\nCandidate A code: {first.code}\n"
+            f"Candidate A objective score: {first.objective}\n"
+            f"Candidate B algorithm description: {second.thought}\nCandidate B code: {second.code}\n"
+            f"Candidate B objective score: {second.objective}\n\n{comparison}\n"
+            "These candidates are from separate branches; do not assume either is the other's parent. "
+            "Compare their designs, treat causal explanations as hypotheses, and give targeted advice.\n"
+            "Format your response as:\n<ref>Your reflection on the candidate designs</ref> "
             "<ans>Specific critique and actionable suggestions (max 40 words)</ans>\n"
             "Let's think step by step and be constructive in your analysis.")
 
 
 def parse_round_critic(message: str) -> dict[str, str]:
     reflection, advice = probe.tagged(message, ("ref", "ans"))
-    if probe.english_words(advice) > 40:
-        raise probe.ProbeError("逐轮 Critic 建议超过 40 词。")
     return {"reflection": reflection, "advice": advice}
+
+
+SOLVER_TIME_SCOPE = "solve_wall_seconds_including_preparation_and_validation"
+
+
+def read_solve_timing(start: dict[str, Any], instances: list[dict[str, Any]],
+                      complete: dict[str, Any]) -> dict[str, Any]:
+    """读取逐实例计时；兼容没有计时字段的历史记录，但不接受不完整的计时。"""
+    scope = start.get("time_scope")
+    if scope is None:
+        if ("average_solve_wall_seconds" in complete
+                or any("solve_wall_seconds" in instance for instance in instances)):
+            raise ValueError("求解时间缺少计时范围。")
+        return {}
+    if scope != SOLVER_TIME_SCOPE or not instances:
+        raise ValueError("求解计时范围或实例数量无效。")
+    times = []
+    for index, instance in enumerate(instances):
+        value = instance.get("solve_wall_seconds")
+        if (isinstance(value, bool) or not isinstance(value, (int, float))
+                or not math.isfinite(value) or value <= 0):
+            raise ValueError(f"实例 {index} 的完整求解时间无效。")
+        times.append(float(value))
+    average = math.fsum(times) / len(times)
+    reported = complete.get("average_solve_wall_seconds")
+    if (isinstance(reported, bool) or not isinstance(reported, (int, float))
+            or not math.isfinite(reported)
+            or not math.isclose(reported, average, rel_tol=1e-12, abs_tol=1e-12)):
+        raise ValueError("平均求解时间与逐实例结果不一致。")
+    return {"solve_wall_seconds": times, "average_solve_wall_seconds": average}
+
+
+def timing_from_result(result: dict[str, Any]) -> tuple[float | None, str | None]:
+    """只接收评价器验证过的逐实例完整求解时间。"""
+    if "average_solve_wall_seconds" in result:
+        value = result["average_solve_wall_seconds"]
+        start = result.get("start")
+        if not isinstance(start, dict) or start.get("time_scope") != SOLVER_TIME_SCOPE:
+            raise StopRun("平均求解耗时缺少已验证的计时范围。")
+        scope = SOLVER_TIME_SCOPE
+    else:
+        return None, None
+    if (isinstance(value, bool) or not isinstance(value, (int, float))
+            or not math.isfinite(value) or value <= 0):
+        raise StopRun("评价返回的耗时证据无效。")
+    return float(value), scope
+
+
+def timing_description(candidate: Candidate) -> str:
+    """描述实测的平均完整求解时间及其范围。"""
+    value = candidate.timing_seconds
+    if (isinstance(value, bool) or not isinstance(value, (int, float))
+            or not math.isfinite(value) or value <= 0):
+        raise StopRun(f"候选 {candidate.candidate_id} 缺少可信的耗时证据。")
+    if candidate.timing_scope == SOLVER_TIME_SCOPE:
+        return (f"mean complete solver wall time: {value} seconds per instance "
+                "(includes preparation and validation; excludes process startup and model calls)")
+    raise StopRun(f"候选 {candidate.candidate_id} 的耗时范围不可信。")
+
+
+def speed_feedback_metrics(candidate: Candidate, raw_direction: str) -> tuple[float, float]:
+    """仅为角色反馈计算最终质量收益及其与平均完整求解时间之比。"""
+    timing_description(candidate)
+    raw = candidate.raw_objective
+    if isinstance(raw, bool) or not isinstance(raw, (int, float)) or not math.isfinite(raw):
+        raise StopRun(f"候选 {candidate.candidate_id} 缺少可信的原始目标值。")
+    if raw_direction == "min":
+        if raw <= 0:
+            raise StopRun(f"候选 {candidate.candidate_id} 的最小化目标必须为正，才能取倒数。")
+        benefit = 1.0 / raw
+        product = raw * candidate.timing_seconds
+        if not math.isfinite(product) or product <= 0:
+            raise StopRun(f"候选 {candidate.candidate_id} 的目标与耗时乘积无效。")
+        rate = 1.0 / product
+    elif raw_direction == "max":
+        if raw < 0:
+            raise StopRun(f"候选 {candidate.candidate_id} 的最大化收益不能为负。")
+        benefit = float(raw)
+        rate = benefit / candidate.timing_seconds
+    else:
+        raise StopRun("速度反馈的原始目标方向无效。")
+    if not math.isfinite(benefit) or not math.isfinite(rate):
+        raise StopRun(f"候选 {candidate.candidate_id} 的质量收益或收益时间比不是有限数。")
+    return benefit, rate
+
+
+def feedback_stop_description(evaluation_mode: str) -> str:
+    if evaluation_mode == "final_quality":
+        return "The result is measured at the fixed iteration budget; this does not prove convergence."
+    if evaluation_mode == "quality_per_time":
+        return "The result is measured at stagnation or the iteration limit; neither proves optimality."
+    raise StopRun("速度反馈的评价设置无效。")
+
+
+def split_critic_prompt(first: Candidate, second: Candidate, *, task: str, direction: str,
+                        raw_direction: str, initial: bool = False, evaluation_mode: str = "final_quality") -> str:
+    """一次比较产生两条互相隔离的角色反馈，并比较质量收益与完整求解时间之比。"""
+    if first.raw_objective is None or second.raw_objective is None:
+        raise StopRun("Critic 缺少候选的原始目标值。")
+    first_time, second_time = timing_description(first), timing_description(second)
+    first_benefit, first_rate = speed_feedback_metrics(first, raw_direction)
+    second_benefit, second_rate = speed_feedback_metrics(second, raw_direction)
+
+    def compare(first_value: float, second_value: float, *, lower_is_better: bool) -> str:
+        if first_value == second_value:
+            return "tie"
+        return "A" if (first_value < second_value) == lower_is_better else "B"
+
+    fitness_winner = compare(first.fitness, second.fitness, lower_is_better=False)
+    raw_winner = compare(first.raw_objective, second.raw_objective, lower_is_better=raw_direction == "min")
+    time_winner = compare(first.timing_seconds, second.timing_seconds, lower_is_better=True)
+    rate_winner = compare(first_rate, second_rate, lower_is_better=False)
+    better_direction = "lower" if direction == "min" else "higher"
+    if first.fitness == second.fitness:
+        comparison = "The objective scores are tied. Do not claim either score is better."
+    else:
+        better = "A" if first.fitness > second.fitness else "B"
+        comparison = (f"Candidate {better} has the better score. "
+                      f"A {better_direction} objective score is better.")
+    targets = ("Both branches start from Candidate B's current code, not Candidate A's code. "
+               "Quality advice target: Candidate B. Speed advice target: Candidate B."
+               if initial else
+               "Candidate A is the Solution Quality Agent's current candidate; Candidate B is the Speed Agent's "
+               "current candidate. Quality advice target: Candidate A. Speed advice target: Candidate B.")
+    raw_better = "lower" if raw_direction == "min" else "higher"
+    benefit_formula = "1 / mean raw objective" if raw_direction == "min" else "mean raw objective"
+    return (f"{task}\nAs an optimization expert, compare two evaluated candidates.\n"
+            f"Candidate A algorithm description: {first.thought}\nCandidate A code: {first.code}\n"
+            f"Candidate A objective score: {first.objective}; raw task objective: {first.raw_objective}; "
+            f"Fitness: {first.fitness}; measured timing: {first_time}; "
+            f"final-solution benefit: {first_benefit}; benefit per solve second: {first_rate}.\n"
+            f"Candidate B algorithm description: {second.thought}\nCandidate B code: {second.code}\n"
+            f"Candidate B objective score: {second.objective}; raw task objective: {second.raw_objective}; "
+            f"Fitness: {second.fitness}; measured timing: {second_time}; "
+            f"final-solution benefit: {second_benefit}; benefit per solve second: {second_rate}.\n"
+            f"{comparison} When comparing raw task objectives, a {raw_better} raw task objective is better.\n"
+            "The following comparisons are computed from the supplied measurements; A and B name candidates, "
+            "'tie' means equal. Do not contradict them or conflate the metrics:\n"
+            f"Fitness comparison: {fitness_winner} (higher Fitness is better).\n"
+            f"Raw objective comparison: {raw_winner} ({raw_better} raw objective is better).\n"
+            f"Observed solve time comparison: {time_winner} (lower recorded mean is shorter).\n"
+            f"Benefit per solve second comparison: {rate_winner} (higher is better for speed advice). "
+            f"Benefit = {benefit_formula}; rate = benefit / mean complete solver wall time. "
+            f"{feedback_stop_description(evaluation_mode)}\n"
+            f"{targets}\n"
+            "Keep each reflection and advice focused on its assigned role; each branch receives only its own tags. "
+            "Each recipient must be able to follow its advice without access to the other candidate's code. "
+            "You may transfer an idea from the other candidate, but express it as a self-contained, specific "
+            "change to the recipient's target code; do not ask a recipient to preserve, copy or modify unseen code. "
+            "Each advice must propose a concrete change the recipient can make now. Do not ask the agents to "
+            "run tests, repeat evaluations, benchmark, profile, use tools or read files; the controller evaluates "
+            "the proposals. State uncertainty in the reflection when evidence is insufficient. "
+            "Base speed advice on the supplied benefit per solve second, considering both final quality "
+            "and measured timing; shorter time alone is not a better speed result. Timing is from a single evaluation "
+            "and may be affected by concurrent load; compare only matching scopes. Treat causal explanations and "
+            "unverified improvements as hypotheses; do not invent measurements. Do not assume the two "
+            "candidates have a parent-child relationship.\n"
+            "Return exactly these four nonempty tags, in order:\n"
+            "<quality_ref>Quality reflection</quality_ref><quality_ans>Quality advice, max 40 words</quality_ans>"
+            "<speed_ref>Speed reflection</speed_ref><speed_ans>Speed advice, max 40 words</speed_ans>")
+
+
+def parse_split_critic(message: str) -> dict[str, dict[str, str]]:
+    names = ("quality_ref", "quality_ans", "speed_ref", "speed_ans")
+    quality_ref, quality_ans, speed_ref, speed_ans = probe.tagged(message, names)
+    if any(re.search(r"</?(?:quality_ref|quality_ans|speed_ref|speed_ans)>", value)
+           for value in (quality_ref, quality_ans, speed_ref, speed_ans)):
+        raise probe.ProbeError("Critic 的角色反馈标签不能嵌套。")
+    return {
+        "solution_quality_agent": {"reflection": quality_ref, "advice": quality_ans},
+        "speed_agent": {"reflection": speed_ref, "advice": speed_ans},
+    }
 
 
 class Controller:
@@ -156,6 +331,7 @@ class Controller:
     design_roles = DESIGN_ROLES
     role_details = ROLE_DETAILS
     integrator_role = INTEGRATOR_ROLE
+    role_specific_critic = True
     fusion_wording = {
         "first_final_label": "Solution Quality Agent", "second_final_label": "Speed Agent",
         "round_priorities": "the solution quality contribution of the Solution Quality Agent, the computational efficiency contribution of the Speed Agent",
@@ -174,6 +350,7 @@ class Controller:
         self.task = TASK if task_contract is None else task_contract.task_prompt()
         self.output = OUTPUT if task_contract is None else task_contract.output_prompt()
         self.direction = "min" if task_contract is None else task_contract.direction
+        self.raw_direction = self.direction
         config = getattr(backend, "cfg", {})
         self.evaluation_mode = config.get("task", {}).get("evaluation_mode", "final_quality")
         if self.evaluation_mode == "quality_per_time":
@@ -268,7 +445,6 @@ class Controller:
             if (not isinstance(objective, (int, float)) or isinstance(objective, bool)
                     or not isinstance(fitness, (int, float)) or isinstance(fitness, bool)):
                 raise StopRun("评价器返回了无效分数类型。")
-            import math
             if self.evaluation_mode == "quality_per_time":
                 elapsed = result.get("average_solve_wall_seconds")
                 if (not isinstance(elapsed, (int, float)) or isinstance(elapsed, bool)
@@ -279,6 +455,9 @@ class Controller:
                 expected_fitness = -objective if self.direction == "min" else objective
             if not math.isfinite(objective) or not math.isfinite(fitness) or fitness != expected_fitness:
                 raise StopRun("评价器返回的目标或 Fitness 不可信。")
+            if self.role_specific_critic:
+                candidate.raw_objective = float(objective)
+                candidate.timing_seconds, candidate.timing_scope = timing_from_result(result)
             with self._lock:
                 candidate.completed_order = result.get("completed_monotonic_ns", time.monotonic_ns())
             candidate.objective = float(fitness if self.evaluation_mode == "quality_per_time" else objective)
@@ -332,6 +511,8 @@ class Controller:
             key = code_hash(item.code)
             origin = earliest[key]
             unique.setdefault(key, replace(item, objective=origin.objective, fitness=origin.fitness,
+                                           raw_objective=origin.raw_objective,
+                                           timing_seconds=origin.timing_seconds, timing_scope=origin.timing_scope,
                                            evaluation_origin=origin.candidate_id))
         selected = sorted(unique.values(), key=lambda c: (-c.fitness, c.generation_order))
         if len(selected) < needed:
@@ -361,10 +542,65 @@ class Controller:
         return self.role_details[role]["focus"]
 
     def branch_prompt(self, role, candidate, critic):
+        if self.role_specific_critic and role == "speed_agent":
+            benefit, rate = speed_feedback_metrics(candidate, self.raw_direction)
+            benefit_formula = "1 / mean raw objective" if self.raw_direction == "min" else "mean raw objective"
+            critic = {**critic, "advice": f"{critic['advice']}\n"
+                      f"Your current candidate's mean raw objective: {candidate.raw_objective}; "
+                      f"final-solution benefit ({benefit_formula}): {benefit}; "
+                      f"{timing_description(candidate)}; benefit per solve second: {rate} (higher is better). "
+                      f"{feedback_stop_description(self.evaluation_mode)} "
+                      "A single measurement can be affected by concurrent load."}
         return role_prompt(role, candidate, critic, task=self.task, output=self.output, details=self.role_details)
 
     def branch_critic_prompt(self, first, second):
+        if self.role_specific_critic:
+            return split_critic_prompt(first, second, task=self.task, direction=self.direction,
+                                       raw_direction=self.raw_direction, evaluation_mode=self.evaluation_mode)
         return round_critic_prompt(first, second, task=self.task, direction=self.direction)
+
+    def initial_critic_prompt(self, a, b):
+        if self.role_specific_critic:
+            return split_critic_prompt(a, b, task=self.task, direction=self.direction,
+                                       raw_direction=self.raw_direction, initial=True,
+                                       evaluation_mode=self.evaluation_mode)
+        better = "Lower" if self.direction == "min" else "Higher"
+        if a.fitness == b.fitness:
+            return (f"{self.task}\nHere are the algorithms proposed by initial population.\n"
+                    f"First code:\n{a.code}\nFirst objective score: {a.objective}\n"
+                    f"Second code:\n{b.code}\nSecond objective score: {b.objective}\n"
+                    "The objective scores are tied. Compare the designs without claiming either score "
+                    "is better; do not assume a parent-child relationship or unsupported causality. "
+                    "Give design hints in fewer than 20 words and actionable critique.\n"
+                    "<ref>Reflection on candidate designs (max 30 words)</ref>\n"
+                    "<ans>Specific critique and actionable suggestions (max 40 words)</ans>\n"
+                    "Let's think step by step and be constructive in your analysis.")
+        return (f"{self.task}\nHere are the algorithms proposed by initial population.\n"
+                f"Better code:\n{a.code}\nBetter objective score: {a.objective}\n"
+                f"Worse code:\n{b.code}\nWorse objective score: {b.objective}\n"
+                f"Note: **A {better.lower()} objective score is better**.\n\n"
+                "Act as a reflector and critical evaluator in the domain of optimization "
+                "heuristics. First, compare the candidates and offer plausible explanations "
+                "for the observed score difference, without assuming a parent-child relationship "
+                "or claiming causality as fact. "
+                "You respond with some hints for designing better heuristics, based on the two "
+                "code and using less than 20 words. Then analyze the worse algorithm's "
+                "limitations and provide specific, actionable improvements.\n\n"
+                "Please provide your answer in the following format:\n"
+                "<ref>Reflection on candidate designs (max 30 words)</ref>\n"
+                "<ans>Specific critique and actionable suggestions (max 40 words)</ans>\n"
+                "Let's think step by step and be constructive in your analysis.")
+
+    def critic_views(self, response):
+        if self.role_specific_critic:
+            return response
+        return {role: response for role in self.design_roles}
+
+    def fusion_reflections(self, response):
+        if not self.role_specific_critic:
+            return [response["reflection"]]
+        return [f"{self.role_details[role]['label']}: {response[role]['reflection']}"
+                for role in self.design_roles]
 
     def round_fusion_prompt(self, proposals, better):
         first, second = proposals
@@ -378,7 +614,9 @@ class Controller:
                 f"Act as a strategic integrator. Weigh {wording['round_priorities']}. "
                 f"Remember A {better.lower()} objective score is better.\n"
                 f"Propose the next step that balances {wording['balance']}, maximizing overall progress "
-                f"by reasoning through their complementary strengths.\n{self.output}")
+                "by reasoning through their complementary strengths.\n"
+                "Do not claim measured runtime, quality preservation or causality beyond the supplied evidence.\n"
+                f"{self.output}")
 
     def final_fusion_prompt(self, best, reflections):
         first, second = best
@@ -392,7 +630,9 @@ class Controller:
                 "3. Insights from the reflection summary\n"
                 "Your task is to create a solution that combines the strongest elements from both algorithms "
                 "while addressing insights from the reflection. Create an algorithm that balances "
-                f"{wording['balance']} to maximize progress.\n{self.output}")
+                f"{wording['balance']} to maximize progress.\n"
+                "Do not claim measured runtime, quality preservation or causality beyond the supplied evidence.\n"
+                f"{self.output}")
 
     def long_reflection_prompt(self, role, reflections, changes):
         label = self.role_details[role]["label"]
@@ -401,7 +641,9 @@ class Controller:
                 f"Objective changes: {changes[role]}\n"
                 f"Based on the relection with changing of the objective scores for {label} {self.role_focus(role)},\n"
                 "write constructive and detailed hints for designing better heuristics, based on prior reflections "
-                f"and focus on {label} and using less than 50 words. Please provide your answer in the following "
+                f"and focus on {label} and using less than 50 words. Treat causal explanations as hypotheses; "
+                "a combined score does not establish separate runtime or quality changes. "
+                "Please provide your answer in the following "
                 "format: <ans>...</ans>. Let's think step by step.")
 
     def merge_reflections_prompt(self, lessons):
@@ -435,34 +677,15 @@ class Controller:
                 a, b = self.elite_pair(population)
                 self.event("elite_pair", generation=self.generation, a=a.candidate_id, b=b.candidate_id)
                 better = "Lower" if self.direction == "min" else "Higher"
-                if a.fitness == b.fitness:
-                    initial_critic = (f"{self.task}\nHere are the algorithms proposed by initial population.\n"
-                                      f"First code:\n{a.code}\nFirst objective score: {a.objective}\n"
-                                      f"Second code:\n{b.code}\nSecond objective score: {b.objective}\n"
-                                      "The objectives are tied. Compare the designs without claiming either score "
-                                      "is better; give design hints in fewer than 20 words and actionable critique.\n"
-                                      "<ref>Reflection on current code's evolution direction (max 30 words)</ref>\n"
-                                      "<ans>Specific critique and actionable suggestions (max 40 words)</ans>\n"
-                                      "Let's think step by step and be constructive in your analysis.")
-                else:
-                    initial_critic = (f"{self.task}\nHere are the algorithms proposed by initial population.\n"
-                                      f"Better code:\n{a.code}\nBetter objective score: {a.objective}\n"
-                                      f"Worse code:\n{b.code}\nWorse objective score: {b.objective}\n"
-                                      f"Note: **A {better.lower()} objective score is better**.\n\n"
-                                      "Act as a reflector and critical evaluator in the domain of optimization "
-                                      "heuristics. First, reflect on why the better algorithm outperforms the other: "
-                                      "You respond with some hints for designing better heuristics, based on the two "
-                                      "code and using less than 20 words. Then analyze the worse algorithm's "
-                                      "limitations and provide specific, actionable improvements.\n\n"
-                                      "Please provide your answer in the following format:\n"
-                                      "<ref>Reflection on current code's evolution direction (max 30 words)</ref>\n"
-                                      "<ans>Specific critique and actionable suggestions (max 40 words)</ans>\n"
-                                      "Let's think step by step and be constructive in your analysis.")
-                critic = self.request("critic_initial", initial_critic, probe.parse_critic)
-                reflections = [critic["reflection"]]
+                initial_critic = self.initial_critic_prompt(a, b)
+                parser = parse_split_critic if self.role_specific_critic else probe.parse_critic
+                critic = self.request("critic_initial", initial_critic, parser)
+                views = self.critic_views(critic)
+                reflections = self.fusion_reflections(critic)
+                role_reflections = {role: [views[role]["reflection"]] for role in self.design_roles}
                 first_role, second_role = self.design_roles
                 all_roles = (*self.design_roles, self.integrator_role)
-                starts = self.batch([(f"start_{role}", (b,), self.branch_prompt(role, b, critic))
+                starts = self.batch([(f"start_{role}", (b,), self.branch_prompt(role, b, views[role]))
                                      for role in self.design_roles])
                 current = {role: result if result.valid else b for role, result in zip(self.design_roles, starts)}
                 changes = {role: [{"from_objective": b.objective, "proposal_objective": result.objective,
@@ -473,12 +696,16 @@ class Controller:
                 formal = {role: [] for role in self.design_roles}
                 last = []
                 for turn in range(1, self.rounds + 1):
+                    parser = parse_split_critic if self.role_specific_critic else parse_round_critic
                     critic = self.request(f"critic_{turn}", self.branch_critic_prompt(current[first_role], current[second_role]),
-                                          parse_round_critic)
-                    reflections.append(critic["reflection"])
+                                          parser)
+                    views = self.critic_views(critic)
+                    reflections.extend(self.fusion_reflections(critic))
+                    for role in self.design_roles:
+                        role_reflections[role].append(views[role]["reflection"])
                     previous = current.copy()
                     proposals = self.batch([(f"round_{turn}_{role}", (previous[role],),
-                                             self.branch_prompt(role, previous[role], critic))
+                                             self.branch_prompt(role, previous[role], views[role]))
                                             for role in self.design_roles])
                     for role, result in zip(self.design_roles, proposals):
                         if result.valid:
@@ -505,7 +732,7 @@ class Controller:
                     self.event("slot_skipped", generation=self.generation, stage="fusion_final", reason="missing_formal_branch")
                 lessons = {}
                 for role in self.design_roles:
-                    prompt = self.long_reflection_prompt(role, reflections, changes)
+                    prompt = self.long_reflection_prompt(role, role_reflections[role], changes)
                     lessons[role] = self.request(f"reflection_{role}", prompt, probe.parse_long_term)
                 lessons[self.integrator_role] = self.request(f"reflection_{self.integrator_role}",
                                                              self.merge_reflections_prompt(lessons), probe.parse_merge)

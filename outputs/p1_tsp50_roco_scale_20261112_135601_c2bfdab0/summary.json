@@ -1,0 +1,49 @@
+{
+  "status": "incomplete",
+  "stop_due_to_service_or_gate": true,
+  "methods": {
+    "proposed": {
+      "values": [],
+      "mean": null,
+      "sample_std": null
+    },
+    "roco": {
+      "values": [],
+      "mean": null,
+      "sample_std": null
+    }
+  },
+  "completed_training_runs": 0,
+  "token_usage_for_all_started_runs": {
+    "model_attempt_events": 81,
+    "model_process_events": 81,
+    "model_usage_events": 80,
+    "attempts_without_usage": 1,
+    "usage_events_without_process": 0,
+    "attempt_process_count_mismatches": 0,
+    "stages_with_repeated_attempts": 0,
+    "observed_tokens": {
+      "input_tokens": 2106007,
+      "cached_input_tokens": 1328256,
+      "output_tokens": 91838,
+      "reasoning_output_tokens": 25929
+    },
+    "usage_events_missing_field": {
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0
+    },
+    "usage_events_invalid_field": {
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0
+    },
+    "usage_events_with_inconsistent_subsets": 0,
+    "usage_events_with_warnings": 0,
+    "usage_events_missing_warning_metadata": 0,
+    "local_records_complete": false,
+    "note": "仅统计本地已回读用量；缓存输入属于输入，reasoning 输出属于输出。缺失或失败请求不按零计算；服务端不可见开销不包含在内。按日志和阶段核对事件数，重复阶段不能逐次证明对应关系。"
+  }
+}

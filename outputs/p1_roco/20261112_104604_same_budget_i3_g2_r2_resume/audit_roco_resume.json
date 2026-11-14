@@ -1,0 +1,254 @@
+{
+  "status": "passed",
+  "scope": "与本方法两代试跑同预算的 RoCo 工程试跑；不属于 P1 正式对照。",
+  "source_events_sha256": "72efffa73dd37d2eb64f1d220d8a737edd2f19c2e00c39a2a134ef43519c9fca",
+  "source_config_sha256": "60f6e1e86c99b729593fed77c993623e46d9b040a09b30a05331270cc91e0d81",
+  "resume_events_sha256": "c62c1426731722c0420b31a1009889a6a2e43f83af435abed97bc882186656f3",
+  "resume_config_sha256": "be084a16f26005a1f3366ef75e8d8a4749c992e7d8e767707e4d49e6b892634c",
+  "reused_critic_event_index": 426,
+  "reused_critic_response_sha256": "d7feb112c2a8bc9fa480df931b46c7be3b79393af9b8750a26c5f7e0e780a1e5",
+  "word_count_policy": "反馈词数为建议；标签和非空要求保留。",
+  "verified_protected_inputs": 51,
+  "dataset_sha256": "49cfd10c6d21efd39736e5baf57510b4ce6945c3a057cdbe8dcad398c728599a",
+  "model_calls": 61,
+  "model_process_failures": 0,
+  "evaluation_statuses": {
+    "passed": 44,
+    "candidate_error": 5
+  },
+  "invalid_proposals": {},
+  "candidate_evaluations": 49,
+  "independently_recomputed_tours": 220,
+  "maximum_route_absolute_error": 3.552713678800501e-15,
+  "population_replay": [
+    {
+      "generation": 0,
+      "members": [
+        {
+          "candidate_id": "c0003",
+          "evaluation_origin": "c0003",
+          "stage": "init_03",
+          "average_objective": 7.888437909868921,
+          "average_solve_wall_seconds": 1.6311401600018143
+        },
+        {
+          "candidate_id": "c0002",
+          "evaluation_origin": "c0002",
+          "stage": "init_02",
+          "average_objective": 8.0359948141208,
+          "average_solve_wall_seconds": 1.5982415800011949
+        }
+      ]
+    },
+    {
+      "generation": 1,
+      "members": [
+        {
+          "candidate_id": "c0004",
+          "evaluation_origin": "c0004",
+          "stage": "eoh_E1_01",
+          "average_objective": 6.2363489060117825,
+          "average_solve_wall_seconds": 1.559731219994137
+        },
+        {
+          "candidate_id": "c0024",
+          "evaluation_origin": "c0024",
+          "stage": "mutation_B_explorer",
+          "average_objective": 7.036242019323298,
+          "average_solve_wall_seconds": 1.5832623599999351
+        }
+      ]
+    },
+    {
+      "generation": 2,
+      "members": [
+        {
+          "candidate_id": "c0045",
+          "evaluation_origin": "c0045",
+          "stage": "mutation_A_exploiter",
+          "average_objective": 6.016213822957511,
+          "average_solve_wall_seconds": 1.5401509799965425
+        },
+        {
+          "candidate_id": "c0049",
+          "evaluation_origin": "c0049",
+          "stage": "mutation_B_integrator",
+          "average_objective": 6.040098415024863,
+          "average_solve_wall_seconds": 1.5530534399993485
+        }
+      ]
+    }
+  ],
+  "elite_pairs": {
+    "1": {
+      "a": "c0003",
+      "b": "c0002"
+    },
+    "2": {
+      "a": "c0004",
+      "b": "c0024"
+    }
+  },
+  "branch_transitions_verified": 12,
+  "branch_results": [
+    {
+      "generation": 1,
+      "role": "Explorer",
+      "round": 0,
+      "previous": "c0002",
+      "proposal": "c0012",
+      "candidate_id": "c0002",
+      "evaluation_origin": "c0002",
+      "stage": "init_02",
+      "average_objective": 8.0359948141208,
+      "average_solve_wall_seconds": 1.5982415800011949
+    },
+    {
+      "generation": 1,
+      "role": "Explorer",
+      "round": 1,
+      "previous": "c0002",
+      "proposal": "c0014",
+      "candidate_id": "c0014",
+      "evaluation_origin": "c0014",
+      "stage": "round_1_explorer",
+      "average_objective": 9.112317800317642,
+      "average_solve_wall_seconds": 1.6114949399983742
+    },
+    {
+      "generation": 1,
+      "role": "Explorer",
+      "round": 2,
+      "previous": "c0014",
+      "proposal": "c0017",
+      "candidate_id": "c0017",
+      "evaluation_origin": "c0017",
+      "stage": "round_2_explorer",
+      "average_objective": 9.618319270957967,
+      "average_solve_wall_seconds": 1.5973677200003293
+    },
+    {
+      "generation": 1,
+      "role": "Exploiter",
+      "round": 0,
+      "previous": "c0002",
+      "proposal": "c0013",
+      "candidate_id": "c0013",
+      "evaluation_origin": "c0013",
+      "stage": "start_exploiter",
+      "average_objective": 8.070260924770935,
+      "average_solve_wall_seconds": 1.5542882200010353
+    },
+    {
+      "generation": 1,
+      "role": "Exploiter",
+      "round": 1,
+      "previous": "c0013",
+      "proposal": "c0015",
+      "candidate_id": "c0015",
+      "evaluation_origin": "c0015",
+      "stage": "round_1_exploiter",
+      "average_objective": 7.474312816319694,
+      "average_solve_wall_seconds": 1.6023561599926324
+    },
+    {
+      "generation": 1,
+      "role": "Exploiter",
+      "round": 2,
+      "previous": "c0015",
+      "proposal": "c0018",
+      "candidate_id": "c0018",
+      "evaluation_origin": "c0018",
+      "stage": "round_2_exploiter",
+      "average_objective": 8.556274697219429,
+      "average_solve_wall_seconds": 1.6191885800013552
+    },
+    {
+      "generation": 2,
+      "role": "Explorer",
+      "round": 0,
+      "previous": "c0024",
+      "proposal": "c0035",
+      "candidate_id": "c0035",
+      "evaluation_origin": "c0035",
+      "stage": "start_explorer",
+      "average_objective": 7.3731649318419645,
+      "average_solve_wall_seconds": 1.5440342399990186
+    },
+    {
+      "generation": 2,
+      "role": "Explorer",
+      "round": 1,
+      "previous": "c0035",
+      "proposal": "c0037",
+      "candidate_id": "c0037",
+      "evaluation_origin": "c0037",
+      "stage": "round_1_explorer",
+      "average_objective": 8.421715663548756,
+      "average_solve_wall_seconds": 1.565166820003651
+    },
+    {
+      "generation": 2,
+      "role": "Explorer",
+      "round": 2,
+      "previous": "c0037",
+      "proposal": "c0040",
+      "candidate_id": "c0040",
+      "evaluation_origin": "c0040",
+      "stage": "round_2_explorer",
+      "average_objective": 8.36808423536236,
+      "average_solve_wall_seconds": 1.598918119998416
+    },
+    {
+      "generation": 2,
+      "role": "Exploiter",
+      "round": 0,
+      "previous": "c0024",
+      "proposal": "c0036",
+      "candidate_id": "c0036",
+      "evaluation_origin": "c0036",
+      "stage": "start_exploiter",
+      "average_objective": 7.186200807178008,
+      "average_solve_wall_seconds": 1.5549190399993678
+    },
+    {
+      "generation": 2,
+      "role": "Exploiter",
+      "round": 1,
+      "previous": "c0036",
+      "proposal": "c0038",
+      "candidate_id": "c0038",
+      "evaluation_origin": "c0038",
+      "stage": "round_1_exploiter",
+      "average_objective": 7.011836722602709,
+      "average_solve_wall_seconds": 1.5519430600019404
+    },
+    {
+      "generation": 2,
+      "role": "Exploiter",
+      "round": 2,
+      "previous": "c0038",
+      "proposal": "c0041",
+      "candidate_id": "c0041",
+      "evaluation_origin": "c0041",
+      "stage": "round_2_exploiter",
+      "average_objective": 7.162456563740401,
+      "average_solve_wall_seconds": 1.5531993399985367
+    }
+  ],
+  "critic_comparisons": 6,
+  "critic_input_pairs_verified": 6,
+  "critic_output_routes_verified": 12,
+  "mutation_history_checks": 12,
+  "model_usage_records": 61,
+  "model_usage_totals": {
+    "input_tokens": 1620436,
+    "cached_input_tokens": 876800,
+    "output_tokens": 90637,
+    "reasoning_output_tokens": 24146
+  },
+  "process_tree_cpu_seconds": 428.546875,
+  "original_elapsed_seconds": 704.7189999999973,
+  "resume_elapsed_seconds": 503.5469999999914,
+  "stop_reason": null
+}

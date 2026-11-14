@@ -1,0 +1,23 @@
+{
+  "status": "completed",
+  "source_events": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_180809_e040f878_resume\\events.jsonl",
+  "source_events_sha256": "220d499c4ce209a944d24476b272aa60f53da64067545da8e46430cb63ba8cae",
+  "new_model_calls": 0,
+  "prior_model_calls": 112,
+  "prior_evaluations": 95,
+  "new_evaluations": 2,
+  "results": [
+    {
+      "candidate_id": "c0103",
+      "status": "passed",
+      "average": 5.800303458835282,
+      "error": null
+    },
+    {
+      "candidate_id": "c0104",
+      "status": "passed",
+      "average": 5.821970430332117,
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\eval.py",
+    "50",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_124748_ca7ee547_resume\\candidates\\c0313",
+    "train"
+  ],
+  "resources": {
+    "available_memory_bytes": 36089237504,
+    "priority": "Normal"
+  },
+  "started_at_utc": "2026-11-13T05:22:26.331690+00:00",
+  "candidate_id": "c0313",
+  "pid": 38792,
+  "exit_code": 0,
+  "objectives": [
+    5.787193452398573,
+    5.956572036041467,
+    6.667806736084895,
+    6.425534414611467,
+    6.107998918002414
+  ],
+  "average": 6.189021111427763,
+  "fitness": -6.189021111427763,
+  "start": {
+    "event": "start",
+    "dataset": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy",
+    "seed_base": 20261103,
+    "n_ants": 30,
+    "n_iterations": 200,
+    "numpy": "2.3.5",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1,
+    "time_scope": "solve_wall_seconds_including_preparation_and_validation",
+    "heuristic_time_scope": "heuristic_function_only"
+  },
+  "average_solve_wall_seconds": 1.9397997999971266,
+  "solve_wall_seconds": [
+    1.9336304999887943,
+    1.9178434999776073,
+    1.9682568000280298,
+    1.9549314999894705,
+    1.9243367000017315
+  ],
+  "average_heuristic_wall_seconds": 0.0006712600123137235,
+  "heuristic_wall_seconds": [
+    0.0008937000238802284,
+    0.0006673000170849264,
+    0.0005646000208798796,
+    0.0006528999947477132,
+    0.0005778000049758703
+  ],
+  "completed_monotonic_ns": 220571031000000,
+  "process_tree_cpu": {
+    "user_seconds": 10.625,
+    "kernel_seconds": 0.515625,
+    "cpu_seconds": 11.140625,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 11.702999999979511
+}

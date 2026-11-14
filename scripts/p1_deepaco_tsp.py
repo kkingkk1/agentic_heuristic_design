@@ -3,6 +3,7 @@
 from hashlib import sha256
 import json
 import random
+from time import perf_counter
 
 import numpy as np
 import torch
@@ -66,22 +67,29 @@ def run(evaluator, model, *, size, phase, k_sparse):
                     "n_ants": evaluator.N_ANTS, "n_iterations": iterations, "n_nodes": size,
                     "numpy": np.__version__, "torch": str(torch.__version__),
                     "torch_threads": torch.get_num_threads(),
+                    "time_scope": "solve_wall_seconds_including_preparation_and_validation",
                     "reference": {"id": REFERENCE_ID, "checkpoint": model.checkpoint,
                                   "k_sparse": k_sparse, "compute_dtype": "float64",
                                   "heuristic_scale": SCALE, "source_sha256": snapshot,
                                   "software_versions": software_versions("tsp")}}, prefix)
-    objectives = []
+    objectives, solve_times = [], []
     for index, points in enumerate(positions):
         seed = seed_base + index
         random.seed(seed)
         np.random.seed(seed)
         torch.manual_seed(seed)
+        started = perf_counter()
         objective, tour, completed = solve(evaluator, points, model, k_sparse=k_sparse, n_iterations=iterations)
+        elapsed = perf_counter() - started
+        if not np.isfinite(elapsed) or elapsed <= 0:
+            raise ValueError("DeepACO TSP 单例求解时间无效。")
         objectives.append(objective)
+        solve_times.append(elapsed)
         evaluator.emit({"event": "instance", "index": index, "seed": seed, "objective": objective,
-                        "iterations": completed, "tour": tour}, prefix)
+                        "iterations": completed, "tour": tour, "solve_wall_seconds": elapsed}, prefix)
     if sha256(dataset.read_bytes()).hexdigest() != expected_hash or model.source_snapshot() != snapshot:
         raise ValueError("评价期间 TSP 数据或 DeepACO 来源文件发生变化。")
     average = float(np.mean(objectives))
     evaluator.emit({"event": "complete", "instance_count": len(objectives),
-                    "average": average, "fitness": -average}, prefix)
+                    "average": average, "fitness": -average,
+                    "average_solve_wall_seconds": float(np.mean(solve_times))}, prefix)

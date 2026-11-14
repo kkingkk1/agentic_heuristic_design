@@ -1,0 +1,21 @@
+F:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py:133: DeprecationWarning: `distance_matrix` is deprecated in favor of `scipy.spatial.distance.cdist` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  dist_mat = distance_matrix(node_pos, node_pos)
+F:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py:133: DeprecationWarning: `minkowski_distance` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  dist_mat = distance_matrix(node_pos, node_pos)
+F:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py:133: DeprecationWarning: `minkowski_distance_p` is deprecated in favor of `scipy.spatial.distance.minkowski` as of SciPy 1.18.0 and will be removed in SciPy 1.20.0.
+  dist_mat = distance_matrix(node_pos, node_pos)
+Traceback (most recent call last):
+  File "F:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py", line 260, in <module>
+    main()
+  File "F:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py", line 225, in main
+    obj, tour, completed_iterations = solve(node_pos, heuristic, iterations, **options)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py", line 139, in solve
+    heu = checked_heuristic(heuristic, dist_mat, black_box=black_box, timings=timings)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\eval.py", line 77, in checked_heuristic
+    scores = heuristic(inputs)
+             ^^^^^^^^^^^^^^^^^
+  File "F:\OneDrive\project\static_determine\agentic_heuristic_design\outputs\p1_roco\20261112_183109_ae37c237_resume\candidates\c0375\problems\tsp_aco\gpt.py", line 115, in heuristics_v2
+    endpoint_bonus *= 1.0 + 0.08 * endpoint_regret[None, :]
+ValueError: non-broadcastable output operand with shape (50,1) doesn't match the broadcast shape (50,50)

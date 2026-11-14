@@ -51,10 +51,9 @@ class TestP1Smoke(unittest.TestCase):
         self.assertTrue(all(item["max_evaluations"] == 1 for item in smoke.plan()["operations"]))
         self.assertFalse(smoke.plan()["uses_formal_test_data"])
         counters = {"calls": 0, "lock": threading.Lock(), "stop": threading.Event()}
-        quota = {"ordinary_usage_allowed": True, "remaining_model_calls": None}
         results = []
         with patch.object(smoke.Runtime, "model", fake_model), \
-             patch.object(smoke.p0_budget_quota, "read_limits", return_value=quota):
+             patch("scripts.p0_budget_quota.read_limits", side_effect=AssertionError("unexpected quota probe")):
             for name, _method_id, _runtime, calls, evaluations in smoke.METHODS:
                 runtime = FakeRuntime(name)
                 result = smoke.run_one(name, runtime, runtime.log, counters)
@@ -69,9 +68,8 @@ class TestP1Smoke(unittest.TestCase):
         counters = {"calls": 0, "lock": threading.Lock(), "stop": threading.Event()}
         runtime = FakeRuntime("roco")
         backend = smoke.SmokeBackend(runtime, counters, max_calls=2)
-        quota = {"ordinary_usage_allowed": True, "remaining_model_calls": None}
         with patch.object(smoke.Runtime, "model", fake_model), \
-             patch.object(smoke.p0_budget_quota, "read_limits", return_value=quota):
+             patch("scripts.p0_budget_quota.read_limits", side_effect=AssertionError("unexpected quota probe")):
             backend.model("first", "prompt")
             backend.model("second", "prompt")
             with self.assertRaisesRegex(StopRun, "2 次调用上限"):
@@ -86,9 +84,8 @@ class TestP1Smoke(unittest.TestCase):
             smoke.plan("unknown")
         counters = {"calls": 0, "lock": threading.Lock(), "stop": threading.Event()}
         runtime = FakeRuntime("proposed")
-        quota = {"ordinary_usage_allowed": True, "remaining_model_calls": None}
         with patch.object(smoke.Runtime, "model", fake_model), \
-                patch.object(smoke.p0_budget_quota, "read_limits", return_value=quota):
+                patch("scripts.p0_budget_quota.read_limits", side_effect=AssertionError("unexpected quota probe")):
             result = smoke.run_one("proposed", runtime, runtime.log, counters, max_calls=1)
             self.assertTrue(result["valid"])
             with self.assertRaisesRegex(StopRun, "1 次调用上限"):
@@ -98,31 +95,34 @@ class TestP1Smoke(unittest.TestCase):
     def test_invalid_proposal_is_not_repaired_or_evaluated(self):
         counters = {"calls": 0, "lock": threading.Lock(), "stop": threading.Event()}
         runtime = FakeRuntime("proposed")
-        quota = {"ordinary_usage_allowed": True, "remaining_model_calls": None}
-
         def invalid_model(runtime, stage, prompt):
             runtime.budget.model_normal += 1
             return "<thought>fixture</thought>\n```python\npass\n```"
 
         with patch.object(smoke.Runtime, "model", invalid_model), \
-                patch.object(smoke.p0_budget_quota, "read_limits", return_value=quota):
+                patch("scripts.p0_budget_quota.read_limits", side_effect=AssertionError("unexpected quota probe")):
             result = smoke.run_one("proposed", runtime, runtime.log, counters)
         self.assertFalse(result["valid"])
         self.assertIn("invalid_proposal", result["error"])
         self.assertEqual((counters["calls"], runtime.budget.model_normal, runtime.budget.eval_starts), (1, 1, 0))
 
-    def test_unquantified_quota_keeps_the_explicit_run_choice(self):
+    def test_run_call_limit_without_subscription_probe(self):
         counters = {"calls": 0, "lock": threading.Lock(), "stop": threading.Event()}
         runtime = FakeRuntime("roco")
         backend = smoke.SmokeBackend(runtime, counters, max_calls=2, allow_unquantified_quota=False)
-        quotas = [{"ordinary_usage_allowed": True, "remaining_model_calls": 2},
-                  {"ordinary_usage_allowed": True, "remaining_model_calls": None}]
         with patch.object(smoke.Runtime, "model", fake_model), \
-             patch.object(smoke.p0_budget_quota, "read_limits", side_effect=quotas):
+             patch("scripts.p0_budget_quota.read_limits", side_effect=AssertionError("unexpected quota probe")):
             backend.model("first", "prompt")
-            with self.assertRaisesRegex(StopRun, "剩余调用次数无法证明"):
-                backend.model("second", "prompt")
-        self.assertEqual((counters["calls"], runtime.budget.model_normal), (1, 1))
+            backend.model("second", "prompt")
+            with self.assertRaisesRegex(StopRun, "调用上限"):
+                backend.model("third", "prompt")
+        self.assertEqual((counters["calls"], runtime.budget.model_normal), (2, 2))
+
+    def test_run_does_not_require_quota_acceptance_flag(self):
+        with patch("sys.argv", ["p1_model_smoke.py", "--run", "--method", "proposed"]), \
+             patch.object(smoke, "memory_and_priority", side_effect=StopRun("已进入运行前资源检查")):
+            with self.assertRaisesRegex(StopRun, "已进入运行前资源检查"):
+                smoke.main()
 
 
 if __name__ == "__main__":

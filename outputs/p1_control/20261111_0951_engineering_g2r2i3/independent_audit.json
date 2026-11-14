@@ -1,0 +1,194 @@
+{
+  "status": "passed",
+  "scope": "仅本次本方法工程观察；2 轮是临时设置，不属于 P1 正式对照。",
+  "source_events_sha256": "3c24025ab97de7544a1ca7d257adfec73eb9f9c5c4375f6bf6330cdeaeb8ec7d",
+  "source_config_sha256": "f70c45eb48861e04f2853dcfc4db89cc3e3fcaee1c55142d8e2df39470649da9",
+  "dataset_sha256": "49cfd10c6d21efd39736e5baf57510b4ce6945c3a057cdbe8dcad398c728599a",
+  "model_calls": 61,
+  "candidate_evaluations": 49,
+  "evaluation_statuses": {
+    "passed": 49
+  },
+  "independently_recomputed_tours": 245,
+  "maximum_route_absolute_error": 1.7763568394002505e-15,
+  "population_replay": [
+    {
+      "generation": 0,
+      "members": [
+        {
+          "candidate_id": "c0001",
+          "evaluation_origin": "c0001",
+          "stage": "init_01",
+          "average_objective": 5.951013845499411,
+          "fitness": -5.951013845499411
+        },
+        {
+          "candidate_id": "c0002",
+          "evaluation_origin": "c0002",
+          "stage": "init_02",
+          "average_objective": 6.0251968778841185,
+          "fitness": -6.0251968778841185
+        }
+      ]
+    },
+    {
+      "generation": 1,
+      "members": [
+        {
+          "candidate_id": "c0008",
+          "evaluation_origin": "c0008",
+          "stage": "eoh_M1_01",
+          "average_objective": 5.869511910259931,
+          "fitness": -5.869511910259931
+        },
+        {
+          "candidate_id": "c0009",
+          "evaluation_origin": "c0009",
+          "stage": "eoh_M1_02",
+          "average_objective": 5.883153410098741,
+          "fitness": -5.883153410098741
+        }
+      ]
+    },
+    {
+      "generation": 2,
+      "members": [
+        {
+          "candidate_id": "c0034",
+          "evaluation_origin": "c0034",
+          "stage": "eoh_M2_02",
+          "average_objective": 5.802575681070484,
+          "fitness": -5.802575681070484
+        },
+        {
+          "candidate_id": "c0033",
+          "evaluation_origin": "c0033",
+          "stage": "eoh_M2_01",
+          "average_objective": 5.822885638791089,
+          "fitness": -5.822885638791089
+        }
+      ]
+    }
+  ],
+  "branch_transitions_verified": 12,
+  "branch_results": [
+    {
+      "generation": 1,
+      "role": "solution_quality_agent",
+      "round": 0,
+      "previous": "c0002",
+      "candidate_id": "c0012",
+      "average_objective": 6.3219104129226675,
+      "average_solve_wall_seconds": 1.5647652999992716
+    },
+    {
+      "generation": 1,
+      "role": "solution_quality_agent",
+      "round": 1,
+      "previous": "c0012",
+      "candidate_id": "c0014",
+      "average_objective": 6.068687965824296,
+      "average_solve_wall_seconds": 1.577276060001168
+    },
+    {
+      "generation": 1,
+      "role": "solution_quality_agent",
+      "round": 2,
+      "previous": "c0014",
+      "candidate_id": "c0017",
+      "average_objective": 6.168211564538386,
+      "average_solve_wall_seconds": 1.5634264599982999
+    },
+    {
+      "generation": 1,
+      "role": "speed_agent",
+      "round": 0,
+      "previous": "c0002",
+      "candidate_id": "c0013",
+      "average_objective": 6.272335863082143,
+      "average_solve_wall_seconds": 1.5846062399999936
+    },
+    {
+      "generation": 1,
+      "role": "speed_agent",
+      "round": 1,
+      "previous": "c0013",
+      "candidate_id": "c0015",
+      "average_objective": 6.222837052891585,
+      "average_solve_wall_seconds": 1.5770104800001719
+    },
+    {
+      "generation": 1,
+      "role": "speed_agent",
+      "round": 2,
+      "previous": "c0015",
+      "candidate_id": "c0018",
+      "average_objective": 6.273321463508902,
+      "average_solve_wall_seconds": 1.5456758799991803
+    },
+    {
+      "generation": 2,
+      "role": "solution_quality_agent",
+      "round": 0,
+      "previous": "c0009",
+      "candidate_id": "c0035",
+      "average_objective": 5.8477007743154665,
+      "average_solve_wall_seconds": 1.5619991200001095
+    },
+    {
+      "generation": 2,
+      "role": "solution_quality_agent",
+      "round": 1,
+      "previous": "c0035",
+      "candidate_id": "c0037",
+      "average_objective": 5.854010641962252,
+      "average_solve_wall_seconds": 1.591984539999976
+    },
+    {
+      "generation": 2,
+      "role": "solution_quality_agent",
+      "round": 2,
+      "previous": "c0037",
+      "candidate_id": "c0040",
+      "average_objective": 5.904671964993295,
+      "average_solve_wall_seconds": 1.556884939999145
+    },
+    {
+      "generation": 2,
+      "role": "speed_agent",
+      "round": 0,
+      "previous": "c0009",
+      "candidate_id": "c0036",
+      "average_objective": 7.309430444067784,
+      "average_solve_wall_seconds": 1.5867556800018066
+    },
+    {
+      "generation": 2,
+      "role": "speed_agent",
+      "round": 1,
+      "previous": "c0036",
+      "candidate_id": "c0038",
+      "average_objective": 6.025533700988416,
+      "average_solve_wall_seconds": 1.5911500799993519
+    },
+    {
+      "generation": 2,
+      "role": "speed_agent",
+      "round": 2,
+      "previous": "c0038",
+      "candidate_id": "c0041",
+      "average_objective": 6.273321463508902,
+      "average_solve_wall_seconds": 1.5680061999999453
+    }
+  ],
+  "critic_output_routes_verified": 12,
+  "model_usage_records": 61,
+  "model_usage_totals": {
+    "input_tokens": 1585494,
+    "cached_input_tokens": 876800,
+    "output_tokens": 59122,
+    "reasoning_output_tokens": 19019
+  },
+  "process_tree_cpu_seconds": 472.984375,
+  "elapsed_seconds": 891.6880000000019
+}

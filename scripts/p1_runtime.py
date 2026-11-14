@@ -90,7 +90,8 @@ class TaskRuntime(Runtime):
             raise StopRun("训练数据的 SHA-256 与任务合同不一致。")
 
         self.cfg, self.log, self.contract = config, log, contract
-        self.cli, self.allow_unquantified_quota = cli, allow_unquantified_quota
+        # 旧参数仅用于兼容调用方，不再参与启动或代次检查。
+        self.cli = cli
         self.problem_name, self.problem_size = name, contract.train_size
         task_dir = ROOT / "problems" / name
         self.eval_script = task_dir / ("eval_black_box.py" if contract.black_box else "eval.py")

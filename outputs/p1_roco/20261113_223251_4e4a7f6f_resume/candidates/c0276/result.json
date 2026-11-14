@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\eval.py",
+    "50",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_223251_4e4a7f6f_resume\\candidates\\c0276",
+    "train"
+  ],
+  "resources": {
+    "available_memory_bytes": 12573597696,
+    "priority": "Normal"
+  },
+  "started_at_utc": "2026-11-13T14:39:48.260730+00:00",
+  "candidate_id": "c0276",
+  "pid": 93180,
+  "exit_code": 0,
+  "objectives": [
+    5.944724135822666,
+    6.082393459612491,
+    6.905882907023968,
+    6.296402390417885,
+    6.446648240726701
+  ],
+  "average": 6.335210226720743,
+  "fitness": -6.335210226720743,
+  "start": {
+    "event": "start",
+    "dataset": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy",
+    "seed_base": 20261103,
+    "n_ants": 30,
+    "n_iterations": 200,
+    "numpy": "2.3.5",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1,
+    "time_scope": "solve_wall_seconds_including_preparation_and_validation",
+    "heuristic_time_scope": "heuristic_function_only"
+  },
+  "average_solve_wall_seconds": 2.015071340004215,
+  "solve_wall_seconds": [
+    1.83271539999987,
+    2.0643533999973442,
+    2.020572900015395,
+    2.0791720999986865,
+    2.0785429000097793
+  ],
+  "average_heuristic_wall_seconds": 0.007887599995592609,
+  "heuristic_wall_seconds": [
+    0.008043999987421557,
+    0.007785199995851144,
+    0.007999599998584017,
+    0.00789850001456216,
+    0.007710699981544167
+  ],
+  "completed_monotonic_ns": 254013984000000,
+  "process_tree_cpu": {
+    "user_seconds": 11.25,
+    "kernel_seconds": 0.96875,
+    "cpu_seconds": 12.21875,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 12.75
+}

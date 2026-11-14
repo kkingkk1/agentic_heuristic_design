@@ -66,16 +66,25 @@ def load_heuristic(root_dir, parameter="distance_matrix"):
     return heuristic
 
 
-def checked_heuristic(heuristic, distances, *, black_box=False):
+def checked_heuristic(heuristic, distances, *, black_box=False, timings=None):
     """检查启发式输出，并保留各上游入口的截断规则。"""
     if black_box:
         edge_count = distances.size
-        scores = heuristic(distances.reshape(edge_count, 1).copy())
+        inputs = distances.reshape(edge_count, 1).copy()
+    else:
+        inputs = distances.copy()
+    begin = perf_counter() if timings is not None else None
+    scores = heuristic(inputs)
+    if begin is not None:
+        elapsed = perf_counter() - begin
+        if not math.isfinite(elapsed) or elapsed < 0:
+            raise ValueError("启发式函数时间无效。")
+        timings["heuristic_wall_seconds"] = elapsed
+    if black_box:
         if not isinstance(scores, np.ndarray) or scores.shape not in ((edge_count,), (edge_count, 1)):
             raise ValueError("黑盒启发式必须返回每条边一个分数。")
         scores = scores.reshape(distances.shape)
     else:
-        scores = heuristic(distances.copy())
         if not isinstance(scores, np.ndarray) or scores.shape != distances.shape:
             raise ValueError("启发式必须返回与距离矩阵同形状的 NumPy 数组。")
     if scores.dtype.kind not in "iuf" or not np.isfinite(scores).all():
@@ -120,14 +129,14 @@ class CheckedACO(ACO):
         return costs
 
 
-def solve(node_pos, heuristic, n_iterations=N_ITERATIONS, *, black_box=False, stagnation_rounds=None):
+def solve(node_pos, heuristic, n_iterations=N_ITERATIONS, *, black_box=False, stagnation_rounds=None, timings=None):
     dist_mat = distance_matrix(node_pos, node_pos)
     if not np.isfinite(dist_mat).all():
         raise ValueError("距离矩阵含非有限值。")
     np.fill_diagonal(dist_mat, 1)
     if (dist_mat <= 0).any():
         raise ValueError("实例含重复城市或无效距离。")
-    heu = checked_heuristic(heuristic, dist_mat, black_box=black_box)
+    heu = checked_heuristic(heuristic, dist_mat, black_box=black_box, timings=timings)
     aco = CheckedACO(dist_mat, heu, n_ants=N_ANTS)
     obj = float(aco.run(n_iterations, stagnation_rounds=stagnation_rounds).item())
     if ((stagnation_rounds is None and aco.checked_iterations != n_iterations)
@@ -192,35 +201,43 @@ def main(*, black_box=False):
     start = {"event": "start", "dataset": str(dataset), "seed_base": seed_base,
              "n_ants": N_ANTS, "n_iterations": iterations,
              "numpy": np.__version__, "torch": torch.__version__,
-             "torch_threads": torch.get_num_threads()}
+             "torch_threads": torch.get_num_threads(),
+             "time_scope": "solve_wall_seconds_including_preparation_and_validation",
+             "heuristic_time_scope": "heuristic_function_only"}
     if code_hash is not None:
         start["candidate_sha256"] = code_hash
     if stagnation_rounds is not None:
-        start.update({"evaluation_mode": "quality_per_time", "stagnation_rounds": stagnation_rounds,
-                      "time_scope": "solve_wall_seconds_including_preparation_and_validation"})
+        start.update({"evaluation_mode": "quality_per_time", "stagnation_rounds": stagnation_rounds})
     emit(start, prefix)
-    objs, solve_times = [], []
+    objs, solve_times, heuristic_times = [], [], []
     for index, node_pos in enumerate(node_positions):
         seed = seed_base + index
         random.seed(seed)
         np.random.seed(seed)
         torch.manual_seed(seed)
-        options = {"black_box": True} if black_box else {}
+        timings = {}
+        options = {"timings": timings}
+        if black_box:
+            options["black_box"] = True
         if stagnation_rounds is not None:
             options["stagnation_rounds"] = stagnation_rounds
-        started = perf_counter() if stagnation_rounds is not None else None
+        started = perf_counter()
         obj, tour, completed_iterations = solve(node_pos, heuristic, iterations, **options)
-        elapsed = perf_counter() - started if started is not None else None
+        elapsed = perf_counter() - started
+        heuristic_elapsed = timings.get("heuristic_wall_seconds")
+        if (not math.isfinite(elapsed) or elapsed <= 0 or isinstance(heuristic_elapsed, bool)
+                or not isinstance(heuristic_elapsed, (int, float)) or not math.isfinite(heuristic_elapsed)
+                or not 0 <= heuristic_elapsed <= elapsed):
+            raise ValueError("单例求解时间或启发式函数时间无效。")
+        solve_times.append(elapsed)
+        heuristic_times.append(heuristic_elapsed)
         objs.append(obj)
         print(f"[*] Instance {index}: {obj}", flush=True)
         instance = {"event": "instance", "index": index, "seed": seed, "objective": obj,
-                    "iterations": completed_iterations, "tour": tour}
-        if elapsed is not None:
-            if not math.isfinite(elapsed) or elapsed <= 0:
-                raise ValueError("完整求解时间必须为有限正数。")
-            solve_times.append(elapsed)
-            instance.update({"solve_wall_seconds": elapsed, "stop_reason":
-                             "stagnation" if completed_iterations < iterations else "iteration_limit"})
+                    "iterations": completed_iterations, "tour": tour,
+                    "solve_wall_seconds": elapsed, "heuristic_wall_seconds": heuristic_elapsed}
+        if stagnation_rounds is not None:
+            instance["stop_reason"] = "stagnation" if completed_iterations < iterations else "iteration_limit"
         emit(instance, prefix)
     if phase == "test":
         if sha256(dataset.read_bytes()).hexdigest() != TEST_DATASET_SHA256[size]:
@@ -230,10 +247,12 @@ def main(*, black_box=False):
     average = float(np.mean(objs))
     print("[*] Average:", flush=True)
     print(average, flush=True)
-    complete = {"event": "complete", "instance_count": len(objs), "average": average}
+    mean_time = math.fsum(solve_times) / len(solve_times)
+    complete = {"event": "complete", "instance_count": len(objs), "average": average,
+                "average_solve_wall_seconds": mean_time,
+                "average_heuristic_wall_seconds": math.fsum(heuristic_times) / len(heuristic_times)}
     if stagnation_rounds is not None:
-        mean_time = math.fsum(solve_times) / len(solve_times)
-        complete.update({"average_solve_wall_seconds": mean_time, "fitness": 1.0 / (average * mean_time)})
+        complete["fitness"] = 1.0 / (average * mean_time)
     emit(complete, prefix)
 
 

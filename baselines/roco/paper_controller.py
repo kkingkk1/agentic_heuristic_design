@@ -22,6 +22,7 @@ class RoCoController(Controller):
             "direction": "to refine and improve it through {focus}. Use conservative, efficiency-driven thinking to enhance performance incrementally.",
         },
     }
+    role_specific_critic = False
     fusion_wording = {
         "first_final_label": "explorer", "second_final_label": "exploiter",
         "round_priorities": "the long-term innovation of the explorer, the short-term refinement of the exploiter",

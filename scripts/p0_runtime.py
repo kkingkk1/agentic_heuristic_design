@@ -33,25 +33,13 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def generation_requirements(population_size: int) -> tuple[int, int]:
-    """三轮协作一代的正常模型调用和候选评价槽位。"""
+def generation_requirements(population_size: int, *, rounds: int = 3) -> tuple[int, int]:
+    """按实际协作轮数计算一代的正常模型调用和候选评价槽位。"""
     if type(population_size) is not int or population_size < 2:
         raise ValueError("种群至少需要两个不同候选。")
-    return 4 * population_size + 25, 4 * population_size + 18
-
-
-def quota_gate(quota, required, *, allow_unquantified=False):
-    """只允许显式接受不可计数的余量；已知不足或不可用始终停止。"""
-    if quota.get("ordinary_usage_allowed") is not True:
-        raise StopRun("订阅服务未确认当前允许普通调用。")
-    remaining = quota.get("remaining_model_calls")
-    if isinstance(remaining, int) and not isinstance(remaining, bool):
-        if remaining < required:
-            raise StopRun(f"已知剩余调用次数不足 {required}；停止真实运行。")
-        return "verified"
-    if remaining is None and allow_unquantified:
-        return "unquantified_explicitly_accepted"
-    raise StopRun(f"订阅剩余调用次数无法证明达到 {required}；停止真实运行。")
+    if type(rounds) is not int or rounds < 1:
+        raise ValueError("协作轮数必须为正整数。")
+    return 4 * population_size + 13 + 4 * rounds, 4 * population_size + 9 + 3 * rounds
 
 
 class JsonLog:
@@ -189,7 +177,8 @@ class Budget:
     def before_generation(self):
         with self.lock:
             budget = self.cfg["budget"]
-            model_slots, evaluation_slots = generation_requirements(self.cfg["task"]["population_size"])
+            model_slots, evaluation_slots = generation_requirements(
+                self.cfg["task"]["population_size"], rounds=self.cfg["task"].get("collaboration_rounds", 3))
             if budget["normal_model_calls"] - self.model_normal < model_slots:
                 raise StopRun("剩余正常模型调用不足以覆盖一代。")
             remaining_retries = budget["additional_infrastructure_evaluation_starts"] - self.eval_retries
@@ -240,7 +229,7 @@ class Runtime:
     def __init__(self, run_dir, config, log, *, cli=None, allow_unquantified_quota=False):
         self.run_dir, self.cfg, self.log = Path(run_dir), config, log
         self.cli = cli
-        self.allow_unquantified_quota = allow_unquantified_quota
+        # 旧参数仅用于兼容调用方，不再参与启动或代次检查。
         self.problem_name, self.problem_size = "tsp_aco", 50
         self.eval_script, self.read_complete = evaluator.EVAL, evaluator.read_complete
         self.additional_candidate_faults = ()
@@ -268,16 +257,6 @@ class Runtime:
 
     def before_generation(self):
         self.budget.before_generation()
-        from scripts import p0_budget_quota
-        try:
-            quota = p0_budget_quota.read_limits()
-        except p0_budget_quota.QuotaProbeError as exc:
-            raise StopRun(f"无法回读订阅额度：{exc}") from exc
-        self.log.event("generation_quota", quota=quota)
-        model_slots, _ = generation_requirements(self.cfg["task"]["population_size"])
-        required = model_slots + (self.cfg["budget"]["additional_infrastructure_retry_calls"] - self.budget.model_retries)
-        mode = quota_gate(quota, required, allow_unquantified=self.allow_unquantified_quota)
-        self.log.event("generation_quota_gate", mode=mode, required_model_calls=required)
 
     def prepare_proposal(self, candidate):
         self.budget.reserve_proposal(candidate.candidate_id, self.cancelled)

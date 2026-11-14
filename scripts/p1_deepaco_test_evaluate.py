@@ -172,10 +172,14 @@ def read_reference_complete(stdout_path, config, entry, dataset, instances, eval
     if name == "tsp" and (reference.get("k_sparse") != config["k_sparse"]
                           or reference.get("heuristic_scale") != TSP_HEURISTIC_SCALE):
         raise ValueError("DeepACO TSP 稀疏度或边权适配不一致。")
+    scope = start.get("time_scope")
+    if scope is not None and (name != "tsp"
+                              or scope != "solve_wall_seconds_including_preparation_and_validation"):
+        raise ValueError("DeepACO 单例求解计时范围无效。")
     if ((name == "cvrp" and start.get("capacity") != evaluator.CAPACITY)
             or (name == "mkp" and start.get("n_dims") != evaluator.N_DIMS)):
         raise ValueError("DeepACO 任务的容量或维度不一致。")
-    objectives = []
+    objectives, solve_times = [], []
     for index, event in enumerate(events[1:-1]):
         objective = event.get("objective")
         if (event.get("index") != index or event.get("seed") != entry["evaluation_seed_base"] + index
@@ -222,6 +226,14 @@ def read_reference_complete(stdout_path, config, entry, dataset, instances, eval
             expected = evaluator.check_solution(event.get("solution", []), prizes[index], weights[index])
         if not math.isclose(objective, expected, rel_tol=1e-12, abs_tol=1e-12):
             raise ValueError(f"DeepACO 测试实例 {index} 的目标与项目评价不一致。")
+        if scope is not None:
+            elapsed = event.get("solve_wall_seconds")
+            if (isinstance(elapsed, bool) or not isinstance(elapsed, (int, float))
+                    or not math.isfinite(elapsed) or elapsed <= 0):
+                raise ValueError(f"DeepACO 测试实例 {index} 的求解时间无效。")
+            solve_times.append(float(elapsed))
+        elif "solve_wall_seconds" in event:
+            raise ValueError(f"DeepACO 测试实例 {index} 的求解时间缺少计时范围。")
         objectives.append(float(objective))
     average = complete.get("average")
     if (isinstance(average, bool) or not isinstance(average, (int, float)) or not math.isfinite(average)
@@ -232,7 +244,16 @@ def read_reference_complete(stdout_path, config, entry, dataset, instances, eval
     if (isinstance(supplied_fitness, bool) or not isinstance(supplied_fitness, (int, float))
             or not math.isfinite(supplied_fitness) or supplied_fitness != fitness):
         raise ValueError("DeepACO 测试 Fitness 与项目目标方向不一致。")
-    return {"objectives": objectives, "average": average, "fitness": fitness, "start": start}
+    result = {"objectives": objectives, "average": average, "fitness": fitness, "start": start}
+    if scope is not None:
+        mean_time = math.fsum(solve_times) / len(solve_times)
+        reported_time = complete.get("average_solve_wall_seconds")
+        if (isinstance(reported_time, bool) or not isinstance(reported_time, (int, float))
+                or not math.isfinite(reported_time)
+                or not math.isclose(reported_time, mean_time, rel_tol=1e-12, abs_tol=1e-12)):
+            raise ValueError("DeepACO 平均求解时间与逐实例结果不一致。")
+        result.update({"solve_wall_seconds": solve_times, "average_solve_wall_seconds": mean_time})
+    return result
 
 
 def evaluate_reference(config_path):

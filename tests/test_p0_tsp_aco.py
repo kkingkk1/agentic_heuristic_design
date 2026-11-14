@@ -69,12 +69,14 @@ class HeuristicValidationTests(unittest.TestCase):
         np.fill_diagonal(distances, 1)
         heuristic = lambda matrix: 1 / matrix
         torch.manual_seed(task.SEED_BASE)
-        actual, tour, iterations = task.solve(node_pos, heuristic)
+        timings = {}
+        actual, tour, iterations = task.solve(node_pos, heuristic, timings=timings)
         torch.manual_seed(task.SEED_BASE)
         original = task.ACO(distances, heuristic(distances) + 1e-9, n_ants=30).run(200).item()
         self.assertEqual(iterations, 200)
         self.assertEqual(actual, original)
         self.assertEqual(sorted(tour), list(range(50)))
+        self.assertGreaterEqual(timings["heuristic_wall_seconds"], 0)
 
 
 class CompletionValidationTests(unittest.TestCase):
@@ -96,6 +98,21 @@ class CompletionValidationTests(unittest.TestCase):
 
     def test_complete_minimization_has_negative_fitness(self):
         self.assertEqual(self.read(self.events())["fitness"], -3.0)
+
+    def test_quality_mode_keeps_score_and_records_two_timing_scopes(self):
+        events = self.events()
+        events[0].update(time_scope="solve_wall_seconds_including_preparation_and_validation",
+                         heuristic_time_scope="heuristic_function_only")
+        for instance in events[1:-1]:
+            instance.update(solve_wall_seconds=2.0, heuristic_wall_seconds=0.5)
+        events[-1].update(average_solve_wall_seconds=2.0, average_heuristic_wall_seconds=0.5)
+        result = self.read(events)
+        self.assertEqual(result["fitness"], -3.0)
+        self.assertEqual(result["solve_wall_seconds"], [2.0] * 5)
+        self.assertEqual(result["heuristic_wall_seconds"], [0.5] * 5)
+        events[1]["heuristic_wall_seconds"] = 3.0
+        with self.assertRaisesRegex(ValueError, "启发式函数时间"):
+            self.read(events)
 
     def test_incomplete_or_inconsistent_results_never_receive_fitness(self):
         partial = self.events()[:-1]

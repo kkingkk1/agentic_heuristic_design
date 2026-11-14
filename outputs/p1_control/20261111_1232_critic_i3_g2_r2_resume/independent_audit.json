@@ -1,0 +1,199 @@
+{
+  "status": "passed",
+  "scope": "两代 Critic 工程试跑的手动断点续跑；不属于 P1 正式对照。",
+  "source_events_sha256": "b038bdb339c69c9cfa240fe083a4ef5795918842e4261f917055ea44ada41678",
+  "original_events_sha256": "717c102cc6aea3d59ebe7532e6c2ace28476410b7e86d6c64787849d2dd1d117",
+  "source_config_sha256": "3ba9399cef5370a43343b0e79102fc8b5461cb55a4ffdfae01d5d8ac634ebb3d",
+  "verified_protected_inputs": 40,
+  "dataset_sha256": "49cfd10c6d21efd39736e5baf57510b4ce6945c3a057cdbe8dcad398c728599a",
+  "model_calls": 62,
+  "failed_model_calls": 1,
+  "candidate_evaluations": 49,
+  "evaluation_statuses": {
+    "passed": 49
+  },
+  "independently_recomputed_tours": 245,
+  "maximum_route_absolute_error": 1.7763568394002505e-15,
+  "population_replay": [
+    {
+      "generation": 0,
+      "members": [
+        {
+          "candidate_id": "c0003",
+          "evaluation_origin": "c0003",
+          "stage": "init_03",
+          "average_objective": 6.193310022868322,
+          "fitness": -6.193310022868322
+        },
+        {
+          "candidate_id": "c0002",
+          "evaluation_origin": "c0002",
+          "stage": "init_02",
+          "average_objective": 7.717208851535879,
+          "fitness": -7.717208851535879
+        }
+      ]
+    },
+    {
+      "generation": 1,
+      "members": [
+        {
+          "candidate_id": "c0009",
+          "evaluation_origin": "c0009",
+          "stage": "eoh_M1_02",
+          "average_objective": 6.129743545884112,
+          "fitness": -6.129743545884112
+        },
+        {
+          "candidate_id": "c0008",
+          "evaluation_origin": "c0008",
+          "stage": "eoh_M1_01",
+          "average_objective": 6.130045391342894,
+          "fitness": -6.130045391342894
+        }
+      ]
+    },
+    {
+      "generation": 2,
+      "members": [
+        {
+          "candidate_id": "c0045",
+          "evaluation_origin": "c0045",
+          "stage": "mutation_A_solution_quality_agent",
+          "average_objective": 5.882054415054252,
+          "fitness": -5.882054415054252
+        },
+        {
+          "candidate_id": "c0034",
+          "evaluation_origin": "c0034",
+          "stage": "eoh_M2_02",
+          "average_objective": 5.952678824569118,
+          "fitness": -5.952678824569118
+        }
+      ]
+    }
+  ],
+  "branch_transitions_verified": 12,
+  "branch_results": [
+    {
+      "generation": 1,
+      "role": "solution_quality_agent",
+      "round": 0,
+      "previous": "c0002",
+      "candidate_id": "c0012",
+      "average_objective": 7.411529046570851,
+      "average_solve_wall_seconds": 1.2543051600005128
+    },
+    {
+      "generation": 1,
+      "role": "solution_quality_agent",
+      "round": 1,
+      "previous": "c0012",
+      "candidate_id": "c0014",
+      "average_objective": 7.4521948505530675,
+      "average_solve_wall_seconds": 1.2478757199991377
+    },
+    {
+      "generation": 1,
+      "role": "solution_quality_agent",
+      "round": 2,
+      "previous": "c0014",
+      "candidate_id": "c0017",
+      "average_objective": 7.400403467658991,
+      "average_solve_wall_seconds": 1.2676990200023284
+    },
+    {
+      "generation": 1,
+      "role": "speed_agent",
+      "round": 0,
+      "previous": "c0002",
+      "candidate_id": "c0013",
+      "average_objective": 8.387533672733449,
+      "average_solve_wall_seconds": 1.2580172199988737
+    },
+    {
+      "generation": 1,
+      "role": "speed_agent",
+      "round": 1,
+      "previous": "c0013",
+      "candidate_id": "c0015",
+      "average_objective": 8.387533672733449,
+      "average_solve_wall_seconds": 1.256343240001297
+    },
+    {
+      "generation": 1,
+      "role": "speed_agent",
+      "round": 2,
+      "previous": "c0015",
+      "candidate_id": "c0018",
+      "average_objective": 8.387533672733449,
+      "average_solve_wall_seconds": 1.2616895200000726
+    },
+    {
+      "generation": 2,
+      "role": "solution_quality_agent",
+      "round": 0,
+      "previous": "c0008",
+      "candidate_id": "c0035",
+      "average_objective": 6.7160739867664345,
+      "average_solve_wall_seconds": 1.2618219800016959
+    },
+    {
+      "generation": 2,
+      "role": "solution_quality_agent",
+      "round": 1,
+      "previous": "c0035",
+      "candidate_id": "c0037",
+      "average_objective": 6.622735560834346,
+      "average_solve_wall_seconds": 1.257169180002529
+    },
+    {
+      "generation": 2,
+      "role": "solution_quality_agent",
+      "round": 2,
+      "previous": "c0037",
+      "candidate_id": "c0040",
+      "average_objective": 6.427867695472145,
+      "average_solve_wall_seconds": 1.2575742400003946
+    },
+    {
+      "generation": 2,
+      "role": "speed_agent",
+      "round": 0,
+      "previous": "c0008",
+      "candidate_id": "c0036",
+      "average_objective": 6.107629075090406,
+      "average_solve_wall_seconds": 1.2572825599985662
+    },
+    {
+      "generation": 2,
+      "role": "speed_agent",
+      "round": 1,
+      "previous": "c0036",
+      "candidate_id": "c0038",
+      "average_objective": 7.292287864879286,
+      "average_solve_wall_seconds": 1.2459996799996589
+    },
+    {
+      "generation": 2,
+      "role": "speed_agent",
+      "round": 2,
+      "previous": "c0038",
+      "candidate_id": "c0041",
+      "average_objective": 7.291308146886996,
+      "average_solve_wall_seconds": 1.2374972600009642
+    }
+  ],
+  "resumed_mutation_histories_verified": 6,
+  "critic_output_routes_verified": 12,
+  "model_usage_records": 61,
+  "model_usage_totals": {
+    "input_tokens": 1594223,
+    "cached_input_tokens": 1048960,
+    "output_tokens": 65453,
+    "reasoning_output_tokens": 20769
+  },
+  "process_tree_cpu_seconds": 384.21875,
+  "original_elapsed_seconds": 784.875,
+  "continuation_elapsed_seconds": 141.6710000000021
+}

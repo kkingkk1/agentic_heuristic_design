@@ -117,14 +117,13 @@ class TestEoHRunGate(unittest.TestCase):
             with self.subTest(field=field), self.assertRaises(ValueError):
                 p1_run_eoh.validate_config(config)
 
-    def test_generation_budget_checks_fifty_slots_and_quota(self):
+    def test_generation_budget_checks_fifty_slots_without_subscription_probe(self):
         config = self.config()
         runtime = runtime_tests.TestTaskRuntime.create(config, runtime_class=EoHRuntime)
         runtime.budget.model_normal = 10
         runtime.budget.eval_normal = runtime.budget.eval_starts = 10
         runtime.budget.eval_cpu_samples = [1.0]
-        quota = {"ordinary_usage_allowed": True, "remaining_model_calls": 1000}
-        with patch("baselines.eoh.runtime.p0_budget_quota.read_limits", return_value=quota):
+        with patch("scripts.p0_budget_quota.read_limits", side_effect=AssertionError("unexpected quota probe")):
             runtime.before_generation()
         runtime.cfg["budget"]["normal_model_calls"] = 59
         with self.assertRaisesRegex(StopRun, "不足以覆盖一代"):

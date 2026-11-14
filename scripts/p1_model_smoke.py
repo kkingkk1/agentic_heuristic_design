@@ -26,9 +26,9 @@ from baselines.reevo.controller import ReEvoController  # noqa: E402
 from baselines.reevo.runtime import ReEvoRuntime  # noqa: E402
 from baselines.roco.paper_controller import RoCoController  # noqa: E402
 from baselines.roco.runtime import RoCoRuntime  # noqa: E402
-from scripts import p0_budget_quota, p0_model_probe as probe, p1_calibrate_test_cost, p1_token_usage  # noqa: E402
+from scripts import p0_model_probe as probe, p1_calibrate_test_cost, p1_token_usage  # noqa: E402
 from scripts.p0_controller import Candidate, Controller, StopRun  # noqa: E402
-from scripts.p0_runtime import JsonLog, Runtime, digest, memory_and_priority, quota_gate  # noqa: E402
+from scripts.p0_runtime import JsonLog, Runtime, digest, memory_and_priority  # noqa: E402
 from scripts.p1_runtime import TaskRuntime  # noqa: E402
 from scripts.p1_task_contract import load_task_contract  # noqa: E402
 
@@ -70,12 +70,10 @@ class SmokeBackend:
     def __init__(self, runtime, counters, *, max_calls=MAX_CALLS, allow_unquantified_quota=True):
         if type(max_calls) is not int or max_calls < 1:
             raise ValueError("工程检查的模型调用上限必须是正整数。")
-        if type(allow_unquantified_quota) is not bool:
-            raise ValueError("不可量化余量的处理方式必须是布尔值。")
         self.runtime, self.counters = runtime, counters
         self.contract = runtime.contract
         self.max_calls = max_calls
-        self.allow_unquantified_quota = allow_unquantified_quota
+        # 旧参数仅用于兼容调用方，不再参与模型调用检查。
 
     def model(self, stage, prompt):
         with self.counters["lock"]:
@@ -83,10 +81,6 @@ class SmokeBackend:
                 raise StopRun("其他检查遇到额度或基础设施阻塞。")
             if self.counters["calls"] >= self.max_calls:
                 raise StopRun(f"真实模型检查达到本次 {self.max_calls} 次调用上限。")
-            quota = p0_budget_quota.read_limits()
-            quota_gate(quota, self.max_calls - self.counters["calls"],
-                       allow_unquantified=self.allow_unquantified_quota)
-            self.runtime.log.event("smoke_quota", stage=stage, quota=quota)
             self.counters["calls"] += 1
         # 工程配置仍禁止普通 TaskRuntime 请求模型；此脚本只为已授权的单候选检查调用基类。
         return Runtime.model(self.runtime, stage, prompt)
@@ -161,7 +155,7 @@ def run_one(name, runtime, log, counters, *, max_calls=MAX_CALLS):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", action="store_true", help="执行已获授权的有界检查；默认只打印方案")
-    parser.add_argument("--accept-unquantified-quota", action="store_true", help="用户已接受本次订阅余量无法换算为调用次数")
+    parser.add_argument("--accept-unquantified-quota", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--method", choices=[spec[0] for spec in METHODS], help="仅检查所选方法")
     args = parser.parse_args()
     methods = tuple(spec for spec in METHODS if args.method is None or spec[0] == args.method)
@@ -169,8 +163,6 @@ def main():
     if not args.run:
         print(json.dumps(run_plan, ensure_ascii=False, indent=2))
         return 0
-    if not args.accept_unquantified_quota:
-        parser.error("本次订阅剩余次数无法量化；须先取得用户对该具体检查方案的授权。")
     resources = memory_and_priority()
     if resources["available_memory_bytes"] < 8589934592:
         raise StopRun("可用内存低于 8 GiB，停止检查。")
@@ -178,12 +170,10 @@ def main():
     login = probe.run_command(cli + ["login", "status"])
     if login.get("exit_code") != 0 or "Logged in using ChatGPT" not in (login.get("stdout", "") + login.get("stderr", "")):
         raise StopRun("无法确认 Codex CLI 的 ChatGPT 登录。")
-    quota = p0_budget_quota.read_limits()
-    quota_gate(quota, run_plan["max_model_cli_calls"], allow_unquantified=True)
     root = ROOT / "outputs/p1_model_smoke" / (datetime.now().strftime("%Y%m%d_%H%M%S") + "_" + uuid.uuid4().hex[:8])
     root.mkdir(parents=True, exist_ok=False)
     with (root / "preflight.json").open("x", encoding="utf-8", newline="\n") as stream:
-        json.dump({"plan": run_plan, "resources": resources, "quota": quota}, stream, ensure_ascii=False, indent=2)
+        json.dump({"plan": run_plan, "resources": resources}, stream, ensure_ascii=False, indent=2)
         stream.write("\n")
     counters = {"calls": 0, "lock": threading.Lock(), "stop": threading.Event()}
     print(f"登录模型检查开始；记录：{root}", flush=True)

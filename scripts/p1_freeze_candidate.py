@@ -94,10 +94,9 @@ def freeze(run_dir):
     verify_training_config(config)
     events = [json.loads(line) for line in events_path.read_text(encoding="utf-8").splitlines() if line.strip()]
     preflight = [event for event in events if event.get("event") == "preflight"]
-    gates = [event for event in events if event.get("event") == "initial_quota_gate"]
     started = [event for event in events if event.get("event") == "formal_run_started"]
-    if len(preflight) != 1 or len(gates) != 1 or not isinstance(preflight[0].get("code_sha256"), dict):
-        raise ValueError("正式运行的启动检查或额度门禁记录缺失。")
+    if len(preflight) != 1 or not isinstance(preflight[0].get("code_sha256"), dict):
+        raise ValueError("正式运行的启动检查或代码哈希记录缺失。")
     if (len(started) != 1 or started[0].get("matrix_contract_sha256") != config["matrix_contract_sha256"]
             or started[0].get("task") != config["task"]["name"]
             or started[0].get("prompt_condition") != config["task"]["prompt_condition"]
@@ -128,9 +127,10 @@ def freeze(run_dir):
     if (not math.isclose(checked["average"], record["average"], rel_tol=1e-12, abs_tol=1e-12)
             or checked["fitness"] != record["fitness"] or checked["objectives"] != record["objectives"]):
         raise ValueError("训练评价独立重读与结果记录不一致。")
-    if read_options and (checked["solve_wall_seconds"] != record.get("solve_wall_seconds")
-                         or checked["stopping_reasons"] != record.get("stopping_reasons")):
-        raise ValueError("训练逐例时间或停止原因与结果记录不一致。")
+    for field in ("solve_wall_seconds", "average_solve_wall_seconds", "heuristic_wall_seconds",
+                  "average_heuristic_wall_seconds", "stopping_reasons"):
+        if checked.get(field) != record.get(field):
+            raise ValueError(f"训练计时或停止记录不一致：{field}。")
     destination = ROOT / "outputs/p1_frozen_candidates" / method / run_dir.name
     destination.mkdir(parents=True, exist_ok=False)
     frozen = destination / "candidate.py"

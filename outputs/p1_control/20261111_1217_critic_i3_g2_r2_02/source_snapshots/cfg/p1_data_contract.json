@@ -1,0 +1,445 @@
+{
+  "status": "frozen",
+  "contract_id": "p1_data_20261104_v1",
+  "scope": "只冻结所列实例文件和实例求解种子；不冻结方法、重复数或总预算。",
+  "source_candidate_commit": "4ad8cfc55056f2d2da94689366ac346eaa620505",
+  "notes": [
+    "训练和同规模测试实例无完全重复。",
+    "来源一致性不证明这些数据是 RoCo 论文的原始实例。",
+    "测试实例未用于候选评价。"
+  ],
+  "tasks": {
+    "tsp_aco": {
+      "train": {
+        "path": "problems/tsp_aco/dataset/train50_dataset.npy",
+        "sha256": "49cfd10c6d21efd39736e5baf57510b4ce6945c3a057cdbe8dcad398c728599a",
+        "git_blob": "3b7bb10195da3a7b815790c2191ead0bb742f365",
+        "bytes": 4128,
+        "instances": 5,
+        "size": 50,
+        "generator_seed": 1234,
+        "evaluation_seeds": [
+          20261103,
+          20261104,
+          20261105,
+          20261106,
+          20261107
+        ],
+        "iterations": 200,
+        "ants": 30
+      },
+      "test": [
+        {
+          "path": "problems/tsp_aco/dataset/test50_p1_dataset.npy",
+          "sha256": "a853e426a52e6beecbf2002fb6ddb69a2f7fbbc7c49cc1297f70171498abca15",
+          "git_blob": "3bda3cf87a6325e49666dcd0f6caab0e31616971",
+          "bytes": 51328,
+          "size": 50,
+          "instances": 64,
+          "evaluation_seed_base": 2026115400,
+          "iterations": 500,
+          "source_git_blob_verified": false,
+          "origin_note": "按已登记生成器延续随机序列生成；未证明为论文原始实例。"
+        },
+        {
+          "path": "problems/tsp_aco/dataset/test100_p1_dataset.npy",
+          "sha256": "2124f6679df3788965c4822673eb335b4b129b88247c8c30a4bb1215f9cf696c",
+          "git_blob": "ab27b9d51c8e11d20c49d34f8fb1685595455a0c",
+          "bytes": 102528,
+          "size": 100,
+          "instances": 64,
+          "evaluation_seed_base": 2026120400,
+          "iterations": 500,
+          "source_git_blob_verified": false,
+          "origin_note": "按已登记生成器延续随机序列生成；未证明为论文原始实例。"
+        },
+        {
+          "path": "problems/tsp_aco/dataset/test200_p1_dataset.npy",
+          "sha256": "bad03ad270daa513bb4b3cad6dc4fa7bea2cadd930c60ff8047c2ee828cfb2ab",
+          "git_blob": "72384b0dbb4d91eef5a45723e92fe084bbd6ee8b",
+          "bytes": 204928,
+          "size": 200,
+          "instances": 64,
+          "evaluation_seed_base": 2026130400,
+          "iterations": 500,
+          "source_git_blob_verified": false,
+          "origin_note": "按已登记生成器延续随机序列生成；未证明为论文原始实例。"
+        }
+      ],
+      "training_supervisor": "scripts/p0_tsp_aco_evaluate.py"
+    },
+    "op_aco": {
+      "train": {
+        "path": "problems/op_aco/dataset/train50_dataset.npz",
+        "sha256": "5371358192a23f4b56c91c0e72b3c9fa5ee186b287501f80b642a94711a981d8",
+        "git_blob": "437462740e19bc27fffa20b56739d1730adf1d2b",
+        "bytes": 4276,
+        "instances": 5,
+        "size": 50,
+        "generator_seed": 1234,
+        "evaluation_seeds": [
+          20261103,
+          20261104,
+          20261105,
+          20261106,
+          20261107
+        ],
+        "iterations": 100,
+        "ants": 30
+      },
+      "test": [
+        {
+          "path": "problems/op_aco/dataset/test50_p1_dataset.npz",
+          "sha256": "a39a528bac23ecbd5bf825b4bd4a1e27936cd5b6cb38ef3642ee9d48d57d23dd",
+          "git_blob": "82c7c8b14b2e3e1bfd1e2316f8155634e13c7901",
+          "bytes": 51476,
+          "size": 50,
+          "instances": 64,
+          "evaluation_seed_base": 2026115400,
+          "iterations": 200,
+          "source_git_blob_verified": true,
+          "origin_note": "与已登记来源 Git blob 相同，不证明是论文原始实例。",
+          "max_path_length": 3.0
+        },
+        {
+          "path": "problems/op_aco/dataset/test100_p1_dataset.npz",
+          "sha256": "acb9d1d08632fcf253f985586f590386f50b7b7d00bb6a070bf7697c5c8a5459",
+          "git_blob": "bc37824a0da2cbd57092a7872d14b71a90476435",
+          "bytes": 102676,
+          "size": 100,
+          "instances": 64,
+          "evaluation_seed_base": 2026120400,
+          "iterations": 200,
+          "source_git_blob_verified": true,
+          "origin_note": "与已登记来源 Git blob 相同，不证明是论文原始实例。",
+          "max_path_length": 4.0
+        },
+        {
+          "path": "problems/op_aco/dataset/test200_p1_dataset.npz",
+          "sha256": "c6b4b997e90540ebff17187bf6a5c2f32a8c311b5d7cf194a4e1944ebed9764f",
+          "git_blob": "77f8e25bd4d8dd7fcad3897555cc588bbd4208b5",
+          "bytes": 205076,
+          "size": 200,
+          "instances": 64,
+          "evaluation_seed_base": 2026130400,
+          "iterations": 200,
+          "source_git_blob_verified": true,
+          "origin_note": "与已登记来源 Git blob 相同，不证明是论文原始实例。",
+          "max_path_length": 5.0
+        },
+        {
+          "path": "problems/op_aco/dataset/test500_p1_dataset.npz",
+          "sha256": "274178c6f62b2720b36ffb19da65fb739b54bf84d79a8990c411dd639c2cba8c",
+          "git_blob": "724e082606d5f14662bf38870001d859d9b984b7",
+          "bytes": 512276,
+          "size": 500,
+          "instances": 64,
+          "evaluation_seed_base": 2026160400,
+          "iterations": 200,
+          "source_git_blob_verified": false,
+          "origin_note": "按已登记生成器延续随机序列生成；未证明为论文原始实例。",
+          "max_path_length": 8.0
+        }
+      ],
+      "training_supervisor": "scripts/p1_op_aco_evaluate.py"
+    },
+    "cvrp_aco": {
+      "train": {
+        "path": "problems/cvrp_aco/dataset/train50_dataset.npy",
+        "sha256": "caf38e123b53da4fefda9a988da5f029267d78daf0995d2b68721f6ca8b46452",
+        "git_blob": "1b9f2252f5509a2748dc3ff2c7ee5e6a83a0f221",
+        "bytes": 12368,
+        "instances": 10,
+        "size": 50,
+        "generator_seed": 1234,
+        "evaluation_seeds": [
+          20261103,
+          20261104,
+          20261105,
+          20261106,
+          20261107,
+          20261108,
+          20261109,
+          20261110,
+          20261111,
+          20261112
+        ],
+        "iterations": 100,
+        "ants": 20
+      },
+      "test": [
+        {
+          "path": "problems/cvrp_aco/dataset/test50_p1_dataset.npy",
+          "sha256": "3370bac48fa37c6d6f23c122a3803e9500fdaaaa57de20c519fe90f57bfd7fa8",
+          "git_blob": "b4d4f5b2353eb5ec5d7e2607b876bab49ca6f1cd",
+          "bytes": 78464,
+          "size": 50,
+          "instances": 64,
+          "evaluation_seed_base": 2026115400,
+          "iterations": 500,
+          "source_git_blob_verified": true,
+          "origin_note": "与已登记来源 Git blob 相同，不证明是论文原始实例。"
+        },
+        {
+          "path": "problems/cvrp_aco/dataset/test100_p1_dataset.npy",
+          "sha256": "7fcf40e6bee3d9b798513a92017eab592539f8226529b696b95475a47a43167d",
+          "git_blob": "097f81f684874dd19bd04cd32c666e198ce5ca58",
+          "bytes": 155264,
+          "size": 100,
+          "instances": 64,
+          "evaluation_seed_base": 2026120400,
+          "iterations": 500,
+          "source_git_blob_verified": true,
+          "origin_note": "与已登记来源 Git blob 相同，不证明是论文原始实例。"
+        },
+        {
+          "path": "problems/cvrp_aco/dataset/test200_p1_dataset.npy",
+          "sha256": "2ba909893eeb440b8cea16591deac6bde5b11ce45fad6057d5931495dca46c79",
+          "git_blob": "8f029443846f467f528ea6623da631bef2423465",
+          "bytes": 308864,
+          "size": 200,
+          "instances": 64,
+          "evaluation_seed_base": 2026130400,
+          "iterations": 500,
+          "source_git_blob_verified": false,
+          "origin_note": "按已登记生成器延续随机序列生成；未证明为论文原始实例。"
+        },
+        {
+          "path": "problems/cvrp_aco/dataset/test500_p1_dataset.npy",
+          "sha256": "d35936a260f554cfe8b75ceb8f0118a0a8b9974a0bbc123cf3f1c8fa2a099c8a",
+          "git_blob": "c9e8666687fa1b1b35aa34f94d9a53ebc061e698",
+          "bytes": 769664,
+          "size": 500,
+          "instances": 64,
+          "evaluation_seed_base": 2026160400,
+          "iterations": 500,
+          "source_git_blob_verified": false,
+          "origin_note": "按已登记生成器延续随机序列生成；未证明为论文原始实例。"
+        }
+      ],
+      "training_supervisor": "scripts/p1_cvrp_aco_evaluate.py"
+    },
+    "mkp_aco": {
+      "train": {
+        "path": "problems/mkp_aco/dataset/train100_dataset.npz",
+        "sha256": "6dc1ffc07b50b8ee7bba919443a6840ed82a04a817e039e05da809877bf21073",
+        "git_blob": "d107465e7802149c58ccd00fac71bcfc00ec12ca",
+        "bytes": 24512,
+        "instances": 5,
+        "size": 100,
+        "generator_seed": 1234,
+        "evaluation_seeds": [
+          20261103,
+          20261104,
+          20261105,
+          20261106,
+          20261107
+        ],
+        "iterations": 50,
+        "ants": 10
+      },
+      "test": [
+        {
+          "path": "problems/mkp_aco/dataset/test100_p1_dataset.npz",
+          "sha256": "1be223e7c34b414ffd358dd1f060b7dad815118d39ae2b62aabf5d03cab2a366",
+          "git_blob": "bb9268c51d13e50a7806e73f119d92493d3d77bb",
+          "bytes": 307712,
+          "size": 100,
+          "instances": 64,
+          "evaluation_seed_base": 2026120400,
+          "iterations": 100,
+          "source_git_blob_verified": true,
+          "origin_note": "与已登记来源 Git blob 相同，不证明是论文原始实例。"
+        },
+        {
+          "path": "problems/mkp_aco/dataset/test200_p1_dataset.npz",
+          "sha256": "7bbb642a2b9693028ce26505e2d50f20120d798ca05a4ddbf354ec279b46e4d2",
+          "git_blob": "56215dc98cc9df06bf841d92a59c023d6b570e53",
+          "bytes": 614912,
+          "size": 200,
+          "instances": 64,
+          "evaluation_seed_base": 2026130400,
+          "iterations": 100,
+          "source_git_blob_verified": true,
+          "origin_note": "与已登记来源 Git blob 相同，不证明是论文原始实例。"
+        },
+        {
+          "path": "problems/mkp_aco/dataset/test300_p1_dataset.npz",
+          "sha256": "72f4a51e775c714b2b71783733b34165d2686c88f1830bd2f9aa42a3cb619a17",
+          "git_blob": "eda26297310c65e515cfd65a2d4de8bb22760285",
+          "bytes": 922112,
+          "size": 300,
+          "instances": 64,
+          "evaluation_seed_base": 2026140400,
+          "iterations": 100,
+          "source_git_blob_verified": true,
+          "origin_note": "与已登记来源 Git blob 相同，不证明是论文原始实例。"
+        },
+        {
+          "path": "problems/mkp_aco/dataset/test500_p1_dataset.npz",
+          "sha256": "171fb450c14e371fd5b989df8be03a08ed6ab620135d6c84b97a9bba001b8db9",
+          "git_blob": "baca251205157ae2d9f420a4a4749567a55ec1a5",
+          "bytes": 1536512,
+          "size": 500,
+          "instances": 64,
+          "evaluation_seed_base": 2026160400,
+          "iterations": 100,
+          "source_git_blob_verified": true,
+          "origin_note": "与已登记来源 Git blob 相同，不证明是论文原始实例。"
+        },
+        {
+          "path": "problems/mkp_aco/dataset/test700_p1_dataset.npz",
+          "sha256": "77132411d3d5279cce38342aead5e12b9a75ebb6dac8ceae3d559145ad645d27",
+          "git_blob": "a969e585830b38fb340e79cac09a7b826eb921e3",
+          "bytes": 2150912,
+          "size": 700,
+          "instances": 64,
+          "evaluation_seed_base": 2026180400,
+          "iterations": 100,
+          "source_git_blob_verified": false,
+          "origin_note": "按已登记生成器延续随机序列生成；未证明为论文原始实例。"
+        }
+      ],
+      "training_supervisor": "scripts/p1_mkp_aco_evaluate.py"
+    },
+    "bpp_offline_aco": {
+      "train": {
+        "path": "problems/bpp_offline_aco/dataset/train500_dataset.npz",
+        "sha256": "1119ff4455d01d61559c6cbb967fa9919c266712f67cf008d6438847ed73d433",
+        "git_blob": "6184f952df4cf3a5e8c8da1f9d9052c8b2043735",
+        "bytes": 10268,
+        "instances": 5,
+        "size": 500,
+        "generator_seed": 5,
+        "evaluation_seeds": [
+          20261103,
+          20261104,
+          20261105,
+          20261106,
+          20261107
+        ],
+        "iterations": 100,
+        "ants": 20
+      },
+      "test": [
+        {
+          "path": "problems/bpp_offline_aco/dataset/test500_p1_dataset.npz",
+          "sha256": "b8035a12fdae1000cb37cff7dfb421fb7f93d4d95b36acaa665de7488c94f440",
+          "git_blob": "d632f5fe0f97f84934dfcb389c36782506cbf414",
+          "bytes": 128268,
+          "size": 500,
+          "instances": 64,
+          "evaluation_seed_base": 2026160400,
+          "iterations": 100,
+          "source_git_blob_verified": true,
+          "origin_note": "与已登记来源 Git blob 相同，不证明是论文原始实例。"
+        },
+        {
+          "path": "problems/bpp_offline_aco/dataset/test700_p1_dataset.npz",
+          "sha256": "74b354f4aeaedec718cd0ab64ba628d9eb3ec3c274bd75b306d78be26be31ff2",
+          "git_blob": "f4ddd725675448aa4d78412be4c1b6a12473cc88",
+          "bytes": 179468,
+          "size": 700,
+          "instances": 64,
+          "evaluation_seed_base": 2026180400,
+          "iterations": 100,
+          "source_git_blob_verified": false,
+          "origin_note": "按已登记生成器延续随机序列生成；未证明为论文原始实例。"
+        },
+        {
+          "path": "problems/bpp_offline_aco/dataset/test1000_p1_dataset.npz",
+          "sha256": "73c38066b27d5c1bffb47f38bb17278eccd0bf61ed2cd7c55e5a1cce9f136da4",
+          "git_blob": "cf9be4cbb97b230790153329cf0e61d9fe83a785",
+          "bytes": 256268,
+          "size": 1000,
+          "instances": 64,
+          "evaluation_seed_base": 2026210400,
+          "iterations": 100,
+          "source_git_blob_verified": true,
+          "origin_note": "与已登记来源 Git blob 相同，不证明是论文原始实例。"
+        }
+      ],
+      "training_supervisor": "scripts/p1_bpp_aco_evaluate.py"
+    },
+    "tsp_gls": {
+      "train": {
+        "path": "problems/tsp_gls/dataset/train200_dataset.npy",
+        "sha256": "f8da974c2a9e935b86c05991f0ed722d01bd1e3a4a18ddde65c381b224086235",
+        "git_blob": "8fef7b54548a15fd942baaaad7d005312d1ef67d",
+        "bytes": 32128,
+        "instances": 10,
+        "size": 200,
+        "generator_seed": 5,
+        "evaluation_seeds": [
+          20261103,
+          20261104,
+          20261105,
+          20261106,
+          20261107,
+          20261108,
+          20261109,
+          20261110,
+          20261111,
+          20261112
+        ],
+        "iterations": 1200,
+        "ants": null
+      },
+      "test": [
+        {
+          "path": "problems/tsp_gls/dataset/test20_p1_dataset.npy",
+          "sha256": "8f6673ec5c99a3bc40dc5d09e12c190eb2c52f3465f59fca2588e45aca4a9a59",
+          "git_blob": "c6d5013dafad155a6255908bae583e1b032a9a35",
+          "bytes": 20608,
+          "size": 20,
+          "instances": 64,
+          "evaluation_seed_base": 2026112400,
+          "iterations": 73,
+          "source_git_blob_verified": true,
+          "origin_note": "与已登记来源 Git blob 相同，不证明是论文原始实例。",
+          "perturbation_moves": 5
+        },
+        {
+          "path": "problems/tsp_gls/dataset/test50_p1_dataset.npy",
+          "sha256": "d1890e17f00b625f01047e03c4aa7d200d30cb3e2645592f261c15e44094aa11",
+          "git_blob": "e2f1bde00675c4320bd029da17d9322a600c6b36",
+          "bytes": 51328,
+          "size": 50,
+          "instances": 64,
+          "evaluation_seed_base": 2026115400,
+          "iterations": 175,
+          "source_git_blob_verified": true,
+          "origin_note": "与已登记来源 Git blob 相同，不证明是论文原始实例。",
+          "perturbation_moves": 30
+        },
+        {
+          "path": "problems/tsp_gls/dataset/test100_p1_dataset.npy",
+          "sha256": "7910b44860ec93d340d3490d0993fcae2a8ee14a587547f753c7720b6be29e28",
+          "git_blob": "580d4a4811148a02f60b4b0b6b266bc52598dd02",
+          "bytes": 102528,
+          "size": 100,
+          "instances": 64,
+          "evaluation_seed_base": 2026120400,
+          "iterations": 1800,
+          "source_git_blob_verified": true,
+          "origin_note": "与已登记来源 Git blob 相同，不证明是论文原始实例。",
+          "perturbation_moves": 40
+        },
+        {
+          "path": "problems/tsp_gls/dataset/test200_p1_dataset.npy",
+          "sha256": "daa71baff8beeee06f5cf5500eb07da62f754e1fb3945d9ffb2e7cdf15a3bbcc",
+          "git_blob": "cb393810a8f567704a8f32516f615c55ec7647c0",
+          "bytes": 204928,
+          "size": 200,
+          "instances": 64,
+          "evaluation_seed_base": 2026130400,
+          "iterations": 800,
+          "source_git_blob_verified": true,
+          "origin_note": "与已登记来源 Git blob 相同，不证明是论文原始实例。",
+          "perturbation_moves": 40
+        }
+      ],
+      "training_supervisor": "scripts/p1_tsp_gls_evaluate.py"
+    }
+  }
+}

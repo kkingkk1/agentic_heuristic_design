@@ -1,0 +1,11 @@
+[*] Running ...
+[*] Dataset loaded: F:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\dataset\train50_dataset.npy with 5 instances.
+P0_JSON {"event": "start", "dataset": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy", "seed_base": 20261103, "n_ants": 30, "n_iterations": 200, "numpy": "2.3.5", "torch": "2.13.0+cu126", "torch_threads": 1, "time_scope": "solve_wall_seconds_including_preparation_and_validation", "heuristic_time_scope": "heuristic_function_only"}
+[*] Instance 0: 5.800664016657071
+P0_JSON {"event": "instance", "index": 0, "seed": 20261103, "objective": 5.800664016657071, "iterations": 200, "tour": [24, 5, 38, 47, 22, 44, 2, 16, 42, 26, 8, 36, 31, 32, 34, 20, 39, 11, 23, 25, 45, 0, 30, 14, 7, 10, 40, 6, 17, 35, 15, 41, 12, 29, 4, 28, 9, 43, 27, 46, 33, 19, 48, 1, 13, 3, 37, 18, 49, 21], "solve_wall_seconds": 2.2832658999832347, "heuristic_wall_seconds": 0.13499859999865294}
+[*] Instance 1: 5.633543186422371
+P0_JSON {"event": "instance", "index": 1, "seed": 20261104, "objective": 5.633543186422371, "iterations": 200, "tour": [13, 43, 38, 36, 6, 10, 28, 49, 34, 31, 32, 27, 0, 39, 41, 9, 25, 21, 1, 11, 29, 40, 33, 44, 24, 35, 16, 7, 18, 2, 23, 45, 48, 42, 8, 5, 12, 26, 17, 14, 22, 47, 3, 20, 4, 46, 37, 30, 19, 15], "solve_wall_seconds": 2.2002091000031214, "heuristic_wall_seconds": 0.13495929999044165}
+[*] Instance 2: 6.348087297924607
+P0_JSON {"event": "instance", "index": 2, "seed": 20261105, "objective": 6.348087297924607, "iterations": 200, "tour": [22, 39, 3, 23, 15, 5, 24, 28, 31, 25, 18, 9, 1, 37, 48, 32, 43, 34, 38, 0, 11, 46, 16, 2, 30, 27, 6, 42, 29, 33, 19, 44, 47, 7, 8, 35, 12, 45, 21, 14, 4, 17, 13, 41, 49, 26, 36, 10, 20, 40], "solve_wall_seconds": 2.2181580000033136, "heuristic_wall_seconds": 0.12385420000646263}
+[*] Instance 3: 6.373357469587122
+P0_JSON {"event": "instance", "index": 3, "seed": 20261106, "objective": 6.373357469587122, "iterations": 200, "tour": [49, 7, 17, 36, 46, 15, 27, 43, 33, 23, 0, 16, 48, 25, 28, 20, 47, 38, 32, 9, 10, 35, 11, 39, 26, 30, 34, 5, 13, 21, 12, 29, 45, 4, 18, 22, 44, 19, 41, 8, 1, 42, 3, 37, 40, 2, 31, 24, 6, 14], "solve_wall_seconds": 2.1295056999952067, "heuristic_wall_seconds": 0.12438779999502003}

@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\eval.py",
+    "50",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_211114_a5bdc0a4_resume\\candidates\\c0262",
+    "train"
+  ],
+  "resources": {
+    "available_memory_bytes": 38701465600,
+    "priority": "Normal"
+  },
+  "started_at_utc": "2026-11-13T14:24:40.043312+00:00",
+  "candidate_id": "c0262",
+  "pid": 33372,
+  "exit_code": 0,
+  "objectives": [
+    8.636482062954403,
+    9.418158053845161,
+    9.044975482093864,
+    9.688513308793286,
+    8.884049336761004
+  ],
+  "average": 9.134435648889543,
+  "fitness": -9.134435648889543,
+  "start": {
+    "event": "start",
+    "dataset": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy",
+    "seed_base": 20261103,
+    "n_ants": 30,
+    "n_iterations": 200,
+    "numpy": "2.3.5",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1,
+    "time_scope": "solve_wall_seconds_including_preparation_and_validation",
+    "heuristic_time_scope": "heuristic_function_only"
+  },
+  "average_solve_wall_seconds": 1.979792899993481,
+  "solve_wall_seconds": [
+    1.6434640000225045,
+    1.616103699983796,
+    1.648245299991686,
+    1.633477999974275,
+    3.357673499995144
+  ],
+  "average_heuristic_wall_seconds": 0.04523116000345908,
+  "heuristic_wall_seconds": [
+    0.04564580001169816,
+    0.043822100007673725,
+    0.046176499978173524,
+    0.04551970001193695,
+    0.04499170000781305
+  ],
+  "completed_monotonic_ns": 253104640000000,
+  "process_tree_cpu": {
+    "user_seconds": 11.0,
+    "kernel_seconds": 0.515625,
+    "cpu_seconds": 11.515625,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 11.609000000025844
+}

@@ -1,0 +1,596 @@
+{
+  "experiment_id": "tsp50-roco-20261114",
+  "created_at_utc": "2026-11-14T02:29:53.354815+00:00",
+  "git_head": "5fda7b16feb2d77713dbe5153b042b8cfa1a72e5",
+  "git_worktree_dirty": true,
+  "matrix_contract_sha256": "a169698d296bd79094f11488741fca47f1ff67574e3c90501c6ae7789fde3d71",
+  "unit": "independent_research_run",
+  "methods": 2,
+  "replicates_per_method": 3,
+  "test_instances_per_candidate": 64,
+  "numpy_torch_threads_ants_iterations_seed_base": [
+    "2.3.5",
+    "2.13.0+cu126",
+    1,
+    30,
+    500,
+    2026115400
+  ],
+  "commands": [
+    [
+      "python",
+      "-B",
+      "-u",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_test_evaluate.py",
+      "--candidate-dir",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\proposed_solution_quality_and_speed_agents\\20261113_143912_4468d76e_resume",
+      "--config",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_tsp50_roco_scale_20261112_135601_c2bfdab0\\test.json"
+    ],
+    [
+      "python",
+      "-B",
+      "-u",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_test_evaluate.py",
+      "--candidate-dir",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\proposed_solution_quality_and_speed_agents\\20261112_211734_d7c5ee74_resume",
+      "--config",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_tsp50_roco_scale_20261112_135601_c2bfdab0\\test.json"
+    ],
+    [
+      "python",
+      "-B",
+      "-u",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_test_evaluate.py",
+      "--candidate-dir",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\proposed_solution_quality_and_speed_agents\\20261113_182734_19e8e233_resume",
+      "--config",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_tsp50_roco_scale_20261112_135601_c2bfdab0\\test.json"
+    ],
+    [
+      "python",
+      "-B",
+      "-u",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_test_evaluate.py",
+      "--candidate-dir",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\roco_paper_adapted\\20261112_183109_ae37c237_resume",
+      "--config",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_tsp50_roco_scale_20261112_135601_c2bfdab0\\test.json"
+    ],
+    [
+      "python",
+      "-B",
+      "-u",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_test_evaluate.py",
+      "--candidate-dir",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\roco_paper_adapted\\20261113_134209_41bdbcb7_resume",
+      "--config",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_tsp50_roco_scale_20261112_135601_c2bfdab0\\test.json"
+    ],
+    [
+      "python",
+      "-B",
+      "-u",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_test_evaluate.py",
+      "--candidate-dir",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\roco_paper_adapted\\20261113_223251_4e4a7f6f_resume",
+      "--config",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_tsp50_roco_scale_20261112_135601_c2bfdab0\\test.json"
+    ],
+    [
+      "python",
+      "-B",
+      "-u",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_manual_retry\\saved_eoh_20261112\\resume_roco1_tsp50_test.py",
+      "--run"
+    ],
+    [
+      "python",
+      "-B",
+      "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_manual_retry\\saved_eoh_20261112\\analyze_tsp50_roco.py",
+      "--write"
+    ]
+  ],
+  "source_files": [
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\cfg\\p1_data_contract.json",
+      "sha256": "fbf84d0bf7ee51071089a01863354abbdb13bfd24d5b7802ba115fcfd2edd0a1"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_135816_854bdc72\\events.jsonl",
+      "sha256": "f37e8879cab8a530fba6d67550627416ca0d9deb76f7dbf20b89972bceeb1849"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_144932_43904aa4_resume\\events.jsonl",
+      "sha256": "74124a691ded9e4b037a75f38aaaacf5d4f548877b8e3ecb9b6c6a1d508ee1ef"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_145816_48da5a36_resume\\events.jsonl",
+      "sha256": "e570352d24d7ab3e126c600877be9deb3e16e02df63997dfe06e9617d58c8e99"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_161733_a2221c51_resume\\candidates\\c0302\\result.json",
+      "sha256": "cd8f39dee7d0011e4df66eb102dfce031cf13a189d46370a3883bf0884d70985"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_161733_a2221c51_resume\\candidates\\c0302\\stdout.txt",
+      "sha256": "adbe4a01332ab5ac65f43783dac4a50ba3da7610335975c663d15f43c13720cf"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_161733_a2221c51_resume\\events.jsonl",
+      "sha256": "314bddbe5535c44fce91e1faf08b4201e64e5cc1d127fa50b3ac2d3a7d9ac241"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_195246_68d519ff\\events.jsonl",
+      "sha256": "c9048da8833a5c3d78e24445c12fb1c15d3cd0b2e1766b17677a3f815ae1f5a5"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_200325_f23e0414_resume\\events.jsonl",
+      "sha256": "8ece019d95b0468429d40a225e56d19724789a89894693ca1ae27723150f23b7"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_201912_0dacd7eb_resume\\events.jsonl",
+      "sha256": "688638f04f67a1e100c1c16f8640c0cd27e86b819e53ceb3c7a5ea4acc8b4659"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_204019_c8ca46d5_resume\\events.jsonl",
+      "sha256": "182dba3e4a27995b7b0cd0475a06e22669e1b062c92339788e93af360a40bae0"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_205629_801e167f_resume\\events.jsonl",
+      "sha256": "57982fbcb7c652782c7b9ddc73bfefb669cbcb1d9473a5e6023ef8e9d694e1ee"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_210054_1819d656_resume\\events.jsonl",
+      "sha256": "37ac4026f5b8f34110227e39f8497f89bdd202c9ef1f61f060f92375d3d6d24c"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_211734_d7c5ee74_resume\\candidates\\c0335\\result.json",
+      "sha256": "5ebe79d40a78fd4d155c24808c58e61ebe214c9f7ae91ff93017461d602e79cf"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_211734_d7c5ee74_resume\\candidates\\c0335\\stdout.txt",
+      "sha256": "782dc4795a1be36b5e768a9ad2eb1c4d2a9a9a1c748175bb621025e457a8ae41"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_211734_d7c5ee74_resume\\config.json",
+      "sha256": "7e4a102eea2df6ef16897a8d42b70c00f8575ee1a02b39f7d2273f6cde8cffa8"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_211734_d7c5ee74_resume\\events.jsonl",
+      "sha256": "96701e294bf517811d6dc6b32a8d7c74cdb5afa7c072a3416187aa9e040bf423"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_230214_43fec153_resume\\events.jsonl",
+      "sha256": "cd024057a09ba6855e170422206240cde52a379841e8c3cad18539f234dd2083"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_142443_fbd2f24b_resume\\events.jsonl",
+      "sha256": "8560d78136eca1e0f632992c4a61fe03e6786b78636352c31ed5d764f7713b3a"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_143445_536b4cc9_resume\\events.jsonl",
+      "sha256": "2005c97a52c01fee8ee5b7ac29074d46c6cd3e92cf04e8a966fd00e2cba336ec"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_143814_04ffb936_resume\\events.jsonl",
+      "sha256": "7d29bb3f46692bf8bcf99dc001c36ff19e9ea9284ef691fc8868899099151e40"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_143912_4468d76e_resume\\candidates\\c0358\\result.json",
+      "sha256": "2fc234829640ea824411ab3ba89e85cd5683e99bf947449b2b4d5c7c4eaceefc"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_143912_4468d76e_resume\\candidates\\c0358\\stdout.txt",
+      "sha256": "d5d916b6e82b4461376eb16742d13a6501a4080e6a39c5d627157ff06c728f7f"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_143912_4468d76e_resume\\config.json",
+      "sha256": "96f651bad81aa8a3dd7f2ca354b29cec1eedeaffd06b93f45e8f9db248578176"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_143912_4468d76e_resume\\events.jsonl",
+      "sha256": "285a47da44127bdd3b67651760b28775ad314439eb2586088efa58b16d97e874"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_151011_1e444253_resume\\events.jsonl",
+      "sha256": "84fc48b58ecfdf34d6ef0c9d7003bb44e10fceafb505883dc137f6ce8c236fe3"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_151506_7fc2acab\\events.jsonl",
+      "sha256": "1481faec81d50eb0ba9a118b3147edfb14016ad87fa018b1933139f147eaf893"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_160445_22419217_resume\\events.jsonl",
+      "sha256": "e54ed2ae31d88a7f633a51796ec523287deace78c72d11a3a561e72882f7b83a"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_163414_1d1321c5_resume\\events.jsonl",
+      "sha256": "4d9fdd3b7d4ad5962c03c9d3b5e775a4b71bb9da864d0d872d26642a41389533"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_164252_1e3534d9_resume\\events.jsonl",
+      "sha256": "3b342d31268e2a518fcb0cbab1f0e557ebeede07e764ab62882d89f6ca6c60e2"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_165504_f7a9246d_resume\\events.jsonl",
+      "sha256": "cc48b28537effc3ef9d03a808b825db22650618634c085b90dac57db752e5317"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_171057_018c3785_resume\\events.jsonl",
+      "sha256": "944a93d72d33a12244cba6ec109bd15316f2129f79fba2b6779b39f203a23e6e"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_182734_19e8e233_resume\\candidates\\c0333\\result.json",
+      "sha256": "8b0b1b6a7f605f4e16ecd1cc9d01257325a29bb0a2d4ab96490567c805f65a7d"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_182734_19e8e233_resume\\candidates\\c0333\\stdout.txt",
+      "sha256": "767a6b5e8099f24dac64a25d6707e8acd674e72b60f86ccab6d01adf6a7a4a54"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_182734_19e8e233_resume\\config.json",
+      "sha256": "930f2cc627a149d197e044ced2861925fe450131f4f0ff47610bc0a9715871d2"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261113_182734_19e8e233_resume\\events.jsonl",
+      "sha256": "91b45893e7b220527a22bdf4dc0f96ec9c72fa81a7bca5a91fadf2c3c55bebfe"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\proposed_solution_quality_and_speed_agents\\20261112_211734_d7c5ee74_resume\\candidate.py",
+      "sha256": "f0e1201cfd3abcd00f65108adde3ee80f18aee5330cbf008c21c235953e6a2ca"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\proposed_solution_quality_and_speed_agents\\20261112_211734_d7c5ee74_resume\\manifest.json",
+      "sha256": "197af671fc8a725911e5366caa9e3648f03996c251991a8701e2b699fbc98d4e"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\proposed_solution_quality_and_speed_agents\\20261113_143912_4468d76e_resume\\candidate.py",
+      "sha256": "611a61866e3ad4a7058b74da44ec13116aec82b38715083c1c2c3053c6f041f1"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\proposed_solution_quality_and_speed_agents\\20261113_143912_4468d76e_resume\\manifest.json",
+      "sha256": "a6bfaa40e29db508532c8f072c1bb3d4b37fe92a90d3113b6d8856e5f76f216f"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\proposed_solution_quality_and_speed_agents\\20261113_182734_19e8e233_resume\\candidate.py",
+      "sha256": "fa972a6aa4b92268ae294c7eb1ede09f09f8c36b7ed834f1f1d95dc9126433e5"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\proposed_solution_quality_and_speed_agents\\20261113_182734_19e8e233_resume\\manifest.json",
+      "sha256": "9de3136e02c365529b7784adeb22126b3c10bd7b02758f01df57c31435632151"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\roco_paper_adapted\\20261112_183109_ae37c237_resume\\candidate.py",
+      "sha256": "1de44a6f3db3ef83c47599c5550fa004c81371a984ff4c8fd72555f8974f6784"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\roco_paper_adapted\\20261112_183109_ae37c237_resume\\manifest.json",
+      "sha256": "75f7f0c1618e46c6d3809518ee5d7ebee7142951dfa26b117f78eb7c912722ec"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\roco_paper_adapted\\20261113_134209_41bdbcb7_resume\\candidate.py",
+      "sha256": "0c27dd82989658342be446262bee25bd0d82bfe9cb0b70749e3b608ef95c4bb8"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\roco_paper_adapted\\20261113_134209_41bdbcb7_resume\\manifest.json",
+      "sha256": "6930bb3b25f85e44f2cbc256c61789d037694d7cf6a5f49b4f7d320c176d761d"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\roco_paper_adapted\\20261113_223251_4e4a7f6f_resume\\candidate.py",
+      "sha256": "58e068a227473df474e06dd7bb107db5eaa47f74ce30435d65eec96729a21ed4"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\roco_paper_adapted\\20261113_223251_4e4a7f6f_resume\\manifest.json",
+      "sha256": "5cb6584959d3317dccfa2df0bfdc6aca521c2a6f9cccf5c1e0cdebd096e1d2ee"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_manual_retry\\fusion_2_20261112_143551_66d3a6ad\\evaluation_events.jsonl",
+      "sha256": "e5d63a7870c761a6fbc3ad28659068539bc1df4616a4437bb25975a585a5de23"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_manual_retry\\fusion_2_20261112_143551_66d3a6ad\\events.jsonl",
+      "sha256": "16dd0bfb4efa7f1ca61dc829d8465911cd409aaffc12ef0bc1521129e92676e3"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_manual_retry\\roco_2_quota_saved_20261112\\20261112_221401_cedfe544_evaluation\\evaluation_events.jsonl",
+      "sha256": "2aed576db6b94aa5ee6737b646d65ac6a729d3afd654d5e8879aa3e06f8f2bf8"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_manual_retry\\roco_generation2_saved_20261112\\20261112_175444_2229cb9a_evaluation\\evaluation_events.jsonl",
+      "sha256": "530a6bb93e37d4cf6ec822e6e3ba9a2faf9281a8de4ab6d3a27843b88551808c"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_manual_retry\\roco_generation2_saved_20261112\\20261112_181024_8854108b_evaluation\\evaluation_events.jsonl",
+      "sha256": "7ef4f7f2a4e75fb71c9dd85c4340c78d18296cf127464179e09690cff79bb4de"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_manual_retry\\round_3_quality_20261112_145256_3c8fe086\\evaluation_events.jsonl",
+      "sha256": "22bc8f461b167592a6da0421cc8a07ed35ad9c863aeab944c4708b52c5f7463d"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_manual_retry\\round_3_quality_20261112_145256_3c8fe086\\events.jsonl",
+      "sha256": "ed1e461f602070c2208f185df1f5c22df76c198b54b8b85d995934af8119eb4a"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_manual_retry\\saved_eoh_20261112\\20261112_230934_proposed_9dcc64a8_evaluation\\evaluation_events.jsonl",
+      "sha256": "1058e685036e1153d12732160006960ad7f33589e54c8e3c3af06e87c18c80ab"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_manual_retry\\saved_eoh_20261112\\20261112_231034_roco_5d06e3ec_evaluation\\evaluation_events.jsonl",
+      "sha256": "5ea2827b0a95f29f5bb5e072fc4afe990219a297b1006ef2b9ead55c7aaf790c"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_manual_retry\\saved_eoh_20261112\\20261112_234107_roco_605caa9c_evaluation\\evaluation_events.jsonl",
+      "sha256": "93c6af016d43e65115262de47583ccbe9da77ba5dd928df453e165bde158789c"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_manual_retry\\saved_eoh_20261112\\analyze_tsp50_roco.py",
+      "sha256": "c6382d493fd5d700d000c7fca212c5a83e2d273ee95300c1f0cd66a823c16876"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_170516_a9eab10e\\events.jsonl",
+      "sha256": "8e11f1fd1b403830dfc7b3765e9eb7bfa699e25645a5cc892870196dd8cea34b"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_172536_af604137_resume\\events.jsonl",
+      "sha256": "bcbcd6851537eb3a546eb24376026015a9629feb4d6709181750638f8011b9d0"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_174300_b791da58_resume\\events.jsonl",
+      "sha256": "a966d30455bcba0f1720f571949c9be9e739c745a5ea4ffbe1048b020a6b5c12"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_180259_94bd200c_resume\\events.jsonl",
+      "sha256": "1416dfa8fbeca067f3c6470ace77db31aed640a4e35d6d4863b44aedb8da3262"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_180809_e040f878_resume\\events.jsonl",
+      "sha256": "220d499c4ce209a944d24476b272aa60f53da64067545da8e46430cb63ba8cae"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_181257_1a92db4f_resume\\events.jsonl",
+      "sha256": "88441a745b317f1c6cb4df49a17ecfbd0d6a1c98406b0a01f23dd02fcaef2825"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_181554_cd08d9e6_resume\\events.jsonl",
+      "sha256": "6bf6ef782feea9fc57af5973fcda85dc25cfb05a80129422bc1ff11421d5cb43"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_183109_ae37c237_resume\\candidates\\c0341\\result.json",
+      "sha256": "adee9bddd175b525735166388d56d11883a418cff87500928933100b33413fad"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_183109_ae37c237_resume\\candidates\\c0341\\stdout.txt",
+      "sha256": "e86d8ae1e0b32f93d5ec66c917ebd4ca4ac4bded60e9485bea0f87d7381c97c1"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_183109_ae37c237_resume\\config.json",
+      "sha256": "683b8894bed62719e3d641a5e141d75b0d37f89c6fcee45ef93703918f094ac8"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_183109_ae37c237_resume\\events.jsonl",
+      "sha256": "366b9ac86267f7d4e89ef739c47a7db3a8d915d68f80577ca33ee763bb238880"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_214857_dd30b74a\\events.jsonl",
+      "sha256": "abe661689d947e36b6705e3e5cf410f6dcd433bdb2b5859288f9ac79caae8e54"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_215400_819f82c2_resume\\events.jsonl",
+      "sha256": "93e7fb9cab728522f7a864e6a1e13b35fdaa7c8244ab41efeb649f4b791d9ff2"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_230339_86dc16b5_resume\\events.jsonl",
+      "sha256": "13c53901d29167015a235dc708221eb0b666d8e4a5bd0d71fe514a23c0f5d687"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_233727_937536c2_resume\\events.jsonl",
+      "sha256": "74e255ba5d0e6fdaef56f14197ca41d1bafb5bdd2ef083dcc263b3be26ee969c"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_103323_cc922db7_resume\\events.jsonl",
+      "sha256": "45362f4eee28567fc5ab01ccfd0a1adaad2e21948df7b374677b09491d572a65"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_103842_3992e671_resume\\events.jsonl",
+      "sha256": "641d35d648a711b61b5aa161bda342fc34f1334fa7577f4aa70cf4383cae995b"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_111435_2ea5e355_resume\\events.jsonl",
+      "sha256": "ba470dd5e7267d03efa0f09949e29a69656d34dba8c7352634402288450e5a8a"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_111837_e6354651_resume\\events.jsonl",
+      "sha256": "4e462f0ea04a053269820e378e5709e6a1bf1d7522c50b8e3615984ac2924c4f"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_112044_2391a265_resume\\events.jsonl",
+      "sha256": "f4cb517f759130a85ab8afc8ab96e5b839a3fc369d126fd2ccd4a09c1dd18706"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_112236_b3e4a95c_resume\\events.jsonl",
+      "sha256": "b5181f30e604163313dbae503c226d9bd6e4a2d41adb40ae256d7d9829a6c84c"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_112319_8c0125d2_resume\\events.jsonl",
+      "sha256": "a13dfaf9c7f79896a600ea948ef566333eaea76ba213745020915254e427f8e2"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_112402_7e55503c_resume\\events.jsonl",
+      "sha256": "ff66646b5731d7e88f1c58a59f1fa0d6723dc6adb8c20cccd8ce944f0e082cab"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_112555_ee551529_resume\\events.jsonl",
+      "sha256": "1481c303857013365d17b809442ecf85c9efd6c7c3ad7e34ddeeddb636cbc60c"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_120225_31e2e5c4_resume\\events.jsonl",
+      "sha256": "74ce8ac28e911303ada017ee6bc2b787bc9c3b6569c8f8d81e1ac5137ebe9b87"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_120432_a07ee50f_resume\\events.jsonl",
+      "sha256": "cc1422a8376106ac093632bd06d6f400e1ccca7e3da841d12e2d90822655104f"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_124748_ca7ee547_resume\\events.jsonl",
+      "sha256": "58d0ecc9f26e7e7da902e3bcb4a2f36c7847b8930817fdeb610fe6e4ce6d5841"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_133039_0866a3bf_resume\\events.jsonl",
+      "sha256": "8ed99b748d799c0888a2d48b983b2929d47c54892a8b06704c804b736c5237da"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_133954_b558039c_resume\\events.jsonl",
+      "sha256": "9e9fe8a5579790c9f4d46aa7b3fcda6bd1d48abf04d206ff0e98f537756e59be"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_134209_41bdbcb7_resume\\candidates\\c0355\\result.json",
+      "sha256": "0b4d925cafe92bfc4b66d867b0be52b6d3464b721c65ecf0675205a2c85f735b"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_134209_41bdbcb7_resume\\candidates\\c0355\\stdout.txt",
+      "sha256": "8d0d9c6e434d829e2820f36af1329e368fe3fe16f4d0cefdeaded9538433059f"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_134209_41bdbcb7_resume\\config.json",
+      "sha256": "a44f4a383ee1d211d6a6e8a1231ff1d5c04e8d6a60ef3f80240313bb9f66e3a4"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_134209_41bdbcb7_resume\\events.jsonl",
+      "sha256": "ee09d7c2b02ac41f91cf1aa3fa65d0b834bdf1c442382a849a8dc1f91785b58f"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_192144_7c3416c7\\events.jsonl",
+      "sha256": "3ae47859a79b442fe526a10a0247ec046c20f19ef0ee4eea557b25469f4c68d5"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_200620_34d3dfaf_resume\\events.jsonl",
+      "sha256": "8edd3f9ce54cb462449ca3feb48e8990b697b375ac5a1532a05aa04bc7a6960d"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_201607_1e649f7a_resume\\events.jsonl",
+      "sha256": "02711f902b61a7cb25c942ea94ed93ce24d499342145e051149fb5c0f69e4940"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_202122_232dcf7f_resume\\events.jsonl",
+      "sha256": "b7dcd11bc365ce7ece6fd7d1e8fea1f0e1cb8f2faaad87e7df94f9dce5aba646"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_202653_0daacce5_resume\\events.jsonl",
+      "sha256": "952ce1b434268386c26e0a52cec90f887a8129643fcd64487f0831270a9aa946"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_205957_46ed0108_resume\\events.jsonl",
+      "sha256": "30717cdd7b1d0a7fc5f56dc387e60906b9e5491855627c6cd52e66b9a02ac860"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_210528_f1fd2f12_resume\\events.jsonl",
+      "sha256": "21225e85f68298ecfb6e255eedbe81b72e5d1b032a2bca656eb3589554f816f8"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_211114_a5bdc0a4_resume\\events.jsonl",
+      "sha256": "2002b91d2bd34280f3f8a805ee1c4df0bf64210489fd881b74d32b902b8505f4"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_223251_4e4a7f6f_resume\\candidates\\c0324\\result.json",
+      "sha256": "261e99c16484dd13e2e1ae50b934a02dbf3f504085bea65bee70f973ef63a6e4"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_223251_4e4a7f6f_resume\\candidates\\c0324\\stdout.txt",
+      "sha256": "6b250062dd47597627beea7f3590a4c31623636102b752157f95d4db2d04d8ac"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_223251_4e4a7f6f_resume\\config.json",
+      "sha256": "66b7532b67d2f1f555003bffb7e2b53a9477fb9220abe38566e20ba2af5bd627"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_223251_4e4a7f6f_resume\\events.jsonl",
+      "sha256": "da19ffa70a6822db311e7546f4c61b6f2210f7f1277414342644b1674f5ceee4"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_235648_34d12148_resume\\events.jsonl",
+      "sha256": "c86945cf6dbaaaddfee75f24f01fd0abf42260ea1748dd2685f5585b432c2cc5"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_test\\proposed_solution_quality_and_speed_agents\\20261114_001043_141c347d\\result.json",
+      "sha256": "e25d5527cec7de22999cd6755fe3116abad753c484bf2be2690b9ec8ddeb1969"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_test\\proposed_solution_quality_and_speed_agents\\20261114_001043_141c347d\\stdout.txt",
+      "sha256": "ec9a56269c640b6195d36407e84ea80a3a8836fd6aaefab025a1b8a9d1793a68"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_test\\proposed_solution_quality_and_speed_agents\\20261114_002016_c2e731dc\\result.json",
+      "sha256": "45f0c7aaa17ecc780fce54db244c6833f2820dfa9f61c353da5927c4235a1064"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_test\\proposed_solution_quality_and_speed_agents\\20261114_002016_c2e731dc\\stdout.txt",
+      "sha256": "b84ed45eae93daa22545cc9c2c1847b9d3261c3f9f7b94954631a6112e637e62"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_test\\proposed_solution_quality_and_speed_agents\\20261114_002938_b4d6ed89\\result.json",
+      "sha256": "76064e917a158e0b7be5533b4e88baeb3b03c14660a543a2893ee24524131004"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_test\\proposed_solution_quality_and_speed_agents\\20261114_002938_b4d6ed89\\stdout.txt",
+      "sha256": "b7c8cfa2b0abb96944e088dc7a411b6ae7d664f771b07a0825a15a1f1ffbfd21"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_test\\roco_paper_adapted\\20261114_003857_23054d62\\result.json",
+      "sha256": "10872caa80fd6b1920a69588271945d31c40b07f2b77faea643ce5310ea205ea"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_test\\roco_paper_adapted\\20261114_003857_23054d62\\stdout.txt",
+      "sha256": "6bf7e5665c1ec3e4a0bae64a78b733af588b97da2e544e4ec9f31652dc57f7b8"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_test\\roco_paper_adapted\\20261114_100728_2fe0d630\\result.json",
+      "sha256": "e089260012a633eb3507f208cab43ac57d4384783de29c15d475dab7cdc4b61d"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_test\\roco_paper_adapted\\20261114_100728_2fe0d630\\stdout.txt",
+      "sha256": "89e96e30c4b7d7af2385275841b0737901d59caed4db432a39631b710de74d7b"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_test\\roco_paper_adapted\\20261114_101348_23cee5d4_resume\\combined_stdout.txt",
+      "sha256": "f29c395746ec36701ced63ae0711cd44ad86c46acbb7e30719c839a375b93013"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_test\\roco_paper_adapted\\20261114_101348_23cee5d4_resume\\result.json",
+      "sha256": "879e03765ac9ab5084067173e2d152ed636cb9fe9d934c055d9544da29ad30c4"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_test\\roco_paper_adapted\\20261114_101348_23cee5d4_resume\\stdout.txt",
+      "sha256": "117e2d3c8eab42b8e58c58ae8ceadb90796ebb72a29466918cec36c6df8b8951"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_test\\roco_paper_adapted\\20261114_101742_0bd83178\\result.json",
+      "sha256": "788f8f5f1ae1d67619e883373037b26ffe8189b2893805ce334dc5a8dd8fc582"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_test\\roco_paper_adapted\\20261114_101742_0bd83178\\stdout.txt",
+      "sha256": "0a0dfbad39a75c7a9e5396d862200ec6ce8887321a513556f62f26c7c8c37cde"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_tsp50_roco_scale_20261112_135601_c2bfdab0\\test.json",
+      "sha256": "39f15dfe2adca898154586e2dfe6a5703c0bef2f1b4346a4f4e81b49ef9173ce"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\test50_p1_dataset.npy",
+      "sha256": "a853e426a52e6beecbf2002fb6ddb69a2f7fbbc7c49cc1297f70171498abca15"
+    }
+  ],
+  "canonical_table": {
+    "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\Results\\Evidence\\tsp50-roco-20261114\\data.csv",
+    "sha256": "ecc3afd395cbc6d91317b46bcdaa751687ccbb14e3c3328d6d4387c5d344386b"
+  },
+  "historical_record": {
+    "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_tsp50_roco_scale_20261112_135601_c2bfdab0\\analysis\\run-history.md",
+    "sha256": "0e52f775d837c41d19b393a36274fecc79f8623da898942eaf4ef4005cd53f6d"
+  },
+  "notes": [
+    "RoCo 首组测试因系统睡眠中断；14 个已完成实例保留，其余 50 个续跑。",
+    "失败请求的 token 用量未知；不作显著性或速度优势声明。"
+  ]
+}

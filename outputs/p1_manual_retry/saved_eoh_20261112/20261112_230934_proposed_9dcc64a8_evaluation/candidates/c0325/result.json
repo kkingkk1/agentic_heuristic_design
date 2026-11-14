@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\eval.py",
+    "50",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_manual_retry\\saved_eoh_20261112\\20261112_230934_proposed_9dcc64a8_evaluation\\candidates\\c0325",
+    "train"
+  ],
+  "resources": {
+    "available_memory_bytes": 38944190464,
+    "priority": "Normal"
+  },
+  "started_at_utc": "2026-11-12T15:09:36.231105+00:00",
+  "candidate_id": "c0325",
+  "pid": 53172,
+  "exit_code": 0,
+  "objectives": [
+    8.034600642323342,
+    9.079338044801563,
+    8.275103412938039,
+    9.215753109785693,
+    9.051385704710896
+  ],
+  "average": 8.731236182911907,
+  "fitness": -8.731236182911907,
+  "start": {
+    "event": "start",
+    "dataset": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy",
+    "seed_base": 20261103,
+    "n_ants": 30,
+    "n_iterations": 200,
+    "numpy": "2.3.5",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1,
+    "time_scope": "solve_wall_seconds_including_preparation_and_validation",
+    "heuristic_time_scope": "heuristic_function_only"
+  },
+  "average_solve_wall_seconds": 2.1380054800014476,
+  "solve_wall_seconds": [
+    2.0689756000065245,
+    2.177809500019066,
+    2.0974392000061926,
+    2.1556127999792807,
+    2.190190299996175
+  ],
+  "average_heuristic_wall_seconds": 0.0008503199904225766,
+  "heuristic_wall_seconds": [
+    0.0017160999996121973,
+    0.000598999991780147,
+    0.0008080999832600355,
+    0.0005354000022634864,
+    0.0005929999751970172
+  ],
+  "completed_monotonic_ns": 169402000000000,
+  "process_tree_cpu": {
+    "user_seconds": 11.4375,
+    "kernel_seconds": 0.6875,
+    "cpu_seconds": 12.125,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 12.828999999997905
+}

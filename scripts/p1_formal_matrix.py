@@ -27,8 +27,8 @@ MATRIX_PATH = ROOT / "cfg/p1_formal_matrix.json"
 RESOURCE_PATH = ROOT / "cfg/p0_tsp_aco.json"
 TASKS = ("tsp_aco", "op_aco", "cvrp_aco", "mkp_aco", "bpp_offline_aco", "tsp_gls")
 METHODS = {
-    "proposed_solution_quality_and_speed_agents": (1, 39, 32),
-    "roco_paper_adapted": (1, 39, 32),
+    "proposed_solution_quality_and_speed_agents": (6, 420, 378),
+    "roco_paper_adapted": (6, 420, 378),
 }
 PILOT_CONDITIONS = [("tsp_aco", "white_box")]
 PILOT_SIZES = {"tsp_aco": (50,)}
@@ -53,13 +53,11 @@ def conditions():
 
 
 def implementation_paths():
-    """收集会改变任务、方法、参考或矩阵合同的源码和提示。"""
+    """收集会改变本批任务、方法或矩阵合同的源码和提示。"""
     scripts = ("p0_controller.py", "p0_runtime.py", "p0_windows_job.py", "p0_model_probe.py",
                "p0_budget_model_probe.py", "p0_budget_quota.py", "p1_runtime.py", "p1_task_contract.py",
                "p1_formal_matrix.py", "p1_freeze_candidate.py", "p1_test_evaluate.py",
-               "p1_token_usage.py",
-               "p1_reference_test_evaluate.py", "p1_deepaco_test_evaluate.py", "p1_deepaco_worker.py",
-               "p1_deepaco_tsp.py", *(Path(RUNNERS[method]).name for method in METHODS))
+               "p1_token_usage.py", *(Path(RUNNERS[method]).name for method in METHODS))
     paths = {ROOT / "scripts" / name for name in scripts}
     for task in {task for task, _ in conditions()}:
         evaluator, _, _ = TRAINING[task]
@@ -73,11 +71,9 @@ def implementation_paths():
         paths.update((ROOT / "cfg/problem" / f"{stem}.yaml",
                       ROOT / "prompts" / stem / "func_desc.txt",
                       ROOT / "prompts" / stem / "func_signature.txt"))
-    for directory in ("roco", "aco_reference"):
-        for path in (ROOT / "baselines" / directory).rglob("*"):
-            if path.is_file() and path.suffix in (".py", ".txt") and "__pycache__" not in path.parts:
-                paths.add(path)
-    paths.add(ROOT / "baselines/deepaco/reference.py")
+    for path in (ROOT / "baselines" / "roco").rglob("*"):
+        if path.is_file() and path.suffix in (".py", ".txt") and "__pycache__" not in path.parts:
+            paths.add(path)
     return sorted(paths, key=lambda path: path.relative_to(ROOT).as_posix())
 
 
@@ -118,7 +114,7 @@ def load_matrix(*, allow_pending=False):
     matrix = json.loads(MATRIX_PATH.read_text(encoding="utf-8"))
     expected_status = ("frozen", "pending") if allow_pending else ("frozen",)
     if (not isinstance(matrix, dict) or matrix.get("status") not in expected_status
-            or matrix.get("contract_id") != "p1_tsp50_small_20261107"
+            or matrix.get("contract_id") != "p1_tsp50_roco_scale_20261112"
             or matrix.get("data_contract_sha256") != digest(DATA_CONTRACT)
             or matrix.get("resource_config_sha256") != digest(RESOURCE_PATH)):
         raise ValueError("P1 矩阵或所依赖的数据、资源合同未冻结或已变化。")
@@ -126,14 +122,14 @@ def load_matrix(*, allow_pending=False):
     if data.get("status") != "frozen" or set(data.get("tasks", {})) != set(TASKS):
         raise ValueError("P1 数据合同的任务集合无效。")
     seeds = matrix.get("selection_seeds")
-    fixed_integers = {"initial_proposals": 6, "population_size": 2, "collaboration_rounds": 3,
-                      "research_repeats": 2, "solver_repeats_per_instance": 1,
-                      "normal_and_retry_evaluation_limit": 32}
+    fixed_integers = {"initial_proposals": 30, "population_size": 10, "collaboration_rounds": 3,
+                      "research_repeats": 3, "solver_repeats_per_instance": 1,
+                      "normal_and_retry_evaluation_limit": 400}
     if (matrix.get("conditions") != [{"task": "tsp_aco", "prompt_condition": "white_box", "test_sizes": [50]}]
             or matrix.get("method_ids") != list(METHODS)
             or any(type(matrix.get(key)) is not int or matrix[key] != value
                    for key, value in fixed_integers.items())
-            or not isinstance(seeds, list) or len(seeds) != 2 or len(set(seeds)) != 2
+            or not isinstance(seeds, list) or len(seeds) != 3 or len(set(seeds)) != 3
             or any(type(seed) is not int or not 0 <= seed < 2**32 for seed in seeds)):
         raise ValueError("P1 重复数、选择种子或评价上限无效。")
     if (type(matrix.get("model_retry_limit")) is not int or matrix["model_retry_limit"] != 0
@@ -142,7 +138,7 @@ def load_matrix(*, allow_pending=False):
             or type(matrix.get("training_process_tree_cpu_seconds")) is not int
             or matrix["training_process_tree_cpu_seconds"] <= 0
             or type(matrix.get("model_cli_limit_per_research")) is not int
-            or matrix["model_cli_limit_per_research"] != 39
+            or matrix["model_cli_limit_per_research"] != 420
             or type(matrix.get("max_concurrent_research_runs")) is not int
             or matrix["max_concurrent_research_runs"] != 1):
         raise ValueError("P1 研发预算无效。")
@@ -357,7 +353,8 @@ def verify_test_config(config):
 
 
 def reference_cells(data):
-    return [(kind, task, size) for task, _, size in test_cells(data) for kind in ("expert", "deepaco")]
+    """当前首批只比较两种研发方法，求解参考不在矩阵中。"""
+    return []
 
 
 def reference_config(matrix, data, kind, task, size):
@@ -507,8 +504,7 @@ def summary(matrix, data):
 def verify_expansion(matrix, data):
     """复用现有入口校验器，离线核对完整展开结果。"""
     from scripts.p1_freeze_candidate import METHODS as validators
-    from scripts import p1_deepaco_test_evaluate, p1_gnngls_test_evaluate, p1_neuopt_test_evaluate
-    from scripts import p1_reference_test_evaluate, p1_test_evaluate
+    from scripts import p1_test_evaluate
 
     verify_training_software(matrix)
     for task in {task for task, _ in conditions()}:
@@ -526,12 +522,16 @@ def verify_expansion(matrix, data):
     for kind, task, size in reference_cells(data):
         config = reference_config(matrix, data, kind, task, size)
         if kind == "expert":
+            from scripts import p1_reference_test_evaluate
             p1_reference_test_evaluate.load_reference_contract(config, data, digest(DATA_CONTRACT), digest(RESOURCE_PATH))
         elif kind == "deepaco":
+            from scripts import p1_deepaco_test_evaluate
             p1_deepaco_test_evaluate.load_reference_contract(config, data, digest(DATA_CONTRACT))
         elif kind == "neuopt":
+            from scripts import p1_neuopt_test_evaluate
             p1_neuopt_test_evaluate.load_reference_contract(config, data, digest(DATA_CONTRACT), digest(RESOURCE_PATH))
         else:
+            from scripts import p1_gnngls_test_evaluate
             p1_gnngls_test_evaluate.load_reference_contract(config, data, digest(DATA_CONTRACT), digest(RESOURCE_PATH))
     result = summary(matrix, data)
     if result["primary_comparisons"] != matrix["comparison"]["primary_family_size"]:

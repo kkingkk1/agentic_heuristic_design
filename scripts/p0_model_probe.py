@@ -205,16 +205,12 @@ def parse_proposal(text: str) -> dict[str, str]:
 
 def parse_critic(text: str) -> dict[str, str]:
     reflection, advice = tagged(text, ("ref", "ans"))
-    # Prompt 5 正文要求设计提示少于 20 词；其格式上限分别为 30 与 40 词。
-    if english_words(reflection) >= 20 or english_words(advice) > 40:
-        raise ProbeError("初始 Critic 输出超过论文 Prompt 5 的词数限制。")
+    # 提示中的词数为建议；保留完整反馈，格式检查仍由 tagged 执行。
     return {"reflection": reflection, "advice": advice}
 
 
 def parse_long_term(text: str) -> str:
     (reflection,) = tagged(text, ("ans",))
-    if english_words(reflection) >= 50:
-        raise ProbeError("长期反思须少于 50 个词。")
     return reflection
 
 

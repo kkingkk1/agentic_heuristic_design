@@ -76,6 +76,8 @@ def plain_response(response):
 class ReEvoController(Controller):
     """保留来源种子、随机配对、短／长期反思、交叉与精英变异。"""
 
+    role_specific_critic = False
+
     def __init__(self, backend, log, contract, *, population_size=10, initial_count=30,
                  mutation_count=5, generations=1, seed=20261103):
         super().__init__(backend, log, population_size=population_size, initial_count=initial_count,

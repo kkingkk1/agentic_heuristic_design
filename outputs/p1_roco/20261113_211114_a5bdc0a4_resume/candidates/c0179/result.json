@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\eval.py",
+    "50",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_211114_a5bdc0a4_resume\\candidates\\c0179",
+    "train"
+  ],
+  "resources": {
+    "available_memory_bytes": 39728762880,
+    "priority": "Normal"
+  },
+  "started_at_utc": "2026-11-13T13:19:53.601328+00:00",
+  "candidate_id": "c0179",
+  "pid": 63036,
+  "exit_code": 0,
+  "objectives": [
+    5.474765696989439,
+    5.729473231666601,
+    6.320921384921099,
+    6.131416882174619,
+    5.940392657127477
+  ],
+  "average": 5.919393970575847,
+  "fitness": -5.919393970575847,
+  "start": {
+    "event": "start",
+    "dataset": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy",
+    "seed_base": 20261103,
+    "n_ants": 30,
+    "n_iterations": 200,
+    "numpy": "2.3.5",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1,
+    "time_scope": "solve_wall_seconds_including_preparation_and_validation",
+    "heuristic_time_scope": "heuristic_function_only"
+  },
+  "average_solve_wall_seconds": 1.9159475999942515,
+  "solve_wall_seconds": [
+    1.615687599987723,
+    1.611733900004765,
+    1.6017288000148255,
+    1.596386099990923,
+    3.154201599973021
+  ],
+  "average_heuristic_wall_seconds": 0.007034400006523356,
+  "heuristic_wall_seconds": [
+    0.007656000001588836,
+    0.006684099993435666,
+    0.006681700004264712,
+    0.006862100010039285,
+    0.00728810002328828
+  ],
+  "completed_monotonic_ns": 249217890000000,
+  "process_tree_cpu": {
+    "user_seconds": 10.578125,
+    "kernel_seconds": 0.609375,
+    "cpu_seconds": 11.1875,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 11.312000000005355
+}

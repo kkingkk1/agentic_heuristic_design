@@ -1,0 +1,29 @@
+{
+  "status": "completed",
+  "source_events": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_230339_86dc16b5_resume\\events.jsonl",
+  "source_events_sha256": "13c53901d29167015a235dc708221eb0b666d8e4a5bd0d71fe514a23c0f5d687",
+  "new_model_calls": 0,
+  "prior_model_calls": 99,
+  "prior_evaluations": 85,
+  "new_evaluations": 3,
+  "results": [
+    {
+      "candidate_id": "c0089",
+      "status": "passed",
+      "average": 9.67853937873844,
+      "error": null
+    },
+    {
+      "candidate_id": "c0090",
+      "status": "candidate_error",
+      "average": null,
+      "error": "候选运行或输出非法；详见 stderr.txt。"
+    },
+    {
+      "candidate_id": "c0092",
+      "status": "passed",
+      "average": 7.962841638294814,
+      "error": null
+    }
+  ]
+}

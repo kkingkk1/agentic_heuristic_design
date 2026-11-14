@@ -58,7 +58,12 @@ def read_complete(stdout_path, *, stagnation_rounds=None):
             or start.get("stagnation_rounds") != stagnation_rounds
             or start.get("time_scope") != "solve_wall_seconds_including_preparation_and_validation"):
         raise ValueError("速度设置或计时范围不符合合同。")
-    times = []
+    scope, heuristic_scope = start.get("time_scope"), start.get("heuristic_time_scope")
+    if (scope not in (None, "solve_wall_seconds_including_preparation_and_validation")
+            or heuristic_scope not in (None, "heuristic_function_only")
+            or (heuristic_scope is not None and scope is None)):
+        raise ValueError("评价计时范围无效。")
+    times, heuristic_times = [], []
     for index, instance in enumerate(instances):
         obj = instance.get("objective")
         tour = instance.get("tour")
@@ -73,14 +78,27 @@ def read_complete(stdout_path, *, stagnation_rounds=None):
         ):
             raise ValueError(f"实例 {index} 的输出不完整或无效。")
         if stagnation_rounds is not None:
-            iterations, elapsed = instance.get("iterations"), instance.get("solve_wall_seconds")
+            iterations = instance.get("iterations")
             if (type(iterations) is not int or not 1 <= iterations <= 200
                     or (iterations < 200 and iterations <= stagnation_rounds)
-                    or instance.get("stop_reason") != ("stagnation" if iterations < 200 else "iteration_limit")
-                    or isinstance(elapsed, bool) or not isinstance(elapsed, (int, float))
+                    or instance.get("stop_reason") != ("stagnation" if iterations < 200 else "iteration_limit")):
+                raise ValueError(f"实例 {index} 的停止原因无效。")
+        if scope is not None:
+            elapsed = instance.get("solve_wall_seconds")
+            if (isinstance(elapsed, bool) or not isinstance(elapsed, (int, float))
                     or not math.isfinite(elapsed) or elapsed <= 0):
-                raise ValueError(f"实例 {index} 的停止原因或完整求解时间无效。")
+                raise ValueError(f"实例 {index} 的完整求解时间无效。")
             times.append(float(elapsed))
+        elif "solve_wall_seconds" in instance:
+            raise ValueError(f"实例 {index} 的求解时间缺少计时范围。")
+        if heuristic_scope is not None:
+            heuristic_elapsed = instance.get("heuristic_wall_seconds")
+            if (isinstance(heuristic_elapsed, bool) or not isinstance(heuristic_elapsed, (int, float))
+                    or not math.isfinite(heuristic_elapsed) or not 0 <= heuristic_elapsed <= elapsed):
+                raise ValueError(f"实例 {index} 的启发式函数时间无效。")
+            heuristic_times.append(float(heuristic_elapsed))
+        elif "heuristic_wall_seconds" in instance:
+            raise ValueError(f"实例 {index} 的启发式时间缺少计时范围。")
     average = complete.get("average")
     if (
         not isinstance(average, (int, float)) or isinstance(average, bool)
@@ -91,19 +109,31 @@ def read_complete(stdout_path, *, stagnation_rounds=None):
         raise ValueError("平均目标与逐实例结果不一致。")
     result = {"objectives": [item["objective"] for item in instances],
               "average": average, "fitness": -average, "start": start}
-    if stagnation_rounds is not None:
+    if scope is not None:
         mean_time = math.fsum(times) / len(times)
+        reported_time = complete.get("average_solve_wall_seconds")
+        if (isinstance(reported_time, bool) or not isinstance(reported_time, (int, float))
+                or not math.isfinite(reported_time)
+                or not math.isclose(reported_time, mean_time, rel_tol=1e-12, abs_tol=1e-12)):
+            raise ValueError("平均求解时间与逐实例结果不一致。")
+        result.update({"average_solve_wall_seconds": mean_time, "solve_wall_seconds": times})
+    if heuristic_scope is not None:
+        mean_heuristic = math.fsum(heuristic_times) / len(heuristic_times)
+        reported_heuristic = complete.get("average_heuristic_wall_seconds")
+        if (isinstance(reported_heuristic, bool) or not isinstance(reported_heuristic, (int, float))
+                or not math.isfinite(reported_heuristic)
+                or not math.isclose(reported_heuristic, mean_heuristic, rel_tol=1e-12, abs_tol=1e-12)):
+            raise ValueError("平均启发式时间与逐实例结果不一致。")
+        result.update({"average_heuristic_wall_seconds": mean_heuristic,
+                       "heuristic_wall_seconds": heuristic_times})
+    if stagnation_rounds is not None:
         fitness = 1.0 / (average * mean_time)
-        reported_time, reported_fitness = complete.get("average_solve_wall_seconds"), complete.get("fitness")
-        if (not math.isfinite(fitness) or isinstance(reported_time, bool) or isinstance(reported_fitness, bool)
-                or not isinstance(reported_time, (int, float)) or not isinstance(reported_fitness, (int, float))
-                or not math.isfinite(reported_time) or not math.isfinite(reported_fitness)
-                or not math.isclose(reported_time, mean_time,
-                                    rel_tol=1e-12, abs_tol=1e-12)
+        reported_fitness = complete.get("fitness")
+        if (not math.isfinite(fitness) or isinstance(reported_fitness, bool)
+                or not isinstance(reported_fitness, (int, float)) or not math.isfinite(reported_fitness)
                 or not math.isclose(reported_fitness, fitness, rel_tol=1e-12, abs_tol=1e-12)):
-            raise ValueError("平均时间或速度 Fitness 与逐实例结果不一致。")
-        result.update({"fitness": fitness, "average_solve_wall_seconds": mean_time,
-                       "solve_wall_seconds": times, "evaluation_mode": "quality_per_time",
+            raise ValueError("速度 Fitness 与逐实例结果不一致。")
+        result.update({"fitness": fitness, "evaluation_mode": "quality_per_time",
                        "stopping_reasons": [item["stop_reason"] for item in instances]})
     return result
 

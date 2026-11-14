@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\eval.py",
+    "50",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_192144_7c3416c7\\candidates\\c0023",
+    "train"
+  ],
+  "resources": {
+    "available_memory_bytes": 34483396608,
+    "priority": "Normal"
+  },
+  "started_at_utc": "2026-11-13T11:30:16.141119+00:00",
+  "candidate_id": "c0023",
+  "pid": 36596,
+  "exit_code": 0,
+  "objectives": [
+    5.495603573608174,
+    5.796324416056724,
+    6.368045127655167,
+    6.330515627043231,
+    6.104268704154052
+  ],
+  "average": 6.018951489703469,
+  "fitness": -6.018951489703469,
+  "start": {
+    "event": "start",
+    "dataset": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy",
+    "seed_base": 20261103,
+    "n_ants": 30,
+    "n_iterations": 200,
+    "numpy": "2.3.5",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1,
+    "time_scope": "solve_wall_seconds_including_preparation_and_validation",
+    "heuristic_time_scope": "heuristic_function_only"
+  },
+  "average_solve_wall_seconds": 1.8926170799997635,
+  "solve_wall_seconds": [
+    1.951254199986579,
+    1.8773450000153389,
+    1.8874002000084147,
+    1.8739743999904022,
+    1.873111599998083
+  ],
+  "average_heuristic_wall_seconds": 0.2623554200050421,
+  "heuristic_wall_seconds": [
+    0.2742011999944225,
+    0.260101299994858,
+    0.2616445000167005,
+    0.2588535000104457,
+    0.25697660000878386
+  ],
+  "completed_monotonic_ns": 242640265000000,
+  "process_tree_cpu": {
+    "user_seconds": 10.390625,
+    "kernel_seconds": 0.640625,
+    "cpu_seconds": 11.03125,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 11.14000000001397
+}

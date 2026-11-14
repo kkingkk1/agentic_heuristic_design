@@ -145,13 +145,12 @@ class TestHSEvoRunGate(unittest.TestCase):
             with self.subTest(field=field), self.assertRaises(ValueError):
                 p1_run_hsevo.validate_config(config)
 
-    def test_generation_budget_checks_harmony_and_quota(self):
+    def test_generation_budget_checks_harmony_without_subscription_probe(self):
         runtime = runtime_tests.TestTaskRuntime.create(self.config(), runtime_class=HSEvoRuntime)
         runtime.budget.model_normal = 30
         runtime.budget.eval_normal = runtime.budget.eval_starts = 31
         runtime.budget.eval_cpu_samples = [1.0]
-        quota = {"ordinary_usage_allowed": True, "remaining_model_calls": 1000}
-        with patch("baselines.hsevo.runtime.p0_budget_quota.read_limits", return_value=quota):
+        with patch("scripts.p0_budget_quota.read_limits", side_effect=AssertionError("unexpected quota probe")):
             runtime.before_generation()
         runtime.cfg["budget"]["normal_code_generation_slots"] = 55
         with self.assertRaisesRegex(StopRun, "评价启动次数不足"):

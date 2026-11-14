@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\eval.py",
+    "50",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261111_172813_speed_feedback_i3_g2_r2\\candidates\\c0011",
+    "train"
+  ],
+  "resources": {
+    "available_memory_bytes": 37938769920,
+    "priority": "Normal"
+  },
+  "started_at_utc": "2026-11-11T09:32:16.426626+00:00",
+  "candidate_id": "c0011",
+  "pid": 55200,
+  "exit_code": 0,
+  "objectives": [
+    5.961121675624145,
+    6.211316366705438,
+    6.930011685372993,
+    6.890630457365838,
+    6.560724290792427
+  ],
+  "average": 6.510760895172169,
+  "fitness": -6.510760895172169,
+  "start": {
+    "event": "start",
+    "dataset": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy",
+    "seed_base": 20261103,
+    "n_ants": 30,
+    "n_iterations": 200,
+    "numpy": "2.3.5",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1,
+    "time_scope": "solve_wall_seconds_including_preparation_and_validation",
+    "heuristic_time_scope": "heuristic_function_only"
+  },
+  "average_solve_wall_seconds": 1.2934676999982913,
+  "solve_wall_seconds": [
+    1.2928905000007944,
+    1.2991076999969664,
+    1.3186809999970137,
+    1.288126799998281,
+    1.2685324999984005
+  ],
+  "average_heuristic_wall_seconds": 0.00015547999937552958,
+  "heuristic_wall_seconds": [
+    0.00019639999663922936,
+    0.0001517000055173412,
+    0.00014090000331634656,
+    0.00014289999671746045,
+    0.00014549999468727037
+  ],
+  "completed_monotonic_ns": 62756078000000,
+  "process_tree_cpu": {
+    "user_seconds": 7.390625,
+    "kernel_seconds": 0.53125,
+    "cpu_seconds": 7.921875,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 7.985000000000582
+}

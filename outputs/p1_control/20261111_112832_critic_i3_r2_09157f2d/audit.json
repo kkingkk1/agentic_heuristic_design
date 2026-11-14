@@ -1,0 +1,117 @@
+{
+  "status": "passed_for_partial_run",
+  "run_status": "stopped_before_selection",
+  "config_sha256": "bda3b0618fdd1cea0651f38126de408f58191a678ceb4f85c2d68931f9dea09c",
+  "events_sha256": "1b80d6bd05444c6006263ae2130be21472cbf10a4fdfbeb277436a0f507b163b",
+  "protected_files_match_before_runtime_changes": true,
+  "model_calls": 25,
+  "candidate_evaluations": 20,
+  "validated_tours": 100,
+  "max_route_absolute_error": 1.7763568394002505e-15,
+  "critic_comparisons_verified": 3,
+  "role_feedback_routes_verified": 6,
+  "critics": [
+    {
+      "stage": "critic_initial",
+      "candidate_a": "c0003",
+      "candidate_b": "c0001",
+      "evaluation_origin_a": "c0003",
+      "evaluation_origin_b": "c0001",
+      "objective_a": 6.482563440168747,
+      "objective_b": 7.513083797169277,
+      "solve_seconds_a": 1.2312674400003742,
+      "solve_seconds_b": 1.2494464199990034,
+      "comparisons": {
+        "fitness": "A",
+        "raw_objective": "A",
+        "solve_time": "A"
+      },
+      "feedback": {
+        "quality_ref": "Candidate A has the lower objective (6.483 vs. 7.513). B’s mutual-nearest and endpoint-competition bonuses may overconcentrate sampling on locally attractive edges, while row normalization can amplify this bias. The single comparison does not isolate which component causes the degradation.",
+        "quality_ans": "Reduce local-bias amplification: retain shortness and rank signals, but cap the combined mutual-nearest and competitiveness bonus so it cannot outweigh shortness by more than a fixed factor before row normalization.",
+        "speed_ref": "Candidate A is faster: 1.2313 s versus B’s 1.2494 s, a 0.0182 s difference. This small gap comes from one evaluation and may reflect concurrent load. B’s explicit per-node Python loops are plausible overhead sources.",
+        "speed_ans": "Vectorize rank-score, mutual-nearest detection, and competitiveness calculations with array broadcasting and indexed operations, preserving the current formulas and normalization while eliminating the per-node Python loops."
+      }
+    },
+    {
+      "stage": "critic_1",
+      "candidate_a": "c0012",
+      "candidate_b": "c0013",
+      "evaluation_origin_a": "c0012",
+      "evaluation_origin_b": "c0013",
+      "objective_a": 8.160403351639724,
+      "objective_b": 7.513083797169277,
+      "solve_seconds_a": 1.259304959999281,
+      "solve_seconds_b": 1.2683802200015635,
+      "comparisons": {
+        "fitness": "B",
+        "raw_objective": "B",
+        "solve_time": "A"
+      },
+      "feedback": {
+        "quality_ref": "Candidate B achieved the lower raw objective, 7.5131 versus A’s 8.1604, but its altered weighting and uncapped structural terms may explain the gain; the evidence does not isolate which signal caused it.",
+        "quality_ans": "Retain A’s robustness, but increase structural guidance moderately: raise mutual-nearest-neighbor and competitiveness bonuses while preserving a cap below the base score, so useful structure influences ranking without overwhelming shortness.",
+        "speed_ref": "Candidate A was marginally faster: 1.2593 s versus B’s 1.2684 s. This single measurement may reflect concurrent load, so the apparent vectorization benefit is unverified and temporary-array overhead remains a plausible cause.",
+        "speed_ans": "Reduce B’s temporary allocations by computing competitiveness only on off-diagonal entries, explicitly zeroing the diagonal afterward, and reusing indexed arrays for symmetry and normalization."
+      }
+    },
+    {
+      "stage": "critic_2",
+      "candidate_a": "c0014",
+      "candidate_b": "c0015",
+      "evaluation_origin_a": "c0014",
+      "evaluation_origin_b": "c0015",
+      "objective_a": 7.952944511996087,
+      "objective_b": 6.911658341386968,
+      "solve_seconds_a": 1.2226129999995465,
+      "solve_seconds_b": 1.2300962399996933,
+      "comparisons": {
+        "fitness": "B",
+        "raw_objective": "B",
+        "solve_time": "A"
+      },
+      "feedback": {
+        "quality_ref": "A 的短距离与行内排名主导较清晰，互近邻和竞争性奖励受上限约束，保持了结构信号的辅助地位。但 B 的目标值由 7.953 降至 6.912，说明 A 仍可能过度强调距离与行内排名；具体归因尚不确定。",
+        "quality_ans": "将基础权重调整为短距离 0.58、行内排名 0.22，并将互近邻与竞争性奖励分别提高至 0.20 和 0.18；保留半基础分数上限、对称化、非负、自环为零及逐行归一化。",
+        "speed_ref": "B 的记录时间为 1.2301 秒，略慢于 A 的 1.2226 秒，因此其部分选择计算尚未显示可观测加速。由于差异很小且仅有单次测量，不能据此断言实现必然更慢。",
+        "speed_ans": "在 B 中移除 `upper_distances` 之外的完整 `score` 初始化与镜像前临时矩阵，直接写入预分配数组并原地镜像；保留上三角计算、两近邻选择和现有评分公式。"
+      }
+    }
+  ],
+  "speed_reflection_word_count": 51,
+  "stop_reason": "StopRun: reflection_speed_agent 的角色输出无效：长期反思须少于 50 个词。",
+  "elapsed_seconds": 395.32799999999406,
+  "evaluation_process_tree_cpu_seconds": 153.828125,
+  "usage": {
+    "model_attempt_events": 25,
+    "model_process_events": 25,
+    "model_usage_events": 25,
+    "attempts_without_usage": 0,
+    "usage_events_without_process": 0,
+    "attempt_process_count_mismatches": 0,
+    "stages_with_repeated_attempts": 0,
+    "observed_tokens": {
+      "input_tokens": 653350,
+      "cached_input_tokens": 368128,
+      "output_tokens": 25738,
+      "reasoning_output_tokens": 7429
+    },
+    "usage_events_missing_field": {
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0
+    },
+    "usage_events_invalid_field": {
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_output_tokens": 0
+    },
+    "usage_events_with_inconsistent_subsets": 0,
+    "usage_events_with_warnings": 0,
+    "usage_events_missing_warning_metadata": 0,
+    "local_records_complete": true,
+    "note": "仅统计本地已回读用量；缓存输入属于输入，reasoning 输出属于输出。缺失或失败请求不按零计算；服务端不可见开销不包含在内。按日志和阶段核对事件数，重复阶段不能逐次证明对应关系。"
+  }
+}

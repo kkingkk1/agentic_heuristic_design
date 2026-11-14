@@ -1,0 +1,81 @@
+{
+  "status": "frozen",
+  "scope": "仅本次本方法工程观察；2 轮是临时设置，不属于 P1 正式对照。",
+  "method": {
+    "id": "proposed_solution_quality_and_speed_agents"
+  },
+  "task": {
+    "name": "tsp_aco",
+    "function": "heuristics_v2(distance_matrix: np.ndarray) -> np.ndarray",
+    "dataset": "problems/tsp_aco/dataset/train50_dataset.npy",
+    "dataset_sha256": "49cfd10c6d21efd39736e5baf57510b4ce6945c3a057cdbe8dcad398c728599a",
+    "dataset_generator_seed": 1234,
+    "instance_count": 5,
+    "problem_size": 50,
+    "evaluation_seeds": [
+      20261103,
+      20261104,
+      20261105,
+      20261106,
+      20261107
+    ],
+    "ants": 30,
+    "iterations_per_instance": 200,
+    "whole_training_wall_timeout_seconds": 60,
+    "prompt_condition": "white_box",
+    "objective_direction": "min",
+    "reference_seed_in_prompt_or_population": false,
+    "evaluation_mode": "final_quality",
+    "selection_seed": 2026111101,
+    "initial_proposals": 3,
+    "population_size": 2,
+    "collaboration_rounds": 2,
+    "generations": 2
+  },
+  "model": {
+    "name": "gpt-5.6-luna",
+    "access": "Codex CLI, existing ChatGPT login, p0_chatgpt_https",
+    "reasoning_effort_override": false,
+    "disabled_feature": "unbounded_connection_retries",
+    "provider_request_max_retries": 0,
+    "provider_stream_max_retries": 0,
+    "retry_policy": "本次不自动重试或修复候选；失败及开销照实记录。",
+    "transport_limitations": "本机拒绝连接路径已检查；服务端请求次数与失败请求用量未必可完整观测，缺失时须标明。"
+  },
+  "resources": {
+    "python_executable": "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "pythonpath": [
+      "D:\\Tools\\paddleocr-document-rebuild\\.venv\\Lib\\site-packages",
+      "D:\\Tools\\mineru\\.venv\\Lib\\site-packages"
+    ],
+    "host_cpu": "Intel Core i7-14700KF, 20 physical cores, 28 logical processors",
+    "host_memory_bytes": 68463861760,
+    "process_priority": "Normal",
+    "max_concurrent_evaluations": 4,
+    "max_concurrent_model_calls": 4,
+    "min_available_system_memory_bytes": 8589934592,
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "observed_torch_intraop_threads": 1,
+    "observed_torch_interop_threads": 20,
+    "memory_note": "可用内存阈值是启动条件，不是进程内存硬限制；候选可能自行创建线程或后代。"
+  },
+  "budget": {
+    "normal_model_calls": 61,
+    "additional_infrastructure_retry_calls": 0,
+    "max_initialization_and_generation_model_cli_invocations": 61,
+    "normal_code_generation_slots": 49,
+    "additional_infrastructure_evaluation_starts": 0,
+    "max_initialization_and_generation_evaluation_starts": 49,
+    "future_initialization_and_generation_eval_process_tree_cpu_seconds": 18000,
+    "token_limits": {
+      "input_including_cached": null,
+      "output": null,
+      "policy": "不设 token 总上限；按已回读输入、缓存输入和输出分别累计。失败或缺失用量标记未知，不按零计算。"
+    }
+  }
+}

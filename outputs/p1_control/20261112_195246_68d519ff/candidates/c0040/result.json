@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\eval.py",
+    "50",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_195246_68d519ff\\candidates\\c0040",
+    "train"
+  ],
+  "resources": {
+    "available_memory_bytes": 35425234944,
+    "priority": "Normal"
+  },
+  "started_at_utc": "2026-11-12T11:58:53.427978+00:00",
+  "candidate_id": "c0040",
+  "pid": 63008,
+  "exit_code": 0,
+  "objectives": [
+    5.943722940489676,
+    6.908769795524077,
+    7.184860061160661,
+    7.298533474000596,
+    6.644829699079943
+  ],
+  "average": 6.796143194050991,
+  "fitness": -6.796143194050991,
+  "start": {
+    "event": "start",
+    "dataset": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy",
+    "seed_base": 20261103,
+    "n_ants": 30,
+    "n_iterations": 200,
+    "numpy": "2.3.5",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1,
+    "time_scope": "solve_wall_seconds_including_preparation_and_validation",
+    "heuristic_time_scope": "heuristic_function_only"
+  },
+  "average_solve_wall_seconds": 1.915327819995582,
+  "solve_wall_seconds": [
+    2.029100499988999,
+    2.0396633000054862,
+    1.8838928999903146,
+    1.8450047000078484,
+    1.778977699985262
+  ],
+  "average_heuristic_wall_seconds": 0.0010197199997492134,
+  "heuristic_wall_seconds": [
+    0.0009921000164467841,
+    0.0010033000144176185,
+    0.0013466999807860702,
+    0.0008467999869026244,
+    0.00090970000019297
+  ],
+  "completed_monotonic_ns": 157957984000000,
+  "process_tree_cpu": {
+    "user_seconds": 10.953125,
+    "kernel_seconds": 0.546875,
+    "cpu_seconds": 11.5,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 11.625
+}

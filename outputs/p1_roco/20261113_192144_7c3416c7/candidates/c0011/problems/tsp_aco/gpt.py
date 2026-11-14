@@ -1,0 +1,47 @@
+import numpy as np
+
+
+def heuristics_v2(distance_matrix: np.ndarray) -> np.ndarray:
+    d = np.asarray(distance_matrix, dtype=float)
+
+    if d.ndim != 2 or d.shape[0] != d.shape[1]:
+        raise ValueError("distance_matrix must be a square matrix")
+
+    n = d.shape[0]
+    if n == 0:
+        return np.empty((0, 0), dtype=float)
+
+    finite = np.isfinite(d)
+    if not np.all(finite):
+        raise ValueError("distance_matrix must contain only finite values")
+    if np.any(d < 0):
+        raise ValueError("distance_matrix must be nonnegative")
+
+    d = 0.5 * (d + d.T)
+    np.fill_diagonal(d, np.inf)
+
+    positive = d[np.isfinite(d) & (d > 0)]
+    scale = float(np.median(positive)) if positive.size else 1.0
+    eps = np.finfo(float).eps * max(scale, 1.0)
+
+    inverse_distance = 1.0 / np.maximum(d, eps)
+    inverse_distance[~np.isfinite(inverse_distance)] = 0.0
+
+    row_sum = inverse_distance.sum(axis=1, keepdims=True)
+    normalized_inverse = inverse_distance / np.maximum(row_sum, eps)
+
+    local_density = normalized_inverse.mean(axis=1)
+    density_bonus = np.sqrt(
+        np.outer(local_density, local_density)
+        / max(float(local_density.max()) ** 2, eps)
+    )
+
+    score = normalized_inverse * (0.8 + 0.2 * density_bonus)
+    score = 0.5 * (score + score.T)
+    np.fill_diagonal(score, 0.0)
+
+    maximum = float(score.max())
+    if maximum > 0.0:
+        score /= maximum
+
+    return score

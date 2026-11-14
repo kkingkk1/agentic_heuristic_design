@@ -68,6 +68,9 @@ class TestRealTSP(unittest.TestCase):
             reference.run(self.task, self.model, size=50, phase="test", k_sparse=20)
         self.assertEqual([event["event"] for event in events], ["start", "instance", "complete"])
         self.assertEqual(events[0]["reference"]["id"], reference.REFERENCE_ID)
+        self.assertEqual(events[0]["time_scope"], "solve_wall_seconds_including_preparation_and_validation")
+        self.assertGreater(events[1]["solve_wall_seconds"], 0)
+        self.assertEqual(events[-1]["average_solve_wall_seconds"], events[1]["solve_wall_seconds"])
         tour = events[1]["tour"]
         self.assertEqual(sorted(tour), list(range(50)))
         distances = self.task.distance_matrix(self.positions, self.positions)

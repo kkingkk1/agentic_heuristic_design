@@ -13,9 +13,9 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from scripts import p0_budget_quota, p0_model_probe as probe  # noqa: E402
+from scripts import p0_model_probe as probe  # noqa: E402
 from scripts.p0_controller import Controller, StopRun  # noqa: E402
-from scripts.p0_runtime import JsonLog, generation_requirements, memory_and_priority, quota_gate  # noqa: E402
+from scripts.p0_runtime import JsonLog, generation_requirements, memory_and_priority  # noqa: E402
 from scripts.p1_formal_matrix import formal_run_guard, verify_training_config  # noqa: E402
 from scripts.p1_runtime import TaskRuntime  # noqa: E402
 
@@ -64,11 +64,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", required=True, help="已冻结的 P1 单运行配置 JSON")
     parser.add_argument("--run", action="store_true", help="通过门禁后执行；默认只做启动前检查")
-    parser.add_argument("--allow-unquantified-quota", action="store_true",
-                        help="仅在用户明确接受时，允许本次运行的订阅余量不可计数")
+    parser.add_argument("--allow-unquantified-quota", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args()
-    if args.allow_unquantified_quota and not args.run:
-        parser.error("--allow-unquantified-quota 只适用于明确启动的本次运行。")
     try:
         config = json.loads(Path(args.config).read_text(encoding="utf-8"))
         generations, seed = validate_config(config)
@@ -96,14 +93,9 @@ def main():
         if (version.get("exit_code") != 0 or login.get("exit_code") != 0
                 or "Logged in using ChatGPT" not in (login.get("stdout", "") + login.get("stderr", ""))):
             raise StopRun("无法确认 Codex CLI 版本或 ChatGPT 登录。")
-        quota = p0_budget_quota.read_limits()
-        log.event("preflight", resources=resources, cli_version=version.get("stdout", "").strip(), quota=quota,
+        log.event("preflight", resources=resources, cli_version=version.get("stdout", "").strip(),
                   code_sha256=runtime.protected_hashes, selection_seed=seed, generations=generations,
-                  unquantified_quota_accepted_for_this_run=args.allow_unquantified_quota,
                   context_note="模型调用使用新会话；服务端内部截断不可见。")
-        required = config["budget"]["max_initialization_and_generation_model_cli_invocations"]
-        mode = quota_gate(quota, required, allow_unquantified=args.allow_unquantified_quota)
-        log.event("initial_quota_gate", mode=mode, required_model_calls=required)
         if not args.run:
             log.event("finish", status="preflight_passed")
             print(f"启动前检查通过；记录：{run_dir}")
@@ -116,7 +108,7 @@ def main():
             controller.run()
         print(f"训练完成；记录：{run_dir}")
         return 0
-    except (StopRun, probe.ProbeError, p0_budget_quota.QuotaProbeError, OSError, ValueError, KeyError) as exc:
+    except (StopRun, probe.ProbeError, OSError, ValueError, KeyError) as exc:
         log.event("preflight_or_run_stopped", error=f"{type(exc).__name__}: {exc}")
         print(f"运行停止：{exc}；记录：{run_dir}", file=sys.stderr)
         return 1

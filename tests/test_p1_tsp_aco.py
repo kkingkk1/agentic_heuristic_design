@@ -131,11 +131,16 @@ class TestEvaluation(unittest.TestCase):
         synthetic = np.zeros((64, 50, 2))
         dataset = task.DATASET.parent / "test50_p1_dataset.npy"
         stream = io.StringIO()
+
+        def fake_solve(*args, **kwargs):
+            kwargs["timings"]["heuristic_wall_seconds"] = 0.0
+            return 5.0, list(range(50)), 500
+
         with patch.object(sys, "argv", ["eval.py", "50", "candidate", "test"]), \
              patch.object(task, "test_dataset", return_value=(dataset, synthetic)), \
              patch.object(task, "candidate_hash", return_value="a" * 64), \
              patch.object(task, "load_heuristic", return_value=object()), \
-             patch.object(task, "solve", return_value=(5.0, list(range(50)), 500)) as solve, \
+             patch.object(task, "solve", side_effect=fake_solve) as solve, \
              contextlib.redirect_stdout(stream):
             task.main()
         events = [json.loads(line.removeprefix("P1_JSON "))
@@ -147,15 +152,23 @@ class TestEvaluation(unittest.TestCase):
         self.assertEqual(events[-1]["instance_count"], 64)
         self.assertEqual(events[-1]["average"], 5.0)
         self.assertEqual(solve.call_count, 64)
+        self.assertEqual(events[0]["heuristic_time_scope"], "heuristic_function_only")
+        self.assertEqual(events[1]["heuristic_wall_seconds"], 0.0)
+        self.assertGreater(events[1]["solve_wall_seconds"], 0)
 
     def test_changed_candidate_never_emits_completion(self):
         dataset = task.DATASET.parent / "test50_p1_dataset.npy"
         stream = io.StringIO()
+
+        def fake_solve(*args, **kwargs):
+            kwargs["timings"]["heuristic_wall_seconds"] = 0.0
+            return 5.0, list(range(50)), 500
+
         with patch.object(sys, "argv", ["eval.py", "50", "candidate", "test"]), \
              patch.object(task, "test_dataset", return_value=(dataset, np.zeros((64, 50, 2)))), \
              patch.object(task, "candidate_hash", side_effect=["a" * 64, "b" * 64]), \
              patch.object(task, "load_heuristic", return_value=object()), \
-             patch.object(task, "solve", return_value=(5.0, list(range(50)), 500)), \
+             patch.object(task, "solve", side_effect=fake_solve), \
              contextlib.redirect_stdout(stream):
             with self.assertRaisesRegex(ValueError, "候选代码发生变化"):
                 task.main()

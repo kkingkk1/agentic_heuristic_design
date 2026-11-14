@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\eval.py",
+    "50",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_192144_7c3416c7\\candidates\\c0054",
+    "train"
+  ],
+  "resources": {
+    "available_memory_bytes": 34967126016,
+    "priority": "Normal"
+  },
+  "started_at_utc": "2026-11-13T11:46:12.909932+00:00",
+  "candidate_id": "c0054",
+  "pid": 56472,
+  "exit_code": 0,
+  "objectives": [
+    5.593903558236931,
+    5.796324416056724,
+    6.726402296762271,
+    6.2890831997750105,
+    6.093669851733593
+  ],
+  "average": 6.099876664512906,
+  "fitness": -6.099876664512906,
+  "start": {
+    "event": "start",
+    "dataset": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy",
+    "seed_base": 20261103,
+    "n_ants": 30,
+    "n_iterations": 200,
+    "numpy": "2.3.5",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1,
+    "time_scope": "solve_wall_seconds_including_preparation_and_validation",
+    "heuristic_time_scope": "heuristic_function_only"
+  },
+  "average_solve_wall_seconds": 3.4687404399970547,
+  "solve_wall_seconds": [
+    2.326982099999441,
+    2.287817799980985,
+    2.8011278999911156,
+    4.968567400006577,
+    4.959207000007154
+  ],
+  "average_heuristic_wall_seconds": 0.9328373800031841,
+  "heuristic_wall_seconds": [
+    0.5873892999952659,
+    0.5798404999950435,
+    0.5784807000018191,
+    1.4598177000007126,
+    1.4586587000230793
+  ],
+  "completed_monotonic_ns": 243605187000000,
+  "process_tree_cpu": {
+    "user_seconds": 18.5625,
+    "kernel_seconds": 0.65625,
+    "cpu_seconds": 19.21875,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 19.296999999991385
+}

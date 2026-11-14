@@ -1,0 +1,9 @@
+[*] Running ...
+[*] Dataset loaded: F:\OneDrive\project\static_determine\agentic_heuristic_design\problems\tsp_aco\dataset\train50_dataset.npy with 5 instances.
+P0_JSON {"event": "start", "dataset": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy", "seed_base": 20261103, "n_ants": 30, "n_iterations": 200, "numpy": "2.3.5", "torch": "2.13.0+cu126", "torch_threads": 1, "time_scope": "solve_wall_seconds_including_preparation_and_validation", "heuristic_time_scope": "heuristic_function_only"}
+[*] Instance 0: 5.481050808359637
+P0_JSON {"event": "instance", "index": 0, "seed": 20261103, "objective": 5.481050808359637, "iterations": 200, "tour": [48, 6, 17, 35, 44, 22, 47, 38, 7, 10, 40, 5, 24, 14, 30, 0, 45, 25, 49, 21, 23, 11, 39, 20, 34, 36, 31, 32, 8, 26, 42, 16, 2, 15, 41, 12, 29, 4, 28, 9, 43, 27, 46, 33, 19, 18, 37, 3, 13, 1], "solve_wall_seconds": 1.7786589000024833, "heuristic_wall_seconds": 0.0007907999970484525}
+[*] Instance 1: 5.909653221184858
+P0_JSON {"event": "instance", "index": 1, "seed": 20261104, "objective": 5.909653221184858, "iterations": 200, "tour": [45, 48, 42, 8, 5, 12, 26, 17, 14, 22, 47, 3, 20, 4, 46, 30, 37, 36, 6, 38, 43, 13, 15, 19, 44, 24, 35, 33, 40, 29, 11, 1, 21, 25, 9, 41, 39, 0, 27, 10, 28, 49, 34, 31, 32, 18, 2, 7, 16, 23], "solve_wall_seconds": 1.8920747000083793, "heuristic_wall_seconds": 0.000375000003259629}
+[*] Instance 2: 6.740703221005763
+P0_JSON {"event": "instance", "index": 2, "seed": 20261105, "objective": 6.740703221005763, "iterations": 200, "tour": [13, 17, 8, 35, 12, 45, 25, 18, 9, 37, 1, 16, 46, 11, 0, 38, 34, 43, 32, 2, 30, 48, 6, 27, 29, 42, 7, 47, 33, 19, 44, 49, 41, 26, 10, 36, 20, 40, 22, 39, 3, 21, 23, 15, 24, 5, 28, 31, 4, 14], "solve_wall_seconds": 1.7619169999961741, "heuristic_wall_seconds": 0.0003719999804161489}

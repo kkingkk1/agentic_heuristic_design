@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\eval.py",
+    "50",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_135816_854bdc72\\candidates\\c0044",
+    "train"
+  ],
+  "resources": {
+    "available_memory_bytes": 38316691456,
+    "priority": "Normal"
+  },
+  "started_at_utc": "2026-11-12T06:05:32.388790+00:00",
+  "candidate_id": "c0044",
+  "pid": 4868,
+  "exit_code": 0,
+  "objectives": [
+    7.148497678185116,
+    7.88005318719316,
+    7.385574555219408,
+    7.67807318175958,
+    7.405154865578121
+  ],
+  "average": 7.499470693587076,
+  "fitness": -7.499470693587076,
+  "start": {
+    "event": "start",
+    "dataset": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy",
+    "seed_base": 20261103,
+    "n_ants": 30,
+    "n_iterations": 200,
+    "numpy": "2.3.5",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1,
+    "time_scope": "solve_wall_seconds_including_preparation_and_validation",
+    "heuristic_time_scope": "heuristic_function_only"
+  },
+  "average_solve_wall_seconds": 1.5687837800069246,
+  "solve_wall_seconds": [
+    1.5777039999957196,
+    1.568067100015469,
+    1.586481600010302,
+    1.5924384999962058,
+    1.519227700016927
+  ],
+  "average_heuristic_wall_seconds": 0.000689100002637133,
+  "heuristic_wall_seconds": [
+    0.0008243000193033367,
+    0.0007753999962005764,
+    0.0006003000016789883,
+    0.0006036999984644353,
+    0.0006417999975383282
+  ],
+  "completed_monotonic_ns": 136754843000000,
+  "process_tree_cpu": {
+    "user_seconds": 8.75,
+    "kernel_seconds": 0.59375,
+    "cpu_seconds": 9.34375,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 9.562000000005355
+}

@@ -1,0 +1,1 @@
+{"event_index": 1, "event": "pilot_stopped", "at_utc": "2026-11-11T04:15:36.987334+00:00", "error": "QuotaProbeError: Codex app-server 返回错误，代码：-32603。", "elapsed_seconds": 2.5}

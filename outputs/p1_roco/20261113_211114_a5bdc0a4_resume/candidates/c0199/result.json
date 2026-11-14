@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\eval.py",
+    "50",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_211114_a5bdc0a4_resume\\candidates\\c0199",
+    "train"
+  ],
+  "resources": {
+    "available_memory_bytes": 39481778176,
+    "priority": "Normal"
+  },
+  "started_at_utc": "2026-11-13T13:38:38.120752+00:00",
+  "candidate_id": "c0199",
+  "pid": 47304,
+  "exit_code": 0,
+  "objectives": [
+    6.058120475974949,
+    6.5222794797814,
+    6.437673967165747,
+    6.874343279061913,
+    6.476819950429885
+  ],
+  "average": 6.473847430482779,
+  "fitness": -6.473847430482779,
+  "start": {
+    "event": "start",
+    "dataset": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy",
+    "seed_base": 20261103,
+    "n_ants": 30,
+    "n_iterations": 200,
+    "numpy": "2.3.5",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1,
+    "time_scope": "solve_wall_seconds_including_preparation_and_validation",
+    "heuristic_time_scope": "heuristic_function_only"
+  },
+  "average_solve_wall_seconds": 3.5610277199884877,
+  "solve_wall_seconds": [
+    2.307123099977616,
+    2.282025499996962,
+    2.570146499987459,
+    5.335430599981919,
+    5.310412899998482
+  ],
+  "average_heuristic_wall_seconds": 1.1989544000069146,
+  "heuristic_wall_seconds": [
+    0.7189741999900434,
+    0.6953961999970488,
+    0.7130650000181049,
+    1.940719700010959,
+    1.9266169000184163
+  ],
+  "completed_monotonic_ns": 250350593000000,
+  "process_tree_cpu": {
+    "user_seconds": 18.8125,
+    "kernel_seconds": 0.671875,
+    "cpu_seconds": 19.484375,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 19.48399999999674
+}

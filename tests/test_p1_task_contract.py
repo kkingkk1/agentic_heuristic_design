@@ -17,6 +17,8 @@ class TestTaskContracts(unittest.TestCase):
                     self.assertEqual(contract.direction, direction)
                     self.assertEqual(contract.black_box, black_box)
                     self.assertIn(contract.signature, contract.task_prompt())
+                    objective = "minimize" if direction == "min" else "maximize"
+                    self.assertIn(f"Original task objective: {objective} the final objective value.", contract.task_prompt())
                     self.assertIn(contract.signature, contract.output_prompt())
                     self.assertNotIn("heuristics_v1", contract.task_prompt())
                     self.assertNotIn("return np.ones", contract.task_prompt())
@@ -108,7 +110,7 @@ class TestTaskContracts(unittest.TestCase):
                     self.assertNotIn("return np.", calls["init_01"])
                     expected = "Higher" if contract.direction == "max" else "Lower"
                     self.assertIn(f"A {expected.lower()} objective score is better", calls["critic_initial"])
-                    self.assertIn(f"A {expected.lower()} objective is better", calls["critic_1"])
+                    self.assertIn(f"A {expected.lower()} objective score is better", calls["critic_1"])
                     self.assertIn(f"A {expected.lower()} objective score is better", calls["fusion_1"])
                     self.assertTrue(all(c.fitness == (c.objective if contract.direction == "max" else -c.objective)
                                         for c in selected))

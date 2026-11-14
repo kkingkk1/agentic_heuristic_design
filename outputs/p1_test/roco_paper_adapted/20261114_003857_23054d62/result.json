@@ -1,0 +1,54 @@
+{
+  "status": "timeout",
+  "started_at_utc": "2026-11-13T16:38:57.307232+00:00",
+  "method": "roco_paper_adapted",
+  "candidate_id": "c0341",
+  "matrix_contract_sha256": "a169698d296bd79094f11488741fca47f1ff67574e3c90501c6ae7789fde3d71",
+  "task": "tsp_aco",
+  "prompt_condition": "white_box",
+  "formal_replicate": 1,
+  "source_run": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_183109_ae37c237_resume",
+  "candidate_sha256": "1de44a6f3db3ef83c47599c5550fa004c81371a984ff4c8fd72555f8974f6784",
+  "size": 50,
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\eval.py",
+    "50",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_test\\roco_paper_adapted\\20261114_003857_23054d62",
+    "test"
+  ],
+  "resources": {
+    "available_memory_bytes": 41557839872,
+    "priority": "Normal"
+  },
+  "protected_sha256": {
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\roco_paper_adapted\\20261112_183109_ae37c237_resume\\candidate.py": "1de44a6f3db3ef83c47599c5550fa004c81371a984ff4c8fd72555f8974f6784",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_frozen_candidates\\roco_paper_adapted\\20261112_183109_ae37c237_resume\\manifest.json": "75f7f0c1618e46c6d3809518ee5d7ebee7142951dfa26b117f78eb7c912722ec",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_tsp50_roco_scale_20261112_135601_c2bfdab0\\test.json": "39f15dfe2adca898154586e2dfe6a5703c0bef2f1b4346a4f4e81b49ef9173ce",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\cfg\\p1_data_contract.json": "fbf84d0bf7ee51071089a01863354abbdb13bfd24d5b7802ba115fcfd2edd0a1",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\cfg\\p1_formal_matrix.json": "a169698d296bd79094f11488741fca47f1ff67574e3c90501c6ae7789fde3d71",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_183109_ae37c237_resume\\config.json": "683b8894bed62719e3d641a5e141d75b0d37f89c6fcee45ef93703918f094ac8",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_183109_ae37c237_resume\\events.jsonl": "366b9ac86267f7d4e89ef739c47a7db3a8d915d68f80577ca33ee763bb238880",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_183109_ae37c237_resume\\candidates\\c0341\\result.json": "adee9bddd175b525735166388d56d11883a418cff87500928933100b33413fad",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_183109_ae37c237_resume\\candidates\\c0341\\stdout.txt": "e86d8ae1e0b32f93d5ec66c917ebd4ca4ac4bded60e9485bea0f87d7381c97c1",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\test50_p1_dataset.npy": "a853e426a52e6beecbf2002fb6ddb69a2f7fbbc7c49cc1297f70171498abca15",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\eval.py": "6047570e46ca865b91d33ac067bfc4df1b31d0e05795e64b35be594034171c02",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\aco.py": "89902d0c92de2579f117a544eed997c0b860401e096713724b6e077f9db64cf8",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\scripts\\p1_test_evaluate.py": "57143aef5900116c33bd9ca29c2a3009357065bd10ec8a88c9a332e98de47d3a"
+  },
+  "timeout_seconds": 900,
+  "process_tree_cpu_limit_seconds": 25200,
+  "pid": 77640,
+  "process_tree": {
+    "user_seconds": 117.421875,
+    "kernel_seconds": 0.625,
+    "cpu_seconds": 118.046875,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "exit_code": 1,
+  "elapsed_seconds": 33987.264999999985
+}

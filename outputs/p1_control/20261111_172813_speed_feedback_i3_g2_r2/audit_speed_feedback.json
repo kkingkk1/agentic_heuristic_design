@@ -1,0 +1,378 @@
+{
+  "status": "passed",
+  "scope": "用户授权的收益时间比反馈两代工程试跑；不属于 P1 正式对照。",
+  "source_events_sha256": "f941cc70f556436c3daf1855d9cb955dd5e00262cdcab4bb014874211eaa92fd",
+  "source_config_sha256": "616887921358ce320c4ccfd675a9fe63562ee8eaafc4bc22c62be110688c386f",
+  "verified_protected_inputs": 20,
+  "dataset_sha256": "49cfd10c6d21efd39736e5baf57510b4ce6945c3a057cdbe8dcad398c728599a",
+  "model_calls": 61,
+  "model_process_failures": 0,
+  "evaluation_statuses": {
+    "passed": 47,
+    "candidate_error": 2
+  },
+  "invalid_proposals": {},
+  "candidate_evaluations": 49,
+  "independently_recomputed_tours": 235,
+  "maximum_route_absolute_error": 1.7763568394002505e-15,
+  "population_replay": [
+    {
+      "generation": 0,
+      "members": [
+        {
+          "candidate_id": "c0003",
+          "evaluation_origin": "c0003",
+          "stage": "init_03",
+          "average_objective": 6.048865780316388,
+          "average_solve_wall_seconds": 1.408542080000916,
+          "benefit_per_second": 0.11736976257102526
+        },
+        {
+          "candidate_id": "c0001",
+          "evaluation_origin": "c0001",
+          "stage": "init_01",
+          "average_objective": 6.556118923315859,
+          "average_solve_wall_seconds": 1.3801696800001082,
+          "benefit_per_second": 0.1105148643060402
+        }
+      ]
+    },
+    {
+      "generation": 1,
+      "members": [
+        {
+          "candidate_id": "c0010",
+          "evaluation_origin": "c0010",
+          "stage": "eoh_M2_01",
+          "average_objective": 5.932842188714399,
+          "average_solve_wall_seconds": 1.289151280002261,
+          "benefit_per_second": 0.13074747768000575
+        },
+        {
+          "candidate_id": "c0025",
+          "evaluation_origin": "c0025",
+          "stage": "mutation_B_speed_agent",
+          "average_objective": 5.949331247140767,
+          "average_solve_wall_seconds": 1.297508960000414,
+          "benefit_per_second": 0.12954524722801014
+        }
+      ]
+    },
+    {
+      "generation": 2,
+      "members": [
+        {
+          "candidate_id": "c0045",
+          "evaluation_origin": "c0045",
+          "stage": "mutation_A_speed_agent",
+          "average_objective": 5.918718567116279,
+          "average_solve_wall_seconds": 1.3070275000020046,
+          "benefit_per_second": 0.12926697466561254
+        },
+        {
+          "candidate_id": "c0032",
+          "evaluation_origin": "c0032",
+          "stage": "eoh_M1_02",
+          "average_objective": 5.932842188714399,
+          "average_solve_wall_seconds": 1.3301548000017647,
+          "benefit_per_second": 0.12671703940625773
+        }
+      ]
+    }
+  ],
+  "elite_pairs": {
+    "1": {
+      "a": "c0003",
+      "b": "c0001"
+    },
+    "2": {
+      "a": "c0010",
+      "b": "c0025"
+    }
+  },
+  "branch_transitions_verified": 12,
+  "branch_results": [
+    {
+      "generation": 1,
+      "role": "solution_quality_agent",
+      "round": 0,
+      "previous": "c0001",
+      "proposal": "c0012",
+      "candidate_id": "c0012",
+      "evaluation_origin": "c0012",
+      "stage": "start_solution_quality_agent",
+      "average_objective": 6.3044932197864965,
+      "average_solve_wall_seconds": 1.306048559998453,
+      "benefit_per_second": 0.12144803525389324
+    },
+    {
+      "generation": 1,
+      "role": "solution_quality_agent",
+      "round": 1,
+      "previous": "c0012",
+      "proposal": "c0014",
+      "candidate_id": "c0014",
+      "evaluation_origin": "c0014",
+      "stage": "round_1_solution_quality_agent",
+      "average_objective": 5.960196354768309,
+      "average_solve_wall_seconds": 1.3049927799991565,
+      "benefit_per_second": 0.12856753684467062
+    },
+    {
+      "generation": 1,
+      "role": "solution_quality_agent",
+      "round": 2,
+      "previous": "c0014",
+      "proposal": "c0017",
+      "candidate_id": "c0017",
+      "evaluation_origin": "c0017",
+      "stage": "round_2_solution_quality_agent",
+      "average_objective": 6.002037604837407,
+      "average_solve_wall_seconds": 1.3093744400015566,
+      "benefit_per_second": 0.12724403398849152
+    },
+    {
+      "generation": 1,
+      "role": "speed_agent",
+      "round": 0,
+      "previous": "c0001",
+      "proposal": "c0013",
+      "candidate_id": "c0013",
+      "evaluation_origin": "c0013",
+      "stage": "start_speed_agent",
+      "average_objective": 6.223666303463851,
+      "average_solve_wall_seconds": 1.2983675800001948,
+      "benefit_per_second": 0.123753086222752
+    },
+    {
+      "generation": 1,
+      "role": "speed_agent",
+      "round": 1,
+      "previous": "c0013",
+      "proposal": "c0015",
+      "candidate_id": "c0015",
+      "evaluation_origin": "c0015",
+      "stage": "round_1_speed_agent",
+      "average_objective": 6.223386756923184,
+      "average_solve_wall_seconds": 1.2827944600008778,
+      "benefit_per_second": 0.12526107454560384
+    },
+    {
+      "generation": 1,
+      "role": "speed_agent",
+      "round": 2,
+      "previous": "c0015",
+      "proposal": "c0018",
+      "candidate_id": "c0018",
+      "evaluation_origin": "c0018",
+      "stage": "round_2_speed_agent",
+      "average_objective": 6.58076372454139,
+      "average_solve_wall_seconds": 1.3117098999980954,
+      "benefit_per_second": 0.1158472970976268
+    },
+    {
+      "generation": 2,
+      "role": "solution_quality_agent",
+      "round": 0,
+      "previous": "c0025",
+      "proposal": "c0035",
+      "candidate_id": "c0035",
+      "evaluation_origin": "c0035",
+      "stage": "start_solution_quality_agent",
+      "average_objective": 5.916600575828393,
+      "average_solve_wall_seconds": 1.332521100001759,
+      "benefit_per_second": 0.12683924664531226
+    },
+    {
+      "generation": 2,
+      "role": "solution_quality_agent",
+      "round": 1,
+      "previous": "c0035",
+      "proposal": "c0037",
+      "candidate_id": "c0037",
+      "evaluation_origin": "c0037",
+      "stage": "round_1_solution_quality_agent",
+      "average_objective": 5.940120603269451,
+      "average_solve_wall_seconds": 1.3242980399983935,
+      "benefit_per_second": 0.12712149774724388
+    },
+    {
+      "generation": 2,
+      "role": "solution_quality_agent",
+      "round": 2,
+      "previous": "c0037",
+      "proposal": "c0040",
+      "candidate_id": "c0040",
+      "evaluation_origin": "c0040",
+      "stage": "round_2_solution_quality_agent",
+      "average_objective": 5.940120603269451,
+      "average_solve_wall_seconds": 1.3033083799993619,
+      "benefit_per_second": 0.12916877762146953
+    },
+    {
+      "generation": 2,
+      "role": "speed_agent",
+      "round": 0,
+      "previous": "c0025",
+      "proposal": "c0036",
+      "candidate_id": "c0036",
+      "evaluation_origin": "c0036",
+      "stage": "start_speed_agent",
+      "average_objective": 5.997677959933097,
+      "average_solve_wall_seconds": 1.3495260200026677,
+      "benefit_per_second": 0.12354796445594461
+    },
+    {
+      "generation": 2,
+      "role": "speed_agent",
+      "round": 1,
+      "previous": "c0036",
+      "proposal": "c0038",
+      "candidate_id": "c0038",
+      "evaluation_origin": "c0038",
+      "stage": "round_1_speed_agent",
+      "average_objective": 5.997677959933097,
+      "average_solve_wall_seconds": 1.3105135799982235,
+      "benefit_per_second": 0.127225841301002
+    },
+    {
+      "generation": 2,
+      "role": "speed_agent",
+      "round": 2,
+      "previous": "c0038",
+      "proposal": "c0041",
+      "candidate_id": "c0041",
+      "evaluation_origin": "c0041",
+      "stage": "round_2_speed_agent",
+      "average_objective": 6.034035889339639,
+      "average_solve_wall_seconds": 1.3022867000006955,
+      "benefit_per_second": 0.1272581208121465
+    }
+  ],
+  "critic_output_routes_verified": 12,
+  "critic_results": [
+    {
+      "generation": 1,
+      "stage": "critic_initial",
+      "candidate_a": {
+        "average_objective": 6.048865780316388,
+        "average_solve_wall_seconds": 1.408542080000916,
+        "benefit_per_second": 0.11736976257102526
+      },
+      "candidate_b": {
+        "average_objective": 6.556118923315859,
+        "average_solve_wall_seconds": 1.3801696800001082,
+        "benefit_per_second": 0.1105148643060402
+      },
+      "rate_winner": "A",
+      "quality_ref": "Candidate A achieves the lower objective (6.0489 versus 6.5561), so B's neighborhood-competition score is less effective here. This single comparison cannot establish causality, but adding explicit mutual-nearest-neighbor compatibility and two-edge savings is a plausible quality improvement.",
+      "quality_ans": "Augment B’s symmetric score with normalized mutual-nearest-neighbor indicators and normalized savings: for each edge, reward endpoint-alternative distance minus edge distance, then blend these terms with inverse-distance preference before final normalization.",
+      "speed_ref": "B is faster per solve (1.3802 s versus 1.4085 s), but A has higher benefit per solve second (0.11737 versus 0.11051), so B’s timing advantage does not yield better measured speed effectiveness. The single evaluation leaves load effects uncertain.",
+      "speed_ans": "Replace B’s row-wise exponential competition with a vectorized rank-based scarcity score: compute each endpoint’s inverse-distance rank, use reciprocal rank sums, and blend them symmetrically with inverse distance to reduce expensive exponential and aggregation work."
+    },
+    {
+      "generation": 1,
+      "stage": "critic_1",
+      "candidate_a": {
+        "average_objective": 6.3044932197864965,
+        "average_solve_wall_seconds": 1.306048559998453,
+        "benefit_per_second": 0.12144803525389324
+      },
+      "candidate_b": {
+        "average_objective": 6.223666303463851,
+        "average_solve_wall_seconds": 1.2983675800001948,
+        "benefit_per_second": 0.123753086222752
+      },
+      "rate_winner": "B",
+      "quality_ref": "Candidate B achieved lower objective and shorter measured time than A. A’s mutual-nearest-neighbor and savings additions did not improve this evaluation, but one run cannot establish causality.",
+      "quality_ans": "Replace A’s exponential competition term with vectorized reciprocal-rank scarcity: rank each edge by endpoint preference, sum reciprocal ranks symmetrically, and blend it with inverse distance, mutual-nearest-neighbor, and savings signals.",
+      "speed_ref": "Candidate B is better on objective, timing, and benefit per solve second. Its rank-based vectorization likely reduces preparation overhead, although the single measurement may reflect concurrent-load variation.",
+      "speed_ans": "Retain B’s rank-scarcity and inverse-distance blend, but compute only top-k ranks with vectorized partitioning and assign zero scarcity to remaining edges, reducing preparation work while preserving strongest guidance."
+    },
+    {
+      "generation": 1,
+      "stage": "critic_2",
+      "candidate_a": {
+        "average_objective": 5.960196354768309,
+        "average_solve_wall_seconds": 1.3049927799991565,
+        "benefit_per_second": 0.12856753684467062
+      },
+      "candidate_b": {
+        "average_objective": 6.223386756923184,
+        "average_solve_wall_seconds": 1.2827944600008778,
+        "benefit_per_second": 0.12526107454560384
+      },
+      "rate_winner": "A",
+      "quality_ref": "A 在固定预算下取得更低原始目标值 5.9602，优于 B 的 6.2234；但其求解时间略长，优势来自最终质量。单次评估不足以确认各组成项的因果贡献。",
+      "quality_ans": "提高 reciprocal-rank 主项权重至 0.70，按比例将 inverse-distance、mutual-nearest 与 savings 权重降至 0.15、0.10、0.05，继续保持有限、非负、对称和零对角。",
+      "speed_ref": "B 的记录时间较短（1.2828 秒对 1.3050 秒），但 benefit per solve second 为 0.1253，低于 A 的 0.1286；因此当前稀疏化尚未带来更好的综合速度收益。",
+      "speed_ans": "将自适应 top-k 改为 min(n−1, max(2, ceil(log2 n)))，并将 preference/scarcity 权重调整为 0.80/0.20，以减少准备开销并限制质量损失。"
+    },
+    {
+      "generation": 2,
+      "stage": "critic_initial",
+      "candidate_a": {
+        "average_objective": 5.932842188714399,
+        "average_solve_wall_seconds": 1.289151280002261,
+        "benefit_per_second": 0.13074747768000575
+      },
+      "candidate_b": {
+        "average_objective": 5.949331247140767,
+        "average_solve_wall_seconds": 1.297508960000414,
+        "benefit_per_second": 0.12954524722801014
+      },
+      "rate_winner": "A",
+      "quality_ref": "Candidate A achieves a slightly lower objective (5.9328 vs. 5.9493), indicating better solution quality. Its explicit savings and reciprocal compatibility signals may preserve useful edges that Candidate B’s rank-based scoring misses; causal attribution remains uncertain from one evaluation.",
+      "quality_ans": "Modify Candidate B to add a normalized local-savings term based on each edge’s distance versus the two endpoints’ second-nearest distances, weighted with geometric endpoint preference before final normalization.",
+      "speed_ref": "Candidate A is faster (1.2892 s vs. 1.2975 s) and has higher benefit per solve second (0.13075 vs. 0.12955), so it is better on the supplied speed metric. The margins are small and single-run timing is uncertain.",
+      "speed_ans": "Replace Candidate B’s full stable argsort with partial nearest-neighbor selection for only the top-ranked edges, while assigning a closed-form low rank weight to remaining valid edges to reduce ranking overhead."
+    },
+    {
+      "generation": 2,
+      "stage": "critic_1",
+      "candidate_a": {
+        "average_objective": 5.916600575828393,
+        "average_solve_wall_seconds": 1.332521100001759,
+        "benefit_per_second": 0.12683924664531226
+      },
+      "candidate_b": {
+        "average_objective": 5.997677959933097,
+        "average_solve_wall_seconds": 1.3495260200026677,
+        "benefit_per_second": 0.12354796445594461
+      },
+      "rate_winner": "A",
+      "quality_ref": "Candidate A achieves the lower objective and higher fitness, with better final-solution benefit. Its savings boost appears quality-promising, although one evaluation cannot isolate causality.",
+      "quality_ans": "Retain the savings mechanism, but cap its multiplier and apply it only when both endpoints have finite second-nearest alternatives, preventing fallback values from rewarding weak or irregular edges.",
+      "speed_ref": "Candidate B is slower and has lower benefit per solve second than A, so partial ranking did not improve the measured speed-quality tradeoff. The single evaluation leaves causal uncertainty.",
+      "speed_ans": "Keep partial ranking, but replace the dense rank-weight matrix with row-wise top-k arrays and apply weights directly during score construction, reducing preparation overhead without changing the tail exploration policy."
+    },
+    {
+      "generation": 2,
+      "stage": "critic_2",
+      "candidate_a": {
+        "average_objective": 5.940120603269451,
+        "average_solve_wall_seconds": 1.3242980399983935,
+        "benefit_per_second": 0.12712149774724388
+      },
+      "candidate_b": {
+        "average_objective": 5.997677959933097,
+        "average_solve_wall_seconds": 1.3105135799982235,
+        "benefit_per_second": 0.127225841301002
+      },
+      "rate_winner": "B",
+      "quality_ref": "A has the lower objective and higher final-solution benefit, so its savings-guided design is currently stronger for solution quality. The evidence does not isolate which component caused the advantage.",
+      "quality_ans": "Keep the eligibility-gated savings boost, but explicitly assign valid zero-distance edges maximal local preference and highest rank before reciprocal scaling, preventing epsilon-based handling from distorting their quality guidance.",
+      "speed_ref": "B is faster and has slightly higher benefit per solve second, despite a worse objective and lower benefit. The rate advantage is very small and may be sensitive to single-run load.",
+      "speed_ans": "Retain sparse top-k ranking, but reduce top_k to min(n-1, max(3, int(sqrt(n)))) and keep a nonzero tail weight, lowering ranking overhead while preserving exploratory edges."
+    }
+  ],
+  "model_usage_records": 61,
+  "model_usage_totals": {
+    "input_tokens": 1591393,
+    "cached_input_tokens": 948480,
+    "output_tokens": 67255,
+    "reasoning_output_tokens": 21172
+  },
+  "process_tree_cpu_seconds": 383.59375,
+  "elapsed_seconds": 1103.7190000000046
+}

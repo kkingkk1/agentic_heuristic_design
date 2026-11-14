@@ -1,0 +1,20 @@
+{
+  "status": "frozen_after_training",
+  "created_at_utc": "2026-11-12T11:50:21.623969+00:00",
+  "method": "roco_paper_adapted",
+  "task": "tsp_aco",
+  "prompt_condition": "white_box",
+  "matrix_contract_sha256": "a169698d296bd79094f11488741fca47f1ff67574e3c90501c6ae7789fde3d71",
+  "formal_replicate": 1,
+  "selection_seed": 2026110601,
+  "source_run": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261112_183109_ae37c237_resume",
+  "source_candidate_id": "c0341",
+  "source_config_sha256": "683b8894bed62719e3d641a5e141d75b0d37f89c6fcee45ef93703918f094ac8",
+  "source_events_sha256": "366b9ac86267f7d4e89ef739c47a7db3a8d915d68f80577ca33ee763bb238880",
+  "source_result_sha256": "adee9bddd175b525735166388d56d11883a418cff87500928933100b33413fad",
+  "source_stdout_sha256": "e86d8ae1e0b32f93d5ec66c917ebd4ca4ac4bded60e9485bea0f87d7381c97c1",
+  "candidate_sha256": "1de44a6f3db3ef83c47599c5550fa004c81371a984ff4c8fd72555f8974f6784",
+  "train_objective": 5.772703547555828,
+  "train_fitness": -5.772703547555828,
+  "note": "训练完成后冻结；尚未执行测试。"
+}

@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "-B",
+    "-u",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\eval.py",
+    "50",
+    "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_roco\\20261113_223251_4e4a7f6f_resume\\candidates\\c0333",
+    "train"
+  ],
+  "resources": {
+    "available_memory_bytes": 22283476992,
+    "priority": "Normal"
+  },
+  "started_at_utc": "2026-11-13T15:29:44.858053+00:00",
+  "candidate_id": "c0333",
+  "pid": 29568,
+  "exit_code": 0,
+  "objectives": [
+    5.343715254789102,
+    5.73951220733798,
+    6.234377287735713,
+    6.100736545783364,
+    5.900370165236764
+  ],
+  "average": 5.8637422921765845,
+  "fitness": -5.8637422921765845,
+  "start": {
+    "event": "start",
+    "dataset": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy",
+    "seed_base": 20261103,
+    "n_ants": 30,
+    "n_iterations": 200,
+    "numpy": "2.3.5",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1,
+    "time_scope": "solve_wall_seconds_including_preparation_and_validation",
+    "heuristic_time_scope": "heuristic_function_only"
+  },
+  "average_solve_wall_seconds": 1.6678631799994037,
+  "solve_wall_seconds": [
+    1.6431478000013158,
+    1.6428157000045758,
+    1.713522699981695,
+    1.687887900014175,
+    1.6519417999952566
+  ],
+  "average_heuristic_wall_seconds": 0.006180679996032268,
+  "heuristic_wall_seconds": [
+    0.006403200008207932,
+    0.006483899982413277,
+    0.005968499986920506,
+    0.006071500014513731,
+    0.005976299988105893
+  ],
+  "completed_monotonic_ns": 257008125000000,
+  "process_tree_cpu": {
+    "user_seconds": 9.375,
+    "kernel_seconds": 0.671875,
+    "cpu_seconds": 10.046875,
+    "total_processes": 2,
+    "active_processes": 0,
+    "terminated_processes": 0
+  },
+  "elapsed_seconds": 10.28200000000652
+}

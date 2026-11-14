@@ -1,0 +1,16 @@
+{
+  "status": "proposal_parsed",
+  "source_run": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_control\\20261112_135816_854bdc72",
+  "source_events_sha256": "f37e8879cab8a530fba6d67550627416ca0d9deb76f7dbf20b89972bceeb1849",
+  "manual_retry_attempts": 1,
+  "automatic_retries": 0,
+  "exit_code": 0,
+  "usage": {
+    "input_tokens": 26760,
+    "cached_input_tokens": 10496,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1158,
+    "reasoning_output_tokens": 348
+  },
+  "code_characters": 2361
+}

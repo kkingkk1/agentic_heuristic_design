@@ -1,0 +1,11 @@
+{
+  "status": "frozen",
+  "matrix_contract_sha256": "a169698d296bd79094f11488741fca47f1ff67574e3c90501c6ae7789fde3d71",
+  "task": "tsp_aco",
+  "prompt_condition": "white_box",
+  "size": 50,
+  "data_contract_sha256": "fbf84d0bf7ee51071089a01863354abbdb13bfd24d5b7802ba115fcfd2edd0a1",
+  "solver_repeats_per_instance": 1,
+  "whole_dataset_wall_timeout_seconds": 900,
+  "process_tree_cpu_seconds": 25200
+}

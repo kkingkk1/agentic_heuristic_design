@@ -8,6 +8,7 @@ import math
 from pathlib import Path
 import random
 import sys
+from time import perf_counter
 
 import numpy as np
 from scipy.spatial import distance_matrix
@@ -133,21 +134,32 @@ def main():
     heuristic = load_heuristic(root)
     start = {"event": "start", "dataset": str(dataset), "seed_base": seed_base, "n_nodes": size,
              "n_iterations": iterations, "perturbation_moves": moves, "numpy": np.__version__}
+    if phase == "train":
+        start["time_scope"] = "solve_wall_seconds_including_preparation_and_validation"
     if code_hash is not None:
         start["candidate_sha256"] = code_hash
         start.update({"lkh_reference_sha256": reference["sha256"], "lkh_reference_mean": reference["mean"],
                       "lkh_absolute_tolerance": ABS_TOLERANCE, "lkh_relative_tolerance": REL_TOLERANCE})
     emit(start)
-    objectives = []
+    objectives, solve_times = [], []
     for index, positions in enumerate(instances):
         seed = seed_base + index
         random.seed(seed)
         np.random.seed(seed)
         reference_value = reference["objectives"][index] if reference is not None else None
+        if phase == "train":
+            started = perf_counter()
         objective, tour, completed_iterations = solve(positions, heuristic, iterations, moves, reference_value)
+        if phase == "train":
+            elapsed = perf_counter() - started
+            if not math.isfinite(elapsed) or elapsed <= 0:
+                raise ValueError("单例完整求解时间无效。")
+            solve_times.append(elapsed)
         objectives.append(objective)
         event = {"event": "instance", "index": index, "seed": seed, "objective": objective,
                  "iterations": completed_iterations, "tour": tour}
+        if phase == "train":
+            event["solve_wall_seconds"] = elapsed
         if reference is not None:
             event.update({"lkh_reference": reference_value,
                           "stop_reason": "reference_reached" if reached_reference(objective, reference_value)
@@ -161,6 +173,8 @@ def main():
         raise ValueError("评价期间 LKH 参考发生变化；不生成完成事件。")
     average = float(np.mean(objectives))
     complete = {"event": "complete", "instance_count": len(objectives), "average": average, "fitness": -average}
+    if phase == "train":
+        complete["average_solve_wall_seconds"] = math.fsum(solve_times) / len(solve_times)
     if reference is not None:
         complete.update({"lkh_reference_mean": reference["mean"],
                          "lkh_gap_percent": (average / reference["mean"] - 1.0) * 100.0})
