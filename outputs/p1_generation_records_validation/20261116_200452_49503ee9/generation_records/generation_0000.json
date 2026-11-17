@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "generation": 0,
+  "status": "completed",
+  "source_event_range": [
+    1,
+    6
+  ],
+  "selection": {
+    "event_index": 6,
+    "candidate_ids": [
+      "c0001"
+    ]
+  },
+  "candidates": [
+    {
+      "candidate_id": "c0001",
+      "sequence": 1,
+      "stage": "init_01",
+      "source_role": "initializer",
+      "operator": "initialization",
+      "generation": 0,
+      "round": null,
+      "parents": [],
+      "generation_order": 1,
+      "code_sha256": "4b3f1a89044363f65bdb24f015f85fbba1d827dfe7e60cd3ee309650ed975b02",
+      "evaluation": {
+        "status": "passed",
+        "started_at_utc": "2026-11-11T01:54:52.888596+00:00",
+        "candidate_id": "c0001",
+        "pid": 41596,
+        "exit_code": 0,
+        "average": 5.951013845499411,
+        "fitness": -5.951013845499411,
+        "average_solve_wall_seconds": 1.594685120000213,
+        "average_heuristic_wall_seconds": 0.00019819999870378523,
+        "completed_monotonic_ns": 35314062000000,
+        "process_tree_cpu": {
+          "user_seconds": 8.9375,
+          "kernel_seconds": 0.515625,
+          "cpu_seconds": 9.453125,
+          "total_processes": 2,
+          "active_processes": 0,
+          "terminated_processes": 0
+        },
+        "elapsed_seconds": 9.515999999995984
+      },
+      "instances": [
+        {
+          "index": 0,
+          "seed": 20261103,
+          "objective": 5.4345301867441425,
+          "iterations": 200,
+          "solve_wall_seconds": 1.6057445999977062,
+          "heuristic_wall_seconds": 0.00025689999893074855
+        },
+        {
+          "index": 1,
+          "seed": 20261104,
+          "objective": 5.633543186422372,
+          "iterations": 200,
+          "solve_wall_seconds": 1.6090878000031807,
+          "heuristic_wall_seconds": 0.00019249999604653567
+        },
+        {
+          "index": 2,
+          "seed": 20261105,
+          "objective": 6.504821059931265,
+          "iterations": 200,
+          "solve_wall_seconds": 1.5961561000003712,
+          "heuristic_wall_seconds": 0.00017920000391313806
+        },
+        {
+          "index": 3,
+          "seed": 20261106,
+          "objective": 6.164583455114381,
+          "iterations": 200,
+          "solve_wall_seconds": 1.6088538999974844,
+          "heuristic_wall_seconds": 0.00018659999477677047
+        },
+        {
+          "index": 4,
+          "seed": 20261107,
+          "objective": 6.017591339284889,
+          "iterations": 200,
+          "solve_wall_seconds": 1.553583200002322,
+          "heuristic_wall_seconds": 0.00017579999985173345
+        }
+      ],
+      "evaluation_start": {
+        "dataset": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\problems\\tsp_aco\\dataset\\train50_dataset.npy",
+        "seed_base": 20261103,
+        "time_scope": "solve_wall_seconds_including_preparation_and_validation",
+        "heuristic_time_scope": "heuristic_function_only"
+      },
+      "selected": true,
+      "status": "evaluation_passed",
+      "valid": true,
+      "thought": "offline fixture",
+      "code": "import numpy as np\n\n\ndef heuristics_v2(distance_matrix: np.ndarray) -> np.ndarray:\n    \"\"\"Return edge-priority indicators for stochastic TSP solution sampling.\"\"\"\n    d = np.asarray(distance_matrix, dtype=float)\n\n    if d.ndim != 2 or d.shape[0] != d.shape[1]:\n        raise ValueError(\"distance_matrix must be a square 2D array\")\n\n    n = d.shape[0]\n    if n == 0:\n        return np.zeros_like(d, dtype=float)\n    if n == 1:\n        return np.zeros((1, 1), dtype=float)\n\n    valid = np.isfinite(d) & (d >= 0.0)\n    np.fill_diagonal(valid, False)\n\n    positive = d[valid & (d > 0.0)]\n    fallback = float(np.median(positive)) if positive.size else 1.0\n\n    safe_d = np.where(valid, d, np.inf)\n    safe_d = np.where(safe_d > 0.0, safe_d, fallback)\n    np.fill_diagonal(safe_d, np.inf)\n\n    # Node-specific distance scale makes the score robust to heterogeneous regions.\n    sorted_distances = np.sort(safe_d, axis=1)\n    k = min(3, max(1, n - 1))\n    local_scale = np.mean(sorted_distances[:, :k], axis=1)\n    local_scale = np.maximum(local_scale, np.finfo(float).eps)\n\n    # Basic short-edge affinity with local-scale normalization.\n    short_edge = np.exp(-safe_d / local_scale[:, None])\n\n    # Mutual-neighborhood affinity favors edges promising from both endpoints.\n    reverse_scale = local_scale[None, :]\n    mutual_affinity = np.exp(\n        -safe_d * 0.5 * (1.0 / local_scale[:, None] + 1.0 / reverse_scale)\n    )\n\n    # Bridge bonus preserves useful connections from locally sparse nodes.\n    sparsity = local_scale / (np.mean(local_scale) + np.finfo(float).eps)\n    bridge_bonus = np.sqrt(sparsity[:, None] * sparsity[None, :])\n\n    score = short_edge * (0.55 + 0.45 * mutual_affinity) * (\n        0.75 + 0.25 * bridge_bonus\n    )\n\n    # Suppress self-loops and invalid edges.\n    score[~valid] = 0.0\n    np.fill_diagonal(score, 0.0)\n\n    # Row normalization keeps each node's outgoing indicators comparable.\n    row_max = np.max(score, axis=1, keepdims=True)\n    score = np.divide(\n        score,\n        row_max,\n        out=np.zeros_like(score),\n        where=row_max > 0.0,\n    )\n\n    return score.astype(float, copy=False)",
+      "evaluation_origin": "c0001"
+    }
+  ],
+  "trace": [
+    {
+      "event_index": 2,
+      "event": "model_attempt",
+      "at_utc": "2026-11-16T12:04:52.526878+00:00",
+      "stage": "init_01",
+      "prompt_sha256": "e1bacc01026f196f24c278f9f873c6a387fba95305e0edac400cdc2e0b79a86a"
+    },
+    {
+      "event_index": 3,
+      "event": "model_process",
+      "at_utc": "2026-11-16T12:04:52.527740+00:00",
+      "stage": "init_01",
+      "result": {
+        "exit_code": 0,
+        "stderr": "",
+        "elapsed_seconds": 0.5,
+        "usage": {
+          "input_tokens": 7,
+          "output_tokens": 3
+        },
+        "event_types": [
+          "item.completed",
+          "turn.completed"
+        ],
+        "warnings": [],
+        "proposal_code_sha256": "4b3f1a89044363f65bdb24f015f85fbba1d827dfe7e60cd3ee309650ed975b02"
+      }
+    }
+  ]
+}

@@ -299,7 +299,7 @@ class TestRoCoRunGate(unittest.TestCase):
                 stack.enter_context(patch.object(Path, "open", return_value=io.StringIO()))
                 stack.enter_context(patch.object(sys, "argv", ["runner", "--config", "fixture", "--run"]))
                 stack.enter_context(patch.object(module, "verify_training_config"))
-                stack.enter_context(patch.object(module, "JsonLog"))
+                log = stack.enter_context(patch.object(module, "TrainingLog"))
                 stack.enter_context(patch.object(module, runtime_name, return_value=runtime))
                 stack.enter_context(patch.object(module, "memory_and_priority", return_value={
                     "available_memory_bytes": config["resources"]["min_available_system_memory_bytes"]}))
@@ -316,6 +316,7 @@ class TestRoCoRunGate(unittest.TestCase):
                 self.assertEqual(constructor.call_args.kwargs["population_size"], 10)
                 self.assertEqual(constructor.call_args.kwargs["initial_count"], 30)
                 self.assertEqual(constructor.call_args.kwargs["rounds"], 3)
+                self.assertIs(log.return_value.contract, runtime.contract)
                 controller.run.assert_called_once_with()
                 self.assertEqual(probe.call_count, 2)  # 模拟版本与登录检查；没有模型请求。
 

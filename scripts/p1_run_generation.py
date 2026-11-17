@@ -15,9 +15,9 @@ if str(ROOT) not in sys.path:
 
 from scripts import p0_model_probe as probe  # noqa: E402
 from scripts.p0_controller import Controller, StopRun  # noqa: E402
-from scripts.p0_runtime import JsonLog, generation_requirements, memory_and_priority  # noqa: E402
+from scripts.p0_runtime import generation_requirements, memory_and_priority  # noqa: E402
 from scripts.p1_formal_matrix import formal_run_guard, verify_training_config  # noqa: E402
-from scripts.p1_runtime import TaskRuntime  # noqa: E402
+from scripts.p1_runtime import TaskRuntime, TrainingLog  # noqa: E402
 
 
 def validate_config(config, *, method_id="proposed_solution_quality_and_speed_agents"):
@@ -76,7 +76,7 @@ def main():
 
     run_dir = ROOT / "outputs" / "p1_control" / (datetime.now().strftime("%Y%m%d_%H%M%S") + "_" + uuid.uuid4().hex[:8])
     run_dir.mkdir(parents=True, exist_ok=False)
-    log = JsonLog(run_dir / "events.jsonl")
+    log = TrainingLog(run_dir / "events.jsonl", None)
     config_path = run_dir / "config.json"
     with config_path.open("x", encoding="utf-8", newline="\n") as stream:
         json.dump(config, stream, ensure_ascii=False, indent=2, allow_nan=False)
@@ -84,6 +84,7 @@ def main():
     try:
         runtime = TaskRuntime(run_dir, config_path, log,
                               allow_unquantified_quota=args.allow_unquantified_quota)
+        log.contract = runtime.contract
         resources = memory_and_priority()
         if resources["available_memory_bytes"] < config["resources"]["min_available_system_memory_bytes"]:
             raise StopRun("可用内存低于冻结阈值。")

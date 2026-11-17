@@ -17,7 +17,7 @@ from baselines.eoh.paper_controller import parse_proposal as parse_eoh  # noqa: 
 from baselines.mcts_ahd.controller import parse_proposal as parse_mcts  # noqa: E402
 from baselines.reevo.controller import parse_generated, seed_code, source_files, text  # noqa: E402
 from scripts import p1_run_eoh, p1_run_generation, p1_run_hsevo, p1_run_mcts_ahd, p1_run_reevo, p1_run_roco  # noqa: E402
-from scripts.p0_controller import check_modification_scope  # noqa: E402
+from scripts.p0_controller import check_modification_scope, code_hash  # noqa: E402
 from scripts.p0_runtime import digest  # noqa: E402
 from scripts.p1_formal_matrix import verify_training_config  # noqa: E402
 from scripts.p1_runtime import TRAINING  # noqa: E402
@@ -71,6 +71,22 @@ def original_code(events, method, candidate_id, contract):
     if len(responses) != 1:
         raise ValueError("候选原始模型响应缺失或重复。")
     response = responses[0].get("response")
+    if response is None and method in ("proposed_solution_quality_and_speed_agents", "roco_paper_adapted"):
+        registration_index = events.index(registrations[0])
+        response_index = events.index(responses[0])
+        processes = [event for event in events[registration_index + 1:response_index]
+                     if event.get("event") == "model_process" and event.get("stage") == responses[0].get("stage")
+                     and isinstance(event.get("result"), dict)
+                     and isinstance(event["result"].get("proposal"), dict)]
+        if len(processes) != 1:
+            raise ValueError("候选的结构化模型提案缺失或重复。")
+        proposal = processes[0]["result"]["proposal"]
+        code, thought = proposal.get("code"), proposal.get("thought")
+        if (not isinstance(code, str) or not isinstance(thought, str)
+                or thought != responses[0].get("thought")
+                or code_hash(code) != responses[0].get("code_sha256")):
+            raise ValueError("候选提案与响应记录不一致。")
+        return contract.parse_proposal(f"<thought>recorded</thought><code>{code}</code>")["code"]
     if method in ("reevo_2f70042_adapted", "hsevo_fb569d6_adapted"):
         return parse_generated(contract, response)["code"]
     if method == "eoh_paper_adapted":

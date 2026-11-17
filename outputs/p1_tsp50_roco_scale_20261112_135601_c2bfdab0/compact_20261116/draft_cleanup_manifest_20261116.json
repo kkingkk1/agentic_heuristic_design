@@ -1,0 +1,46 @@
+{
+  "status": "completed",
+  "scope": "TSP50 整理过程中的 5 个已替代草稿；不包括候选目录、评价、结果或手工续跑材料。",
+  "result_anchor": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\vault\\Results\\Reports\\tsp50-roco-20261114.md",
+  "total_files": 5,
+  "total_bytes": 10588164,
+  "one_drive_status": "删除前目标固定到本机；删除后 OneDrive 进程仍在运行，云端同步完成与否未知。删除可能同步至云端。",
+  "reparse_check": "系统工具确认五个目标均为 CLOUD_6；本次按用户指示处理此标记，未修改文件属性或 ACL。",
+  "backup": "未新建备份。候选归档第二版及最终清单保留。",
+  "executed_at_local": "2026-11-16 19:40 +08:00",
+  "verification": "五个目标路径均已不存在；五项保留文件的大小和修改时间未变，9032 个候选原文件均存在且大小一致。",
+  "targets": [
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_tsp50_roco_scale_20261112_135601_c2bfdab0\\compact_20261116\\candidate_archive.zip",
+      "type": "file",
+      "bytes": 4748313,
+      "reason": "初版候选归档已被补齐角色、算子及父代字段的 candidate_archive_v2.zip 替代。"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_tsp50_roco_scale_20261112_135601_c2bfdab0\\compact_20261116\\review_manifest.json",
+      "type": "file",
+      "bytes": 2978561,
+      "reason": "初版审查清单误列 448 个被引用文件，已被最终清单替代；整理说明保留这一差错的摘要。"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_tsp50_roco_scale_20261112_135601_c2bfdab0\\compact_20261116\\review_manifest_v2.json",
+      "type": "file",
+      "bytes": 2854405,
+      "reason": "第二版审查清单的全部 9032 个候选路径已包含在最终清单中。"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_tsp50_roco_scale_20261112_135601_c2bfdab0\\compact_20261116\\inventory_control.json",
+      "type": "file",
+      "bytes": 3122,
+      "reason": "该次盘点跳过云重解析目录，错误显示零文件。"
+    },
+    {
+      "path": "F:\\OneDrive\\project\\static_determine\\agentic_heuristic_design\\outputs\\p1_tsp50_roco_scale_20261112_135601_c2bfdab0\\compact_20261116\\inventory_roco.json",
+      "type": "file",
+      "bytes": 3763,
+      "reason": "该次盘点跳过云重解析目录，错误显示零文件。"
+    }
+  ],
+  "risk": "删除后无法从这两份旧审查清单直接读取被初版误列的 448 条逐路径记录；整理说明仍保留数量与原因。",
+  "execution": "用户要求不再以 CLOUD_6 标记阻止本次清理；删除前已重新核对精确目标、属性和 OneDrive 状态。"
+}
