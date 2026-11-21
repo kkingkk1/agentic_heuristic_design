@@ -1,0 +1,2281 @@
+{
+  "created_at_utc": "2026-11-19T03:47:53.941543+00:00",
+  "evaluation": "One final TSP50 comparison at a common stagnation threshold",
+  "dataset": "problems/tsp_aco/dataset/test50_p1_dataset.npy",
+  "instances_per_replicate": 64,
+  "seed_base": 2026115400,
+  "ants": 30,
+  "checkpoint_rounds": 12000,
+  "stagnation_rounds": 50000,
+  "improvement_tolerance": 1e-12,
+  "iteration_cap": null,
+  "stop_rule": "First 50000 consecutive iterations without an incumbent decrease greater than tolerance",
+  "priority": "Normal",
+  "logical_cpus": [
+    0,
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20,
+    22,
+    24,
+    26,
+    1,
+    3,
+    5,
+    7
+  ],
+  "environment": {
+    "python": "C:\\Users\\a_wei\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+    "python_version": "3.12.12",
+    "pythonpath": [
+      "D:\\Tools\\paddleocr-document-rebuild\\.venv\\Lib\\site-packages",
+      "D:\\Tools\\mineru\\.venv\\Lib\\site-packages"
+    ],
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "numpy": "2.3.5",
+    "scipy": "1.18.0",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1,
+    "torch_interop_threads": 20,
+    "logical_processors": 28,
+    "available_memory_bytes": 40377384960,
+    "priority": "Normal"
+  },
+  "resources": {
+    "concurrent_evaluations": 18,
+    "min_available_system_memory_bytes": 8589934592,
+    "anchor_timeout_seconds": 120,
+    "block_timeout_seconds": 480
+  },
+  "backend": "Replay-verified compiled ACO with numerically stable sampling",
+  "time_scope": "Preparation, active ACO blocks, and final route validation. Checkpoint I/O excluded.",
+  "comparison_unit": "independent research run",
+  "research_model_calls": 0,
+  "candidates": {
+    "proposed_1_c0358": {
+      "root": "outputs/tsp50_selection_diagnostic/20261118_02_2f73bc9e/candidates/proposed_1_c0358",
+      "sha256": "611a61866e3ad4a7058b74da44ec13116aec82b38715083c1c2c3053c6f041f1",
+      "frozen_source": "outputs/p1_frozen_candidates/proposed_solution_quality_and_speed_agents/20261113_143912_4468d76e_resume/candidate.py",
+      "baseline_path": "outputs/p1_test/proposed_solution_quality_and_speed_agents/20261114_001043_141c347d/result.json",
+      "objectives_at_500": [
+        5.965587191082426,
+        5.500686428900313,
+        5.8247584977063465,
+        5.387372955527511,
+        5.686625547728749,
+        5.4578670787282695,
+        5.714894450998347,
+        5.773874390798834,
+        5.706103948006429,
+        6.2706232379311935,
+        5.795465571984972,
+        6.151126229417161,
+        5.942582265991435,
+        5.815209266904147,
+        5.910438465249307,
+        5.697787712411119,
+        5.314533770325538,
+        5.951348826000762,
+        5.354155760735751,
+        5.77193851041872,
+        6.193457028361756,
+        5.324417148984182,
+        6.3283948182152026,
+        5.667094796565928,
+        5.765233169196214,
+        5.790977967931986,
+        6.41792145757701,
+        5.838073759378486,
+        5.87543024100116,
+        5.7718545638132746,
+        6.153273003623779,
+        5.874370590165082,
+        5.792281420197733,
+        5.860345242731415,
+        6.199963938351641,
+        5.98944546703486,
+        5.31650976629441,
+        5.5602660215526,
+        6.256478389061855,
+        6.197260092532408,
+        5.831049937035642,
+        5.350946205402231,
+        5.634981576361031,
+        6.067226264151664,
+        5.994169931477554,
+        5.91020003650346,
+        5.813799987625781,
+        5.961961348340189,
+        6.197379828491549,
+        6.145571756891912,
+        6.010122283815151,
+        5.791925437194078,
+        5.615782274428154,
+        5.2365561132896,
+        5.69229411848851,
+        5.500190801273646,
+        6.306233898568826,
+        5.904506630310327,
+        5.8230224537518325,
+        5.901316613098995,
+        5.833063412203908,
+        5.745322890084934,
+        5.705592410887762,
+        5.364418057569843
+      ]
+    },
+    "proposed_2_c0335": {
+      "root": "outputs/tsp50_selection_diagnostic/20261118_02_2f73bc9e/candidates/proposed_2_c0335",
+      "sha256": "f0e1201cfd3abcd00f65108adde3ee80f18aee5330cbf008c21c235953e6a2ca",
+      "frozen_source": "outputs/p1_frozen_candidates/proposed_solution_quality_and_speed_agents/20261112_211734_d7c5ee74_resume/candidate.py",
+      "baseline_path": "outputs/p1_test/proposed_solution_quality_and_speed_agents/20261114_002016_c2e731dc/result.json",
+      "objectives_at_500": [
+        5.851105374449324,
+        5.474180752150976,
+        5.853401398362521,
+        5.368926463605593,
+        5.688134668555053,
+        5.413309596187549,
+        5.749473122613566,
+        5.770333485969436,
+        5.780761652524097,
+        6.172247742681726,
+        5.795465571984972,
+        5.8866807740742715,
+        5.882850196478887,
+        5.815209266904146,
+        5.89535629626607,
+        5.699919665448736,
+        5.342476751525085,
+        5.8517498780866095,
+        5.366639189638935,
+        5.808106080930822,
+        6.208231386592695,
+        5.280390743300142,
+        6.3283948182152026,
+        5.747306460026616,
+        5.836612744068231,
+        5.790977967931986,
+        6.406000894990468,
+        5.8164313840423425,
+        5.90544564889394,
+        5.736091711195708,
+        6.044288073326228,
+        5.872941382428753,
+        5.8328323316396045,
+        5.97532748331874,
+        6.092794448721814,
+        6.005292529967414,
+        5.310231674060646,
+        5.626944353458717,
+        6.301827933204652,
+        6.042551011558872,
+        5.811359115723892,
+        5.350946205402232,
+        5.679244797508831,
+        6.056419870714015,
+        6.018339411602393,
+        5.933690892565995,
+        5.714926518025172,
+        6.077450674878534,
+        6.197379828491548,
+        6.068752605765424,
+        5.9993356588585955,
+        5.828950591564426,
+        5.540831131902532,
+        5.266879830821396,
+        5.584798514612307,
+        5.500190801273645,
+        6.128918337515505,
+        5.904506630310326,
+        5.90539410345207,
+        5.828304374352474,
+        5.989501771258575,
+        5.741836812444501,
+        5.7354819508744175,
+        5.353835376770709
+      ]
+    },
+    "proposed_3_c0333": {
+      "root": "outputs/tsp50_selection_diagnostic/20261118_02_2f73bc9e/candidates/proposed_3_c0333",
+      "sha256": "fa972a6aa4b92268ae294c7eb1ede09f09f8c36b7ed834f1f1d95dc9126433e5",
+      "frozen_source": "outputs/p1_frozen_candidates/proposed_solution_quality_and_speed_agents/20261113_182734_19e8e233_resume/candidate.py",
+      "baseline_path": "outputs/p1_test/proposed_solution_quality_and_speed_agents/20261114_002938_b4d6ed89/result.json",
+      "objectives_at_500": [
+        5.933852181835093,
+        5.474178313474486,
+        5.8247584977063465,
+        5.350241881172528,
+        5.716900727891934,
+        5.426532845374071,
+        5.683948106761778,
+        5.809957996970493,
+        5.737960844716828,
+        6.260510297477959,
+        5.924423522782421,
+        6.076811010513529,
+        5.8741305758926705,
+        5.918466395464949,
+        5.905172155107209,
+        5.627787267499619,
+        5.340919838536918,
+        5.895339212830146,
+        5.235419785633347,
+        5.802611770803794,
+        6.364103398880086,
+        5.2973788744729084,
+        6.32480410932124,
+        5.842640880127583,
+        5.7421485474790535,
+        5.805022877748714,
+        6.3582896520709005,
+        5.9299838352670715,
+        5.99585157468154,
+        5.720764786329446,
+        6.114813340991013,
+        5.848828677693522,
+        5.779231011400556,
+        5.799957334627539,
+        6.0940197489119665,
+        6.065788328862969,
+        5.45627880441015,
+        5.629450672101451,
+        6.311048347875847,
+        6.2575949681256455,
+        5.931936782221792,
+        5.358084621922185,
+        5.783080719056492,
+        6.135940764021117,
+        5.9993447909142255,
+        5.935775057878399,
+        5.7513824800040165,
+        6.041920137820941,
+        6.195959016978151,
+        6.076914818510682,
+        5.998682301040643,
+        5.828256560406938,
+        5.505744941595288,
+        5.3017631944984664,
+        5.688580924743354,
+        5.500190801273645,
+        6.142183270315711,
+        5.985552123520365,
+        5.913714170543722,
+        5.932874659453556,
+        5.966542973376522,
+        5.718387607587763,
+        5.667121349109176,
+        5.420167584261944
+      ]
+    },
+    "roco_1_c0341": {
+      "root": "outputs/tsp50_selection_diagnostic/20261118_02_2f73bc9e/candidates/roco_1_c0341",
+      "sha256": "1de44a6f3db3ef83c47599c5550fa004c81371a984ff4c8fd72555f8974f6784",
+      "frozen_source": "outputs/p1_frozen_candidates/roco_paper_adapted/20261112_183109_ae37c237_resume/candidate.py",
+      "baseline_path": "outputs/p1_test/roco_paper_adapted/20261114_101348_23cee5d4_resume/result.json",
+      "objectives_at_500": [
+        5.8092149837040505,
+        5.418644537743079,
+        5.856332372769334,
+        5.4664751466356005,
+        5.686625547728749,
+        5.41792228548232,
+        5.709123273037068,
+        5.821708242678735,
+        5.715919520909991,
+        6.143943857688224,
+        5.7954655719849715,
+        6.124197166020548,
+        5.949986149906683,
+        5.815209266904147,
+        5.89535629626607,
+        5.62778726749962,
+        5.314533770325538,
+        5.862914990673003,
+        5.283384124842925,
+        5.808106080930822,
+        6.295096346111493,
+        5.2973788744729084,
+        6.315687449455218,
+        5.735245915897869,
+        5.710316716317106,
+        5.790977967931986,
+        6.418351191847693,
+        5.844974643905959,
+        5.87543024100116,
+        5.769243920004758,
+        6.177649949171483,
+        5.936159368420857,
+        5.767988953548192,
+        5.960342847382212,
+        6.0979783816200674,
+        5.995315153367219,
+        5.3908327336303845,
+        5.71091544922222,
+        6.1374835363063465,
+        6.100049901695419,
+        5.810065789395833,
+        5.350946205402231,
+        5.633415492952631,
+        6.160631314656229,
+        5.989646405806008,
+        5.94159734046469,
+        5.704685567586259,
+        5.974023311967231,
+        6.1959590169781515,
+        6.073248528533183,
+        6.0004125480993284,
+        5.825055973351402,
+        5.505744941595287,
+        5.233068126128012,
+        5.641433047163717,
+        5.483970646137515,
+        6.142183270315712,
+        5.904506630310327,
+        5.874700900929163,
+        5.844141757387421,
+        5.866438392480418,
+        5.778954113658527,
+        5.6648752996274885,
+        5.382312983015395
+      ]
+    },
+    "roco_2_c0355": {
+      "root": "outputs/tsp50_selection_diagnostic/20261118_02_2f73bc9e/candidates/roco_2_c0355",
+      "sha256": "0c27dd82989658342be446262bee25bd0d82bfe9cb0b70749e3b608ef95c4bb8",
+      "frozen_source": "outputs/p1_frozen_candidates/roco_paper_adapted/20261113_134209_41bdbcb7_resume/candidate.py",
+      "baseline_path": "outputs/p1_test/roco_paper_adapted/20261114_100728_2fe0d630/result.json",
+      "objectives_at_500": [
+        5.8092149837040505,
+        5.562738479906179,
+        5.853496935628387,
+        5.358289710159276,
+        5.686625547728749,
+        5.4904649546354936,
+        5.710844693301349,
+        5.753013679975883,
+        5.7914865335750125,
+        6.233818679914492,
+        5.7954655719849715,
+        6.1671083066130965,
+        5.899705201669729,
+        5.77483954993536,
+        5.781852836453806,
+        5.62778726749962,
+        5.339147787677977,
+        5.756221475568081,
+        5.3483311969668055,
+        5.802611770803794,
+        6.2375832536823355,
+        5.2973788744729084,
+        6.3137971879600805,
+        5.747306460026615,
+        5.7763493853656245,
+        5.7915261339189605,
+        6.3933173155492415,
+        5.854391437751769,
+        5.864374474980508,
+        5.696052194638417,
+        6.138549681175162,
+        5.928129272609018,
+        5.781084938799536,
+        5.940485495450841,
+        6.079231123582646,
+        5.98944546703486,
+        5.364246878758668,
+        5.6923306004934116,
+        6.145748948631027,
+        6.125517460863246,
+        5.771763731859681,
+        5.350946205402231,
+        5.733552988920765,
+        6.043615617198403,
+        6.004410824264301,
+        5.910200036503461,
+        5.810434229720411,
+        5.997394221697506,
+        6.1959590169781515,
+        6.06441870332886,
+        5.998682301040643,
+        5.802439340590918,
+        5.490151243031739,
+        5.240720673389998,
+        5.621219196014154,
+        5.483970646137515,
+        6.142183270315712,
+        5.904506630310326,
+        5.944124929703649,
+        5.823658126864445,
+        5.906406999788004,
+        5.68368668001712,
+        5.701057543539771,
+        5.407231107546684
+      ]
+    },
+    "roco_3_c0324": {
+      "root": "outputs/tsp50_selection_diagnostic/20261118_02_2f73bc9e/candidates/roco_3_c0324",
+      "sha256": "58e068a227473df474e06dd7bb107db5eaa47f74ce30435d65eec96729a21ed4",
+      "frozen_source": "outputs/p1_frozen_candidates/roco_paper_adapted/20261113_223251_4e4a7f6f_resume/candidate.py",
+      "baseline_path": "outputs/p1_test/roco_paper_adapted/20261114_101742_0bd83178/result.json",
+      "objectives_at_500": [
+        5.848779162666101,
+        5.485730658422155,
+        5.8521873347343085,
+        5.343910901647133,
+        5.697685735625728,
+        5.406243690110346,
+        5.764815492794522,
+        5.809957996970493,
+        5.7932033783467185,
+        6.106001783255512,
+        5.795465571984971,
+        5.8866807740742715,
+        5.89406137498663,
+        5.830732540410186,
+        6.041096475016644,
+        5.654952665589766,
+        5.362370711460291,
+        5.782278786860305,
+        5.2382512614296175,
+        5.802611770803793,
+        6.193457028361756,
+        5.273022124566991,
+        6.351797651853514,
+        5.764636441313307,
+        5.693210761887014,
+        5.8027886234939965,
+        6.407106685812132,
+        5.919359517455232,
+        5.87543024100116,
+        5.74475529050691,
+        6.158810884154147,
+        5.848484183880848,
+        5.755917943063864,
+        5.787106465618051,
+        6.043556075917185,
+        5.98944546703486,
+        5.335146283159839,
+        5.65084769210382,
+        6.297051910628408,
+        6.042551011558872,
+        5.832126417916461,
+        5.350946205402231,
+        5.67493847320691,
+        5.996280228340714,
+        6.017671178042147,
+        5.935775057878399,
+        5.77220123792582,
+        5.994030373546046,
+        6.195959016978151,
+        5.961088244623229,
+        5.998682301040643,
+        5.777759371929375,
+        5.49853093940911,
+        5.233068126128012,
+        5.554427850696947,
+        5.477426839507525,
+        6.128918337515505,
+        5.916069334660749,
+        5.805296041497931,
+        5.8240390855129895,
+        5.9314702176569325,
+        5.721975628096549,
+        5.698699909799918,
+        5.419589538865532
+      ]
+    }
+  },
+  "paired_execution": [
+    {
+      "replicate": 3,
+      "index": 21,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 0
+    },
+    {
+      "replicate": 3,
+      "index": 53,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 2
+    },
+    {
+      "replicate": 3,
+      "index": 28,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 4
+    },
+    {
+      "replicate": 3,
+      "index": 29,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 6
+    },
+    {
+      "replicate": 2,
+      "index": 12,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 8
+    },
+    {
+      "replicate": 1,
+      "index": 17,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 10
+    },
+    {
+      "replicate": 1,
+      "index": 30,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 12
+    },
+    {
+      "replicate": 1,
+      "index": 50,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 14
+    },
+    {
+      "replicate": 2,
+      "index": 37,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 16
+    },
+    {
+      "replicate": 2,
+      "index": 40,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 18
+    },
+    {
+      "replicate": 2,
+      "index": 19,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 20
+    },
+    {
+      "replicate": 3,
+      "index": 3,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 22
+    },
+    {
+      "replicate": 2,
+      "index": 63,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 24
+    },
+    {
+      "replicate": 3,
+      "index": 18,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 26
+    },
+    {
+      "replicate": 1,
+      "index": 11,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 1
+    },
+    {
+      "replicate": 3,
+      "index": 15,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 3
+    },
+    {
+      "replicate": 2,
+      "index": 32,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 5
+    },
+    {
+      "replicate": 1,
+      "index": 16,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 7
+    },
+    {
+      "replicate": 2,
+      "index": 44,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 0
+    },
+    {
+      "replicate": 3,
+      "index": 37,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 2
+    },
+    {
+      "replicate": 2,
+      "index": 41,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 4
+    },
+    {
+      "replicate": 1,
+      "index": 55,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 6
+    },
+    {
+      "replicate": 1,
+      "index": 4,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 8
+    },
+    {
+      "replicate": 3,
+      "index": 20,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 10
+    },
+    {
+      "replicate": 3,
+      "index": 60,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 12
+    },
+    {
+      "replicate": 2,
+      "index": 51,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 14
+    },
+    {
+      "replicate": 2,
+      "index": 1,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 16
+    },
+    {
+      "replicate": 3,
+      "index": 8,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 18
+    },
+    {
+      "replicate": 1,
+      "index": 52,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 20
+    },
+    {
+      "replicate": 1,
+      "index": 12,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 22
+    },
+    {
+      "replicate": 1,
+      "index": 37,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 24
+    },
+    {
+      "replicate": 3,
+      "index": 27,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 26
+    },
+    {
+      "replicate": 3,
+      "index": 59,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 1
+    },
+    {
+      "replicate": 2,
+      "index": 39,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 3
+    },
+    {
+      "replicate": 2,
+      "index": 31,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 5
+    },
+    {
+      "replicate": 1,
+      "index": 57,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 7
+    },
+    {
+      "replicate": 3,
+      "index": 35,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 0
+    },
+    {
+      "replicate": 1,
+      "index": 61,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 2
+    },
+    {
+      "replicate": 2,
+      "index": 30,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 4
+    },
+    {
+      "replicate": 2,
+      "index": 28,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 6
+    },
+    {
+      "replicate": 3,
+      "index": 11,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 8
+    },
+    {
+      "replicate": 2,
+      "index": 42,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 10
+    },
+    {
+      "replicate": 3,
+      "index": 24,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 12
+    },
+    {
+      "replicate": 3,
+      "index": 1,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 14
+    },
+    {
+      "replicate": 1,
+      "index": 39,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 16
+    },
+    {
+      "replicate": 2,
+      "index": 16,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 18
+    },
+    {
+      "replicate": 1,
+      "index": 14,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 20
+    },
+    {
+      "replicate": 2,
+      "index": 55,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 22
+    },
+    {
+      "replicate": 3,
+      "index": 61,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 24
+    },
+    {
+      "replicate": 1,
+      "index": 33,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 26
+    },
+    {
+      "replicate": 3,
+      "index": 17,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 1
+    },
+    {
+      "replicate": 2,
+      "index": 13,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 3
+    },
+    {
+      "replicate": 2,
+      "index": 23,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 5
+    },
+    {
+      "replicate": 2,
+      "index": 59,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 7
+    },
+    {
+      "replicate": 2,
+      "index": 24,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 0
+    },
+    {
+      "replicate": 2,
+      "index": 35,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 2
+    },
+    {
+      "replicate": 2,
+      "index": 25,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 4
+    },
+    {
+      "replicate": 1,
+      "index": 38,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 6
+    },
+    {
+      "replicate": 3,
+      "index": 2,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 8
+    },
+    {
+      "replicate": 3,
+      "index": 38,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 10
+    },
+    {
+      "replicate": 1,
+      "index": 35,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 12
+    },
+    {
+      "replicate": 2,
+      "index": 5,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 14
+    },
+    {
+      "replicate": 3,
+      "index": 36,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 16
+    },
+    {
+      "replicate": 3,
+      "index": 4,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 18
+    },
+    {
+      "replicate": 2,
+      "index": 52,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 20
+    },
+    {
+      "replicate": 3,
+      "index": 39,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 22
+    },
+    {
+      "replicate": 1,
+      "index": 31,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 24
+    },
+    {
+      "replicate": 3,
+      "index": 12,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 26
+    },
+    {
+      "replicate": 2,
+      "index": 10,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 1
+    },
+    {
+      "replicate": 3,
+      "index": 58,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 3
+    },
+    {
+      "replicate": 1,
+      "index": 15,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 5
+    },
+    {
+      "replicate": 3,
+      "index": 57,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 7
+    },
+    {
+      "replicate": 1,
+      "index": 63,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 0
+    },
+    {
+      "replicate": 2,
+      "index": 49,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 2
+    },
+    {
+      "replicate": 3,
+      "index": 43,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 4
+    },
+    {
+      "replicate": 1,
+      "index": 26,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 6
+    },
+    {
+      "replicate": 1,
+      "index": 62,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 8
+    },
+    {
+      "replicate": 1,
+      "index": 6,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 10
+    },
+    {
+      "replicate": 3,
+      "index": 13,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 12
+    },
+    {
+      "replicate": 2,
+      "index": 36,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 14
+    },
+    {
+      "replicate": 1,
+      "index": 41,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 16
+    },
+    {
+      "replicate": 3,
+      "index": 45,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 18
+    },
+    {
+      "replicate": 1,
+      "index": 19,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 20
+    },
+    {
+      "replicate": 2,
+      "index": 6,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 22
+    },
+    {
+      "replicate": 2,
+      "index": 60,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 24
+    },
+    {
+      "replicate": 3,
+      "index": 51,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 26
+    },
+    {
+      "replicate": 2,
+      "index": 22,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 1
+    },
+    {
+      "replicate": 2,
+      "index": 8,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 3
+    },
+    {
+      "replicate": 1,
+      "index": 18,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 5
+    },
+    {
+      "replicate": 2,
+      "index": 3,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 7
+    },
+    {
+      "replicate": 1,
+      "index": 21,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 0
+    },
+    {
+      "replicate": 2,
+      "index": 34,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 2
+    },
+    {
+      "replicate": 3,
+      "index": 19,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 4
+    },
+    {
+      "replicate": 3,
+      "index": 49,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 6
+    },
+    {
+      "replicate": 2,
+      "index": 57,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 8
+    },
+    {
+      "replicate": 3,
+      "index": 25,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 10
+    },
+    {
+      "replicate": 1,
+      "index": 5,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 12
+    },
+    {
+      "replicate": 2,
+      "index": 4,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 14
+    },
+    {
+      "replicate": 2,
+      "index": 46,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 16
+    },
+    {
+      "replicate": 3,
+      "index": 42,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 18
+    },
+    {
+      "replicate": 3,
+      "index": 14,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 20
+    },
+    {
+      "replicate": 1,
+      "index": 44,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 22
+    },
+    {
+      "replicate": 2,
+      "index": 18,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 24
+    },
+    {
+      "replicate": 1,
+      "index": 10,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 26
+    },
+    {
+      "replicate": 3,
+      "index": 31,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 1
+    },
+    {
+      "replicate": 3,
+      "index": 16,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 3
+    },
+    {
+      "replicate": 1,
+      "index": 13,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 5
+    },
+    {
+      "replicate": 1,
+      "index": 0,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 7
+    },
+    {
+      "replicate": 1,
+      "index": 3,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 0
+    },
+    {
+      "replicate": 3,
+      "index": 32,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 2
+    },
+    {
+      "replicate": 2,
+      "index": 45,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 4
+    },
+    {
+      "replicate": 2,
+      "index": 53,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 6
+    },
+    {
+      "replicate": 1,
+      "index": 47,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 8
+    },
+    {
+      "replicate": 1,
+      "index": 20,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 10
+    },
+    {
+      "replicate": 3,
+      "index": 9,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 12
+    },
+    {
+      "replicate": 1,
+      "index": 56,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 14
+    },
+    {
+      "replicate": 3,
+      "index": 30,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 16
+    },
+    {
+      "replicate": 1,
+      "index": 2,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 18
+    },
+    {
+      "replicate": 3,
+      "index": 54,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 20
+    },
+    {
+      "replicate": 1,
+      "index": 59,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 22
+    },
+    {
+      "replicate": 2,
+      "index": 2,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 24
+    },
+    {
+      "replicate": 1,
+      "index": 42,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 26
+    },
+    {
+      "replicate": 3,
+      "index": 62,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 1
+    },
+    {
+      "replicate": 2,
+      "index": 56,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 3
+    },
+    {
+      "replicate": 3,
+      "index": 47,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 5
+    },
+    {
+      "replicate": 1,
+      "index": 54,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 7
+    },
+    {
+      "replicate": 1,
+      "index": 51,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 0
+    },
+    {
+      "replicate": 2,
+      "index": 11,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 2
+    },
+    {
+      "replicate": 3,
+      "index": 63,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 4
+    },
+    {
+      "replicate": 2,
+      "index": 50,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 6
+    },
+    {
+      "replicate": 1,
+      "index": 46,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 8
+    },
+    {
+      "replicate": 3,
+      "index": 56,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 10
+    },
+    {
+      "replicate": 2,
+      "index": 17,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 12
+    },
+    {
+      "replicate": 1,
+      "index": 49,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 14
+    },
+    {
+      "replicate": 2,
+      "index": 38,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 16
+    },
+    {
+      "replicate": 1,
+      "index": 36,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 18
+    },
+    {
+      "replicate": 2,
+      "index": 9,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 20
+    },
+    {
+      "replicate": 1,
+      "index": 32,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 22
+    },
+    {
+      "replicate": 1,
+      "index": 9,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 24
+    },
+    {
+      "replicate": 1,
+      "index": 22,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 26
+    },
+    {
+      "replicate": 2,
+      "index": 7,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 1
+    },
+    {
+      "replicate": 1,
+      "index": 48,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 3
+    },
+    {
+      "replicate": 2,
+      "index": 61,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 5
+    },
+    {
+      "replicate": 1,
+      "index": 40,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 7
+    },
+    {
+      "replicate": 3,
+      "index": 34,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 0
+    },
+    {
+      "replicate": 1,
+      "index": 58,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 2
+    },
+    {
+      "replicate": 3,
+      "index": 26,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 4
+    },
+    {
+      "replicate": 2,
+      "index": 0,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 6
+    },
+    {
+      "replicate": 3,
+      "index": 55,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 8
+    },
+    {
+      "replicate": 3,
+      "index": 52,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 10
+    },
+    {
+      "replicate": 1,
+      "index": 8,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 12
+    },
+    {
+      "replicate": 2,
+      "index": 48,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 14
+    },
+    {
+      "replicate": 3,
+      "index": 44,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 16
+    },
+    {
+      "replicate": 1,
+      "index": 25,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 18
+    },
+    {
+      "replicate": 2,
+      "index": 29,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 20
+    },
+    {
+      "replicate": 3,
+      "index": 0,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 22
+    },
+    {
+      "replicate": 2,
+      "index": 62,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 24
+    },
+    {
+      "replicate": 3,
+      "index": 5,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 26
+    },
+    {
+      "replicate": 2,
+      "index": 58,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 1
+    },
+    {
+      "replicate": 3,
+      "index": 7,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 3
+    },
+    {
+      "replicate": 2,
+      "index": 33,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 5
+    },
+    {
+      "replicate": 1,
+      "index": 53,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 7
+    },
+    {
+      "replicate": 2,
+      "index": 27,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 0
+    },
+    {
+      "replicate": 3,
+      "index": 22,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 2
+    },
+    {
+      "replicate": 2,
+      "index": 21,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 4
+    },
+    {
+      "replicate": 3,
+      "index": 23,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 6
+    },
+    {
+      "replicate": 1,
+      "index": 29,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 8
+    },
+    {
+      "replicate": 2,
+      "index": 20,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 10
+    },
+    {
+      "replicate": 1,
+      "index": 23,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 12
+    },
+    {
+      "replicate": 2,
+      "index": 15,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 14
+    },
+    {
+      "replicate": 3,
+      "index": 6,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 16
+    },
+    {
+      "replicate": 2,
+      "index": 47,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 18
+    },
+    {
+      "replicate": 1,
+      "index": 27,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 20
+    },
+    {
+      "replicate": 2,
+      "index": 14,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 22
+    },
+    {
+      "replicate": 3,
+      "index": 33,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 24
+    },
+    {
+      "replicate": 3,
+      "index": 10,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 26
+    },
+    {
+      "replicate": 2,
+      "index": 43,
+      "order": [
+        "roco_2_c0355",
+        "proposed_2_c0335"
+      ],
+      "logical_cpu": 1
+    },
+    {
+      "replicate": 1,
+      "index": 1,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 3
+    },
+    {
+      "replicate": 1,
+      "index": 60,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 5
+    },
+    {
+      "replicate": 2,
+      "index": 26,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 7
+    },
+    {
+      "replicate": 3,
+      "index": 48,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 0
+    },
+    {
+      "replicate": 3,
+      "index": 41,
+      "order": [
+        "proposed_3_c0333",
+        "roco_3_c0324"
+      ],
+      "logical_cpu": 2
+    },
+    {
+      "replicate": 3,
+      "index": 50,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 4
+    },
+    {
+      "replicate": 3,
+      "index": 46,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 6
+    },
+    {
+      "replicate": 1,
+      "index": 45,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 8
+    },
+    {
+      "replicate": 1,
+      "index": 7,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 10
+    },
+    {
+      "replicate": 2,
+      "index": 54,
+      "order": [
+        "proposed_2_c0335",
+        "roco_2_c0355"
+      ],
+      "logical_cpu": 12
+    },
+    {
+      "replicate": 1,
+      "index": 28,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 14
+    },
+    {
+      "replicate": 1,
+      "index": 34,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 16
+    },
+    {
+      "replicate": 1,
+      "index": 43,
+      "order": [
+        "proposed_1_c0358",
+        "roco_1_c0341"
+      ],
+      "logical_cpu": 18
+    },
+    {
+      "replicate": 1,
+      "index": 24,
+      "order": [
+        "roco_1_c0341",
+        "proposed_1_c0358"
+      ],
+      "logical_cpu": 20
+    },
+    {
+      "replicate": 3,
+      "index": 40,
+      "order": [
+        "roco_3_c0324",
+        "proposed_3_c0333"
+      ],
+      "logical_cpu": 22
+    }
+  ],
+  "source_sha256": {
+    "problems\\tsp_aco\\aco.py": "89902d0c92de2579f117a544eed997c0b860401e096713724b6e077f9db64cf8",
+    "problems\\tsp_aco\\eval.py": "6047570e46ca865b91d33ac067bfc4df1b31d0e05795e64b35be594034171c02",
+    "outputs/tsp50_selection_diagnostic/20261118_02_2f73bc9e/candidates/proposed_1_c0358/problems/tsp_aco/gpt.py": "611a61866e3ad4a7058b74da44ec13116aec82b38715083c1c2c3053c6f041f1",
+    "outputs/tsp50_selection_diagnostic/20261118_02_2f73bc9e/candidates/proposed_2_c0335/problems/tsp_aco/gpt.py": "f0e1201cfd3abcd00f65108adde3ee80f18aee5330cbf008c21c235953e6a2ca",
+    "outputs/tsp50_selection_diagnostic/20261118_02_2f73bc9e/candidates/proposed_3_c0333/problems/tsp_aco/gpt.py": "fa972a6aa4b92268ae294c7eb1ede09f09f8c36b7ed834f1f1d95dc9126433e5",
+    "outputs/tsp50_selection_diagnostic/20261118_02_2f73bc9e/candidates/roco_1_c0341/problems/tsp_aco/gpt.py": "1de44a6f3db3ef83c47599c5550fa004c81371a984ff4c8fd72555f8974f6784",
+    "outputs/tsp50_selection_diagnostic/20261118_02_2f73bc9e/candidates/roco_2_c0355/problems/tsp_aco/gpt.py": "0c27dd82989658342be446262bee25bd0d82bfe9cb0b70749e3b608ef95c4bb8",
+    "outputs/tsp50_selection_diagnostic/20261118_02_2f73bc9e/candidates/roco_3_c0324/problems/tsp_aco/gpt.py": "58e068a227473df474e06dd7bb107db5eaa47f74ce30435d65eec96729a21ed4",
+    "outputs/tsp50_selection_diagnostic/20261118_convergence_budget_91e5c4b7/continue_budget.py": "3d2ab93e30e1af1902d7878cbb9cc734e0c08cebacf9fd322f0410486192e5f4",
+    "outputs/tsp50_selection_diagnostic/20261118_convergence_probe_7db62f10/contract.json": "3d4c6fbd63aeac84ef05d4866481e13b1857c866ea17cda3c793989bc7dd1f9a",
+    "outputs/tsp50_selection_diagnostic/20261118_convergence_probe_7db62f10/run_summary.json": "c7e87dfb057d57fb1c247c63257ce7e4e12ffd3806aa9e580b616b7dc82c7604",
+    "outputs/tsp50_selection_diagnostic/20261118_convergence_probe_7db62f10/probe.csv": "4432dfcce580bb3df499c089babb5643fe1b989cafe5f9f14096b38d6cc5a416",
+    "outputs/tsp50_selection_diagnostic/20261118_stable_sampling_budget_261e4c9a/continue_with_stable_sampling.py": "43e35c3b35f75f42cae7e83eb37fe30631d73926d5716dee2d2c23f49f639bbd",
+    "outputs/tsp50_selection_diagnostic/20261118_convergence_budget_91e5c4b7/contract.json": "a29e48fca9e00a5790b7cfa1b6a5f2e983130213c44988107aa6f0f744870830",
+    "outputs/tsp50_selection_diagnostic/20261118_convergence_budget_91e5c4b7/through_12000/phase_summary.json": "43d6213489eab0723dc722e40047546d756adb8bce9c142598651151bb2f7e8e",
+    "outputs/tsp50_selection_diagnostic/20261118_convergence_budget_91e5c4b7/sampling-failure.json": "0c82c2f184790d8f970b342e98362dbda018a45f77df551046c748914e3c3621",
+    "outputs/tsp50_selection_diagnostic/20261118_stable_sampling_budget_261e4c9a/extend_range.py": "755626abc541ece7cc0b7fd10370c5fad78b25b329714998af38680a2c87a232",
+    "outputs/tsp50_selection_diagnostic/20261118_stable_sampling_budget_261e4c9a/contract.json": "d14607c346338aca590cb2c8e41c06afeee8573bcbb1b58806da24777754e6cf",
+    "outputs/tsp50_selection_diagnostic/20261118_stable_sampling_budget_261e4c9a/paused_at_44000.json": "76fb4f21efe90e9e573b29c11833282286dc1b1db61d9626fc7ffd3bf29d984b",
+    "outputs/tsp50_selection_diagnostic/20261118_stable_sampling_budget_261e4c9a/through_44000/phase_summary.json": "d12bba167eb7b5ed1c2f6777a2dd7e398d1502d487905eb1c06ac1ee0f5fbd49",
+    "outputs/tsp50_selection_diagnostic/20261118_stable_sampling_budget_261e4c9a/accelerated_range.py": "9920cc1f5de275da33b74f16f841164ca4f59cc61d4303b9fe2285faa3826411",
+    "outputs/tsp50_selection_diagnostic/20261118_stable_sampling_budget_261e4c9a/extension_from_44000.json": "273fefc9254dd703cb261e89785a9be6d0dd5dc51bce9dd5e8260cffa0380a39",
+    "outputs/tsp50_selection_diagnostic/20261118_stable_sampling_budget_261e4c9a/paused_at_60000.json": "1c5d76d480be4f5351fd2fef2fe8987170948c89808fb880c3823776fccfeb55",
+    "outputs/tsp50_selection_diagnostic/20261118_stable_sampling_budget_261e4c9a/extension_from_44000_phases/through_60000/phase_summary.json": "ab5f75773fc3bdf016b6009e18c7177e0aef4be91eee212b9a57e34d673a44fb",
+    "outputs/tsp50_selection_diagnostic/20261118_stable_sampling_budget_261e4c9a/fast_continuation.py": "b9b15da173e1080e43605a2eb95ac502dff4cd1063c60dd48e576b4375f32089",
+    "outputs/tsp50_selection_diagnostic/20261118_stable_sampling_budget_261e4c9a/extension_from_60000.json": "ef37e0f2f833d0e42b4a7d30b54481a91454b80e8ca2d31da6c44aa5c53ae6c6",
+    "outputs/tsp50_selection_diagnostic/20261118_stable_sampling_budget_261e4c9a/paused_at_128000.json": "cdf4aee5732ec8a5864a4f9c3c9f098a8a34027a93f549bafd89addf3bd5d19b",
+    "outputs/tsp50_selection_diagnostic/20261118_stable_sampling_budget_261e4c9a/extension_from_60000_phases/through_128000/phase_summary.json": "230a084c807fe2c3f14d2bf755068d591e6edddba7706d7a8ef78f1b390ec8f8",
+    "outputs/tsp50_selection_diagnostic/20261119_empirical_stop_d1a74f6b/empirical_stop.py": "98c5504d35ebe2746066bd4ee78c06a056890d669b6886d156cc5bd01870661b",
+    "outputs/tsp50_selection_diagnostic/20261118_stable_sampling_budget_261e4c9a/extension_from_128000.json": "d349a284ea9a8e26d462a24bb3ab85eb993026bd4f01f81d82f2f33249239305",
+    "outputs/tsp50_selection_diagnostic/20261118_stable_sampling_budget_261e4c9a/extension_from_128000_phases/through_152000/phase_summary.json": "7138d1b8ff9fbad1787e273eec8a54a1ffb9810b6ca15c0044bbd90342dfa86c",
+    "outputs/p1_frozen_candidates/proposed_solution_quality_and_speed_agents/20261113_143912_4468d76e_resume/candidate.py": "611a61866e3ad4a7058b74da44ec13116aec82b38715083c1c2c3053c6f041f1",
+    "outputs/p1_test/proposed_solution_quality_and_speed_agents/20261114_001043_141c347d/result.json": "e25d5527cec7de22999cd6755fe3116abad753c484bf2be2690b9ec8ddeb1969",
+    "outputs/p1_frozen_candidates/proposed_solution_quality_and_speed_agents/20261112_211734_d7c5ee74_resume/candidate.py": "f0e1201cfd3abcd00f65108adde3ee80f18aee5330cbf008c21c235953e6a2ca",
+    "outputs/p1_test/proposed_solution_quality_and_speed_agents/20261114_002016_c2e731dc/result.json": "45f0c7aaa17ecc780fce54db244c6833f2820dfa9f61c353da5927c4235a1064",
+    "outputs/p1_frozen_candidates/proposed_solution_quality_and_speed_agents/20261113_182734_19e8e233_resume/candidate.py": "fa972a6aa4b92268ae294c7eb1ede09f09f8c36b7ed834f1f1d95dc9126433e5",
+    "outputs/p1_test/proposed_solution_quality_and_speed_agents/20261114_002938_b4d6ed89/result.json": "76064e917a158e0b7be5533b4e88baeb3b03c14660a543a2893ee24524131004",
+    "outputs/p1_frozen_candidates/roco_paper_adapted/20261112_183109_ae37c237_resume/candidate.py": "1de44a6f3db3ef83c47599c5550fa004c81371a984ff4c8fd72555f8974f6784",
+    "outputs/p1_test/roco_paper_adapted/20261114_101348_23cee5d4_resume/result.json": "879e03765ac9ab5084067173e2d152ed636cb9fe9d934c055d9544da29ad30c4",
+    "outputs/p1_frozen_candidates/roco_paper_adapted/20261113_134209_41bdbcb7_resume/candidate.py": "0c27dd82989658342be446262bee25bd0d82bfe9cb0b70749e3b608ef95c4bb8",
+    "outputs/p1_test/roco_paper_adapted/20261114_100728_2fe0d630/result.json": "e089260012a633eb3507f208cab43ac57d4384783de29c15d475dab7cdc4b61d",
+    "outputs/p1_frozen_candidates/roco_paper_adapted/20261113_223251_4e4a7f6f_resume/candidate.py": "58e068a227473df474e06dd7bb107db5eaa47f74ce30435d65eec96729a21ed4",
+    "outputs/p1_test/roco_paper_adapted/20261114_101742_0bd83178/result.json": "788f8f5f1ae1d67619e883373037b26ffe8189b2893805ce334dc5a8dd8fc582",
+    "problems/tsp_aco/dataset/test50_p1_dataset.npy": "a853e426a52e6beecbf2002fb6ddb69a2f7fbbc7c49cc1297f70171498abca15",
+    "vault/Results/Evidence/tsp50-roco-20261114/manifest.json": "bdc5a070013a657fce929395f29e8594f90611713c7855798c4fcb0d7e4b7546",
+    "outputs/tsp50_selection_diagnostic/20261119_empirical_stop_d1a74f6b/contract.json": "4a15a19077d511a66d39a316af3938e04290c9332b329d81169d6f4d26673a43",
+    "outputs/tsp50_selection_diagnostic/20261119_final_stop50k_7f0b1d60/final_stagnation.py": "604552adae9e2c676b4afe2745ea165a6c9726a393e349989bc0e45e5cfcdb35",
+    "problems/tsp_aco/eval.py": "6047570e46ca865b91d33ac067bfc4df1b31d0e05795e64b35be594034171c02",
+    "problems/tsp_aco/aco.py": "89902d0c92de2579f117a544eed997c0b860401e096713724b6e077f9db64cf8"
+  }
+}

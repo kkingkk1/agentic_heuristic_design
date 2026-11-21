@@ -1,0 +1,158 @@
+{
+  "status": "verified",
+  "verified_at_utc": "2026-11-20T02:13:58.927292+00:00",
+  "summary": {
+    "contract_sha256": "d90cd09649a1c26ddb3c449d2e7ff5dce3517b25fb3759818bc2e83386659a20",
+    "expected": 384,
+    "completed": 384,
+    "current_session_wall_seconds": 10544.502489100007,
+    "finished_at_utc": "2026-11-19T10:18:52.918288+00:00",
+    "research_model_calls": 0,
+    "methods": {
+      "proposed": {
+        "route_length": {
+          "mean": 5.73945660656644,
+          "sd": 0.009291425289921005
+        },
+        "solve_wall_seconds": {
+          "mean": 643.3023794140616,
+          "sd": 46.0380417569757
+        },
+        "solve_cpu_seconds": {
+          "mean": 641.3496907552084,
+          "sd": 46.32086206428518
+        },
+        "heuristic_wall_seconds": {
+          "mean": 0.000862438021044909,
+          "sd": 0.00026451769038490476
+        },
+        "rounds": {
+          "mean": 76087.92708333333,
+          "sd": 4737.851384595449
+        }
+      },
+      "roco": {
+        "route_length": {
+          "mean": 5.736875064492152,
+          "sd": 0.0036249408883882238
+        },
+        "solve_wall_seconds": {
+          "mean": 634.8455133848953,
+          "sd": 28.95397820400503
+        },
+        "solve_cpu_seconds": {
+          "mean": 633.1689453125,
+          "sd": 29.380040851235798
+        },
+        "heuristic_wall_seconds": {
+          "mean": 0.0019952380209436646,
+          "sd": 0.0013801637319475286
+        },
+        "rounds": {
+          "mean": 75043.19791666667,
+          "sd": 1957.844243640635
+        }
+      }
+    },
+    "solve_cpu_seconds_total": 244707.578125,
+    "aco_iterations": 29017176,
+    "resumed_instances": 11,
+    "baseline_500_max_abs_difference": 0.0
+  },
+  "checks": [
+    "frozen source hashes",
+    "384 unique cases and exact pair identities",
+    "all routes feasible and lengths recomputed",
+    "every run stopped at its first 50000-iteration plateau",
+    "all 500-iteration anchors matched",
+    "instance, research-run and method aggregates recomputed"
+  ],
+  "research_run_means": {
+    "proposed": [
+      {
+        "candidate": "proposed_1_c0358",
+        "anchor500": 5.820369738385389,
+        "route_length": 5.733039091053571,
+        "solve_wall_seconds": 624.8590712249996,
+        "solve_cpu_seconds": 621.9912109375,
+        "heuristic_wall_seconds": 0.0005696781258848205,
+        "rounds": 75819.03125
+      },
+      {
+        "candidate": "proposed_2_c0335",
+        "anchor500": 5.810070604938604,
+        "route_length": 5.735219412073516,
+        "solve_wall_seconds": 695.7025533546862,
+        "solve_cpu_seconds": 694.20947265625,
+        "heuristic_wall_seconds": 0.0009333968749842825,
+        "rounds": 80954.5
+      },
+      {
+        "candidate": "proposed_3_c0333",
+        "anchor500": 5.8334066351700065,
+        "route_length": 5.750111316572235,
+        "solve_wall_seconds": 609.345513662499,
+        "solve_cpu_seconds": 607.848388671875,
+        "heuristic_wall_seconds": 0.001084239062265624,
+        "rounds": 71490.25
+      }
+    ],
+    "roco": [
+      {
+        "candidate": "roco_1_c0341",
+        "anchor500": 5.809879493734128,
+        "route_length": 5.737127293974423,
+        "solve_wall_seconds": 609.3210733359373,
+        "solve_cpu_seconds": 606.929931640625,
+        "heuristic_wall_seconds": 0.0007704765628204768,
+        "rounds": 74463.9375
+      },
+      {
+        "candidate": "roco_2_c0355",
+        "anchor500": 5.808322593962679,
+        "route_length": 5.740367303197062,
+        "solve_wall_seconds": 628.9071966796876,
+        "solve_cpu_seconds": 627.665283203125,
+        "heuristic_wall_seconds": 0.0034906937496543833,
+        "rounds": 73440.34375
+      },
+      {
+        "candidate": "roco_3_c0324",
+        "anchor500": 5.7976323485428,
+        "route_length": 5.73313059630497,
+        "solve_wall_seconds": 666.3082701390609,
+        "solve_cpu_seconds": 664.91162109375,
+        "heuristic_wall_seconds": 0.0017245437503561334,
+        "rounds": 77225.3125
+      }
+    ]
+  },
+  "mean_route_at_500": {
+    "proposed": 5.821282326164666,
+    "roco": 5.805278145413202
+  },
+  "proposed_relative_to_roco_percent": {
+    "route_length": 0.044999098730014175,
+    "solve_wall_seconds": 1.3321140105528428,
+    "solve_cpu_seconds": 1.2920320087193682,
+    "heuristic_wall_seconds": -56.77518110661245,
+    "rounds": 1.3921703707600486
+  },
+  "min_rounds": 50049,
+  "max_rounds": 246907,
+  "max_block_wall_cpu_ratio": 1.167505139230618,
+  "first_launch_at_utc": "2026-11-19T03:48:06.646515+00:00",
+  "wall_seconds_from_first_launch_to_finish": 23446.271773,
+  "time_scope": "Preparation, active ACO blocks, and final route validation. Checkpoint I/O excluded.",
+  "resume_receipts": [
+    {
+      "pid": 27076,
+      "started_at_utc": "2026-11-19T07:23:08.1292326Z",
+      "stdout": "supervisor.resume_20261119_072308_129.stdout.txt",
+      "stderr": "supervisor.resume_20261119_072308_129.stderr.txt",
+      "previous_pid": 27284,
+      "completed_at_resume": 323,
+      "reason": "Previous supervisor exited while executor was disconnected"
+    }
+  ]
+}

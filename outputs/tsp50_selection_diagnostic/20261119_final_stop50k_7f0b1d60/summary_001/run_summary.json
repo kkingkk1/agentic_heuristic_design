@@ -1,0 +1,58 @@
+{
+  "contract_sha256": "d90cd09649a1c26ddb3c449d2e7ff5dce3517b25fb3759818bc2e83386659a20",
+  "expected": 384,
+  "completed": 384,
+  "current_session_wall_seconds": 10544.502489100007,
+  "finished_at_utc": "2026-11-19T10:18:52.918288+00:00",
+  "research_model_calls": 0,
+  "methods": {
+    "proposed": {
+      "route_length": {
+        "mean": 5.73945660656644,
+        "sd": 0.009291425289921005
+      },
+      "solve_wall_seconds": {
+        "mean": 643.3023794140616,
+        "sd": 46.0380417569757
+      },
+      "solve_cpu_seconds": {
+        "mean": 641.3496907552084,
+        "sd": 46.32086206428518
+      },
+      "heuristic_wall_seconds": {
+        "mean": 0.000862438021044909,
+        "sd": 0.00026451769038490476
+      },
+      "rounds": {
+        "mean": 76087.92708333333,
+        "sd": 4737.851384595449
+      }
+    },
+    "roco": {
+      "route_length": {
+        "mean": 5.736875064492152,
+        "sd": 0.0036249408883882238
+      },
+      "solve_wall_seconds": {
+        "mean": 634.8455133848953,
+        "sd": 28.95397820400503
+      },
+      "solve_cpu_seconds": {
+        "mean": 633.1689453125,
+        "sd": 29.380040851235798
+      },
+      "heuristic_wall_seconds": {
+        "mean": 0.0019952380209436646,
+        "sd": 0.0013801637319475286
+      },
+      "rounds": {
+        "mean": 75043.19791666667,
+        "sd": 1957.844243640635
+      }
+    }
+  },
+  "solve_cpu_seconds_total": 244707.578125,
+  "aco_iterations": 29017176,
+  "resumed_instances": 11,
+  "baseline_500_max_abs_difference": 0.0
+}
